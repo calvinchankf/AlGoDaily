@@ -1017,3 +1017,4 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 453 | [Print FooBar Alternately](/leetcode/1115-print-foobar-alternately) | concurrency | [leetcode 1115](https://leetcode.com/problems/print-foobar-alternately/) | good and practical question 📌 need to revise again |
 | 454 | [Fizz Buzz Multithreaded](/leetcode/1195-fizz-buzz-multithreaded) | concurrency | [leetcode 1195](https://leetcode.com/problems/fizz-buzz-multithreaded/) | good and practical question 📌 need to revise again |
 | 455 | [Building H2O](/leetcode/1117-building-h2o) | concurrency | [leetcode 1117](https://leetcode.com/problems/building-h2o/) | good and practical question 📌 need to revise again |
+| 456 | [Design Bounded Blocking Queue](/leetcode/1188-design-bounded-blocking-queue) | concurrency | [leetcode 1188](https://leetcode.com/problems/design-bounded-blocking-queue/) | good and practical question 📌 need to revise again |
