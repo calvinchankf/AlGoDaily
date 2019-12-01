@@ -857,7 +857,7 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 311 | [Word Subsets](/leetcode/916-word-subsets) | hashtable | [leetcode 916](https://leetcode.com/problems/word-subsets/) | ⭐️think twice |
 | 312 | [Largest Time for Given Digits](/leetcode/949-largest-time-for-given-digits) | recursion | [leetcode 949](https://leetcode.com/problems/largest-time-for-given-digits/) | permutation |
 | 313 | [Different Ways to Add Parentheses](/leetcode/241-different-ways-to-add-parentheses) | recursion | [leetcode 241](https://leetcode.com/problems/different-ways-to-add-parentheses/) | 📌📌📌need to revise again^3 |
-| 314 | [Print in Order](/leetcode/1114-print-in-order) | concurrency | [leetcode 1114](https://leetcode.com/problems/print-in-order/) | mutex vs semaphore |
+| 314 | [Print in Order](/leetcode/1114-print-in-order) | concurrency | [leetcode 1114](https://leetcode.com/problems/print-in-order/) | 📌1st: mutex lock. 2nd semaphore |
 | 315 | [Maximum Average Subtree](/leetcode/1120-maximum-average-subtree) | tree, recursion | [leetcode 1120](https://leetcode.com/problems/maximum-average-subtree/) |  |
 | 316 | [Smallest Subtree with all the Deepest Nodes](/leetcode/865-smallest-subtree-with-all-the-deepest-nodes) | tree, recursion | [leetcode 865](https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/) | 1st O(kN) BFS + lowest common ancestor. 2nd O(N) recursion |
 | 316 | [Lowest Common Ancestor of Deepest Leaves](/leetcode/1123-lowest-common-ancestor-of-deepest-leaves) | tree, recursion | [leetcode 1123](https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/) | O(kN) BFS + lowest common ancestor |
@@ -1008,13 +1008,13 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 444 | [Projection Area of 3D Shapes](/leetcode/883-projection-area-of-3d-shapes) | tree, hashtable | [leetcode 883](https://leetcode.com/problems/projection-area-of-3d-shapes/) | 1st O(RC) |
 | 445 | [Lemonade Change](/leetcode/860-lemonade-change) | array | [leetcode 860](https://leetcode.com/problems/lemonade-change/) | 1st O(n) |
 | 446 | [Web Crawler](/leetcode/1236-web-crawler) | graph, hashtable | [leetcode 1236](https://leetcode.com/problems/web-crawler/) | 1st BFS O(n)S(n). 2nd DFS O(n)S(n) |
-| 447 | [Web Crawler Multithreaded](/leetcode/1242-web-crawler-multithreaded) | concurrency | [leetcode 1242](https://leetcode.com/problems/web-crawler-multithreaded/) | good and practical question, BFS 📌 need to revise again |
+| 447 | [Web Crawler Multithreaded](/leetcode/1242-web-crawler-multithreaded) | concurrency | [leetcode 1242](https://leetcode.com/problems/web-crawler-multithreaded/) | good and practical question which needs ThreadPoolExecutor with BFS 📌 need to revise again |
 | 448 | Stupid Tetris | challenged by colleagues | [Stupid Tetris](https://github.com/calvinchankf/stupid-tetris) | 50% might be |
 | 449 | Stupid Tetris | challenged by colleagues | [Stupid Tetris](https://github.com/calvinchankf/stupid-tetris) | 100% all shapes added |
 | 450 | [Confusing Number](/leetcode/1056-confusing-number) | array | [leetcode 1056](https://leetcode.com/problems/confusing-number/) | |
 | 451 | [Play with Chips](/leetcode/1217-play-with-chips) | array | [leetcode 1217](https://leetcode.com/problems/play-with-chips/) | |
-| 452 | [Print Zero Even Odd](/leetcode/1116-print-zero-even-odd) | concurrency | [leetcode 1116](https://leetcode.com/problems/print-zero-even-odd/) | good and practical question 📌 need to revise again |
-| 453 | [Print FooBar Alternately](/leetcode/1115-print-foobar-alternately) | concurrency | [leetcode 1115](https://leetcode.com/problems/print-foobar-alternately/) | good and practical question 📌 need to revise again |
-| 454 | [Fizz Buzz Multithreaded](/leetcode/1195-fizz-buzz-multithreaded) | concurrency | [leetcode 1195](https://leetcode.com/problems/fizz-buzz-multithreaded/) | good and practical question 📌 need to revise again |
-| 455 | [Building H2O](/leetcode/1117-building-h2o) | concurrency | [leetcode 1117](https://leetcode.com/problems/building-h2o/) | good and practical question 📌 need to revise again |
-| 456 | [Design Bounded Blocking Queue](/leetcode/1188-design-bounded-blocking-queue) | concurrency | [leetcode 1188](https://leetcode.com/problems/design-bounded-blocking-queue/) | good and practical question 📌 need to revise again |
+| 452 | [Print Zero Even Odd](/leetcode/1116-print-zero-even-odd) | concurrency | [leetcode 1116](https://leetcode.com/problems/print-zero-even-odd/) | 📌1st mutex lock. 2nd semaphore |
+| 453 | [Print FooBar Alternately](/leetcode/1115-print-foobar-alternately) | concurrency | [leetcode 1115](https://leetcode.com/problems/print-foobar-alternately/) | 📌1st mutex lock. 2nd semaphore |
+| 454 | [Fizz Buzz Multithreaded](/leetcode/1195-fizz-buzz-multithreaded) | concurrency | [leetcode 1195](https://leetcode.com/problems/fizz-buzz-multithreaded/) | 📌1st mutex lock. 2nd semaphore beats 100% |
+| 455 | [Building H2O](/leetcode/1117-building-h2o) | concurrency | [leetcode 1117](https://leetcode.com/problems/building-h2o/) | cheated...made it single-thread LOL |
+| 456 | [Design Bounded Blocking Queue](/leetcode/1188-design-bounded-blocking-queue) | concurrency | [leetcode 1188](https://leetcode.com/problems/design-bounded-blocking-queue/) | 📌semaphore + deque |
