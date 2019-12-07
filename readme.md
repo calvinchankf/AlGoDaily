@@ -1022,4 +1022,5 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 458 | [Remove Interval](/leetcode/1272-remove-interval) | stack | [leetcode 1272](https://leetcode.com/problems/remove-interval/) | 1st brute-force all cases O(N) |
 | 459 | [Number of Closed Islands](/leetcode/1254-number-of-closed-islands) | graph | [leetcode 1254](https://leetcode.com/problems/number-of-closed-islands/) | 1st O(N)S(N) DFS + hashtable |
 | 460 | [Shift 2D Grid](/leetcode/1260-shift-2d-grid) | array | [leetcode 1260](https://leetcode.com/problems/shift-2d-grid/) | simple but interesting |
-| 461 | [Shift 2D Grid](/leetcode/723-candy-crush) | array | [leetcode 723](https://leetcode.com/problems/candy-crush/) | simple but tedious |
+| 461 | [Candy Crush](/leetcode/723-candy-crush) | array | [leetcode 723](https://leetcode.com/problems/candy-crush/) | simple but tedious |
+| 462 | [Array Transformation](/leetcode/1243-array-transformation) | array | [leetcode 1243](https://leetcode.com/problems/array-transformation/) | |
