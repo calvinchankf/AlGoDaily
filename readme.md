@@ -1025,3 +1025,4 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 461 | [Candy Crush](/leetcode/723-candy-crush) | array | [leetcode 723](https://leetcode.com/problems/candy-crush/) | simple but tedious |
 | 462 | [Array Transformation](/leetcode/1243-array-transformation) | array | [leetcode 1243](https://leetcode.com/problems/array-transformation/) | |
 | 463 | [Construct Binary Search Tree from Preorder Traversal](/leetcode/1008-construct-binary-search-tree-from-preorder-traversal) | tree | [leetcode 1008](https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/) | 1st recursion O(NlogN). 2nd iteration O(NlogN) |
+| 464 | [Number of Distinct Islands II](/leetcode/711-number-of-distinct-islands-ii) | graph | [leetcode 1008](https://leetcode.com/problems/number-of-distinct-islands-ii/) | 1st BFS+hastbale. 2nd DFS+hashtable |
