@@ -1,3 +1,15 @@
+"""
+    1st: bianry search
+    - group the difficulty and profit in an extra array A, sort them by difficulty
+    - need another extra array B to save the maxProfits up until each difficulty
+    - for each worker, upper bound binary search amongst A to get an index, add up the maxProfits[index] to the result
+
+    Time    O(DlogD + WlogD)
+    Space   O(D+P)
+    496 ms, faster than 9.80%
+"""
+
+
 class Solution(object):
     def maxProfitAssignment(self, difficulty, profit, worker):
         """
