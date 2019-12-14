@@ -1,11 +1,22 @@
 """
-    1st: bianry search
-    - group the difficulty and profit in an extra array A, sort them by difficulty
-    - need another extra array B to save the maxProfits up until each difficulty
-    - for each worker, upper bound binary search amongst A to get an index, add up the maxProfits[index] to the result
+    Here was my first approach, upper bound binary search
 
-    Time    O(DlogD + WlogD)
-    Space   O(D+P)
+    1. group the difficulty and profit in an extra array A, sort them by difficulty
+    2. need another extra array B to save the maxProfits up until each difficulty
+    3. for each worker, upper bound binary search amongst A to get an index, add up the maxProfits[index] to the result
+    
+    Illustration on the steps with the below example:
+    difficulty = [68, 35, 52, 47, 86]
+    profit = [67, 17, 1, 81, 3]
+    worker = [92, 10, 85, 84, 82]
+
+    1. A = [(35, 17), (47, 81), (52, 1), (68, 67), (86, 3)]
+    2. B = [17, 81, 81, 81, 81]
+    3. idx from binary search = [4, -1, 3, 3, 3]
+    so the result will be B[4] + B[-1] + B[3] + B[3] + B[3] = 81 + 0 + 81 + 81 + 81 = 324
+    
+    Time O(DlogD + WlogD)
+    Space O(D+P)
     496 ms, faster than 9.80%
 """
 
