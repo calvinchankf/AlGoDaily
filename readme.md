@@ -1033,3 +1033,4 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 469 | [Print Immutable Linked List in Reverse](/leetcode/1265-print-immutable-linked-list-in-reverse) | linked list, recursion | [leetcode 1282](https://leetcode.com/problems/print-immutable-linked-list-in-reverse/) | 1st O(2N)S(N), 2nd recursion O(N)S(N) |
 | 470 | [Most Profit Assigning Work](/leetcode/826-most-profit-assigning-work) | binary search | [leetcode 826](https://leetcode.com/problems/most-profit-assigning-work/) | 1st O(NlogN) |
 | 471 | [Count Servers that Communicate](/leetcode/1267-count-servers-that-communicate) | hashtable | [leetcode 1267](https://leetcode.com/problems/count-servers-that-communicate/) | 1st O(RC+R+C) |
+| 472 | [Number of Enclaves](/leetcode/1020-number-of-enclaves) | graph, recursion | [leetcode 1020](https://leetcode.com/problems/number-of-enclaves/) | 1st recursion |

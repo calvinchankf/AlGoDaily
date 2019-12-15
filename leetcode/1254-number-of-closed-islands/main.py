@@ -2,7 +2,7 @@
     1st: DFS + hashtable
     - use recursion to check if we reach to either 1 or visited cell when we explore a territory(DFS)
     - use a hashtable to reduce redundant calculation
-    - similar to lc463
+    - similar to lc463, lc1020
 
     Time    O(N)
     Space   O(N)

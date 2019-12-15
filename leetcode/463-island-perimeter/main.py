@@ -1,6 +1,6 @@
 """
     1st approach: recursive dfs, combine the perimeter of each grid
-
+    - simiar to lc1020, lc1254
     Time    O(n)
     Space   O(n, d)
     1372 ms, faster than 5.04%
