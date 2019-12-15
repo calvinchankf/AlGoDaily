@@ -1034,3 +1034,4 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 470 | [Most Profit Assigning Work](/leetcode/826-most-profit-assigning-work) | binary search | [leetcode 826](https://leetcode.com/problems/most-profit-assigning-work/) | 1st O(NlogN) |
 | 471 | [Count Servers that Communicate](/leetcode/1267-count-servers-that-communicate) | hashtable | [leetcode 1267](https://leetcode.com/problems/count-servers-that-communicate/) | 1st O(RC+R+C) |
 | 472 | [Number of Enclaves](/leetcode/1020-number-of-enclaves) | graph, recursion | [leetcode 1020](https://leetcode.com/problems/number-of-enclaves/) | 1st recursion DFS, 2nd BFS |
+| 473 | [Convert Binary Number in a Linked List to Integer](/leetcode/1290-convert-binary-number-in-a-linked-list-to-integer) | linked list, math | [leetcode 1290](https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/) | 1st O(2N), 2nd O(N) |
