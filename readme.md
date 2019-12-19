@@ -1036,3 +1036,4 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 472 | [Number of Enclaves](/leetcode/1020-number-of-enclaves) | graph, recursion | [leetcode 1020](https://leetcode.com/problems/number-of-enclaves/) | 1st recursion DFS, 2nd BFS |
 | 473 | [Convert Binary Number in a Linked List to Integer](/leetcode/1290-convert-binary-number-in-a-linked-list-to-integer) | linked list, math | [leetcode 1290](https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/) | 1st O(2N), 2nd O(N) |
 | 474 | [Maximum Number of Balloons](/leetcode/1189-maximum-number-of-balloons) | hashtable | [leetcode 1189](https://leetcode.com/problems/maximum-number-of-balloons/) | 1st, 2nd O(N) |
+| 475 | [Hexspeak](/leetcode/1271-hexspeak) | array, hashtable | [leetcode 1271](https://leetcode.com/problems/hexspeak/) | 1st, 2nd O(logN) |
