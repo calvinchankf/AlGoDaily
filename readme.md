@@ -1038,3 +1038,4 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 474 | [Maximum Number of Balloons](/leetcode/1189-maximum-number-of-balloons) | hashtable | [leetcode 1189](https://leetcode.com/problems/maximum-number-of-balloons/) | 1st, 2nd O(N) |
 | 475 | [Hexspeak](/leetcode/1271-hexspeak) | array, hashtable | [leetcode 1271](https://leetcode.com/problems/hexspeak/) | 1st, 2nd O(logN) |
 | 476 | [Sequential Digits](/leetcode/1291-sequential-digits) | array | [leetcode 1291](https://leetcode.com/problems/sequential-digits/) | 1st O(logN) |
+| 477 | [Reconstruct a 2-Row Binary Matrix](/leetcode/1253-reconstruct-a-2-row-binary-matrix) | array | [leetcode 1253](https://leetcode.com/problems/reconstruct-a-2-row-binary-matrix/) | O(N) |

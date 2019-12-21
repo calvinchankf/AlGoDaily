@@ -1,19 +1,35 @@
-def solution(U, L, C):
+"""
+    It is lc1253: Reconstruct a 2-Row Binary Matrix
+"""
+
+
+def solution(upper, lower, colsum):
     # write your code in Python 3.6
-    a = len(C) * [0]
-    for i in range(len(C)):
-        if C[i] > 0 and U > 0:
-            a[i] = 1
-            U -= 1
-            C[i] -= 1
-    if U > 0:
-        return "IMPOSSIBLE"
-    countOneInC = 0
-    for item in C:
-        countOneInC += item
-    if countOneInC != L:
-        return "IMPOSSIBLE"
-    return "".join([str(x) for x in a]) + "," + "".join([str(x) for x in C])
+    n = len(colsum)
+    row1 = n * [0]
+    row2 = n * [0]
+    for i in range(n):
+        if colsum[i] == 2:
+            if upper > 0 and lower > 0:
+                row1[i] = 1
+                row2[i] = 1
+                upper -= 1
+                lower -= 1
+            else:
+                return []
+    for i in range(n):
+        if colsum[i] == 1:
+            if upper > 0:
+                row1[i] = 1
+                upper -= 1
+            elif lower > 0:
+                row2[i] = 1
+                lower -= 1
+            else:
+                return []
+    if upper == 0 and lower == 0:
+        return [row1, row2]
+    return []
 
 
 print(solution(3, 2, [2, 1, 1, 0, 1]))
