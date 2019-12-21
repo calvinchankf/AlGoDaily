@@ -1039,3 +1039,4 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 475 | [Hexspeak](/leetcode/1271-hexspeak) | array, hashtable | [leetcode 1271](https://leetcode.com/problems/hexspeak/) | 1st, 2nd O(logN) |
 | 476 | [Sequential Digits](/leetcode/1291-sequential-digits) | array | [leetcode 1291](https://leetcode.com/problems/sequential-digits/) | 1st O(logN) |
 | 477 | [Reconstruct a 2-Row Binary Matrix](/leetcode/1253-reconstruct-a-2-row-binary-matrix) | array | [leetcode 1253](https://leetcode.com/problems/reconstruct-a-2-row-binary-matrix/) | O(N) |
+| 478 | [Maximum Length of a Concatenated String with Unique Characters](/leetcode/1239-maximum-length-of-a-concatenated-string-with-unique-characters) | recursion | [leetcode 1239](https://leetcode.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/) | 1st, 2nd O(2^N) at max |
