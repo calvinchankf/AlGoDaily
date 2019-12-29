@@ -105,7 +105,7 @@ print("-----")
 
     Time    O(SP)
     Space   O(SP)
-    756 ms, faster than 64.77%
+    736 ms, faster than 65.31%
 """
 
 
@@ -114,7 +114,7 @@ class Solution(object):
     def removeDummyStars(self, p):
         if p == '':
             return p
-        p1 = [p[0], ]
+        p1 = [p[0]]
         for x in p[1:]:
             if p1[-1] != '*' or p1[-1] == '*' and x != '*':
                 p1.append(x)
