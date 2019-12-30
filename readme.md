@@ -1047,4 +1047,4 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 483 | [Maximum Side Length of a Square with Sum Less than or Equal to Threshold](/leetcode/1292-maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold) | dynamic programming | [leetcode 1030](https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/) | 📌need to revise again |
 | 484 | [Divisor Game](/leetcode/1025-divisor-game) | dynamic programming | [leetcode 1025](https://leetcode.com/problems/divisor-game/) | 1st recursion+hashtable O(N^2). 2nd math O(1)📌need to revise again |
 | 485 | [Prime Arrangements](/leetcode/1175-prime-arrangements) | dynamic programming | [leetcode 1175](https://leetcode.com/problems/prime-arrangements/) | 1st O(N^2) |
-
+| 487 | [Iterator for Combination](/leetcode/1286-iterator-for-combination) | recursion | [leetcode 1286](https://leetcode.com/problems/iterator-for-combination/) | 1st O(nCk) |
