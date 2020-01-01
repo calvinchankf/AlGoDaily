@@ -3,7 +3,7 @@ from collections import defaultdict
 """
     1st: union find + recursion
 
-    Time    O(N + NlogN + N + k!) k=number of words which have sysnonym
+    Time    O(2N + NlogN + k!) k=number of words which have sysnonym
     Space   O(3N + k!)
     20 ms, faster than 53.37%
 """
