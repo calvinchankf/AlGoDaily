@@ -1045,6 +1045,8 @@ tree | [leetcode 889](https://leetcode.com/problems/serialize-and-deserialize-bi
 | 481 | [Delete Tree Nodes](/leetcode/1273-delete-tree-nodes) | recursion | [leetcode 1273](https://leetcode.com/problems/delete-tree-nodes/) | 1st DFS+DFS O(3N). 2nd DFS+BFS O(3N) |
 | 482 | [Matrix Cells in Distance Order](/leetcode/1030-matrix-cells-in-distance-order) | array | [leetcode 1030](https://leetcode.com/problems/matrix-cells-in-distance-order/) | 1st BFS O(RC), 2nd O(NlogN) where N=RC |
 | 483 | [Maximum Side Length of a Square with Sum Less than or Equal to Threshold](/leetcode/1292-maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold) | dynamic programming | [leetcode 1030](https://leetcode.com/problems/maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold/) | 📌need to revise again |
-| 484 | [Divisor Game](/leetcode/1025-divisor-game) | dynamic programming | [leetcode 1025](https://leetcode.com/problems/divisor-game/) | 1st recursion+hashtable O(N^2). 2nd math O(1)📌need to revise again |
+| 484 | [Divisor Game](/leetcode/1025-divisor-game) | dynamic programming | [leetcode 1025](https://leetcode.com/problems/divisor-game/) | 1st recursion+hashtable O(N^2). 2nd math O(1) 📌need to revise again |
 | 485 | [Prime Arrangements](/leetcode/1175-prime-arrangements) | dynamic programming | [leetcode 1175](https://leetcode.com/problems/prime-arrangements/) | 1st O(N^2) |
+| 486 | [Wildcard Matching](/leetcode/44-wildcard-matching) | dynamic programming | [leetcode 44](https://leetcode.com/problems/wildcard-matching/) | 1st O(2^min(S, P)) LTE, 2nd O(SP) 📌need to revise again |
 | 487 | [Iterator for Combination](/leetcode/1286-iterator-for-combination) | recursion | [leetcode 1286](https://leetcode.com/problems/iterator-for-combination/) | 1st O(nCk) |
+

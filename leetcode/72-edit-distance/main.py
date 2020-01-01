@@ -1,4 +1,6 @@
 """
+    similar to lc44, 712, 583
+
     questions to ask:
     - are the cost of add, delete, remove the same? yes
     - will there be empty strings? yes
