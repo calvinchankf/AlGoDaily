@@ -13,6 +13,10 @@
     case 2:
     form duplicate combination with the day before previous day, day[i-2] * (k-1)
 
+    ref:
+    - https://leetcode.com/problems/paint-fence/discuss/71151/Lucas-formula-maybe-%22O(1)%22-and-34-liners
+    - https://www.dazhuanlan.com/2020/01/04/5e10205cdf382/
+
     Time    O(N)
     Space   O(N)
     28 ms, faster than 60.43%
