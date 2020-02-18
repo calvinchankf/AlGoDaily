@@ -107,3 +107,56 @@ print(upperBsearch([1, 3, 5, 5, 5, 7, 9], 5))   # 5 <-
 print(upperBsearch([1, 3, 5, 5, 5, 7, 9], 6))   # 5 <-
 print(upperBsearch([1, 3, 5, 5, 5, 7, 9], 10))   # 7
 # e.g. how many numbers <= k
+
+
+def descending_bsearch(nums, target):
+    left = 0
+    right = len(nums)-1
+    while left <= right:
+        mid = (left + right)/2
+        if target < nums[mid]:
+            # right = mid - 1
+            left = mid + 1
+        elif target > nums[mid]:
+            # left = mid + 1
+            right = mid - 1
+        else:
+            return mid
+    # to find number that <= target
+    # return right
+
+    # to find number that no >= target
+    # return left
+
+    return -1
+
+
+print("--descending_bsearch--")
+print(descending_bsearch([11, 9, 7, 5, 3, 1], 4))   # -1
+print(descending_bsearch([11, 9, 7, 5, 3, 1], 5))   # 2
+print(descending_bsearch([11, 9, 7, 5, 3, 1], 7))   # 1
+
+
+def descending_upperBsearch(nums, target):
+    """
+    [9, 7, 5, 5, 5, 3, 1]
+                 ^
+            find this
+    """
+    left = -1
+    right = len(nums)-1
+    while left < right:
+        mid = (left + right + 1)//2
+        if target <= nums[mid]:
+            left = mid
+        else:
+            right = mid - 1
+    return left
+
+
+print("--descending_lowerBsearch--")
+print(descending_upperBsearch([9, 7, 5, 5, 5, 3, 1], 0))   # 6
+print(descending_upperBsearch([9, 7, 5, 5, 5, 3, 1], 1))   # 6
+print(descending_upperBsearch([9, 7, 5, 5, 5, 3, 1], 4))   # 4 <-
+print(descending_upperBsearch([9, 7, 5, 5, 5, 3, 1], 5))   # 4 <-
+print(descending_upperBsearch([9, 7, 5, 5, 5, 3, 1], 10))   # -1
