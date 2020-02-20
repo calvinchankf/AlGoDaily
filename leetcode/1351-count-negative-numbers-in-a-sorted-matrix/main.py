@@ -1,6 +1,10 @@
 from typing import List
 
 """
+    brute force: O(RC)
+"""
+
+"""
     1st: common upper bound binary search
     Time    O(RC) <- reversing each row takes linear time O(N)
     Space   O(C)
