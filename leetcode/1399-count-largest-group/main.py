@@ -9,15 +9,17 @@ from collections import defaultdict
 """
 
 
+from collections import defaultdict
+
+
 class Solution:
     def countLargestGroup(self, n: int) -> int:
         ht = defaultdict(int)
+        largestCount = 0
+        res = 0
         for i in range(1, n+1):
             key = self.getKey(i)
             ht[key] += 1
-        largestCount = 0
-        res = 0
-        for key in ht:
             if ht[key] > largestCount:
                 largestCount = ht[key]
                 res = 1
