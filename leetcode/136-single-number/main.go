@@ -40,7 +40,7 @@ func singleNumber1(nums []int) int {
 	return result
 }
 
-// attemp 3: beat operation
+// attempt 3: beat operation
 // use XOR: exclusive or
 // A	B		XOR(^)
 // F	F		F
