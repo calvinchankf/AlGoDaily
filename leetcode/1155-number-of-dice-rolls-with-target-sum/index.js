@@ -17,7 +17,7 @@
 const numRollsToTarget = (d, f, target) => {
 	const ht = {};
 	const res = dfs(d, f, target, ht);
-	return res % (Math.pow(10, 9) + 7);
+	return res;
 };
 
 const dfs = (d, f, remain, ht) => {
@@ -36,5 +36,5 @@ const dfs = (d, f, remain, ht) => {
 		res += dfs(d - 1, f, remain - num, ht);
 	}
 	ht[key] = res % (Math.pow(10, 9) + 7);
-	return res;
+	return ht[key];
 };
