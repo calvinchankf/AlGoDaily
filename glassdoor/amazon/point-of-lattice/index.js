@@ -27,12 +27,11 @@ const lattice = (ax, ay, bx, by) => {
 	const turn90_x = dy;
 	const turn90_y = -dx;
 	/*
-    since
+    given that
         turn90_y   result_y - by
         -------- = -------------
         turn90_x   result_x - bx
-    if we want to find the neaest,
-    we should find a pair of smallest_y:smallest_x which has the same ratio as turn90_y:turn90_x
+    if we want to find the neaest, we should find a pair of smallest_y:smallest_x which has the same ratio as turn90_y:turn90_x
         smallest_y   turn90_y   result_y - by
         ---------- = -------- = -------------
         smallest_x   turn90_x   result_x - bx
