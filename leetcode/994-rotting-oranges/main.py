@@ -19,13 +19,27 @@ class Solution(object):
             return 0
 
         dist = []
-        for _ in range(len(grid)):
-            dist.append(len(grid[0]) * [sys.maxsize])
-
+        q = []
         for i in range(len(grid)):
+            temp = []
             for j in range(len(grid[0])):
+                temp.append(sys.maxsize)
                 if grid[i][j] == 2:
-                    self.bfs(i, j, grid, dist)
+                    q.append((i, j, 0))
+            dist.append(temp)
+
+        while len(q) > 0:
+            i, j, steps = q.pop(0)
+            if i < 0 or i == len(grid) or j < 0 or j == len(grid[0]):
+                continue
+            if grid[i][j] != 1 and grid[i][j] != 2:
+                continue
+            if steps < dist[i][j]:
+                dist[i][j] = steps
+                q.append((i-1, j, steps+1))
+                q.append((i+1, j, steps+1))
+                q.append((i, j-1, steps+1))
+                q.append((i, j+1, steps+1))
 
         res = 0
         for i in range(len(grid)):
@@ -33,29 +47,5 @@ class Solution(object):
                 if grid[i][j] == 1:
                     if dist[i][j] == sys.maxsize:
                         return -1
-                    else:
-                        res = max(res, dist[i][j])
+                    res = max(res, dist[i][j])
         return res
-
-    def bfs(self, x, y, grid, dist):
-
-        seen = set()
-
-        q = [(x, y, 0)]
-        while len(q) > 0:
-            i, j, steps = q.pop(0)
-            if i < 0 or i+1 > len(grid) or j < 0 or j+1 > len(grid[0]):
-                continue
-            if (i == x and j == y) or grid[i][j] == 1:
-
-                key = (i, j)
-                if key in seen:
-                    continue
-                seen.add(key)
-
-                dist[i][j] = min(dist[i][j], steps)
-
-                q.append((i-1, j, steps+1))
-                q.append((i+1, j, steps+1))
-                q.append((i, j-1, steps+1))
-                q.append((i, j+1, steps+1))

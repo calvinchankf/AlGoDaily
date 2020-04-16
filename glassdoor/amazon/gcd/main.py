@@ -11,13 +11,14 @@
     common way:
 
     findGcd(100, 40)
+    
     -> 40, 100%40
     findGcd(40, 20)
+    
     -> 40, 40%20
     findGcd(20, 0)
 
     so gcd = 20
-
 """
 
 
