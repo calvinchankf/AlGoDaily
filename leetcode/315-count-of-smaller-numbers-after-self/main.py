@@ -43,6 +43,14 @@ class Solution(object):
         return left
 
 
+s = Solution()
+
+a = [5, 2, 6, 1, 2, 1]
+print(s.countSmaller(a))
+
+
+print("-----")
+
 """
     2nd: mergesort, learned from others
     
@@ -96,6 +104,73 @@ class Solution:
         pairs = [(n, i) for i, n in enumerate(nums)]
         divide(pairs)
         return res
+
+
+s = Solution()
+
+a = [5, 2, 6, 1, 2, 1]
+print(s.countSmaller(a))
+
+
+print("-----")
+
+"""
+    3rd: Binary Indexed Tree + Prefix Sum
+    - e.g. [5, 2, 6, 1, 2, 1]
+            ^  ^  ^  ^  ^  ^
+    rank = [3, 2, 4, 1, 2, 1] <- it means the rank of each of the number after input array is sorted
+
+    num     rank    frequency(fenwick)  prefix sum/query(rank-1)
+    1       1       [0<-,1,0,0,0]       0
+    2       2       [0,1<-,1,0,0]       1
+    1       1       [0<-,2,1,0,0]       0
+    6       4       [0,2,1,0<-,1]       3
+    2       2       [0,2<-,2,0,1]       2
+    5       3       [0,2,2<-,1,1]       4
+
+    - see idea.png for detail
+    
+    ref:
+    - https://www.youtube.com/watch?v=2SVLYsq5W8M
+
+    Time    O(NlogN)
+    Space   O(N)
+    100 ms, faster than 90.00%
+"""
+
+
+class BinaryIndexedTree(object):
+    def __init__(self, n):
+        self.fenwickTree = (n+1) * [0]
+
+    def update(self, i, val):
+        k = i + 1
+        while k < len(self.fenwickTree):
+            self.fenwickTree[k] += val
+            k += k & -k
+
+    def getSum(self, i):
+        s = 0
+        k = i + 1
+        while k > 0:
+            s += self.fenwickTree[k]
+            k -= k & -k
+        return s
+
+
+class Solution(object):
+    def countSmaller(self, nums):
+        hashTable = {v: i+1 for i, v in enumerate(sorted(set(nums)))}
+
+        tree = BinaryIndexedTree(len(hashTable))
+        res = []
+        for i in range(len(nums) - 1, -1, -1):
+            num = nums[i]
+            index = hashTable[num]
+            res.append(tree.getSum(index-1))
+            # update frequency
+            tree.update(index, 1)
+        return res[::-1]
 
 
 s = Solution()
