@@ -30,6 +30,8 @@
 
     N is an integer within the range [5..100,000];
     each element of array A is an integer within the range [1..10,000].
+
+    ref: https://leetcode.com/discuss/interview-question/506287/
 """
 
 
@@ -49,15 +51,13 @@ def f(nums):
         suffix_sum += nums[i]
         suffix_sums[i] = suffix_sum
 
-    sum_from_left = 0
-    sum_from_right = 0
     i, j = 0, n - 1
     while i < j - 2:
         sum_from_left = prefix_sums[i]
         sum_from_right = suffix_sums[j]
+        sum_in_middle = prefix_sums[j-2] - prefix_sums[i+1]
         if sum_from_left == sum_from_right:
-            middle_sum = prefix_sums[j-2] - prefix_sums[i+1]
-            if middle_sum == sum_from_left:
+            if sum_in_middle == sum_from_left:
                 return True
         if prefix_sums[i] > suffix_sums[j]:
             j -= 1
