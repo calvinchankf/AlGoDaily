@@ -12,8 +12,7 @@ class Solution(object):
         Time	O(nlogn)
         Space O(n)
         """
-        self.mergesort(nums, 0, len(nums)-1)
-        return nums
+        return self.mergesort(nums)
 
     def mergesort(self, nums):
         if len(nums) == 1:
@@ -38,3 +37,10 @@ class Solution(object):
         if j < len(right):
             res += right[j:]
         return res
+
+
+s = Solution()
+
+a = [45, 6, 7, 89, 0, 1, 2, 2, 34]
+
+print(s.sortArray(a))
