@@ -1,5 +1,5 @@
 class Solution(object):
-    def sortArray(self, nums):
+    def mergesort(self, nums):
         """
         :type nums: List[int]
         :rtype: List[int]
@@ -12,17 +12,17 @@ class Solution(object):
         Time	O(nlogn)
         Space O(n)
         """
-        return self.mergesort(nums)
+        return self.divide(nums)
 
-    def mergesort(self, nums):
+    def divide(self, nums):
         if len(nums) == 1:
             return nums
         half = len(nums)/2
-        left = self.mergesort(nums[:half])
-        right = self.mergesort(nums[half:])
-        return self.merge(left, right)
+        left = self.divide(nums[:half])
+        right = self.divide(nums[half:])
+        return self.conquer(left, right)
 
-    def merge(self, left, right):
+    def conquer(self, left, right):
         res = []
         i, j = 0, 0
         while i < len(left) and j < len(right):
@@ -43,4 +43,4 @@ s = Solution()
 
 a = [45, 6, 7, 89, 0, 1, 2, 2, 34]
 
-print(s.sortArray(a))
+print(s.mergesort(a))
