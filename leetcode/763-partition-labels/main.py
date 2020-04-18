@@ -88,17 +88,17 @@ class Solution(object):
             m[c] = i
         res = []
         # for finding the farthest reach
-        farthest = 0
+        farthest = -1
         # for recording the substring start point
-        startPoint = 0
+        startPoint = -1
         # iterate the string to record the farthest point a substring can reach
         for i in range(len(S)):
             c = S[i]
             farthest = max(farthest, m[c])
             # check if the farthest == i. if yes, it means the substring btw startpoint and i is one of the result
             if i == farthest:
-                res.append(farthest-startPoint+1)
-                startPoint = i+1
+                res.append(farthest-startPoint)
+                startPoint = i
         return res
 
 
