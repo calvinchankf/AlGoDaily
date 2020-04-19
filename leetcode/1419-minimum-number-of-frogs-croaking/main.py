@@ -1,10 +1,12 @@
+import heapq
+
 """
-    1st: intervals
-    - similar to lc253
+    1st: hashtable + heap
+    - intervals problem similar to lc253
 
     Time    O(NlogN)
     Space   O(N)
-    LTE 49 / 54 test cases passed.
+    1260 ms, faster than 100.00%
 """
 
 
@@ -14,55 +16,51 @@ class Solution(object):
         :type croakOfFrogs: str
         :rtype: int
         """
+        ht = {
+            'c': [],
+            'cr': [],
+            'cro': [],
+            'croa': [],
+            'croak': [],
+        }
         prevOf = {
             'r': 'c',
-            'o': 'r',
-            'a': 'o',
-            'k': 'a',
+            'o': 'cr',
+            'a': 'cro',
+            'k': 'croa',
         }
-        # [(start, end, string)....
-        intvs = []
         for i in range(len(croakOfFrogs)):
             c = croakOfFrogs[i]
-            if len(intvs) == 0:
-                intvs.append([i, i, c])
-            elif c == 'c':
-                intvs.append([i, i, c])
+            if c == 'c':
+                ht[c].append([i, i + 1])
             else:
-                didBreak = False
-                for j in range(len(intvs)):
-                    lastChar = intvs[j][2][-1]
-                    if prevOf[c] == lastChar:
-                        intvs[j][1] = i + 1
-                        intvs[j][2] += c
-                        didBreak = True
-                        break
-                if didBreak == False:
+                prevPattern = prevOf[c]
+                if len(ht[prevPattern]) > 0:
+                    start, end = ht[prevPattern].pop(0)
+                    nextPattern = prevPattern + c
+                    ht[nextPattern].append([start, i + 1])
+                else:
                     return -1
+        if len(ht['c']) > 0 or len(ht['cr']) > 0 or len(ht['cro']) > 0 or len(ht['croa']) > 0:
+            return -1
 
-        for i, j, s in intvs:
-            if s != 'croak':
-                return -1
+        intvs = ht['croak']
 
-        def cptr(a, b):
-            if a[0] == b[0]:
-                return a[1]-b[1]
-            return a[0]-b[0]
-        intvs = sorted(intvs, cmp=cptr)
+        # # the above gurantees that the intervals are sorted
+        # def cptr(a, b):
+        #     if a[0] == b[0]:
+        #         return a[1]-b[1]
+        #     return a[0]-b[0]
+        # intvs = sorted(intvs, cmp=cptr)
 
-        lasts = [intvs[0][1]]
-        for i in range(1, len(intvs)):
-            cur = intvs[i]
-            found = False
-            for j in range(len(lasts)):
-                last = lasts[j]
-                if last <= cur[0]:
-                    lasts[j] = max(last, cur[1])
-                    found = True
-                    break
-            if found == False:
-                lasts.append(cur[1])
-        return len(lasts)
+        pq = []
+        for i in range(len(intvs)):
+            start, end = intvs[i]
+            if len(pq) > 0 and start >= pq[0]:
+                heapq.heapreplace(pq, end)
+            else:
+                heapq.heappush(pq, end)
+        return len(pq)
 
 
 s = Solution()
