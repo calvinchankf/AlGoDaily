@@ -117,6 +117,10 @@ class NumArray(object):
     ref:
     - https://www.youtube.com/playlist?list=PLDV1Zeh2NRsCvoyP-bztk6uXAYoyZg_U9
     - https://leetcode.com/problems/range-sum-query-mutable/discuss/75753/Java-using-Binary-Indexed-Tree-with-clear-explanation
+    - https://www.youtube.com/watch?v=uSFzHCZ4E-8
+
+    2's complement binary representation for negative numbers
+    - youtube.com/watch?v=4qH4unVtJkE&vl=en
 
     Time of build   O(n)
     Time of update  O(logn)
@@ -140,14 +144,25 @@ class NumArray(object):
 
     def _buildTree(self, i, val):
         k = i + 1
+        # new i = i + least significant bit(i)
+        # e.g. start from 5
+        # 5     00101
+        # 6     00110 (becos 00101 + 00001)
+        # 8     01000 (becos 00110 + 00010)
+        # 16    10000 (becos 01000 + 01000)
         while k < len(self.fenwickTree):
             self.fenwickTree[k] += val
-            # new k = k + least_significant_bit(k)
             k = k + (k & -k)
 
     def _getSum(self, i):
         s = 0
         k = i + 1
+        # flip the least significant bit 1 by 1 to the left until 0
+        # e.g. start from 14
+        # 14    1110
+        # 12    1100 (1110 - 0010)
+        # 8     1000 (1100 - 0100)
+        # 0     0000 (1000 - 1000)
         while k > 0:
             s += self.fenwickTree[k]
             k = k - (k & -k)
