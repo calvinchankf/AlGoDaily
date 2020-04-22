@@ -16,19 +16,29 @@
 
 /*
     Approach:
-    - find the vowels count from the beginning or the end
-    - find the longest substring in S that all the chars in this substring are vowels
+    - find the consecutive vowels count from the start and the end
+    - find the longest consecutive vowels in the middle
+    - sum them up
 
+    e.g.1
     a a a y y y a a y y a y a a a y a y a a a
-    ^ ^ ^ - - - * * - - * - * * * - * - ^ ^ ^
+    * * * - - - ^ ^ - - ^ - ^ ^ ^ - ^ - * * *
 
     Result = 3 + (2 or 1 or 3) + 3 = 9
+
+
+    e.g.2
+    a a b c d e e e f g h i i i i j k l m n o o
+    * * - - - ^ ^ ^ - - - ^ ^ ^ ^ - - - - - * *
+
+    Result = 2 + (3 or 4) + 2 = 8
 
     Time    O(N)
     Space   O(1)
 */
 const isVowel = (c) => {
-	return c == "a" || c == "e" || c == "i" || c == "o" || c == "u";
+	const ht = new Set(["a", "e", "i", "o", "u"]);
+	return ht.has(c);
 };
 
 const longestCombinedVowels = (s) => {
@@ -67,17 +77,26 @@ const longestCombinedVowels = (s) => {
 	return startVowelCount + longestInMiddle + endVowelCount;
 };
 
+// 9
 let a = "aaayyyaayyayaaayayaaa";
 console.log(longestCombinedVowels(a));
 
+// 6
 a = "yyyaayyayaaayayaaa";
 console.log(longestCombinedVowels(a));
 
+// 6
 a = "aaayyyaayyayaaayay";
 console.log(longestCombinedVowels(a));
 
+// 8
+a = "aabcdeeefghiiiijklmnoo";
+console.log(longestCombinedVowels(a));
+
+// 3
 a = "earthproblem";
 console.log(longestCombinedVowels(a));
 
+// 2
 a = "letsgosomewhere";
 console.log(longestCombinedVowels(a));

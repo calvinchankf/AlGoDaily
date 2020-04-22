@@ -28,15 +28,36 @@
     ref: https://leetcode.com/discuss/interview-question/538068/
 */
 
-// 10C -> [9, 2]
-const symbolToCoor = (symbol) => {
-	const n = symbol.length;
-	const row = parseInt(symbol.substring(0, n - 1)) - 1;
-	const col = symbol[n - 1].charCodeAt(0) - 65;
-	return [row, col];
-};
+/*
+    2 hashtables
 
-const zombieInMatrix = (N, S, T) => {
+    first hashtable: store every coordinate to its ship
+    e.g. S = "1A 1B, 3A 3B"
+    coordinatesToShip = {
+        1A: 0,
+        1B: 0,
+        2A: 0,
+        2B: 0,
+        3A: 1,
+        3B: 1
+    }
+
+    second hashtable: store area for every ship
+    e.g. S = "1A 1B, 3A 3B"
+    areas = {
+        0: 4,
+        1: 2
+    }
+
+    when we iterate through the targets, we decrement the ship area
+    e.g. T = "1A 1B 1C"
+    {
+        0: 1,   <- ship 0 has been hit by "1A 1B 1C", so the remaining area = 1
+        1: 2
+    }
+
+*/
+const battleship = (N, S, T) => {
 	const coorMapToShip = {};
 	const shipAreas = {};
 
@@ -47,7 +68,9 @@ const zombieInMatrix = (N, S, T) => {
 		const [bottpm, right] = symbolToCoor(bottom_right);
 		for (let i = top; i <= bottpm; i++) {
 			for (let j = left; j <= right; j++) {
-				const key = i + "," + j;
+				const key = `${i},${j}`;
+				// key = coordinate
+				// value = ID of the ship which includes the coordinate
 				coorMapToShip[key] = idx;
 				if (shipAreas[idx] === undefined) {
 					shipAreas[idx] = 1;
@@ -60,21 +83,15 @@ const zombieInMatrix = (N, S, T) => {
 
 	const shipAreasFuture = { ...shipAreas };
 
-	console.log(coorMapToShip);
-	console.log(shipAreas);
-	console.log(shipAreasFuture);
-
 	const hits_str = T.split(" ");
 	hits_str.forEach((symbol) => {
 		const [i, j] = symbolToCoor(symbol);
-		const key = i + "," + j;
+		const key = `${i},${j}`;
 		if (coorMapToShip[key] !== undefined) {
 			const ship = coorMapToShip[key];
 			shipAreasFuture[ship] -= 1;
 		}
 	});
-
-	console.log(shipAreasFuture);
 
 	let destroyed = 0;
 	let damaged = 0;
@@ -91,20 +108,28 @@ const zombieInMatrix = (N, S, T) => {
 	return `${destroyed},${damaged}`;
 };
 
+// 10C -> [9, 2]
+const symbolToCoor = (symbol) => {
+	const n = symbol.length;
+	const row = parseInt(symbol.substring(0, n - 1)) - 1; // 0-based
+	const col = symbol[n - 1].charCodeAt(0) - "A".charCodeAt(0); // A->0, B->1, C->2...
+	return [row, col];
+};
+
 // return 1,1
 N = 4;
 S = "1B 2C,2D 4D";
 T = "2B 2D 3D 4D 4A";
-console.log(zombieInMatrix(N, S, T));
+console.log(battleship(N, S, T));
 
 // return 0,1
 N = 3;
 S = "1A 1B,2C 2C";
 T = "1B";
-console.log(zombieInMatrix(N, S, T));
+console.log(battleship(N, S, T));
 
 // 1,0
 N = 12;
 S = "1A 2A,12A 12A";
 T = "12A";
-console.log(zombieInMatrix(N, S, T));
+console.log(battleship(N, S, T));
