@@ -59,8 +59,8 @@ I believe that practising algorithms every day is a long-term investment in my l
 -   [Day 401 - 500](./markdowns/day401-500.md)
 -   [Day 501 - 600](./markdowns/day501-600.md)
 
-| Day | Question | Type | From | remarks |
-| --- | -------- | ---- | ---- | ------- |
-| 601 | [Binary Indexed Tree](/miscellaneous/binary-indexed-tree/)                                                                                                                    | Fenwick Tree                | study                                                                                                                         |                                                                           |
-| 602 | [Minimum Value to Get Positive Step by Step Sum](/leetcode/1413-minimum-value-to-get-positive-step-by-step-sum)                                                               | prefix sum                | [leetcode 1413](https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/)                                |                                                                           |
-
+| Day | Question                                                                                                        | Type         | From                                                                                           | remarks |
+| --- | --------------------------------------------------------------------------------------------------------------- | ------------ | ---------------------------------------------------------------------------------------------- | ------- |
+| 601 | [Binary Indexed Tree](/miscellaneous/binary-indexed-tree)                                                       | Fenwick Tree | study                                                                                          |         |
+| 602 | [Minimum Value to Get Positive Step by Step Sum](/leetcode/1413-minimum-value-to-get-positive-step-by-step-sum) | prefix sum   | [leetcode 1413](https://leetcode.com/problems/minimum-value-to-get-positive-step-by-step-sum/) |         |
+| 612 | [Jump Game](/leetcode/55-jump-game)                                                                             | min-max      | [leetcode 55](https://leetcode.com/problems/jump-game/)                                        |         |
