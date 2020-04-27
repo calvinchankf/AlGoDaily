@@ -12,7 +12,7 @@ def bsearch(nums, target):
     # to find number that <= target
     # return right
 
-    # to find number that no >= target
+    # to find number that >= target
     # return left
 
     return -1
@@ -52,7 +52,7 @@ def bSearchNearest(nums, target):
             left = mid + 1
         else:
             return mid
-    # checking
+    # bounds checking
     if right < 0:
         return 0
     if left > len(nums)-1:
