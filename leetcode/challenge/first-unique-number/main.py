@@ -5,8 +5,8 @@ from collections import Counter
     - similar to lc146
 
     Time of init                O(N)
-    Time of showFirstUnique()   O(N)
-    Time of add()               O(N)
+    Time of showFirstUnique()   O(1)
+    Time of add()               O(1)
     Space                       O(N)
     1088 ms
 """
@@ -69,3 +69,40 @@ class FirstUnique:
 # obj = FirstUnique(nums)
 # param_1 = obj.showFirstUnique()
 # obj.add(value)
+
+
+"""
+    2nd: queue + hashtable
+    - not a very optimal approach
+    - counter the occurence of each number
+    - when we do showFirstUnique(), pop the queue until we reach to a number which appears once only
+
+    Time of init                O(N)
+    Time of showFirstUnique()   O(N)
+    Time of add()               O(1)
+    Space                       O(N)
+    1560 ms
+"""
+
+
+class FirstUnique:
+
+    def __init__(self, nums: List[int]):
+        self.ht = {}
+        self.q = []
+        for num in nums:
+            self.add(num)
+
+    def showFirstUnique(self) -> int:
+        while len(self.q) > 0 and self.ht[self.q[0]] > 1:
+            self.q.pop(0)
+        if len(self.q) == 0:
+            return -1
+        return self.q[0]
+
+    def add(self, value: int) -> None:
+        if value in self.ht:
+            self.ht[value] += 1
+        else:
+            self.ht[value] = 1
+            self.q.append(value)
