@@ -56,7 +56,7 @@ class Solution:
     - just save the range and its count i.e. (idx, steps)
     e.g.
     [8,2,4,4,4,9,5,2,5,8,8,0,8,6,9,1,1,6,3]
-     
+        
     idx  0: [(0, 0)]
     idx  5: [(0, 0), (8, 1)]
     idx  9: [(0, 0), (8, 1), (14, 2)]
@@ -66,7 +66,7 @@ class Solution:
 
     Time    O(NlogN)
     Space   O(N)
-    152 ms, faster than 12.27%
+    148 ms, faster than 12.70%
 """
 
 
@@ -84,7 +84,7 @@ class Solution:
                     minSteps.append((k, minSteps[-1][1] + 1))
         return minSteps[-1][1]
 
-    def lowerBsearch(self, nums, target):
+    def lowerBsearch(self, nums: List[tuple], target: int) -> int:
         left = 0
         right = len(nums)
         while left < right:
