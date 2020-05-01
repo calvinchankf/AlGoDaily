@@ -103,3 +103,29 @@ class Solution:
             else:
                 left = mid + 1
         return left
+
+
+"""
+    4th: dynamic programming? greedy?
+    - similar to lc55: Jump Game I
+    - here we have 2 more variables
+        - jumps: track the number of jumps
+        - gMaxIdx: track the global farthest index we can reach
+    
+    Time    O(N)
+    Space   O(1)
+    96 ms, faster than 77.02%
+"""
+
+
+class Solution:
+    def jump(self, nums: List[int]) -> int:
+        maxIdx = 0
+        gMaxIdx = 0
+        jumps = 0
+        for i in range(len(nums)):
+            if i > gMaxIdx:
+                jumps += 1
+                gMaxIdx = maxIdx
+            maxIdx = max(maxIdx, i+nums[i])
+        return jumps
