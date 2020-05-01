@@ -56,13 +56,22 @@ class Solution:
     - just save the range and its count i.e. (idx, steps)
     e.g.
     [8,2,4,4,4,9,5,2,5,8,8,0,8,6,9,1,1,6,3]
-        
-    idx  0: [(0, 0)]
-    idx  5: [(0, 0), (8, 1)]
-    idx  9: [(0, 0), (8, 1), (14, 2)]
-    idx 10: [(0, 0), (8, 1), (14, 2), (17, 3)]
-    idx 18: [(0, 0), (8, 1), (14, 2), (17, 3), (18, 3)]
+    
+    What we gonna optimze is, we only store the minsteps at last the last index, therefore we can do binary search
 
+    Orignal:
+    [8,2,4,4,4,9,5,2,5,8,8,0,8,6,9,1,1,6,3]
+     * 1 1 1 1 1 1 1 1
+		       * 1 1 1 2 2 2 2 2 2
+					   * 2 2 2 2 2 3 3 3
+						     * 2 2 3 3 3 3
+    
+    Optimal:
+    [8,2,4,4,4,9,5,2,5,8,8,0,8,6,9,1,1,6,3]
+     * ------------> 1
+		       * --------------> 2
+					   * ------------> 3
+						     * --------> 3 (2 + 1, becos the lower minsteps = 2, not 3)
 
     Time    O(NlogN)
     Space   O(N)
