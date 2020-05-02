@@ -8,7 +8,7 @@ from collections import Counter
     Time of showFirstUnique()   O(1)
     Time of add()               O(1)
     Space                       O(N)
-    1088 ms
+    1128 ms, faster than 16.67%
 """
 
 
@@ -81,7 +81,7 @@ class FirstUnique:
     Time of showFirstUnique()   O(N)
     Time of add()               O(1)
     Space                       O(N)
-    1560 ms
+    1532 ms, faster than 16.67%
 """
 
 
