@@ -22,7 +22,7 @@ class Solution:
     def dfs(self, node: TreeNode, x: str, y: str):
         if node == None:
             return False
-        x_ = x + ',' + str(node.val)
+        _x = x + ',' + str(node.val)
         if node.left == None and node.right == None:
-            return x_ == y
-        return self.dfs(node.left, x_, y) or self.dfs(node.right, x_, y)
+            return _x == y
+        return self.dfs(node.left, _x, y) or self.dfs(node.right, _x, y)
