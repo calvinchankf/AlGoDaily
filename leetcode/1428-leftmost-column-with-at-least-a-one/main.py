@@ -4,7 +4,7 @@
 
     Time    O(logN)
     Space   O(1)
-    96 ms
+    88 ms, faster than 100.00%
 """
 
 
