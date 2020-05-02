@@ -10,7 +10,7 @@
 
     Time    O(N) at most
     Space   O(logN -> N) height of the tree
-    140 ms
+    148 ms, faster than 100.00% 
 """
 
 
