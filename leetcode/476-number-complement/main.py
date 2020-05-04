@@ -6,7 +6,7 @@
 
     Time    O(logn)
     Space   O(1)
-    32 ms, faster than 37.10%
+    28 ms, faster than 71.18%
 """
 
 
@@ -18,7 +18,7 @@ class Solution:
         i = 0
         while num > 0:
             temp = num & 1
-            res += abs(temp - 1) * (2**i)
+            res += (temp ^ 1) * (2**i)
             num >>= 1
             i += 1
         return res
