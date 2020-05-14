@@ -21,7 +21,6 @@ class Solution:
                 q.append((idx + i, steps + 1))
         return -1
 
-
 """
     2nd: caching
 
