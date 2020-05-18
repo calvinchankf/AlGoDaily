@@ -1,5 +1,6 @@
 """
     1st approach: bit op
+    - same as lc476
     - if the current bit is 0, add 1 << count the result
     - increment the count and N//2 when we iterating through the binary representation of the number
 
