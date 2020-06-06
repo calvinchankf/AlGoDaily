@@ -3,6 +3,7 @@ from typing import List
 
 """
     1st: recursion + hashtable
+    - similar to lc1043
     - consider m = 2, we find out the Largest Sum of Averages in 2 loops, right?
     - so, when m = 3, we can reuse the result from m = 2
     - so, when m = 4, we can reuse the result from m = 3
