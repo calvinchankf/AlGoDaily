@@ -2,7 +2,7 @@ from typing import List
 
 """
     1st: dynamic programming, recursion + hashtable
-    - similar to lc813
+    - similar to lc410, lc813
     - solve it by solving its subproblems, optimize the speed by caching the result of subproblems
 
     For example [1,15,7,9,2,5,10], 
