@@ -70,3 +70,38 @@ class Solution:
             res = min(res, cur)
         ht[key] = res
         return res
+
+
+"""
+    3rd: bottom up iteration
+    - tbh, it is hard to transform the recursive approach into this approach....
+
+    ref:
+    - https://www.youtube.com/watch?v=Cpy4T_rVuPk
+
+    Time    O(M * N^2)
+    Space   O(MN)
+    5856 ms, faster than 18.00%
+"""
+
+
+class Solution:
+    def splitArray(self, nums: List[int], m: int) -> int:
+        n = len(nums)
+
+        preffixSums = (n+1) * [0]
+        for i in range(n):
+            preffixSums[i+1] = preffixSums[i] + nums[i]
+
+        dp = []
+        for i in range(n + 1):
+            dp.append((m + 1) * [sys.maxsize])
+
+        dp[0][0] = 0
+        for i in range(1, n+1):
+            for j in range(1, m+1):
+                for k in range(i):
+                    cur = max(dp[k][j-1], preffixSums[i] - preffixSums[k])
+                    dp[i][j] = min(dp[i][j], cur)
+
+        return dp[-1][-1]
