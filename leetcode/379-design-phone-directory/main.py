@@ -7,7 +7,7 @@ class DLLNode(object):
 
 """
     1st approach: linked list + hashtable
-    - similar to lc146
+    - similar to lc146, lc1429
     
     Time of init()      O(n)
     Time of others      O(1)
