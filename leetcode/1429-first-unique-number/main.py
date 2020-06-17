@@ -2,7 +2,7 @@ from collections import Counter
 
 """
     1st: linked list + hashtable
-    - similar to lc146
+    - similar to lc146, lc379
 
     Time of init                O(N)
     Time of showFirstUnique()   O(1)
