@@ -59,15 +59,18 @@ class Solution:
         return self.dfs(costs, 0, 0, 0)
 
     def dfs(self, costs, count_a, count_b, index):
-        if (count_a, count_b, index) in self.cached:
-            return self.cached[(count_a, count_b, index)]
-        if count_a == count_b == len(costs) // 2:  # Valid division of people
+        # Valid division of people
+        if count_a == count_b and count_a * 2 == len(costs):
             return 0
+        # Invalid division of people
         if index == len(costs):
-            return sys.maxsize  # Invalid division of people
+            return sys.maxsize
+        key = (count_a, count_b)
+        if key in self.cached:
+            return self.cached[key]
         minCost = min(
             costs[index][0] + self.dfs(costs, count_a + 1, count_b, index + 1),
             costs[index][1] + self.dfs(costs, count_a, count_b + 1, index + 1)
         )
-        self.cached[(count_a, count_b, index)] = minCost
+        self.cached[key] = minCost
         return minCost
