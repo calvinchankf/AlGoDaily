@@ -1,12 +1,12 @@
 """
     1st approach: binary search + sliding window
-    - let's say length of a string is 10, we can try to see if there are any duplicate substrings of length 5
+    - let's say the length of a string is 10, we can try to see if there are any duplicate substrings of length 5
     - if yes, we are going to see if there are any duplicate substrings of length (10+5+1)//2 = 8
     - if no, we are going to see if there are any duplicate substrings of length (0+5+1)//2 = 3
 
     Time    O(nlogn)
     Space   O(n^2)
-    Memory Limit Exceeded(MLE)
+    10 / 16 test cases passed. Memory Limit Exceeded(MLE)
 """
 
 
