@@ -1,5 +1,6 @@
 """
     1st approach: BFS + nodes coloring
+    - see .idea.png
 
     idea learned from others:
     - https://www.youtube.com/watch?v=VlZiMD7Iby4
@@ -41,6 +42,7 @@ class Solution(object):
 
 """
     2nd approach: recursive DFS + nodes coloring
+    - see .idea.png
 
     idea learned from others:
     - https://www.youtube.com/watch?v=VlZiMD7Iby4
