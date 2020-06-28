@@ -65,6 +65,7 @@ class Solution(object):
 
 """
     2nd: Floyd Warshall algorithm
+    - similar to lc1462
 
     ref:
     - https://www.youtube.com/watch?v=4OQeCuLYj-4
