@@ -22,6 +22,7 @@ class Solution(object):
         :type head: ListNode
         :rtype: ListNode
         """
+        # find if there is a cycle
         if head == None:
             return None
         slow = head
@@ -31,8 +32,10 @@ class Solution(object):
             fast = fast.next.next
             if slow == fast:
                 break
+        # if no cycle, return None
         if fast == None or fast.next == None:
             return None
+        # find the starting point
         slow = head
         while slow != fast:
             slow = slow.next
