@@ -1,3 +1,12 @@
+"""
+    1st: bit op XOR
+
+    Time    O( log(max(X,Y)) )
+    Space   O(1)
+    24 ms, faster than 92.58%
+"""
+
+
 class Solution(object):
     def hammingDistance(self, x, y):
         """
@@ -17,7 +26,28 @@ class Solution(object):
 print(Solution().hammingDistance(1, 4))
 
 """
-    2nd: bit op
+    2nd: bit op AND, SHIFT
+
+    Time    O(logM + logN)
+    Space   O(64)
+    40 ms, faster than 16.11%
+"""
+
+
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        res = 0
+        while x > 0 or y > 0:
+            a = x & 1
+            b = y & 1
+            res += a != b
+            x >>= 1
+            y >>= 1
+        return res
+
+
+"""
+    3rd: math
     - get the bit operation of both numbers
     - find the diff
 
