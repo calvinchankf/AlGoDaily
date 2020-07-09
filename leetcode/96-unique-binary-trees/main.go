@@ -3,6 +3,7 @@ package main
 /*
 	classic approach: Catalan Number
 	- https://www.youtube.com/watch?v=YDf982Lb84o
+	- https://www.youtube.com/watch?v=GgP75HAvrlY
 
 	f(1) = 1
 	f(2) = 2
