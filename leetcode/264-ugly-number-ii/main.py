@@ -1,4 +1,4 @@
-import heapq
+from heapq import heappush, heappop
 
 """
     1st approach: brute force, reuse lc263
@@ -66,34 +66,26 @@ print("-----")
 
 
 class Solution(object):
-
-    def __init__(self):
-        self.nums = [1]
-
-    def nthUglyNumber(self, n):
-        """
-        :type n: int
-        :rtype: int
-        """
-        if n < 1:
-            return 0
-        heapq.heapify(self.nums)
-        self.dfs(1, set())
-        res = 1
-        for i in range(n+1):
-            res = heapq.heappop(self.nums)
+    def nthUglyNumber(self, n: int) -> int:
+        self.pq = []
+        self.seen = set()
+        self.dfs(1)
+        res = None
+        while n > 0:
+            res = heappop(self.pq)
+            n -= 1
         return res
 
-    def dfs(self, num, seen):
-        if num in seen:
+    def dfs(self, n: int):
+        if n in self.seen:
             return
-        seen.add(num)
-        if num > 2**31:
+        self.seen.add(n)
+        if n > 2**31:
             return
-        heapq.heappush(self.nums, num)
-        self.dfs(num*2, seen)
-        self.dfs(num*3, seen)
-        self.dfs(num*5, seen)
+        heappush(self.pq, n)
+        self.dfs(n*2)
+        self.dfs(n*3)
+        self.dfs(n*5)
 
 
 """
