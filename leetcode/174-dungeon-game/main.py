@@ -1,38 +1,73 @@
 import sys
 
+"""
+    classic: dynamic programming
+
+    ref:
+    - https://leetcode.com/articles/dungeon-game
+    - https://leetcode.com/problems/dungeon-game/discuss/698271/Python-Short-DP-9-lines-O(mn)-top-down-explained
+    - https://leetcode.com/problems/dungeon-game/discuss/464716/Diego's-Understandable-Explanations-C%2B%2B
+
+    Time    O(RC)
+    Space   O(RC)
+    48 ms, faster than 98.54%
+"""
+
 
 class Solution(object):
-    """
-        1st approach
-        - brute force dfs all the paths and find the least negative path sum
-        Time    O(2^(m+n))
-        Space   O(1)
-    """
-
-   def __init__(self):
-        self.leastNegative = -sys.maxint-1
-
     def calculateMinimumHP(self, dungeon):
         """
         :type dungeon: List[List[int]]
         :rtype: int
         """
-        self.dfs(dungeon, 0, 0, 0)
-        if self.leastNegative > 0:
-            return 1
-        return -self.leastNegative+1
+        r, c = len(dungeon), len(dungeon[0])
+        dp = [[0]*(c+1) for _ in range(r+1)]
 
-    def dfs(self, dungeon, i, j, acc):
-        if i < 0 or i >= len(dungeon) or j < 0 or j >= len(dungeon[0]):
-            return
-        temp = acc + dungeon[i][j]
-        if i == len(dungeon) - 1 and j == len(dungeon[0])-1:
-            print(temp)
-            if temp < 0 and temp > self.leastNegative:
-                self.leastNegative = temp
+        dp[r-1][c], dp[r][c-1] = 1, 1
+        for i in range(r-1):
+            dp[i][c] = sys.maxsize
+        for j in range(c-1):
+            dp[r][j] = sys.maxsize
 
-        self.dfs(dungeon, i+1, j, temp)
-        self.dfs(dungeon, i, j+1, temp)
+        for i in range(r-1, -1, -1):
+            for j in range(c-1, -1, -1):
+                minFromRightOrBottom = min(dp[i+1][j], dp[i][j+1])
+                dp[i][j] = max(minFromRightOrBottom - dungeon[i][j], 1)
+
+        return dp[0][0]
 
 
-print(Solution().calculateMinimumHP([[-2, -3, 3], [-5, -10, 1], [10, 30, -5]]))
+s = Solution()
+
+a = [
+    [-2, -3, 3],
+    [-5, -10, 1],
+    [10, 30, -5]
+]
+print(s.calculateMinimumHP(a))
+
+a = [
+    [-2, -3, 3],
+    [-5, -10, 1],
+    [10, 30, -500]
+]
+print(s.calculateMinimumHP(a))
+
+a = [
+    [-3, 5]
+]
+print(s.calculateMinimumHP(a))
+
+a = [
+    [0, 5],
+    [-2, -3],
+]
+print(s.calculateMinimumHP(a))
+
+a = [
+    [-2, -3, 3, -4],
+    [-5, -10, 1, -4],
+    [10, 30, -5, 5],
+    [10, 30, -5, -6],
+]
+print(s.calculateMinimumHP(a))
