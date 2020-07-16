@@ -11,7 +11,7 @@ type TreeNode struct {
 
 	Time	O(n)
 	Space	O(h)
-	 0 ms, faster than 100.00%
+	0 ms, faster than 100.00%
 */
 func isSameTree(p *TreeNode, q *TreeNode) bool {
 	if p == nil && q == nil {
@@ -29,7 +29,7 @@ func isSameTree(p *TreeNode, q *TreeNode) bool {
 
 	Time	O(n)
 	Space	O(h)
-	 0 ms, faster than 100.00%
+	0 ms, faster than 100.00%
 */
 type StackItem struct {
 	NodeA *TreeNode
