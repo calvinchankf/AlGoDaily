@@ -56,7 +56,8 @@ I believe that practising algorithms every day is a long-term investment in my l
 -   [Day 501 - 600](./markdowns/day501-600.md)
 -   [Day 601 - 700](./markdowns/day601-700.md)
 
-| Day | Question                                                                    | Type      | From                                                                        | remarks |
-| --- | --------------------------------------------------------------------------- | --------- | --------------------------------------------------------------------------- | ------- |
-| 701 | [Unique Binary Search Trees II](/leetcode/95-unique-binary-search-trees-ii) | recursion | [leetcode 95](https://leetcode.com/problems/unique-binary-search-trees-ii/) | 📌📌📌  |
-| 702 | [Water Bottles](/leetcode/1518-water-bottles)                               | math      | [leetcode 1518](https://leetcode.com/problems/water-bottles/)               | ⭐️     |
+| Day | Question                                                                                                                  | Type             | From                                                                                                | remarks |
+| --- | ------------------------------------------------------------------------------------------------------------------------- | ---------------- | --------------------------------------------------------------------------------------------------- | ------- |
+| 701 | [Unique Binary Search Trees II](/leetcode/95-unique-binary-search-trees-ii)                                               | recursion        | [leetcode 95](https://leetcode.com/problems/unique-binary-search-trees-ii/)                         | 📌📌📌  |
+| 702 | [Water Bottles](/leetcode/1518-water-bottles)                                                                             | math             | [leetcode 1518](https://leetcode.com/problems/water-bottles/)                                       | ⭐️     |
+| 703 | [Number of Nodes in the Sub-Tree With the Same Label](/leetcode/1519-number-of-nodes-in-the-sub-tree-with-the-same-label) | graph, hashtable | [leetcode 1519](https://leetcode.com/problems/number-of-nodes-in-the-sub-tree-with-the-same-label/) | ⭐️     |
