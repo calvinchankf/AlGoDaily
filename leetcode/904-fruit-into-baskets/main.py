@@ -1,5 +1,6 @@
 """
     1st approach: 2 pointers
+    - similar to lc1208
     - maintain the sliding window to have 2 unique keys
 
     Time    O(n)

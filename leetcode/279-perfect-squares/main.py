@@ -27,22 +27,24 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        if n == 0:
+        if n <= 0:
             return 0
         root = int(math.sqrt(n))
         squares = []
         for i in range(1, root+1):
             squares.append(i*i)
         dp = (n + 1) * [0]
-        for i in range(1, n+1):
+        dp[1] = 1
+        for i in range(2, n+1):
             minSteps = sys.maxsize
             for sq in squares:
                 remain = i - sq
-                if remain < 0:
+                if remain >= 0:
+                    minSteps = min(minSteps, dp[remain] + 1)
+                else:
                     break
-                minSteps = min(minSteps, dp[remain])
-            dp[i] = minSteps + 1
-        return dp[n]
+            dp[i] = minSteps
+        return dp[-1]
 
 
 print(Solution().numSquares(7691))
