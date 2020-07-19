@@ -1,8 +1,12 @@
-/**
- * @param {string} a
- * @param {string} b
- * @return {string}
- */
+/*
+    1st approach: stack + carry
+	- each digit = byteA + byteB + carry
+	- add the digits until no more carry, a, b
+
+    Time    O(A+B + max(A, B))
+    Space   O(A+B)
+    92 ms, faster than 33.74%
+*/
 var addBinary = function (a, b) {
 	let carry = 0;
 	let res = "";
