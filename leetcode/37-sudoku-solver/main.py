@@ -13,8 +13,12 @@ from collections import defaultdict
     - backtrack if we dont have candicates if we are still unfilled cells
     - return True if we reach to the end
 
-    Time    O(N^2)
-    Time    O(N^2)
+    Time of brute force   O(9^N) -> O(9^81) Total at most 81 cells. For each cell, there are 9 possbilities
+    Time of backtracking  O((9!)^9)         On each row, there are 
+                                            - not more than 9 possibilities for the first empty cell to put, 
+                                            - not more than 9 x 8 for the second one, 
+                                            - not more than 9 x 8 x 7 for the third one,...etc
+    Space    O(81)
     196 ms, faster than 73.90%
 """
 
