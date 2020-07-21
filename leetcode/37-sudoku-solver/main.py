@@ -13,7 +13,7 @@ from collections import defaultdict
     - backtrack if we dont have candicates if we are still unfilled cells
     - return True if we reach to the end
 
-    Time    O(N^3)
+    Time    O(N^2)
     Time    O(N^2)
     196 ms, faster than 73.90%
 """
