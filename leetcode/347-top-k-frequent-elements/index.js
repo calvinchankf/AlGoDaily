@@ -32,12 +32,9 @@ var topKFrequent = function (nums, k) {
 		return b[0] - a[0];
 	});
 	const res = [];
-	for (let pair of arr) {
-		const [count, value] = pair;
-		res.push(value);
-		if (res.length == k) {
-			break;
-		}
+	const n = Math.min(arr.length, k);
+	for (let i = 0; i < n; i++) {
+		res.push(arr[i][1]);
 	}
 	return res;
 };
