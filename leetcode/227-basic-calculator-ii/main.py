@@ -159,7 +159,10 @@ class Solution(object):
 # https://www.quora.com/What-does-floor-division-in-Python-do
 a = -3
 b = 2
+print(a/b)
 print(int(a/float(b)))
+
+print('---')
 
 # 47
 print(Solution().calculate("3+22*2"))
