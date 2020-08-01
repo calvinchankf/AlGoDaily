@@ -55,6 +55,7 @@ I believe that practising algorithms every day is a long-term investment in my l
 -   [Day 501 - 600](./markdowns/day501-600.md)
 -   [Day 601 - 700](./markdowns/day601-700.md)
 
-| Day | Question                                                                    | Type      | From                                                                        | remarks |
-| --- | --------------------------------------------------------------------------- | --------- | --------------------------------------------------------------------------- | ------- |
-| 701 | [Unique Binary Search Trees II](/leetcode/95-unique-binary-search-trees-ii) | recursion | [leetcode 95](https://leetcode.com/problems/unique-binary-search-trees-ii/) | 📌📌📌  |
+| Day | Question                                                                    | Type      | From                                                                        | remarks                          |
+| --- | --------------------------------------------------------------------------- | --------- | --------------------------------------------------------------------------- | -------------------------------- |
+| 701 | [Unique Binary Search Trees II](/leetcode/95-unique-binary-search-trees-ii) | recursion | [leetcode 95](https://leetcode.com/problems/unique-binary-search-trees-ii/) | 📌📌📌                           |
+| 726 | [Bulb Switcher](/leetcode/319-bulb-switcher)                                | math      | [leetcode 319](https://leetcode.com/problems/bulb-switcher/)                | ⭐️⭐️⭐️ observersation is king |
