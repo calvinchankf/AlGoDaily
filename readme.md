@@ -58,3 +58,4 @@ I believe that practising algorithms every day is a long-term investment in my l
 | Day | Question                                                                    | Type      | From                                                                        | remarks |
 | --- | --------------------------------------------------------------------------- | --------- | --------------------------------------------------------------------------- | ------- |
 | 701 | [Unique Binary Search Trees II](/leetcode/95-unique-binary-search-trees-ii) | recursion | [leetcode 95](https://leetcode.com/problems/unique-binary-search-trees-ii/) | 📌📌📌  |
+| 728 | [Detect Capital](/leetcode/520-detect-capital)                              | string    | [leetcode 520](https://leetcode.com/problems/detect-capital/)               |         |
