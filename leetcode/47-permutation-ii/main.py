@@ -39,7 +39,6 @@ class Solution(object):
 
 """
     optimize the naive approach
-    recursively dfs all the possibilities and avoid duplicate paths by using a hashtable
 
     e.g. 2, -1, 3, -1
     sort it such that nums = -1, -1, 2, 3
