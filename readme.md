@@ -4,6 +4,7 @@ I believe that practising algorithms every day is a long-term investment in my l
 
 [![](https://lc.coding.gs/v1/ranking/calvinchankf.svg?logo=leetcode)](https://leetcode.com/calvinchankf/)
 [![](https://lc.coding.gs/v1/solved/calvinchankf.svg?logo=leetcode)](https://leetcode.com/calvinchankf/)
+[![HitCount](http://hits.dwyl.com/calvinchankf/algodaily.svg)](http://hits.dwyl.com/calvinchankf/algodaily)
 
 #### Languages
 
