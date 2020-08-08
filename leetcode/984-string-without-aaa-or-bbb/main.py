@@ -35,7 +35,7 @@ class Solution(object):
                     if B > 0:
                         res += 'b'
                         B -= 1
-        if B > A:
+        elif B > A:
             while A > 0 or B > 0:
                 if B - A >= 2:
                     res += 'bb'
