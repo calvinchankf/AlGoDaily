@@ -56,13 +56,16 @@ class Solution(object):
         left = 0
         right = len(nums) - 1
         while left <= right:
+            # if no left most < right most, the minval is the left most number
             if nums[left] <= nums[right]:
                 return nums[left]
             mid = (left + right)/2
-            if nums[left] <= nums[mid]:
-                left = mid + 1
-            else:
+            # this is so similar to lower bound,
+            # both < and <= work fine because there are duplicate numbers
+            if nums[mid] < nums[right]:
                 right = mid
+            else:
+                left = mid + 1
 
 
 """
