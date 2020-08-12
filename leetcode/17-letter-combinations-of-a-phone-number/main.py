@@ -3,8 +3,8 @@
 	1. for 13,a->d, a->e, a->f...so on
 	2. quite similar to permutation problem
 
-	Time	O(3^n*4^m)
-	Space	O(3^n*4^m)
+	Time	O(3^n -> 4^m)
+	Space	O(3^n -> 4^m)
 	n: number of 3 characters digits like 1->abc
 	m: number of 4 characters digits like 9->wxyz
     20 ms, faster than 75.92%
@@ -57,8 +57,8 @@ print("-----")
 	1. for 13,a->d, a->e, a->f...so on
 	2. quite similar to permutation problem
 
-	Time	O(3^n*4^m)
-	Space	O(3^n*4^m)
+	Time	O(3^n -> 4^m)
+	Space	O(3^n -> 4^m)
 	n: number of 3 characters digits like 1->abc
 	m: number of 4 characters digits like 9->wxyz
     20 ms, faster than 80.31%
