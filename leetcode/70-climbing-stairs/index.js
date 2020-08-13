@@ -3,20 +3,19 @@
  * @return {number}
  */
 var climbStairs = function (n) {
-    const m = {}
-    return f(n, m)
+	const ht = {};
+	const f = (i) => {
+		if (i < 0) {
+			return 0;
+		} else if (i === 0) {
+			return 1;
+		}
+		if (i in ht) {
+			return ht[i];
+		}
+		const temp = f(i - 1) + f(i - 2);
+		ht[i] = temp;
+		return temp;
+	};
+	return f(n);
 };
-
-var f = function (n, m) {
-    if (n == 0) {
-        return 1
-    } else if (n < 0) {
-        return 0
-    }
-    if (m[n]) {
-        return m[n]
-    }
-    total = f(n - 1, m) + f(n - 2, m)
-    m[n] = total
-    return total
-}
