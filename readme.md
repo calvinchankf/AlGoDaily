@@ -14,7 +14,7 @@ I believe that practising algorithms every day is a long-term investment in my l
 -   Binary Search
 -   Binary Search Tree
 -   Tree(Binary Tree, N-aray Tree, Trie, Binary Indexed Tree, Segment Tree)
--   Graph(Dijkstra, Floyd Warshall, Union Find, Kruskal, Prim's, Minimum Spanning Tree, Topological Ordering...etc)
+-   Graph(Dijkstra, Bellman-Ford, Floyd Warshall, Union Find, Kruskal, Prim's, Minimum Spanning Tree, Topological Ordering...etc)
 -   Stack
 -   Queue
 -   Array
