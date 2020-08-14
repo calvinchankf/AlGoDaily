@@ -4,6 +4,11 @@ from functools import cmp_to_key
 
 """
     1st: sort the end times
+    - activity selection
+
+    ref:
+    - https://www.cse.cuhk.edu.hk/~taoyf/course/3160/19-fall/lec/disj_intv.pdf
+    - https://en.wikipedia.org/wiki/Activity_selection_problem
 
     Time    O(NlogN)
     Space   O(N)
