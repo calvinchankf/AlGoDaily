@@ -13,17 +13,14 @@ from functools import cmp_to_key
 
 class Solution:
     def findLongestChain(self, pairs: List[List[int]]) -> int:
-        cur, res = -sys.maxsize, 0
-
-        def compare(a, b):
-            return a[1] - b[1]
-
-        arr = sorted(pairs, key=cmp_to_key(compare))
-        for x, y in arr:
-            if cur < x:
-                cur = y
-                res += 1
-        return res
+        intvs = sorted(pairs, key=lambda x: x[1])
+        count = 0
+        pos = -sys.maxsize
+        for s, e in intvs:
+            if s > pos:
+                pos = e
+                count += 1
+        return count
 
 
 """
