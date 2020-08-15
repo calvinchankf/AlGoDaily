@@ -43,6 +43,8 @@ print(Solution().distinctSubstrings('aba', 2))
 print(Solution().distinctSubstrings('aa', 1))
 print(Solution().distinctSubstrings('abcdabc', 3))
 
+print("-----")
+
 
 class Solution(object):
     def distinctSubstrings(self, s, k):
@@ -79,3 +81,54 @@ print(Solution().distinctSubstrings('aba', 2))
 print(Solution().distinctSubstrings('aa', 1))
 print(Solution().distinctSubstrings('abcdabc', 3))
 print(Solution().distinctSubstrings('abcbaa', 3))
+
+print("-----")
+
+"""
+    Variation: of size K only
+    https://leetcode.com/discuss/interview-question/370112
+"""
+
+
+class Solution(object):
+    def distinctSubstrings(self, s, k):
+        res = set()
+        window = ''
+        ht = 26 * [0]
+        for i in range(len(s)):
+            c = s[i]
+
+            window += c
+            key = ord(c) - ord('a')
+            ht[key] += 1
+
+            if len(window) > k:
+                last = window[0]
+                window = window[1:]
+                key = ord(last) - ord('a')
+                ht[key] -= 1
+
+            if len(window) == k:
+                isAllOne = True
+                for i in range(26):
+                    if ht[i] > 1:
+                        isAllOne = False
+                if isAllOne:
+                    res.add(window)
+
+        return list(res)
+
+
+s = Solution()
+
+a = "abcabc"
+b = 3
+print(s.distinctSubstrings(a, b))
+
+a = "abacab"
+b = 3
+print(s.distinctSubstrings(a, b))
+
+a = "awaglknagawunagwkwagl"
+b = 4
+print(s.distinctSubstrings(a, b))
