@@ -15,12 +15,13 @@ class Solution(object):
         :type sticks: List[int]
         :rtype: int
         """
-        pq = sticks
-        heapq.heapify(pq)
         res = 0
+        pq = sticks[:]
+        heapq.heapify(pq)
         while len(pq) > 1:
             a = heapq.heappop(pq)
             b = heapq.heappop(pq)
-            res += a + b
-            heapq.heappush(pq, a + b)
+            c = a + b
+            res += c
+            heapq.heappush(pq, c)
         return res
