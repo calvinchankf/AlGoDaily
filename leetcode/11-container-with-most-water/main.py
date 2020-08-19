@@ -43,7 +43,7 @@ print("--------------------")
 
 
 class Solution(object):
-    def maxArea(self, height):
+    def maxArea(self, nums):
         """
         :type height: List[int]
         :rtype: int

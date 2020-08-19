@@ -27,7 +27,6 @@ var productExceptSelf = function (nums) {
 		const j = n - i - 1;
 		backward[j] = backward[j + 1] * nums[j + 1];
 	}
-
 	const res = Array(n).fill(1);
 	for (let i = 0; i < n; i++) {
 		res[i] = forward[i] * backward[i];
