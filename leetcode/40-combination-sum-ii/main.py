@@ -48,7 +48,7 @@ print(Solution().combinationSum(a, 27))
 print("-----")
 
 """
-    2nd approach: recursive dfs, avoid duplicate by using a hashtable
+    2nd approach: simialar to lc90(subset 2)
 
     it is hard to determind the Time Complexity, it depends on the input
     108 ms, faster than 32.29%
