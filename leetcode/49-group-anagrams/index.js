@@ -13,14 +13,14 @@ var groupAnagrams = function (strs) {
 	for (let s of strs) {
 		const alphabetsCount = Array(26).fill(0);
 		for (c of s) {
-			const idx = c.charCodeAt(0) - 97;
+			const idx = c.charCodeAt(0) - "a".charCodeAt(0);
 			alphabetsCount[idx] += 1;
 		}
 		const key = alphabetsCount.join(",");
-		if (ht[key] === undefined) {
-			ht[key] = [s];
-		} else {
+		if (key in ht) {
 			ht[key].push(s);
+		} else {
+			ht[key] = [s];
 		}
 	}
 	const res = [];
