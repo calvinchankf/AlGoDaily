@@ -35,7 +35,7 @@ class Solution(object):
 
 
 """
-    2nd approach: recursion + hashtable
+    2nd approach: recursion
     - similar to 1st dont need to use a hashtable(since the array is sorted)
     
     Time    O(2^n) worst

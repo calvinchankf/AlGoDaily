@@ -1,10 +1,8 @@
 class Solution(object):
     def maximalRectangle(self, matrix):
         """
-        :type matrix: List[List[str]]
-        :rtype: int
-
         classic approach: dynamic programming + max area within a histogram(leetcode 84)
+        - similar to lc1504
 
         e.g.
         [
