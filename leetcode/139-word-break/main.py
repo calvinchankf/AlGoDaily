@@ -1,14 +1,14 @@
 """
     1st approach: recursion + memorization
     - e.g. "catsandogab", ["cats", "dog", "sand", "and", "cat", "og", "ab"]
-    from the begining, we can split it into 2 strings
-    [cat,sandogab], [cats, andogab]
-    then they can become in the next recursion
-    [cat,sand,ogab], [cat,sand,ogab]
-    then 
-    [cat,sand,og,ab], [cat,sand,og,ab]
+        from the begining, we can split it into 2 strings
+        [cat,sandogab], [cats, andogab]
+        then they can become in the next recursion
+        [cat,sand,ogab], [cat,sand,ogab]
+        then 
+        [cat,sand,og,ab], [cat,sand,og,ab]
     - actually we did [cat,sand,ogab], we know that "ogab" is breakable after the recursion,
-    therefore we can save "ogab" as "true" so that we can avoid redundant computation if we meet "ogab" again
+        therefore we can save "ogab" as "true" so that we can avoid redundant computation if we meet "ogab" again
 
     Time    O(n^2)
     Space   O(n)

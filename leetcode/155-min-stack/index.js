@@ -3,7 +3,7 @@
     - for each push(), calculate the curMin and put it with the x in stack
     - for each pop(), pop the top item
 
-    Time    O(n)
+    Time    O(1)
     Space   O(n)
     100ms beats 85.92%
 */
@@ -20,12 +20,12 @@ var MinStack = function () {
  * @return {void}
  */
 MinStack.prototype.push = function (x) {
-	if (this.arr.length == 0) {
+	const n = this.arr.length;
+	if (n == 0) {
 		return this.arr.push([x, x]);
 	}
-	prevMin = this.arr[this.arr.length - 1][1];
-	newMin = Math.min(prevMin, x);
-	return this.arr.push([x, newMin]);
+	const newMin = Math.min(this.arr[n - 1][1], x);
+	this.arr.push([x, newMin]);
 };
 
 /**
@@ -39,14 +39,16 @@ MinStack.prototype.pop = function () {
  * @return {number}
  */
 MinStack.prototype.top = function () {
-	return this.arr[this.arr.length - 1][0];
+	const n = this.arr.length;
+	return this.arr[n - 1][0];
 };
 
 /**
  * @return {number}
  */
 MinStack.prototype.getMin = function () {
-	return this.arr[this.arr.length - 1][1];
+	const n = this.arr.length;
+	return this.arr[n - 1][1];
 };
 
 /**
@@ -57,3 +59,35 @@ MinStack.prototype.getMin = function () {
  * var param_3 = obj.top()
  * var param_4 = obj.getMin()
  */
+
+/*
+    ES6 class of 1st
+
+    Time of all methods     O(1)
+    Space                   O(N)
+    124 ms, faster than 64.04%
+*/
+class MinStack {
+	constructor() {
+		this.arr = [];
+	}
+	push(x) {
+		const n = this.arr.length;
+		if (n == 0) {
+			return this.arr.push([x, x]);
+		}
+		const newMin = Math.min(this.arr[n - 1][1], x);
+		this.arr.push([x, newMin]);
+	}
+	pop() {
+		return this.arr.pop();
+	}
+	top() {
+		const n = this.arr.length;
+		return this.arr[n - 1][0];
+	}
+	getMin() {
+		const n = this.arr.length;
+		return this.arr[n - 1][1];
+	}
+}

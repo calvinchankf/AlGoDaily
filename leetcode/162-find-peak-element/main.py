@@ -1,3 +1,12 @@
+"""
+    1st: linear search
+
+    Time    O(N)
+    Space   O(1)
+    76 ms, faster than 7.05%
+"""
+
+
 class Solution(object):
     def findPeakElement(self, nums):
         """

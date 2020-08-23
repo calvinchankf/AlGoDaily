@@ -24,7 +24,7 @@ import (
 	e.g.2 [[8]]
 	e.g.3 [[8],[9]]
 
-	Time	O(n)
+	Time	O(N * K^2)
 	Space	O(1)
 	4 ms, faster than 100.00%
 */

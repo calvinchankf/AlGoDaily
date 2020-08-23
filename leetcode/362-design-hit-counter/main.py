@@ -58,8 +58,8 @@ class HitCounter(object):
     - hit() => put the keys in the hashtable, increment the count for existing keys
     - getHits() => count the result by iterating through the hashtable from back until the key <= timestamp - 300
 
-    Time: hit()       O(1)
-    Time: getHits()   O(1) cos it just counts 300 keys at maximum
+    Time of hit()       O(1)
+    Time of getHits()   O(1) cos it just counts 300 keys at maximum
     Space   O(n)
     16 ms, faster than 100.00%
 """

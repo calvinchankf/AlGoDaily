@@ -27,14 +27,14 @@ const dfs = (d, f, remain, ht) => {
 		}
 		return 0;
 	}
-	const key = d + "," + remain;
-	if (ht[key] !== undefined) {
+	const key = `${d},${remain}`;
+	if (key in ht) {
 		return ht[key];
 	}
-	let res = 0;
-	for (let num = 1; num <= f; num++) {
-		res += dfs(d - 1, f, remain - num, ht);
+	let total = 0;
+	for (let num = 1; num < f + 1; num++) {
+		total += dfs(d - 1, f, remain - num, ht);
 	}
-	ht[key] = res % (Math.pow(10, 9) + 7);
+	ht[key] = total % (Math.pow(10, 9) + 7);
 	return ht[key];
 };
