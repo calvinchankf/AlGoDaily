@@ -1,16 +1,19 @@
+"""
+    1st approach: topo ordering BFS with array
+
+    Time    O(V+E)
+    Space   O(V)
+    80 ms, faster than 60.39%
+    7may2019
+"""
+
+
 class Solution(object):
     def canFinish(self, numCourses, prerequisites):
         """
         :type numCourses: int
         :type prerequisites: List[List[int]]
         :rtype: bool
-
-        1st approach: topo ordering BFS with array
-
-        Time    O(V+E)
-        Space   O(V)
-        80 ms, faster than 60.39%
-        7may2019
         """
         connections = []
         indegrees = []
@@ -47,6 +50,15 @@ print(Solution().canFinish(
     6, [[4, 3], [1, 0], [5, 2], [5, 4], [5, 1], [2, 3], [3, 5]]))
 print("-----")
 
+"""
+    2nd approach: topo ordering BFS but with hashtable
+
+    Time    O(V+E)
+    Space   O(V)
+    216 ms, faster than 20.38%
+    28mar2019
+"""
+
 
 class Solution(object):
     def canFinish(self, numCourses, prerequisites):
@@ -54,13 +66,6 @@ class Solution(object):
         :type numCourses: int
         :type prerequisites: List[List[int]]
         :rtype: List[int]
-
-        2nd approach: topo ordering BFS but with hashtable
-
-        Time    O(V+E)
-        Space   O(V)
-        216 ms, faster than 20.38%
-        28mar2019
         """
         connections = {}
         indegrees = {}
