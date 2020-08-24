@@ -1,7 +1,18 @@
 """
     1st approach: 2 pointers
-    - similar to lc1208
+    - exactly the same question lc159
     - maintain the sliding window to have 2 unique keys
+    
+    The question is so confusing, lets rephrase the quesion:
+    Given a string, find the max length of a substring which has only 2 distinct characters
+	e.g. "ababacddc", return 5
+	becos length of "ababa" = 5, where all other substrings are < 5
+	e.g.
+	length of "abab" = 4
+	length of "cddc" = 4
+	.
+    .
+    .
 
     Time    O(n)
     Space   O(n)

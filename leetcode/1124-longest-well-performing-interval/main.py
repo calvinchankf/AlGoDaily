@@ -9,7 +9,7 @@
     - we only save the first occurence of a pfs so to ensure that we can form a longest subarray
 
     generic approach
-    - this question is fucking similar to leetcode 325, 525, 560, 930, 1171
+    - this question is fucking similar to leetcode 325, 523, 525, 560, 930, 1171
     - find loops <==============================================================
     - the basic idea is to store the previous sum in a hashtable
         e.g. key: previous sum, value: number of occurence of a previous sum

@@ -1,23 +1,26 @@
+"""
+    1st approach: Topological Ordering in DFS
+
+    1. create a list to save to children for each node
+    2. for each node, put the children in
+        e.g. [4, 3], [1, 0], [5, 2], [5, 4], [5, 1], [2, 3]
+        children list = [[], [0], [3], [], [3], [2,4,1]]
+    3. use a hashtable to store the visited node, 1=visiting, 2=visited
+    4. use a stack to store the nodes which no longer has unvisited children
+    5. the result is the stack in the reversed order
+
+    Time    O(V+E)
+    Space   O(V)
+    36ms beats 98.29%
+"""
+
+
 class Solution(object):
     def findOrder(self, numCourses, prerequisites):
         """
         :type numCourses: int
         :type prerequisites: List[List[int]]
         :rtype: List[int]
-
-        1st approach: Topological Ordering in DFS
-
-        1. create a list to save to children for each node
-        2. for each node, put the children in
-            e.g. [4, 3], [1, 0], [5, 2], [5, 4], [5, 1], [2, 3]
-            children list = [[], [0], [3], [], [3], [2,4,1]]
-        3. use a hashtable to store the visited node, 1=visiting, 2=visited
-        4. use a stack to store the nodes which no longer has unvisited children
-        5. the result is the stack in the reversed order
-
-        Time    O(V+E)
-        Space   O(V)
-        36ms beats 98.29%
         """
         # prepare a list to save to children for each node
         connections = []
@@ -69,6 +72,25 @@ print(Solution().findOrder(
 
 print("---------------------------------------------")
 
+"""
+    2nd appraoch: Topological Ordering in BFS
+
+    1. create a list to save to children for each node
+    2. for each node, put the children in
+        e.g. [4, 3], [1, 0], [5, 2], [5, 4], [5, 1], [2, 3]
+        children list = [[], [0], [3], [], [3], [2,4,1]]
+    3. count the indegree for each node(indegree = the number of incoming edges)
+    4. put the nodes with 0 indegree into a queue
+    5. if the queue is not empty, append the dequeued node to the result and in the same time decrement it's children's indegree
+    6  after decrement, if there are nodes which has 0 indegree, put them into the queue
+    7. do 6) and 7) until the queue becomes empty
+    8. need a 'cnt' to check if there is a cycle(for detail: see comment)
+
+    Time    O(V+E)
+    Space   O(V)
+    32ms beats 100%
+"""
+
 
 class Solution(object):
     def findOrder(self, numCourses, prerequisites):
@@ -76,23 +98,6 @@ class Solution(object):
         :type numCourses: int
         :type prerequisites: List[List[int]]
         :rtype: List[int]
-
-        2nd appraoch: Topological Ordering in BFS
-
-        1. create a list to save to children for each node
-        2. for each node, put the children in
-            e.g. [4, 3], [1, 0], [5, 2], [5, 4], [5, 1], [2, 3]
-            children list = [[], [0], [3], [], [3], [2,4,1]]
-        3. count the indegree for each node(indegree = the number of incoming edges)
-        4. put the nodes with 0 indegree into a queue
-        5. if the queue is not empty, append the dequeued node to the result and in the same time decrement it's children's indegree
-        6  after decrement, if there are nodes which has 0 indegree, put them into the queue
-        7. do 6) and 7) until the queue becomes empty
-        8. need a 'cnt' to check if there is a cycle(for detail: see comment)
-
-        Time    O(V+E)
-        Space   O(V)
-        32ms beats 100%
         """
         # prepare a list to save to children for each node
         connections = []
