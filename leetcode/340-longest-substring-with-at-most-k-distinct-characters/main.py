@@ -1,9 +1,10 @@
 """
     1st approach: hashtable + sliding window
+    - similar to lc3, 159, 904
     - in each iteration
         1. put the character into the hastable counter
-        2. if the number of keys <= k, update result if need
-        3. if the number of keys > k, remove the leftmost character in the window as well as increment its count
+        2. if the number of keys > k, remove the leftmost character in the window as well as increment its count
+        3. update the result if the number of keys is <= k
 
     Time    O(2n) worst case: aaaaaaaaaabc, k=2
     Space   O(n)
@@ -29,19 +30,18 @@ class Solution(object):
             else:
                 ht[c] += 1
 
+            # if the total number of keys of hashtable > k, we
+            while len(ht) > k:
+                last = s[left]
+                ht[last] -= 1
+                # dont forget to remove the keys from hashtable if no more count on it
+                if ht[last] == 0:
+                    del ht[last]
+                # move the left pointer to the right by 1 unit
+                left += 1
             # update the result if the number of keys is <= k
-            if len(ht) <= k:
-                res = max(res, i-left+1)
-            else:
-                # if the total number of keys of hashtable > k, we
-                while len(ht) > k:
-                    last = s[left]
-                    ht[last] -= 1
-                    # dont forget to remove the keys from hashtable if no more count on it
-                    if ht[last] == 0:
-                        del ht[last]
-                    # move the left pointer to the right by 1 unit
-                    left += 1
+            res = max(res, i-left+1)
+
         return res
 
 

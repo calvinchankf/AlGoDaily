@@ -10,7 +10,7 @@
     https://www.youtube.com/watch?v=hLcYp67wCcM
 
     generic approach
-    - this question is fucking similar to leetcode 325, 525, 560, 930, 1124
+    - this question is fucking similar to leetcode 325, 523, 525, 560, 930, 1124
     - find loops <==============================================================
     - the basic idea is to store the previous sum in a hashtable
         e.g. key: previous sum, value: number of occurence of a previous sum

@@ -39,13 +39,13 @@ class Solution(object):
                     heapq.heappush(heap, (weight+cand[1], cand[0]))
 
         # the max travel time is the result
-        maximum = 0
+        maxDelay = 0
         for i in range(1, N+1):
             if i not in seen:
                 return -1
-            if seen[i] > maximum:
-                maximum = seen[i]
-        return maximum
+            if seen[i] > maxDelay:
+                maxDelay = seen[i]
+        return maxDelay
 
 
 a = [[2, 1, 1], [2, 3, 1], [3, 4, 1]]

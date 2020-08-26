@@ -1,6 +1,6 @@
 """
     1st approach: subarray sum = k
-    - this question is fucking similar to leetcode 325, 525, 560, 1124, 1171
+    - this question is fucking similar to leetcode 325, 523, 525, 560, 1124, 1171
     
     generic approach
     - find loops <==============================================================
