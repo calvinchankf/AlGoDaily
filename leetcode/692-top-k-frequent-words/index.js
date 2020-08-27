@@ -35,12 +35,8 @@ var topKFrequent = function (words, k) {
 		return b[0] - a[0];
 	});
 	const res = [];
-	for (let pair of arr) {
-		const [count, value] = pair;
-		res.push(value);
-		if (res.length == k) {
-			break;
-		}
+	for (let i = 0; i < Math.min(k, arr.length); i++) {
+		res.push(arr[i][1]);
 	}
 	return res;
 };

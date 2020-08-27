@@ -1,5 +1,6 @@
 """
     1st approach: backtracking
+    - - similar to lc37, lc51
     - https://www.youtube.com/watch?v=5v6zdfkImms
     - basically try every possisbilities within the safe region
     - for each coordinate, we need to check the whole board to see if it is safe to place a queen
