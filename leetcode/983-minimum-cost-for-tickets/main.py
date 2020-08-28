@@ -2,6 +2,7 @@ import sys
 
 """
     1st: dp, learned from others
+    - similar to lc746
     - actually it is similar to coin change, we can do it with a bottom up approach
     - be careful that:
         1. for non-present days, extand the previous day cost
@@ -117,9 +118,11 @@ class Solution(object):
                 dp[i] = dp[i-1]
                 continue
 
-            dp[i] = min(dp[max(0, i - 1)] + costs[0],
-                        dp[max(0, i - 7)] + costs[1],
-                        dp[max(0, i - 30)] + costs[2])
+            dp[i] = min(
+                dp[max(0, i - 1)] + costs[0],
+                dp[max(0, i - 7)] + costs[1],
+                dp[max(0, i - 30)] + costs[2]
+            )
 
         return dp[lastDay]
 

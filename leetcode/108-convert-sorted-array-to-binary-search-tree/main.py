@@ -7,7 +7,7 @@ class TreeNode(object):
 
 
 """
-    revision:
+    recursion:
     0. to create a balence tree, u must sort the array first
     1. sort the array
     2. build the tree recursively in the way of binary search
@@ -34,7 +34,7 @@ class Solution(object):
 
 
 """
-    revision: using slice, but keep in mind that slicing takes O(n)
+    recursion: using slice, but keep in mind that slicing takes O(n)
     0. to create a balence tree, u must sort the array first
     1. sort the array
     2. build the tree recursively in the way of binary search

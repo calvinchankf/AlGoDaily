@@ -54,3 +54,40 @@ a = ["a", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "b", "c", "c"]
 print(s.compress(a))
 
 print("-----")
+
+"""
+    2nd: in-place with 2 pointers
+"""
+
+
+class Solution:
+    def compress(self, chars: List[str]) -> int:
+        if len(chars) == 0:
+            return 0
+        cur = chars[0]
+        count = 1
+        j = 0
+        for i in range(1, len(chars)):
+            c = chars[i]
+            if c != cur:
+                chars[j] = cur
+                j += 1
+                if count > 1:
+                    countStr = str(count)
+                    for x in countStr:
+                        chars[j] = x
+                        j += 1
+                cur = c
+                count = 1
+            else:
+                count += 1
+        # print(cur, chars, j)
+        if count > 0:
+            chars[j] = cur
+            j += 1
+            if count > 1:
+                countStr = str(count)
+                for x in countStr:
+                    chars[j] = x
+                    j += 1
+        return j
