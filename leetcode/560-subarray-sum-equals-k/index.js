@@ -4,7 +4,7 @@
  * @return {number}
  * 
  * 1st approach: zero sum subarray
-    - this question is fucking similar to leetcode 325, 525, 930
+    - this question is fucking similar to leetcode 325, 525, 523, 930
     - the basic idea is to store the previous sum in a hashtable
         e.g. key: previous sum, value: number of occurence of a previous sum
     - if currentSum - target in the hastable, the result += occurence
@@ -23,23 +23,23 @@
     96 ms, faster than 51.22%
  */
 var subarraySum = function (nums, k) {
-    const m = {}
-    let pfs = 0
-    let res = 0
-    for (let i = 0; i < nums.length; i++) {
-        pfs += nums[i]
-        if (pfs == k) {
-            res += 1
-        }
-        const remain = pfs - k
-        if (m[remain] != undefined) {
-            res += m[remain]
-        }
-        if (m[pfs] === undefined) {
-            m[pfs] = 1
-        } else {
-            m[pfs] += 1
-        }
-    }
-    return res
+	const m = {};
+	let pfs = 0;
+	let res = 0;
+	for (let i = 0; i < nums.length; i++) {
+		pfs += nums[i];
+		if (pfs == k) {
+			res += 1;
+		}
+		const remain = pfs - k;
+		if (remain in m) {
+			res += m[remain];
+		}
+		if (pfs in m) {
+			m[pfs] += 1;
+		} else {
+			m[pfs] = 1;
+		}
+	}
+	return res;
 };
