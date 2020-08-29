@@ -62,7 +62,7 @@ print(Solution().checkIfWiggle(a))
     - this is quite similar to wiggle sort checking
 
     Time    O(n)
-    Space   O(n)
+    Space   O(1)
     80 ms, faster than 48.94%
 """
 

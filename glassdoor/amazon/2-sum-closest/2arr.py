@@ -30,18 +30,20 @@
 
     Time    O(mlogn) -> O(mn) because it might happen that there are duplicates travel distances in returnRoutes
     Space   O(n)
+
+    ref:
+    - https://leetcode.com/discuss/interview-question/373202
 """
 
 
 def optimalUtilization(maxTravelDist, forwardRouteList, returnRouteList):
-    if maxTravelDist <= 0 or len(forwardRouteList) == 0 or len(
-            returnRouteList) == 0:
+    if maxTravelDist <= 0 or len(forwardRouteList) == 0 or len(returnRouteList) == 0:
         return []
     returnRouteList = sorted(returnRouteList)
     res = []
     best = 0
     for forward in forwardRouteList:
-        returnIdx = upperbsearch(returnRouteList, maxTravelDist - forward[1])
+        returnIdx = bsearch(returnRouteList, maxTravelDist - forward[1])
         if returnIdx < 0:
             continue
         # iterate the returnRouteList if the curNum == prevNum
@@ -61,7 +63,6 @@ def optimalUtilization(maxTravelDist, forwardRouteList, returnRouteList):
     return res
 
 
-"""
 # if no duplicate travel distance in returnRoutes, use this basic binary search
 def bsearch(routes, target):
     left = 0
@@ -75,7 +76,81 @@ def bsearch(routes, target):
         else:
             return mid
     return right
+
+
+a = 20
+b = [[1, 8], [2, 7], [3, 14]]
+c = [[1, 5], [2, 10], [3, 14]]
+print(optimalUtilization(a, b, c))
+
+a = 20
+b = [[1, 8], [2, 15], [3, 9]]
+c = [[1, 8], [2, 11], [3, 12]]
+print(optimalUtilization(a, b, c))
+
+a = 20
+b = [[1, 8], [2, 15], [3, 9], [4, 8]]
+c = [[1, 8], [2, 11], [3, 12], [4, 12], [5, 12]]
+print(optimalUtilization(a, b, c))
+
+# corner cases
+a = -20
+b = [[1, 8], [2, 7], [3, 14]]
+c = [[1, 5], [2, 10], [3, 14]]
+print(optimalUtilization(a, b, c))
+
+a = 20
+b = []
+c = [[1, 5], [2, 10], [3, 14]]
+print(optimalUtilization(a, b, c))
+
+a = 20
+b = [[1, 21], [2, 22], [3, 23]]
+c = [[1, 24], [2, 25], [3, 26]]
+print(optimalUtilization(a, b, c))
+
+print("-----")
+
 """
+    a = 20
+    b = [[1, 8], [2, 15], [3, 9], [4, 8]]
+    c = [[1, 8], [2, 11], [3, 12], [4, 12], [5, 12]]
+
+    aId = 1 matches bIdx = 3, 4, 5
+"""
+
+
+def optimalUtilization(maxTravelDist, forwardRouteList, returnRouteList):
+    if maxTravelDist <= 0 or len(forwardRouteList) == 0 or len(returnRouteList) == 0:
+        return []
+    returnRouteList = sorted(returnRouteList)
+    res = []
+    best = 0
+    for aId, aVal in forwardRouteList:
+        firstIdx = lowerBsearch(returnRouteList, maxTravelDist - aVal)
+        lastIdx = upperbsearch(returnRouteList, maxTravelDist - aVal)
+        if firstIdx < 0 or firstIdx == len(returnRouteList) or lastIdx < 0 or lastIdx == len(returnRouteList):
+            continue
+        for i in range(firstIdx, lastIdx + 1):
+            bId, bVal = returnRouteList[i]
+            if aVal + bVal > best:
+                res = [[aId, bId]]
+                best = aVal + bVal
+            elif aVal + bVal == best:
+                res.append([aId, bId])
+    return res
+
+
+def lowerBsearch(nums, target):
+    left = 0
+    right = len(nums)
+    while left < right:
+        mid = (left + right)//2
+        if target <= nums[mid]:
+            right = mid
+        else:
+            left = mid + 1
+    return left
 
 
 def upperbsearch(routes, target):
@@ -102,7 +177,7 @@ print(optimalUtilization(a, b, c))
 
 a = 20
 b = [[1, 8], [2, 15], [3, 9], [4, 8]]
-c = [[1, 8], [2, 11], [3, 12], [4, 12]]
+c = [[1, 8], [2, 11], [3, 12], [4, 12], [5, 12]]
 print(optimalUtilization(a, b, c))
 
 # corner cases
