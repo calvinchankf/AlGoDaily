@@ -1,5 +1,7 @@
 /*
-    1st: brute force dp
+    1st: sort + brute force dp
+    - sort the envelops by area(w * h)
+    - dp it by the logic similar to lc300: Longest Increasing Subsequence
 
     Time    O(N^2)
     Space   O(N)

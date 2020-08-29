@@ -1,6 +1,6 @@
 /*
     1st approach: dynamic programming
-    - similar to lc646
+    - similar to lc354, 646
 
     ref: Longest Increasing Subsequence
     - https://www.youtube.com/watch?v=CE2b_-XfVDk
