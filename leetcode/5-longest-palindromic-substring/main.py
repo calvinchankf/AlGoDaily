@@ -5,7 +5,9 @@ class Solution(object):
         :rtype: str
 
         1st approach
+        - similar to algoexpert largest range
         - for each charactor, expand its left and right if palindrome
+
         Time    O(n^2)
         Space   O(length of longest substring)
         28jan2019
@@ -48,6 +50,7 @@ class Solution1(object):
         :rtype: str
 
         1st approach
+        - similar to algoexpert largest range
         - for each charactor, expand its left and right if palindrome
 
         Time    O(n^2)

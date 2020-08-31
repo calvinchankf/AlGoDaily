@@ -40,3 +40,37 @@ class Solution(object):
                 or (ord(s) >= 48 and ord(s) <= 57):
             return True
         return False
+
+
+"""
+    2nd: similar to 1st but concise
+
+    Time    O(N)
+    Space   O(1)
+    52 ms, faster than 47.60%
+"""
+
+
+class Solution(object):
+    def isPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: bool
+        """
+        s = s.lower()
+        left = 0
+        right = len(s) - 1
+        while left < right:
+            while left < right and not self.isAlphanumeric(s[left]):
+                left += 1
+            while left < right and not self.isAlphanumeric(s[right]):
+                right -= 1
+            if left <= right and s[left] == s[right]:
+                left += 1
+                right -= 1
+            else:
+                return False
+        return True
+
+    def isAlphanumeric(self, c):
+        return 0 <= ord(c) - ord('a') < 26 or 0 <= ord(c) - ord('0') < 10

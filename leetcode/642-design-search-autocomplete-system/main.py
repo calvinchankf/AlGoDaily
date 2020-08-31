@@ -1,3 +1,4 @@
+from functools import cmp_to_key
 import operator
 
 
@@ -124,88 +125,70 @@ print("-----")
 """
 
 
-class Trie(object):
+class Node(object):
     def __init__(self):
         self.children = {}
         self.count = 0
 
 
-class AutocompleteSystem(object):
+class Trie(object):
+    def __init__(self):
+        self.root = Node()
 
-    def __init__(self, sentences, times):
-        """
-        :type sentences: List[str]
-        :type times: List[int]
-        """
-        self.history = ''
-        self.trie = Trie()
-        for i in range(len(sentences)):
-            self._insert(sentences[i], times[i])
-
-    def input(self, c):
-        """
-        :type c: str
-        :rtype: List[str]
-        """
-        if c == '#':
-            self._insert(self.history)
-            self.history = ''
-            return []
-        else:
-            self.history += c
-            return self._search()
-
-    def _insert(self, sentence, count=1):
-        """
-        1. traversal to insert a word into the trie
-        """
-        cur = self.trie
-        for c in sentence:
+    def insert(self, word, count=1):
+        cur = self.root
+        for c in word:
             if c not in cur.children:
-                cur.children[c] = Trie()
+                cur.children[c] = Node()
             cur = cur.children[c]
         cur.count += count
 
-    def _search(self):
-        """
-        1. search node in a trie
-        2. dfs
-        3. sort
-        """
-        # search
-        prefix = self.history
-        cur = self.trie
-        for c in prefix:
+    def search(self, word):
+        cur = self.root
+        for c in word:
             if c not in cur.children:
                 return []
             cur = cur.children[c]
-        leafs = []
+        cands = []
 
-        # dfs
         def dfs(node, path):
+            if node == None:
+                return
             if node.count > 0:
-                leafs.append((node.count, path))
+                cands.append((node.count, word + path))
             for key in node.children:
-                dfs(node.children[key], path+key)
-        dfs(cur, prefix)
+                dfs(node.children[key], path + key)
+        dfs(cur, '')
 
-        # python cmp
-        def mycmp(a, b):
-            # if we want descending and a > b, we return -1
-            if a[0] > b[0]:
-                return -1
-            elif a[0] < b[0]:
-                return 1
-            else:
-                # if we want ascending and a < b, we return -1
-                if a[1] < b[1]:
-                    return -1
-                return 1
-        # sort using cmp
-        leafs = sorted(leafs, cmp=mycmp)
+        def cmptr(a, b):
+            if a[0] == b[0]:
+                return -1 if a[1] < b[1] else 1
+            return b[0] - a[0]
+        cands.sort(key=cmp_to_key(cmptr))
 
-        # sort
-        return [x[1] for x in leafs[:3]]
+        res = []
+        for i in range(min(3, len(cands))):
+            res.append(cands[i][1])
+        return res
+
+
+class AutocompleteSystem:
+
+    def __init__(self, sentences, times):
+        self.trie = Trie()
+        for i in range(len(sentences)):
+            s = sentences[i]
+            t = times[i]
+            self.trie.insert(s, t)
+        self.userInput = ''
+
+    def input(self, c):
+        if c == '#':
+            self.trie.insert(self.userInput)
+            self.userInput = ''
+            return []
+        self.userInput += c
+        return self.trie.search(self.userInput)
 
 
 sentences = ['i love you', 'island', 'ironman', 'i love leetcode', 'ia']
