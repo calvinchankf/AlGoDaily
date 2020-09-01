@@ -68,3 +68,22 @@ class Solution(object):
 s = Solution()
 print(s.readBinaryWatch(1))
 print(s.readBinaryWatch(2))
+
+print("-----")
+
+"""
+    2nd: think in another way
+    - there there 23:59 possibilities, 
+        if a binary representation of a timeslot in which the total number of '1' from hour and minute == num, then this is on of the result
+"""
+
+
+class Solution(object):
+    def readBinaryWatch(self, num):
+        res = []
+        for h in range(12):
+            for m in range(60):
+                b = bin(h) + bin(m)
+                if b.count('1') == num:
+                    res.append('%d:%02d' % (h, m))
+        return res

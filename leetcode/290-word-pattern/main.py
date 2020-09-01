@@ -14,22 +14,20 @@ class Solution(object):
         :type str: str
         :rtype: bool
         """
+        forward = {}
+        backward = {}
         words = sentence.split()
         if len(pattern) != len(words):
             return False
-        forward = {}
-        backward = {}
         for i in range(len(pattern)):
-            c = pattern[i]
-            word = words[i]
-            if c not in forward:
-                forward[c] = word
-            elif forward[c] != word:
+            a = pattern[i]
+            b = words[i]
+            if a in forward and forward[a] != b:
                 return False
-            if word not in backward:
-                backward[word] = c
-            elif backward[word] != c:
+            if b in backward and backward[b] != a:
                 return False
+            forward[a] = b
+            backward[b] = a
         return True
 
 

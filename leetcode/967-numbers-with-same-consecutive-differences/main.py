@@ -17,9 +17,11 @@ class Solution:
         :type K: int
         :rtype: List[int]
         """
+        if N == 1:
+            return [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
         self.ht = {}
         res = set()
-        start = 0 if N == 1 else 1
+        start = 1
         for i in range(start, 10):
             temp = self.dfs(N, K, i)
             for x in temp:

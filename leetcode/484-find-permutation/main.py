@@ -4,7 +4,7 @@
     e.g.1
     D   D   I   I   D   I
     1   2   3   4   5   6   7
-    _________       _____       <- reverse the order of items with continuois ^
+    _________       _____       <- reverse the order of items with continuous ^
     3   2   1   4   6   5   7   <- result
 
     Time    O(n)
@@ -48,7 +48,7 @@ print("-----")
 
 """
     2nd approach: stack, suggested solution
-    - basicallywhen we see an 'D', we pile up the stack
+    - basically when we see an 'D', we pile up the stack
     - when we see an 'I', we empty the stack and put the items into the result array
     
     ref:
