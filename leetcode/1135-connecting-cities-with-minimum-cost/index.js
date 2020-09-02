@@ -33,17 +33,17 @@ var minimumCost = function (N, connections) {
 class UnionFind {
 	constructor(N) {
 		this.count = N;
-		this.ids = {};
+		this.roots = {};
 		this.caps = {};
 		for (let i = 1; i < N + 1; i++) {
-			this.ids[i] = i;
+			this.roots[i] = i;
 			this.caps[i] = 1;
 		}
 	}
 	find = (key) => {
 		let cur = key;
-		while (cur != this.ids[cur]) {
-			cur = this.ids[cur];
+		while (cur != this.roots[cur]) {
+			cur = this.roots[cur];
 		}
 		return cur;
 	};
@@ -54,10 +54,10 @@ class UnionFind {
 			return;
 		}
 		if (this.caps[pId] < this.caps[qId]) {
-			this.ids[pId] = qId;
+			this.roots[pId] = qId;
 			this.caps[qId] += this.caps[pId];
 		} else {
-			this.ids[qId] = pId;
+			this.roots[qId] = pId;
 			this.caps[pId] += this.caps[qId];
 		}
 		this.count -= 1;

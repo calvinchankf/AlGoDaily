@@ -5,7 +5,7 @@
 
     Time    O(2n)
     Space   O(n)
-    20 ms, faster than 65.41%
+    20 ms, faster than 99.11%
 """
 
 
@@ -17,19 +17,20 @@ class Solution(object):
         """
         if len(nums) == 0:
             return []
-        first = nums[0]
-        intvs = [[first, first]]
-        for i in range(1, len(nums)):
-            num = nums[i]
-            if num == intvs[-1][1]+1:
-                intvs[-1][1] = num
-            else:
-                x = [num, num]
-                intvs.append(x)
+
+        n = len(nums)
+        intvs = []
+        j = 0
+        for i in range(1, n):
+            if nums[i] > nums[i-1] + 1:
+                intvs.append((nums[j], nums[i-1]))
+                j = i
+        intvs.append((nums[j], nums[-1]))
+
         res = []
-        for a, b in intvs:
-            if a == b:
-                res.append(str(a))
+        for s, e in intvs:
+            if s == e:
+                res.append(str(s))
             else:
-                res.append(str(a)+'->'+str(b))
+                res.append(str(s) + '->' + str(e))
         return res
