@@ -1,6 +1,6 @@
 /*
     1st approach: min and max 2 arrays
-    - similar to lc42, lc135, lc1493
+    - similar to lc42, 135, 487, 1493
     - from the front to the end, store the max at each index
     - from the end to the front, store the min at each index
     - when max[i-1] <= max[i] <= min[i+1], it is the target index of the last item in the winter period
