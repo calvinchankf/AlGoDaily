@@ -48,7 +48,7 @@ class Solution(object):
 
 
 """
-    1st approach:
+    2nd approach:
     - serialize both trees
     - check if the 2nd serialized representation is within the 1st serialized representation
 
