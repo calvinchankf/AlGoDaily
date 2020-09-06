@@ -35,10 +35,10 @@ class Solution(object):
 class UnionFind(object):
     def __init__(self, N):
         self.count = N
-        self.ids = {}
+        self.roots = {}
         self.caps = {}
         for i in range(1, N+1):
-            self.ids[i] = i
+            self.roots[i] = i
             self.caps[i] = 1
 
     def getCount(self):
@@ -47,8 +47,8 @@ class UnionFind(object):
     def find(self, key):
         # loop to find to ultimate root
         cur = key
-        while cur != self.ids[cur]:
-            cur = self.ids[cur]
+        while cur != self.roots[cur]:
+            cur = self.roots[cur]
         return cur
 
     def union(self, p, q):
@@ -58,10 +58,10 @@ class UnionFind(object):
             return
         # attach to the larger tree
         if self.caps[pId] < self.caps[qId]:
-            self.ids[pId] = qId
+            self.roots[pId] = qId
             self.caps[qId] += self.caps[pId]
         else:
-            self.ids[qId] = pId
+            self.roots[qId] = pId
             self.caps[pId] += self.caps[qId]
         self.count -= 1
 
@@ -69,11 +69,12 @@ class UnionFind(object):
 """
     2nd: minimum spanning tree (prim)
 
+    ref:
+	- https://www.youtube.com/watch?v=YyLaRffCdk4
+
 	Time	O(E log V) E: number of edges, V: number of vertices
 	Space	O(E + V) hashtable + heap
-
-	ref:
-	- https://www.youtube.com/watch?v=YyLaRffCdk4
+    744 ms, faster than 60.81%
 """
 
 

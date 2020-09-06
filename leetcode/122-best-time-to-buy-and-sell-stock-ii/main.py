@@ -1,3 +1,6 @@
+import sys
+
+
 class Solution(object):
     def maxProfit(self, prices):
         """
@@ -56,16 +59,13 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
-        if len(prices) < 2:
-            return 0
         res = 0
-        minVal = prices[0]
-        for i in range(1, len(prices)):
-            if prices[i] < minVal:
-                minVal = prices[i]
-            else:
-                res += prices[i] - minVal
-                minVal = prices[i]
+        dip = sys.maxsize
+        for p in prices:
+            if p - dip > 0:
+                res += p - dip
+                dip = p
+            dip = min(dip, p)
         return res
 
 
@@ -87,6 +87,8 @@ print("-----------------------------------")
     Space   O(1)
     48 ms, faster than 47.05%
 """
+
+
 class Solution(object):
     def maxProfit(self, prices):
         """
@@ -98,6 +100,7 @@ class Solution(object):
             if prices[i] > prices[i-1]:
                 res += prices[i] - prices[i-1]
         return res
+
 
 print(Solution().maxProfit([7, 1, 5, 3, 6, 4]))
 print(Solution().maxProfit([1, 2, 3, 4, 5]))

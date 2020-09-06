@@ -1,6 +1,6 @@
 """
     2nd approach: 4 pointers
-    - narrow down the range by updating the poiners, minRow, maxRow, minCol, maxCol
+    - narrow down the range by updating the poiners, top, bottom, left, right
 
     Time    O(n)
     Space   O(1)
@@ -16,34 +16,34 @@ class Solution:
         """
         if len(matrix) == 0 or len(matrix[0]) == 0:
             return []
-        minRow = 0
-        maxCol = len(matrix[0])-1
-        maxRow = len(matrix)-1
-        minCol = 0
+        top = 0
+        right = len(matrix[0])-1
+        bottom = len(matrix)-1
+        left = 0
 
         res = []
 
-        while minRow <= maxRow and minCol <= maxCol:
+        while top <= bottom and left <= right:
             # go right
-            for i in range(minCol, maxCol+1):
-                res.append(matrix[minRow][i])
-            minRow += 1
+            for i in range(left, right+1):
+                res.append(matrix[top][i])
+            top += 1
             # go down
-            for i in range(minRow, maxRow+1):
-                res.append(matrix[i][maxCol])
-            maxCol -= 1
+            for i in range(top, bottom+1):
+                res.append(matrix[i][right])
+            right -= 1
             # go left
-            # minRow has been +1 previously, so maxRow must be >= new minRow in order to traverse correctly
-            if minRow <= maxRow:
-                for i in range(maxCol, minCol-1, -1):
-                    res.append(matrix[maxRow][i])
-                maxRow -= 1
+            # top has been +1 previously, so bottom must be >= new top in order to traverse correctly
+            if top <= bottom:
+                for i in range(right, left-1, -1):
+                    res.append(matrix[bottom][i])
+                bottom -= 1
             # go up
-            # minCol has been +1 previously, so maxCol must be >= new minRow in order to traverse correctly
-            if minCol <= maxCol:
-                for i in range(maxRow, minRow-1, -1):
-                    res.append(matrix[i][minCol])
-                minCol += 1
+            # left has been +1 previously, so right must be >= new top in order to traverse correctly
+            if left <= right:
+                for i in range(bottom, top-1, -1):
+                    res.append(matrix[i][left])
+                left += 1
         return res
 
 
@@ -100,7 +100,7 @@ print("-----")
 
 """
     2nd approach: 4 pointers
-    - narrow down the range by updating the poiners, minRow, maxRow, minCol, maxCol
+    - narrow down the range by updating the poiners, top, bottom, left, right
 
     Time    O(n)
     Space   O(1)
@@ -116,40 +116,40 @@ class Solution(object):
         """
         if len(matrix) == 0 or len(matrix[0]) == 0:
             return []
-        minRow = 0
-        maxCol = len(matrix[0])-1
-        maxRow = len(matrix)-1
-        minCol = 0
+        top = 0
+        right = len(matrix[0])-1
+        bottom = len(matrix)-1
+        left = 0
 
         res = []
 
-        while minRow <= maxRow and minCol <= maxCol:
+        while top <= bottom and left <= right:
             # go right
-            j = minCol
-            while j <= maxCol:
-                res.append(matrix[minRow][j])
+            j = left
+            while j <= right:
+                res.append(matrix[top][j])
                 j += 1
-            minRow += 1
+            top += 1
             # go down
-            i = minRow
-            while i <= maxRow:
-                res.append(matrix[i][maxCol])
+            i = top
+            while i <= bottom:
+                res.append(matrix[i][right])
                 i += 1
-            maxCol -= 1
+            right -= 1
             # go left
-            if minRow <= maxRow:
-                j = maxCol
-                while j >= minCol:
-                    res.append(matrix[maxRow][j])
+            if top <= bottom:
+                j = right
+                while j >= left:
+                    res.append(matrix[bottom][j])
                     j -= 1
-                maxRow -= 1
+                bottom -= 1
             # go up
-            if minCol <= maxCol:
-                i = maxRow
-                while i >= minRow:
-                    res.append(matrix[i][minCol])
+            if left <= right:
+                i = bottom
+                while i >= top:
+                    res.append(matrix[i][left])
                     i -= 1
-                minCol += 1
+                left += 1
         return res
 
 

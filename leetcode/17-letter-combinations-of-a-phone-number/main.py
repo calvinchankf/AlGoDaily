@@ -61,44 +61,39 @@ print("-----")
 	Space	O(3^n -> 4^m)
 	n: number of 3 characters digits like 1->abc
 	m: number of 4 characters digits like 9->wxyz
-    20 ms, faster than 80.31%
+    24 ms, faster than 94.99%
 """
 
 
 class Solution(object):
 
-    def __init__(self):
-        self.res = []
-
     def letterCombinations(self, digits):
-        """
-        :type digits: str
-        :rtype: List[str]
-        """
-        ht = {}
-        ht['2'] = 'abc'
-        ht['3'] = 'def'
-        ht['4'] = 'ghi'
-        ht['5'] = 'jkl'
-        ht['6'] = 'mno'
-        ht['7'] = 'pqrs'
-        ht['8'] = 'tuv'
-        ht['9'] = 'wxyz'
-        self.dfs(digits, "", ht)
+        self.ht = {
+            '2': ['a', 'b', 'c'],
+            '3': ['d', 'e', 'f'],
+            '4': ['g', 'h', 'i'],
+            '5': ['j', 'k', 'l'],
+            '6': ['m', 'n', 'o'],
+            '7': ['p', 'q', 'r', 's'],
+            '8': ['t', 'u', 'v'],
+            '9': ['w', 'x', 'y', 'z'],
+        }
+        self.res = []
+        self.dfs(digits, '')
         return self.res
 
-    def dfs(self, remain, prefix, ht):
-        if len(remain) == 0:
-            if len(prefix) > 0:
-                self.res.append(prefix)
+    def dfs(self, digits, chosen):
+        if len(digits) == 0:
+            if len(chosen) > 0:
+                self.res.append(chosen)
             return
-        numStr = remain[0]
-        if numStr in ht:
-            cands = ht[numStr]
-            for cand in cands:
-                self.dfs(remain[1:], prefix+cand, ht)
-        else:
-            self.dfs(remain[1:], prefix, ht)
+        num = digits[0]
+        # if num not in self.ht:
+        #     self.dfs(digits[1:], chosen)
+        #     return
+        cands = self.ht[num]
+        for cand in cands:
+            self.dfs(digits[1:], chosen + cand)
 
 
 print(Solution().letterCombinations(""))

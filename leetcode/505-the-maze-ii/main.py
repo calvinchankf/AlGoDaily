@@ -1,3 +1,4 @@
+import heapq
 import sys
 """
     1st approach: BFS
@@ -203,3 +204,43 @@ a = [
 b = [0, 4]
 c = [4, 4]
 print(Solution().shortestDistance(a, b, c))
+
+"""
+    3rd: dijkstra
+    - regard steps as weights
+    - with dijkstra, we can make sure the length from start point is always smallest
+
+    Time    O(RC logRC)
+    Space   O(RC)
+    304 ms, faster than 78.33%
+"""
+
+
+class Solution(object):
+
+    def shortestDistance(self, maze, start, destination):
+        R, C = len(maze), len(maze[0])
+        dirs = [(0, -1), (0, 1), (-1, 0), (1, 0)]
+        ht = {}
+        pq = [(0, start[0], start[1])]
+        while len(pq) > 0:
+            d, i, j = heapq.heappop(pq)
+
+            key = (i, j)
+            if key in ht and d >= ht[key]:
+                continue
+            ht[key] = d
+
+            if i == destination[0] and j == destination[1]:
+                return d
+
+            for di, dj in dirs:
+                _i = i
+                _j = j
+                _d = d
+                while 0 <= _i+di < R and 0 <= _j+dj < C and maze[_i+di][_j+dj] == 0:
+                    _i += di
+                    _j += dj
+                    _d += 1
+                heapq.heappush(pq, (_d, _i, _j))
+        return -1
