@@ -15,14 +15,13 @@ class Solution(object):
         :type arr: List[int]
         :rtype: bool
         """
-        ht = Counter(arr)
-        for x in arr:
-            if x * 2 in ht:
-                if x * 2 == x:
-                    if ht[x*2] > 1:
-                        return True
-                else:
-                    return True
+        ht = {}
+        for i in range(len(arr)):
+            ht[arr[i]] = i
+        for i in range(len(arr)):
+            target = arr[i] * 2
+            if target in ht and ht[target] != i:
+                return True
         return False
 
 

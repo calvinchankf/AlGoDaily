@@ -93,28 +93,23 @@ class Solution(object):
         :type wordDict: List[str]
         :rtype: bool
         """
-        wordSet = set()
-        for w in wordDict:
-            wordSet.add(w)
-        m = {}
-        return self.find(s, wordSet, m)
+        wordSet = set(wordDict)
+        ht = {}
+        return self.dfs(s, wordSet, ht)
 
-    def find(self, s, wordSet, m):
+    def dfs(self, s, wordSet, ht):
+        if s in ht:
+            return ht[s]
         if len(s) == 0:
             return True
-        if s in m:
-            return m[s]
-        # check if the begining contains any words in wordSet
-        for word in wordSet:
-            w = s[:len(word)]
-            if word == w:
-                temp = self.find(s[len(word):], wordSet, m)
-                if temp == True:
-                    m[s] = True
+        for w in wordSet:
+            n = len(w)
+            cand = s[:n]
+            if cand == w:
+                if self.dfs(s[n:], wordSet, ht):
                     return True
-        # memorize the result for s to avoid redundant computation if we meet s again
-        m[s] = False
-        return False
+        ht[s] = False
+        return ht[s]
 
 
 s = "applepenapple"

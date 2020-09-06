@@ -22,8 +22,8 @@
     2. backtracking is actually a dfs, if a recursion exits, 
         it 'unseen' the explored coordinates such that we can explore all possibilities.
 
-    Time    O(4^L) L: length of target word
-    Space   O(M*N + L)
+    Time    O(N * 3^L) N: number of cells, L: length of target word, 3^L instead of 4^L because we dont go backward 
+    Space   O(N)
     364 ms, faster than 33.86%
 """
 
@@ -84,8 +84,8 @@ print("-----")
 """
     1st approach B: similar to the 1st but takes up fewer space
 
-    Time    O(4^L) L: length of target word
-    Space   O(M*N + L)
+    Time    O(N * 3^L) N: number of cells, L: length of target word, 3^L instead of 4^L because we dont go backward
+    Space   O(N)
     368 ms, faster than 36.74%
 """
 
@@ -140,3 +140,42 @@ a = [
     ["A", "D", "E", "E"],
 ]
 print(Solution().exist(a, "ABCESEEEFS"))
+
+"""
+    3rd: backtracking without mutating the array
+
+    Time    O(N * 3^L) N: number of cells, L: length of target word, 3^L instead of 4^L because we dont go backward
+    Space   O(N)
+    556 ms, faster than 21.93%
+"""
+
+
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        for i in range(len(board)):
+            for j in range(len(board[0])):
+                if board[i][j] == word[0]:
+                    hs = set()
+                    b = self.dfs(board, i, j, word, hs)
+                    if b:
+                        return True
+        return False
+
+    def dfs(self, board, i, j, word, hs):
+        if len(word) == 0:
+            return True
+        if i < 0 or i+1 > len(board) or j < 0 or j+1 > len(board[0]):
+            return False
+        if word[0] != board[i][j]:
+            return False
+        key = (i, j)
+        if key in hs:
+            return False
+        hs.add(key)
+        dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        for di, dj in dirs:
+            b = self.dfs(board, i+di, j+dj, word[1:], hs)
+            if b:
+                return True
+        hs.remove(key)
+        return False

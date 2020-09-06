@@ -6,20 +6,19 @@ class RandomListNode(object):
         self.random = None
 
 
+"""
+    1st approach:
+    1. use a hashtable to map the address of each node and a new node
+    2. iterate the linked list and construct a new linked list using the values in hashtable
+
+    Time    O(2n)
+    Space   O(n)
+    68ms beats 97.59%
+"""
+
+
 class Solution(object):
     def copyRandomList(self, head):
-        """
-        :type head: RandomListNode
-        :rtype: RandomListNode
-
-        1st approach:
-        1. use a hashtable to map the address of each node and a new node
-        2. iterate the linked list and construct a new linked list using the values in hashtable
-
-        Time    O(2n)
-        Space   O(n)
-        68ms beats 97.59%
-        """
         # put the addresses into a hashtable
         ht = {}
         cur = head

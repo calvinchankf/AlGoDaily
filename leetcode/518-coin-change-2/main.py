@@ -14,6 +14,7 @@
 	see ./explanation.jpeg
 
     ref:
+    - https://www.youtube.com/watch?v=DJ4a7cmjZY0
     - https://www.youtube.com/watch?v=jaNZ83Q3QGc
 
     Time    O(N * A)

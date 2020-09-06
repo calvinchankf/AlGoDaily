@@ -1,7 +1,7 @@
 /*
     1st approach: Bfs, hashtable for visited island territories
     
-    100 ms, faster than 12.22%
+    // 100 ms, faster than 12.22%
 */
 
 /**
@@ -38,13 +38,17 @@ const bfs = (grid, x, y, visited) => {
 			continue;
 		}
 		visited.add(key);
-		[
-			[-1, 0],
-			[1, 0],
-			[0, -1],
-			[0, 1],
-		].forEach(([di, dj]) => {
-			q.push([i + di, j + dj]);
-		});
+		// [
+		// 	[-1, 0],
+		// 	[1, 0],
+		// 	[0, -1],
+		// 	[0, 1],
+		// ].forEach(([di, dj]) => {
+		// 	q.push([i + di, j + dj]);
+		// });
+		q.push([i - 1, j]);
+		q.push([i + 1, j]);
+		q.push([i, j - 1]);
+		q.push([i, j + 1]);
 	}
 };
