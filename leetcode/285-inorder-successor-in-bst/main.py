@@ -74,15 +74,15 @@ if ans != None:
 
 class Solution(object):
     def inorderSuccessor(self, root, p):
-        node = root
-        suc = None
-        while node != None:
-            if p.val >= node.val:
-                node = node.right
+        res = None
+        cur = root
+        while cur != None:
+            if p.val < cur.val:
+                res = cur
+                cur = cur.left
             else:
-                suc = node
-                node = node.left
-        return suc
+                cur = cur.right
+        return res
 
 
 a = TreeNode(5)

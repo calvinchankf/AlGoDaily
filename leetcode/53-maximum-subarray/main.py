@@ -66,7 +66,7 @@ class Solution(object):
         for num in nums:
             # update current sum and array
             # we use >= instead of > because we want to include the head if the curSum == 0
-            if curSum+num >= num:
+            if curSum + num >= num:
                 curSum += num
                 curSumArr.append(num)
             else:

@@ -4,7 +4,7 @@ import sys
     Given a matrix with r rows and c columns, 
     find the maximum score of a path starting at [0, 0] and ending at [r-1, c-1]. 
     The score of a path is the minimum value in that path. 
-    For example, the score of the path 8 → 4 → 5 → 9 is 4.
+    For example, the score of the path 8 -> 4 -> 5 -> 9 is 4.
 
     Don't include the first or final entry. You can only move either down or right at any point in time.
     
@@ -19,8 +19,8 @@ import sys
     
     Explanation:
     Possible paths:
-    5 → 1 → 5 => min value is 1
-    5 → 4 → 5 => min value is 4
+    5 -> 1 -> 5 => min value is 1
+    5 -> 4 -> 5 => min value is 4
     Return the max value among minimum values => max(4, 1) = 4.
     ------------------------------------------------------------------------
     Example 2:
@@ -64,18 +64,23 @@ def maxOfMinAltitudes(matrix):
                 scores[i][j] = min(matrix[i][j], scores[i-1][j])
             else:
                 scores[i][j] = max(
-                    min(matrix[i][j], scores[i-1][j]), min(matrix[i][j], scores[i][j-1]))
+                    min(matrix[i][j], scores[i-1][j]),
+                    min(matrix[i][j], scores[i][j-1])
+                )
     return max(scores[R-1][C-2], scores[R-2][C-1])
 
 
+# 4
 a = [[5, 1],
      [4, 5]]
 print(maxOfMinAltitudes(a))
 
+# 4
 a = [[1, 2, 3],
      [4, 5, 1]]
 print(maxOfMinAltitudes(a))
 
+# 5
 a = [[6, 7, 8],
      [5, 4, 2],
      [8, 7, 6]

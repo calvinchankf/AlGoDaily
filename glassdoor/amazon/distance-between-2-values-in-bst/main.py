@@ -5,60 +5,86 @@
 
 
 class TreeNode(object):
-    def __init__(self, x):
-        self.val = x
+    def __init__(self, val):
+        self.val = val
         self.left = None
         self.right = None
 
 
-def distanceBetween2ValuesInBST(nums, a, b):
-    nums = sorted(nums)
-    bst = buildBST(nums, 0, len(nums) - 1)
-    lca = lowestCommonAncestor(bst, a, b)
-    depthA = findDepth(lca, a)
-    depthB = findDepth(lca, b)
-    return depthA + depthB
-
-
-def buildBST(nums, left, right):
-    if left > right:
-        return None
-    mean = (left + right) / 2
-    node = TreeNode(nums[mean])
-    node.left = buildBST(nums, left, mean - 1)
-    node.right = buildBST(nums, mean + 1, right)
+def inserBst(node, val):
+    if node == None:
+        return TreeNode(val)
+    if val < node.val:
+        node.left = inserBst(node.left, val)
+    else:
+        node.right = inserBst(node.right, val)
     return node
 
 
-def lowestCommonAncestor(root, p, q):
-    curr = root
+def buildBst(nums):
+    root = None
+    for x in nums:
+        root = inserBst(root, x)
+    return root
+
+
+def lca(node, p, q):
+    cur = node
     left = min(p, q)
     right = max(p, q)
-    while True:
-        if curr.left != None and right < curr.val:
-            curr = curr.left
-        elif curr.right != None and left > curr.val:
-            curr = curr.right
+    while cur != None:
+        if left < cur.val and right < cur.val:
+            cur = cur.left
+        elif left > cur.val and right > cur.val:
+            cur = cur.right
         else:
-            return curr
+            return cur
+    return cur
 
 
 def findDepth(root, target):
     cur = root
     steps = 0
-    while True:
-        if cur.val < target:
-            cur = cur.right
-            steps += 1
-        elif cur.val > target:
+    while cur != None:
+        if target < cur.val:
             cur = cur.left
+            steps += 1
+        elif target > cur.val:
+            cur = cur.right
             steps += 1
         else:
             return steps
+    return -1
+
+
+"""
+    1. build the BST tree
+    2. find the common ancestor
+    3. the distance between them is the sum of the depth of each the nodes the common ancestor
+
+    Time    O(N)
+    Space   O(N)
+"""
+
+
+def bstDistance(values, node1, node2):
+    # WRITE YOUR CODE HERE
+    bst = buildBst(values)
+    ancestor = lca(bst, node1, node2)
+    depthA = findDepth(ancestor, node1)
+    depthB = findDepth(ancestor, node2)
+    if depthA == -1 or depthB == -1:
+        return -1
+    return depthA + depthB
 
 
 print("-----")
 
-print(distanceBetween2ValuesInBST([5, 6, 3, 1, 2, 4], 2, 4))
-print(distanceBetween2ValuesInBST([5, 6, 3, 1, 2, 4], 4, 6))
-print(distanceBetween2ValuesInBST([5, 6, 3, 1, 2, 4], 4, 5))
+# 3
+print(bstDistance([5, 6, 3, 1, 2, 4], 2, 4))
+# -1
+print(bstDistance([9, 7, 5, 3, 1], 76, 20))
+# 3
+print(bstDistance([5, 6, 3, 1, 2, 4], 4, 6))
+# 2
+print(bstDistance([5, 6, 3, 1, 2, 4], 4, 5))

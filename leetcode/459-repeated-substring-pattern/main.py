@@ -51,3 +51,25 @@ class Solution(object):
             return False
         ss = (s + s)[1:-1]
         return ss.find(s) != -1
+
+
+"""
+    3rd: repeating substring to see if we can form our result string
+
+    Time    O(N^2)
+    Space   O(N)
+    1096 ms, faster than 6.16%
+"""
+
+
+class Solution:
+    def repeatedSubstringPattern(self, s: str) -> bool:
+        n = len(s)
+        for i in range(n-1):
+            sub = s[:i+1]
+            cur = ''
+            while len(cur) < len(s):
+                cur += sub
+            if cur == s:
+                return True
+        return False

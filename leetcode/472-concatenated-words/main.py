@@ -6,7 +6,7 @@
 """
 
 """
-    1st approach: slicing + hashtable (dynamic programming)
+    1st approach: recursion + hashtable (dynamic programming)
 
     Time    < O(n*2^k) k: average number of characters of words, but since we use hashtable, it must be smaller
     Space   < O(2^k) the recursion tree, but since we use hashtable, it must be smaller
@@ -39,7 +39,7 @@ class Solution(object):
         if s in seen:
             return seen[s]
         count = 0
-        # using slice character by character instead of wordSet
+        # slice characters instead of iterating the wordSet
         # because there might be so many words here for this question
         for i in range(len(s)):
             temp = s[:i+1]

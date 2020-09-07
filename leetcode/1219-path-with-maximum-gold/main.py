@@ -15,34 +15,37 @@ from typing import List
 """
 
 
-class Solution:
-    def getMaximumGold(self, grid: List[List[int]]) -> int:
+class Solution(object):
+    def getMaximumGold(self, grid):
         self.res = 0
         for i in range(len(grid)):
             for j in range(len(grid[0])):
                 if grid[i][j] == 0:
                     continue
-                hs = set()
-                hs.add((i, j))
-                self.dfs(grid, i, j, hs, grid[i][j])
+                ht = {}
+                self.dfs(grid, i, j, ht, 0)
         return self.res
 
-    def dfs(self, grid: List[List[int]], i: int, j: int, hs: set, total: int) -> None:
-        self.res = max(self.res, total)
-        dirs = [[0, -1], [0, 1], [-1, 0], [1, 0]]
-        for di, dj in dirs:
-            x = i + di
-            y = j + dj
-            if x < 0 or x == len(grid) or y < 0 or y == len(grid[0]):
-                continue
-            if grid[x][y] == 0:
-                continue
+    def dfs(self, grid, i, j, ht, gold):
+        if i < 0 or i == len(grid) or j < 0 or j == len(grid[0]):
+            return
+        if grid[i][j] == 0:
+            return
+        key = (i, j)
+        if key in ht:
+            return
+        ht[key] = True
 
-            if (x, y) in hs:
-                continue
-            hs.add((x, y))      # 1. put the candidate into the hashtable
-            self.dfs(grid, x, y, hs, total + grid[x][y])
-            hs.remove((x, y))   # 2. remove the candidate after the exploration
+        gold += grid[i][j]
+        self.res = max(self.res, gold)
+
+        self.dfs(grid, i-1, j, ht, gold)
+        self.dfs(grid, i+1, j, ht, gold)
+        self.dfs(grid, i, j-1, ht, gold)
+        self.dfs(grid, i, j+1, ht, gold)
+
+        del ht[key]
+        return
 
 
 s = Solution()

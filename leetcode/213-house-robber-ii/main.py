@@ -1,7 +1,8 @@
 """
-    1st approach: reuse leetcode 213
-	- since adjacent means only the i-1 and i+1, problem becomes to rob either
-		ouse[0]-House[n-2] or House[1]-House[n-1], depending on which choice offers more money
+    1st approach: reuse leetcode 198
+	- circular means that we cannot rob houses[0] and houses[n-1] at the same time, so the result is either:
+        - from houses[1] to houses[n-2]
+        - Or from houses[2] to houses[n-1]
 
 	Time		O(2n)
 	Space		O(1)

@@ -1,5 +1,28 @@
 """
     https://leetcode.com/discuss/interview-question/782606/
+
+    Find the largest group of associated items. If there is a tie, return the group that first appears in lexicographical order
+    Input: edges between the items
+    Output: a list of associated items
+
+    e.g.1
+    edges= [
+        ['a', 'b'],
+        ['c', 'd'],
+        ['d', 'e'],
+    ]
+    output: ['c', 'd', 'e']
+    explanation: there are 2 groups: ['a','b'] and ['c', 'd', 'e']. Clearly, the secound group is larger
+
+    e.g.2
+    edges = [
+        ['d', 'e'],
+        ['e', 'f'],
+        ['a', 'b'],
+        ['b', 'c']
+    ]
+    output: ['a', 'b', 'c']
+    explanation: there are 2 groups: [d', 'e', 'f'] and ['a','b'','c]. They have the same size but the second group is lexicographically smaller
 """
 
 
