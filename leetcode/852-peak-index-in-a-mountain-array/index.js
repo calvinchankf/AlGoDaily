@@ -30,6 +30,19 @@ var peakIndexInMountainArray = function (A) {
 /*
     2nd: upper boundy binary search
 
+    concern: will A[mid-1] be out of bound?
+
+    - in short, no!
+    - in detail, because the question guarantees that the array has at least 3 items. 
+    
+    Lets look at the example: [0,10,2]
+    
+    left = 0, right = 3, then mid = 1 -----> since A[0] = 0 and A[1] = 10, left = left + 1 = 1 + 1 = 2
+    left = 2, right = 3, then mid = 2 -----> since A[1] = 10 and A[2] = 2, right = mid = 2
+    left = 2, right = 2, then exit while loop
+
+    Both left&right point to 2, which is the number that next to the peak(similar to upper bound binary search)
+
     Time    O(logN)
     Space   O(1)
     88 ms, faster than 11.15%

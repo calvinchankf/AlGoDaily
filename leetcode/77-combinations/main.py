@@ -34,15 +34,17 @@ class Solution(object):
                 self.dfs(nums[i+1:], path + [nums[i]], k)
 
 
-r = Solution().combine(4, 2)
+s = Solution()
+
+r = s.combine(4, 2)
 print(r)
-r = Solution().combine(4, 3)
+r = s.combine(4, 3)
 print(r)
-r = Solution().combine(5, 4)
+r = s.combine(5, 4)
 print(r)
 
 
-class Solution1(object):
+class Solution(object):
     """
     Implementation similar to permutations
     Time    O(nCk)
@@ -67,9 +69,11 @@ class Solution1(object):
                 self.dfs(i+1, n, path + [i], k)
 
 
-r = Solution1().combine(4, 2)
+s = Solution()
+
+r = s.combine(4, 2)
 print(r)
-r = Solution1().combine(4, 3)
+r = s.combine(4, 3)
 print(r)
-r = Solution1().combine(5, 4)
+r = s.combine(5, 4)
 print(r)

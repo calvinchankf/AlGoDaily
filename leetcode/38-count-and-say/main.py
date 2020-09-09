@@ -4,15 +4,9 @@ class Solution(object):
     """
 
     def countAndSay(self, n):
-        """
-        :type n: int
-        :rtype: str
-        """
         result = "1"
-        n -= 1
-        while n > 0:
+        for i in range(1, n):
             result = self.buildNext(result)
-            n -= 1
         return result
 
     def buildNext(self, s):
@@ -23,11 +17,11 @@ class Solution(object):
             if cur == s[i]:
                 cnt += 1
             else:
-                result += str(cnt)+cur
+                result += str(cnt) + cur
                 cur = s[i]
                 cnt = 1
         if cnt > 0:
-            result += str(cnt)+cur
+            result += str(cnt) + cur
         return result
 
 

@@ -1,40 +1,34 @@
+"""
+    2nd approach: 2 pointers
+    - similar to lc26, 75, 283
+    - slow pointer points to the right most distinct number
+    - fast pointer is for iteration
+    - if fast pointer meets a different value, slow pointer move forward and modify the numer as the fast pointer points to
+
+    Time    O(n)
+    Space   O(1)
+    76 ms, faster than 32.29%
+"""
+
+
 class Solution(object):
-    def removeDuplicates(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-
-        2nd approach: 2 pointers
-        - slow pointer points to the right most distinct number
-        - fast pointer is for iteration
-        - if fast pointer meets a different value, slow pointer move forward and modify the numer as the fast pointer points to
-
-        Time    O(n)
-        Space   O(1)
-        44 ms, faster than 49.13%
-        18apr2019
-        """
+    def removeDuplicates(self, nums: List[int]) -> int:
         if len(nums) == 0:
-            return 0
-        if len(nums) <= 2:
-            return len(nums)
-        slow = 1
-        for i in range(2, len(nums)):
-            num = nums[i]
-            # 1st case: if last == cur but last last != cur
-            # [1,1,2,2,....
-            #      s ^
-            if nums[slow] == num:
-                if nums[slow-1] != num:
-                    slow += 1
-                    nums[slow] = num
-            else:
-                # 2 case: if last != cur
-                # [1,1,2
-                #    s ^
-                slow += 1
-                nums[slow] = num
-        return slow + 1
+            return
+        j = 0
+        curMax = -sys.maxsize
+        curCount = 0
+        for i in range(len(nums)):
+            if nums[i] > curMax:
+                curMax = nums[i]
+                nums[i], nums[j] = nums[j], nums[i]
+                j += 1
+                curCount = 1
+            elif nums[i] == curMax and curCount < 2:
+                nums[i], nums[j] = nums[j], nums[i]
+                j += 1
+                curCount += 1
+        return j
 
 
 a = [1, 1, 1, 2, 2, 3]

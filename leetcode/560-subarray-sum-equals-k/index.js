@@ -4,7 +4,7 @@
  * @return {number}
  * 
  * 1st approach: zero sum subarray
-    - this question is fucking similar to leetcode 325, 525, 930
+    - this question is fucking similar to leetcode 325, 525, 523, 930
     - the basic idea is to store the previous sum in a hashtable
         e.g. key: previous sum, value: number of occurence of a previous sum
     - if currentSum - target in the hastable, the result += occurence
