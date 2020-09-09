@@ -1,6 +1,6 @@
 /*
     1st approach: recursion + hashtable
-    - similar to classic coin change/knapsack problem
+    - similar to classic coin change/knapsack problem/lc377
     - when we calculate recursively, there must be some redundant 'subtrees'. we can use a hashtable to avoid redundant calculation
 
     Time    O(DFT)

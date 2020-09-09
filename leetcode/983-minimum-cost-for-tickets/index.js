@@ -1,5 +1,6 @@
 /*
     dp, learned from others, more concise
+    - similar to lc746
     - actually it is similar to coin change, we can do it with a bottom up approach
     - be careful that:
         1. for non-present days, extand the previous day cost
@@ -37,6 +38,36 @@ var mincostTickets = function (days, costs) {
 				dp[Math.max(0, i - 30)] + costs[2]
 			);
 		}
+	}
+	return dp[n];
+};
+
+/*
+    Or this
+*/
+var mincostTickets = function (days, costs) {
+	const n = days[days.length - 1];
+	const dp = Array(n + 1).fill(0);
+	const hs = new Set(days);
+	for (let i = 1; i < n + 1; i++) {
+		if (!hs.has(i)) {
+			dp[i] = dp[i - 1];
+			continue;
+		}
+		let minCost = Number.MAX_SAFE_INTEGER;
+		minCost = Math.min(
+			minCost,
+			i - 1 >= 0 ? dp[i - 1] + costs[0] : costs[0]
+		);
+		minCost = Math.min(
+			minCost,
+			i - 7 >= 0 ? dp[i - 7] + costs[1] : costs[1]
+		);
+		minCost = Math.min(
+			minCost,
+			i - 30 >= 0 ? dp[i - 30] + costs[2] : costs[2]
+		);
+		dp[i] = minCost;
 	}
 	return dp[n];
 };

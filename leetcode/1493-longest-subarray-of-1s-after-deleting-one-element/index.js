@@ -1,6 +1,6 @@
 /*
     1st: min max 2 arrays
-    - similar to lc135, lc915
+    - similar to lc42, 135, 487, 915, 1493
 
     e.g. [0,1,1,0,1,1,1,0]
     ->    0 1 2 0 1 2 3 0

@@ -1,5 +1,6 @@
 """
     1st approach: bfs + hashtable
+    - similar to lc200
 
     TIme    O(n)
     Space   O(n)

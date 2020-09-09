@@ -3,13 +3,13 @@ import heapq
 """
     1st approach
     - sort the array
-    - create an array of last hour of occupied rooms
+    - create an array to store the end time of the latest meeting in every room
     - each interval, compare the last meeting(since sorted) amongst the meeting in the meeting rooms
     - if there is no collision, put the meeting in that room, else create a new meeting room for the interval
     
-    Time		O(nlogn) sort
-    Space 	O(n)	result array
-    84 ms, faster than 18.80%
+    Time		O(NlogN)    sort
+    Space 	    O(N)	    result array
+    76 ms, faster than 52.42% 
 """
 
 
@@ -28,19 +28,18 @@ class Solution(object):
             return a[0]-b[0]
         intervals = sorted(intervals, cmp=cptr)
 
-        lasts = [intervals[0][1]]
-        for i in range(1, len(intervals)):
-            cur = intervals[i]
+        ends = []
+        for i in range(len(intervals)):
+            s, e = intervals[i]
             found = False
-            for j in range(len(lasts)):
-                last = lasts[j]
-                if last <= cur[0]:
-                    lasts[j] = max(last, cur[1])
+            for j in range(len(ends)):
+                if ends[j] <= s:
                     found = True
+                    ends[j] = e
                     break
-            if found == False:
-                lasts.append(cur[1])
-        return len(lasts)
+            if not found:
+                ends.append(e)
+        return len(ends)
 
 
 """
