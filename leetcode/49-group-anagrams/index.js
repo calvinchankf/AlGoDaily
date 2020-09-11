@@ -12,7 +12,7 @@ var groupAnagrams = function (strs) {
 	const ht = {};
 	for (let s of strs) {
 		const alphabetsCount = Array(26).fill(0);
-		for (c of s) {
+		for (let c of s) {
 			const idx = c.charCodeAt(0) - "a".charCodeAt(0);
 			alphabetsCount[idx] += 1;
 		}

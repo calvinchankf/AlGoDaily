@@ -1,17 +1,17 @@
-/**
- * @param {character[][]} board
- * @param {string} word
- * @return {boolean}
- */
+/*
+    1st: backtracking
+
+    Time    O(N * 3^L) N: number of cells, L: length of target word, 3^L instead of 4^L because we dont go backward
+    Space   O(N)
+*/
 var exist = function (board, word) {
 	let R = board.length;
 	let C = board[0].length;
 	for (let i = 0; i < R; i++) {
 		for (let j = 0; j < C; j++) {
-			// console.log(i, j, word[0], board[i][j]);
 			if (word[0] === board[i][j]) {
-				let hs = new Set();
-				const b = dfs(board, i, j, word, hs);
+				let ht = {};
+				const b = dfs(board, i, j, word, ht);
 				if (b === true) {
 					return true;
 				}
@@ -21,26 +21,22 @@ var exist = function (board, word) {
 	return false;
 };
 
-const dfs = (board, i, j, word, hs) => {
+const dfs = (board, i, j, word, ht) => {
 	if (word.length === 0) {
 		return true;
 	}
-
-	// console.log(i, j, word, hs);
-
 	if (i < 0 || i == board.length || j < 0 || j == board[0].length) {
 		return false;
 	}
-
 	if (word[0] !== board[i][j]) {
 		return false;
 	}
 
 	const key = `${i},${j}`;
-	if (hs.has(key)) {
+	if (key in ht) {
 		return false;
 	}
-	hs.add(key);
+	ht[key] = true;
 
 	const dirs = [
 		[-1, 0],
@@ -49,13 +45,12 @@ const dfs = (board, i, j, word, hs) => {
 		[0, 1],
 	];
 	for (let [di, dj] of dirs) {
-		const b = dfs(board, i + di, j + dj, word.slice(1), hs);
+		const b = dfs(board, i + di, j + dj, word.slice(1), ht);
 		if (b === true) {
 			return true;
 		}
-		// hs.delete(`${i + di},${j + dj}`);
 	}
-	hs.delete(key);
+	delete ht[key];
 	return false;
 };
 
