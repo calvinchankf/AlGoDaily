@@ -1,8 +1,9 @@
 """
-    1st: brute force with a hashtable
+    1st: brute force to compare every charactor with a hashtable
 
     Time    O(MN)
     Space   O(N)
+    20 ms, faster than 90.49%
 """
 
 
@@ -13,26 +14,21 @@ class Solution(object):
         :type order: str
         :rtype: bool
         """
-        orderMap = {}
+        mapping = {}
         for i in range(len(order)):
-            orderMap[order[i]] = i
+            mapping[order[i]] = i
+
         for i in range(1, len(words)):
             prev = words[i-1]
-            curr = words[i]
-            minLen = min(len(prev), len(curr))
-            shouldNext = False
-            for j in range(minLen):
-                a = orderMap[prev[j]]
-                b = orderMap[curr[j]]
-                if a < b:
-                    shouldNext = True
+            cur = words[i]
+            n = min(len(prev), len(cur))
+            for j in range(n):
+                p = prev[j]
+                c = cur[j]
+                if mapping[p] < mapping[c]:
                     break
-                elif a == b:
-                    continue
-                else:
+                elif mapping[p] > mapping[c]:
                     return False
-            if shouldNext:
-                continue
-            if prev[:minLen] == curr[:minLen] and len(prev) > len(curr):
+            if prev[:n] == cur[:n] and len(prev) > len(cur):
                 return False
         return True

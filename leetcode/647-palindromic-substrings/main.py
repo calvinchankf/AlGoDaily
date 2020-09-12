@@ -11,35 +11,28 @@
 
     Time    O(n^2)
     Space   O(1)
-    132 ms, faster than 51.55%
+    164 ms, faster than 64.96%
 """
 
 
 class Solution(object):
     def countSubstrings(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
         res = 0
         for i in range(len(s)):
-            count1 = self.explore(s, i, i)
-            count2 = self.explore(s, i-1, i)
-            res += count1 + count2
+            res += self.expand(s, i-1, i)
+            res += self.expand(s, i, i)
         return res
 
-    def explore(self, s, left, right):
-        if left < 0:
+    def expand(self, s, left, right):
+        i = left
+        j = right
+        if i < 0:
             return 0
-        if right+1 > len(s):
+        if s[i] != s[j]:
             return 0
-        if s[left] != s[right]:
-            return 0
-        # if it passes all checking, it means that this substring itself is already a palindrome
-        # e.g. a <- odd length, aa <- even length
-        count = 1
-        while left-1 >= 0 and right+1 < len(s) and s[left-1] == s[right+1]:
-            left -= 1
-            right += 1
-            count += 1
-        return count
+        res = 1
+        while i-1 >= 0 and j+1 < len(s) and s[i-1] == s[j+1]:
+            res += 1
+            i -= 1
+            j += 1
+        return res

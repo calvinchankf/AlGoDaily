@@ -5,6 +5,8 @@
     Space   O(N)
     56 ms, faster than 68.38% 
 """
+
+
 class Solution(object):
     def decompressRLElist(self, nums):
         """
@@ -12,8 +14,9 @@ class Solution(object):
         :rtype: List[int]
         """
         result = []
-        for i in range(len(nums) // 2):
-            a = nums[2*i]
-            b = nums[2*i+1]
-            result += a * [b]
+        i = 0
+        while i < len(nums):
+            freq, val = nums[i], nums[i+1]
+            res = res + freq * [val]
+            i += 2
         return result

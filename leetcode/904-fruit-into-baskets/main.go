@@ -2,7 +2,7 @@ package main
 
 /*
 	1st approach: sliding window
-	- the question is so confusing, lets rephrase the quesion be
+	- the question is so confusing, lets rephrase the quesion:
 
 	Given a string, find the max length of a substring which has only 2 distinct characters
 	e.g. "ababacddc", return 5
