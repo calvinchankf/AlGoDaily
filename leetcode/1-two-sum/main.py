@@ -27,10 +27,9 @@ class Solution(object):
             num = nums[i]
             remain = target - num
             if remain in ht:
-                return [ht[remain], i]
-            else:
-                ht[num] = i
-        return []
+                return [i, ht[remain]]
+            ht[num] = i
+        return [-1, -1]
 
 
 """
