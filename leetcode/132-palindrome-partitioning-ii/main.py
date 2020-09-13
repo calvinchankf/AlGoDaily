@@ -62,7 +62,7 @@ print("-----")
 
     Time    O(N^2) in each recursion we check every suffix O(N), and there are N recursions (because every recursion stops when we see a cache)
     Space   O(N) the suffixes cache
-    2600 ms, faster than 5.29%
+    2076 ms, faster than 5.29%
 """
 
 
@@ -78,10 +78,13 @@ class Solution(object):
         if s in ht:
             return ht[s]
         minGroup = None
+        forward = ''
+        backward = ''
         for i in range(len(s)):
-            sub = s[:i+1]
-            if sub == sub[::-1]:
-                group = self.dfs(s[i+1:], ht) + [sub]
+            forward += s[i]
+            backward = s[i] + backward
+            if forward == backward:
+                group = self.dfs(s[i+1:], ht) + [forward]
                 if minGroup == None or len(group) < len(minGroup):
                     minGroup = group
         # print(s, minGroup)
@@ -133,7 +136,7 @@ print("-----")
 
     Time    O(N^2) in each recursion we check every suffix O(N), and there are N recursions (because every recursion stops when we see a cache)
     Space   O(N) the suffixes cache
-    1824 ms, faster than 5.29%
+    1444 ms, faster than 10.13%
 """
 
 
@@ -149,18 +152,20 @@ class Solution(object):
 
     def dfs(self, s, ht):
         if len(s) == 0:
-            # self.res.append(cur)
             return 0
         if s in ht:
             return ht[s]
         minGroupLen = sys.maxsize
+        forward = ''
+        backward = ''
         for i in range(len(s)):
-            sub = s[:i+1]
-            if sub == sub[::-1]:
+            forward += s[i]
+            backward = s[i] + backward
+            if forward == backward:
                 groupLen = self.dfs(s[i+1:], ht) + 1
                 if groupLen < minGroupLen:
                     minGroupLen = groupLen
-        # print(s, minGroupLen)
+        # print(s, minGroup)
         ht[s] = minGroupLen
         return ht[s]
 
