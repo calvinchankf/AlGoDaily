@@ -87,7 +87,7 @@ class Solution(object):
                 group = self.dfs(s[i+1:], ht) + [forward]
                 if minGroup == None or len(group) < len(minGroup):
                     minGroup = group
-        # print(s, minGroup)
+        print(s, minGroup)
         ht[s] = minGroup
         return ht[s]
 
@@ -107,6 +107,9 @@ a = 'noonabbad'
 print(s.minCut(a))
 
 a = "ababababababababababababcbabababababababababababa"
+print(s.minCut(a))
+
+a = "cabababcbc"
 print(s.minCut(a))
 
 a = "bobnoonabbadnxna"
@@ -185,6 +188,9 @@ a = 'noonabbad'
 print(s.minCut(a))
 
 a = "ababababababababababababcbabababababababababababa"
+print(s.minCut(a))
+
+a = "cabababcbc"
 print(s.minCut(a))
 
 a = "bobnoonabbadnxna"

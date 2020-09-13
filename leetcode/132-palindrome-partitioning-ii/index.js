@@ -50,3 +50,28 @@ const dfs = (s, ht) => {
 	ht[s] = minGroupLen;
 	return ht[s];
 };
+
+let a;
+
+a = "aab";
+console.log(minCut(a));
+
+a = "a";
+console.log(minCut(a));
+
+a = "ab";
+console.log(minCut(a));
+
+a = "noonabbad";
+console.log(minCut(a));
+
+a = "ababababababababababababcbabababababababababababa";
+console.log(minCut(a));
+
+a = "cabababcbc";
+console.log(minCut(a));
+
+a = "bobnoonabbadnxna";
+console.log(minCut(a));
+
+console.log("-----");
