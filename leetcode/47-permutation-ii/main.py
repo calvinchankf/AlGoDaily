@@ -72,8 +72,10 @@ class Solution(object):
                 self.dfs(cands[:i] + cands[i+1:], chosen + [cands[i]])
 
 
-print(Solution().permuteUnique([1, 1, 2]))
-print(Solution().permuteUnique([1, 1, 2, 3]))
+s = Solution()
+
+print(s.permuteUnique([1, 1, 2]))
+print(s.permuteUnique([1, 1, 2, 3]))
 print("-----")
 
 """

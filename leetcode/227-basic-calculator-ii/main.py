@@ -149,7 +149,10 @@ class Solution(object):
                 elif sign == '*':
                     stack[-1] = stack[-1]*num
                 elif sign == '/':
-                    stack[-1] = int(stack[-1]/float(num))
+                    if stack[-1] < 0:
+                        stack[-1] = -(-stack[-1] // num)
+                    else:
+                        stack[-1] = stack[-1] // num
                 sign = c
                 num = 0
         return sum(stack)

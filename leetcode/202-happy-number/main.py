@@ -29,25 +29,18 @@
 
 class Solution(object):
     def isHappy(self, n):
-        """
-        :type n: int
-        :rtype: bool
-        """
-        arr = []
-        seen = set()
-        while n > 1 and n not in seen:
-            arr.append(n)
-            seen.add(n)
-            n = self.cal(n)
-        return n == 1, arr
-
-    def cal(self, n):
-        res = 0
-        while n > 0:
-            x = n % 10
-            res += x*x
-            n /= 10
-        return res
+        ht = {}
+        while n != 1:
+            temp = 0
+            while n > 0:
+                d = n % 10
+                temp += d**2
+                n = n//10
+            if temp in ht:
+                return False
+            ht[temp] = True
+            n = temp
+        return True
 
 
 s = Solution()

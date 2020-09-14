@@ -175,35 +175,33 @@ print("-----")
 
 class Solution(object):
     def threeSum(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[List[int]]
-        """
-        nums = sorted(nums)
+        n = len(nums)
+        if n < 3:
+            return []
+        nums.sort()
         res = []
-        for i in range(len(nums)):
-            if i > 0 and nums[i] == nums[i-1]:
+        for i in range(n):
+            # avoid redundancy
+            if i > 0 and nums[i-1] == nums[i]:
                 continue
-            num = nums[i]
-            target = -num
             left = i+1
-            right = len(nums) - 1
+            right = n-1
             while left < right:
-                cur = nums[left] + nums[right]
-                if cur == target:
-                    res.append([num, nums[left], nums[right]])
+                total = nums[i] + nums[left] + nums[right]
+                if total == 0:
+                    res.append([nums[i], nums[left], nums[right]])
                     # skip if the next number which equals to this num when we right--
-                    while left < right and nums[right-1] == nums[right]:
-                        right -= 1
-                    right -= 1
-                    # skip if the next number which equals to this num when we left++
                     while left < right and nums[left] == nums[left+1]:
                         left += 1
+                    # skip if the next number which equals to this num when we left++
+                    while left < right and nums[right-1] == nums[right]:
+                        right -= 1
                     left += 1
-                if cur > target:
                     right -= 1
-                elif cur < target:
+                elif total < 0:
                     left += 1
+                else:
+                    right -= 1
         return res
 
 
