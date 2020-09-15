@@ -16,7 +16,7 @@
     remaining: [[5, 0], [5, 2], [4, 4]]
     
     4th iteration: [[5, 0], [7, 0], [6, 1], [7, 1]]
-    remaining: [[4, 4]]
+    remaining: [[4, 4], [5, 2]]
 
     5th iteration: [[5, 0], [7, 0], [5, 2], [6, 1], [7, 1]]
     remaining: [[4, 4]]

@@ -51,7 +51,6 @@ class LRUCache(object):
             node = self.map[key]
             node.val = value
             self._moveToTail(node)
-            self.map[key] = node
         else:
             node = ListNode(key, value)
             self._addToTail(node)

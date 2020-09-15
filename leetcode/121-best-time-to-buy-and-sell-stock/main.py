@@ -8,43 +8,6 @@ import heapq
 
     Time    O(n)
     Space   O(1)
-    20 ms, faster than 100.00%
-"""
-
-
-class Solution(object):
-    def maxProfit(self, prices):
-        if len(prices) < 2:
-            return 0
-        bay = prices[0]
-        diff = 0
-        for price in prices:
-            if price < bay:
-                bay = price
-            if price - bay > diff:
-                diff = price - bay
-        return diff
-
-
-print(Solution().maxProfit([7, 1, 5, 3, 6, 4]))
-print(Solution().maxProfit([7, 6, 4, 3, 1]))
-print(Solution().maxProfit([2, 4]))
-print(Solution().maxProfit([2, 4, 1]))
-print(Solution().maxProfit([2, 4, 1, 4]))
-print(Solution().maxProfit([2, 3, 10, 6, 4, 8, 1]))
-print(Solution().maxProfit([7, 9, 5, 6, 3, 2]))
-print(Solution().maxProfit([1, 2, 90, 10, 110]))
-print(Solution().maxProfit([80, 2, 6, 3, 100]))
-
-print("-----")
-
-"""
-    optimize 1st approach: classic dp problem
-    - keep the bay when we traverse the list
-    - when there is a new peak and the current diff is larger than the previous diff, update the diff
-
-    Time    O(n)
-    Space   O(1)
     52 ms, faster than 48.09%
 """
 

@@ -17,19 +17,18 @@
     152 ms, faster than 42.49%
 */
 var coinChange = function (coins, amount) {
-	const n = amount;
-	const dp = Array(n + 1).fill(0);
-	for (let i = 1; i < n + 1; i++) {
-		let minStepsFromRemain = Number.MAX_SAFE_INTEGER;
+	const dp = Array(amount + 1).fill(0);
+	for (let i = 1; i <= amount; i++) {
+		let minCount = Number.MAX_SAFE_INTEGER;
 		for (let c of coins) {
-			const remain = i - c;
-			if (remain >= 0) {
-				minStepsFromRemain = Math.min(dp[remain], minStepsFromRemain);
+			let target = i - c;
+			if (target >= 0) {
+				minCount = Math.min(minCount, dp[target] + 1);
 			}
 		}
-		dp[i] = minStepsFromRemain + 1;
+		dp[i] = minCount;
 	}
-	if (dp[amount] >= Number.MAX_SAFE_INTEGER) {
+	if (dp[amount] == Number.MAX_SAFE_INTEGER) {
 		return -1;
 	}
 	return dp[amount];
