@@ -65,6 +65,7 @@ print("----")
 
 """
     2nd: optimized BFS
+    - similar to lc854
     - in BFS, we dont need to generate all permuation of swap(i,j) in every step
     - we can instead target the leftmost character one by one to makes S more simliar to target string B
         so that we can reduce the time complexity
