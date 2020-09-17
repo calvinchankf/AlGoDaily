@@ -60,36 +60,30 @@ print(Solution().findAnagrams("abab", "ab"))
 
 class Solution(object):
     def findAnagrams(self, s, p):
-        """
-        :type s: str
-        :type p: str
-        :rtype: List[int]
-        """
-        p_structure = 26 * [0]
-        cur_structure = 26 * [0]
+        pHt = 26 * [0]
         for c in p:
-            p_structure[ord(c) - ord('a')] += 1
-        # iterate
+            pHt[ord(c) - ord('a')] += 1
+
         res = []
+        j = 0
+        window = 26 * [0]
         for i in range(len(s)):
-            # substract last character from window after i == len(p)
+            c = s[i]
+            window[ord(c) - ord('a')] += 1
             if i >= len(p):
-                earliest = s[i - len(p)]
-                cur_structure[ord(earliest) - ord('a')] -= 1
-            # add character to the window
-            cur_structure[ord(s[i]) - ord('a')] += 1
-            # check structure
-            if self.sameStructure(p_structure, cur_structure) == True:
-                # append index of the earlierest character in this string
-                res.append(i - len(p) + 1)
+                last = s[j]
+                j += 1
+                window[ord(last) - ord('a')] -= 1
+            if self.areTheSame(window, pHt):
+                res.append(j)
         return res
 
-    def sameStructure(self, a, b):
-        for i in range(len(a)):
+    def areTheSame(self, a, b):
+        for i in range(26):
             if a[i] != b[i]:
                 return False
         return True
 
 
-print(findAnagrams("cbaebabacd", "abc"))
-print(findAnagrams("abab", "ab"))
+print(Solution().findAnagrams("cbaebabacd", "abc"))
+print(Solution().findAnagrams("abab", "ab"))

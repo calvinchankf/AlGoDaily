@@ -16,7 +16,7 @@ class Heap(object):
 
         # O(n) version
         # bottom-up
-        # shift down from bottom to up such that we minimize the number of shift operations
+        # shift down from bottom to top such that we minimize the number of shift operations
         # n/2 + n/8 + n/16.... = O(n)
         self.nums = arr
         n = len(arr)
@@ -40,8 +40,8 @@ class Heap(object):
     def _shiftDown(self, fromIdx):
         cur = fromIdx
         while cur < len(self.nums):
-            left = 2*cur+1
-            right = 2*cur+2
+            left = 2 * cur + 1
+            right = 2 * cur + 2
             # if 2 children
             if left < len(self.nums) and right < len(self.nums):
                 if self.nums[cur] < self.nums[left] and self.nums[cur] < self.nums[right]:
@@ -66,11 +66,11 @@ class Heap(object):
     # used by push
     def _shiftUp(self, fromIdx):
         curIdx = fromIdx
-        parentIdx = (curIdx - 1) / 2
+        parentIdx = (curIdx - 1) // 2
         while curIdx > 0 and self.nums[parentIdx] > self.nums[curIdx]:
             self.nums[parentIdx], self.nums[curIdx] = self.nums[curIdx], self.nums[parentIdx]
             curIdx = parentIdx
-            parentIdx = (curIdx - 1) / 2
+            parentIdx = (curIdx - 1) // 2
 
 
 h = Heap()

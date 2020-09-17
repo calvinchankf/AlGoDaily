@@ -6,7 +6,7 @@
 
     Time    O(RC)
     Space    O(RC)
-    272 ms, faster than 48.96%
+    268 ms, faster than 73.33%
 """
 
 
@@ -18,33 +18,32 @@ class Solution(object):
         :type destination: List[int]
         :rtype: bool
         """
+        R, C = len(maze), len(maze[0])
         # left, right, up, down
         dirs = [(0, -1), (0, 1), (-1, 0), (1, 0)]
-        # destination
-        destI, destJ = destination[0], destination[1]
-        visited = {}
-
+        ht = {}
         q = []
         q.append((start[0], start[1]))
-
         while len(q) > 0:
             i, j = q.pop(0)
-            if i == destI and j == destJ:
+
+            # we only care about the stop points
+            key = (i, j)
+            if key in ht:
+                continue
+            ht[key] = True
+
+            if i == destination[0] and j == destination[1]:
                 return True
 
             for di, dj in dirs:
                 # roll the ball until it hits a wall
-                row = i
-                col = j
-                while 0 <= row+di < len(maze) and 0 <= col+dj < len(maze[0]) and maze[row+di][col+dj] == 0:
-                    row += di
-                    col += dj
-                # check if the new starting position has been visited
-                key = str(row) + "," + str(col)
-                if key in visited:
-                    continue
-                visited[key] = True
-                q.append((row, col))
+                _i = i
+                _j = j
+                while 0 <= _i+di < R and 0 <= _j+dj < C and maze[_i+di][_j+dj] == 0:
+                    _i += di
+                    _j += dj
+                q.append((_i, _j))
         return False
 
 

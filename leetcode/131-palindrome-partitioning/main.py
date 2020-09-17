@@ -24,24 +24,16 @@
 
 
 class Solution(object):
-
-    def __init__(self):
-        self.res = []
-
     def partition(self, s):
-        """
-        :type s: str
-        :rtype: List[List[str]]
-        """
+        self.res = []
         self.dfs(s, [])
         return self.res
 
-    def dfs(self, cands, path):
-        if len(cands) == 0:
-            self.res.append(path)
-        for i in range(1, len(cands)+1):
-            if self.isPalindromic(cands[:i]) == True:
-                self.dfs(cands[i:], path + [cands[:i]])
-
-    def isPalindromic(self, s):
-        return s == s[::-1]
+    def dfs(self, s, cur):
+        if len(s) == 0:
+            self.res.append(cur)
+            return
+        for i in range(len(s)):
+            sub = s[:i+1]
+            if sub == sub[::-1]:
+                self.dfs(s[i+1:], cur + [sub])
