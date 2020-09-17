@@ -23,3 +23,18 @@ var fib = function (N) {
 	};
 	return f(N);
 };
+
+/*
+    2nd: bottom-up iterative
+
+	Time 	O(n) iterate from 1 to N
+	Space	O(n) for the array
+	76 ms, faster than 70.93%
+*/
+var fib = function (N) {
+	const dp = [0, 1];
+	for (let i = 2; i <= N; i++) {
+		dp.push(dp[i - 2] + dp[i - 1]);
+	}
+	return dp[N];
+};

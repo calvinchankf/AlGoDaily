@@ -17,7 +17,7 @@ import (
 	1st approach
 	- store an array for each item, find the target in the subarray
 	e.g.
-  [23, 2, 4, 6, 7]
+  	[23, 2, 4, 6, 7]
 	23	25 29 35	42
 			2		6	12	19
 					4	10	13
@@ -83,13 +83,14 @@ func minSubArrayLen1(s int, nums []int) int {
 }
 
 /*
-	3rd approach
+	3rd: 2 pointers
+	- similar to lc3, 76
 	- learned from others https://www.geeksforgeeks.org/minimum-length-subarray-sum-greater-given-value/
-	- 2 pointers
 	- fast pointer to find the next item which sum up > target
 	- once each the target, move the slow pointer to the right to see if the sum persist if sum = sum - nums[slow]
-	Time	O(n) < x < O(n^2)
-	Space O(1)
+
+	Time	O(2n)
+	Space 	O(1)
 	8ms ms beats 100%
 	23jan2019
 */

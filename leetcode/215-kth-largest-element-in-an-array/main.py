@@ -1,5 +1,7 @@
+import heapq
+
 """
-    2nd approach: upper bound binary search
+    1st approach: upper bound binary search
 
     Time    O(n * (logk + k)) since insert takes O(k)
     Space   O(k)
@@ -61,3 +63,38 @@ class Solution(object):
             if len(pq) > k:
                 heapq.heappop(pq)
         return heapq.heappop(pq)
+
+
+"""
+    3rd: quick select
+
+    Time		O(N) -> O(N^2)
+	Space		O(N)
+	80 ms, faster than 48.50%
+"""
+
+
+class Solution:
+    def findKthLargest(self, nums: List[int], k: int) -> int:
+        return self.quickSelect(nums, 0, len(nums)-1, k)
+
+    def quickSelect(self, nums, left, right, k):
+        if k > 0 and k <= len(nums):
+            pIdx = self.partition(nums, left, right)
+            if pIdx+1 == k:
+                return nums[pIdx]
+            elif pIdx+1 < k:
+                return self.quickSelect(nums, pIdx+1, right, k)
+            else:
+                return self.quickSelect(nums, left, pIdx-1, k)
+        return -1
+
+    def partition(self, nums, left, right):
+        pivot = nums[right]
+        pIdx = left
+        for i in range(left, right):
+            if nums[i] >= pivot:
+                nums[i], nums[pIdx] = nums[pIdx], nums[i]
+                pIdx += 1
+        nums[pIdx], nums[right] = nums[right], nums[pIdx]
+        return pIdx
