@@ -16,14 +16,14 @@ class Solution(object):
         :rtype: str
         """
         if len(strs) == 0:
-            return ""
+            return ''
         res = strs[0]
         for i in range(1, len(strs)):
             s = strs[i]
-            j = 0
-            while j < len(s):
-                if j >= len(res) or s[j] != res[j]:
+            for j in range(min(len(res), len(s))):
+                if res[j] != s[j]:
+                    res = s[:j]
                     break
-                j += 1
-            res = res[:j]
+            if len(s) < len(res):
+                res = s
         return res

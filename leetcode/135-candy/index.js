@@ -1,6 +1,6 @@
 /*
     2nd: min max 2 arrays
-    - similar to lc915
+    - similar to lc42, 135, 487, 915, 1493
     - from the front to the end, store the number of candies by comparing with the previous item
     - from the end to the front, store the number of candies by comparing with the previous item
     - the max of forwards[i] and backwards[i] is our result at each index

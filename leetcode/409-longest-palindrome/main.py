@@ -1,3 +1,4 @@
+from collections import Counter
 """
     1st approach: hashtable
     1. count the occurence of each character
@@ -40,8 +41,42 @@ class Solution(object):
         return res
 
 
+s = Solution()
+
 a = "abccccdd"
-print(Solution().longestPalindrome(a))
+print(s.longestPalindrome(a))
 
 a = "aaaabbbccccddd"
-print(Solution().longestPalindrome(a))
+print(s.longestPalindrome(a))
+
+print("-----")
+
+
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        counter = Counter(s)
+        largestOddCount = 0
+        largestOdd = None
+        for key in counter:
+            if counter[key] % 2 == 1 and counter[key] > largestOddCount:
+                largestOddCount = counter[key]
+                largestOdd = key
+        res = 0
+        for key in counter:
+            if counter[key] % 2 == 0:
+                res += counter[key]
+            else:
+                if key == largestOdd:
+                    res += counter[key]
+                else:
+                    res += counter[key] - 1
+        return res
+
+
+s = Solution()
+
+a = "abccccdd"
+print(s.longestPalindrome(a))
+
+a = "aaaabbbccccddd"
+print(s.longestPalindrome(a))

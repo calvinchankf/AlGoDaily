@@ -2,7 +2,7 @@
     1st approach: math
 
     Time    O(n)
-    Space   O(1)
+    Space   O(n)
     48 ms, faster than 23.34%
 """
 
