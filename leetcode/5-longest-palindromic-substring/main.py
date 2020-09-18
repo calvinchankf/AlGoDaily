@@ -12,22 +12,25 @@ class Solution(object):
         Space   O(length of longest substring)
         28jan2019
         """
-        longest = ""
+        res = ""
         for i in range(len(s)):
-            left1, right1 = self.expandFromCenter(s, i, i)
-            left2, right2 = self.expandFromCenter(s, i, i+1)
-            if right1-left1+1 > len(longest):
-                longest = s[left1:right1+1]
-            if right2-left2+1 > len(longest):
-                longest = s[left2:right2+1]
+            a = self.expand(s, i, i)
+            b = self.expand(s, i - 1, i)
+            if len(a) > len(res):
+                res = a
+            if len(b) > len(res):
+                res = b
+        return res
 
-        return longest
-
-    def expandFromCenter(self, s, i, j):
-        while i >= 0 and j < len(s) and s[i] == s[j]:
+    def expand(self, s, i, j):
+        if i < 0:
+            return ''
+        elif s[i] != s[j]:
+            return ''
+        while i - 1 >= 0 and j + 1 < len(s) and s[i - 1] == s[j + 1]:
             i -= 1
             j += 1
-        return (i+1, j-1)
+        return s[i:j+1]
 
 
 print(Solution().longestPalindrome(""))
