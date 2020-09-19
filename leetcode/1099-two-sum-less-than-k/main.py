@@ -28,7 +28,9 @@ class Solution(object):
                 right -= 1
         return res
 
-a = [358,898,450,732,672,672,256,542,320,573,423,543,591,280,399,923,920,254,135,952,115,536,143,896,411,722,815,635,353,486,127,146,974,495,229,21,733,918,314,670,671,537,533,716,140,599,758,777,185,549]
+
+a = [358, 898, 450, 732, 672, 672, 256, 542, 320, 573, 423, 543, 591, 280, 399, 923, 920, 254, 135, 952, 115, 536, 143, 896, 411,
+     722, 815, 635, 353, 486, 127, 146, 974, 495, 229, 21, 733, 918, 314, 670, 671, 537, 533, 716, 140, 599, 758, 777, 185, 549]
 b = 1800
 print(Solution().twoSumLessThanK(a, b))
 
@@ -51,25 +53,29 @@ class Solution(object):
         :type K: int
         :rtype: int
         """
-        A = sorted(A)
-        res = -1
-        for i in range(len(A)-1):
-            idx = self.bsearch(A, i+1, K-A[i]) - 1
-            if i < idx < len(A):
-                total = A[i] + A[idx]
-                res = max(res, total)
+        A.sort()
+        res = -sys.maxsize
+        for i in range(len(A)):
+            a = A[i]
+            j = self.bsearch(A, K - a)
+            if i < j < len(A) and a + A[j] < K:
+                res = max(res, a + A[j])
+        if res == -sys.maxsize:
+            return -1
         return res
 
-    def bsearch(self, nums, start, target):
-        left = start
-        right = len(nums)
-        while left < right:
-            mid = (left + right)//2
-            if target <= nums[mid]:
-                right = mid
-            else:
+    def bsearch(self, nums, target):
+        left = 0
+        right = len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if target < nums[mid]:
+                right = mid - 1
+            elif target > nums[mid]:
                 left = mid + 1
-        return left
+            else:
+                return mid
+        return right
 
 
 a = [34, 23, 1, 24, 75, 33, 54, 8]
@@ -80,6 +86,7 @@ a = [34, 23, 1, 24, 75, 33, 54, 8]
 b = 77
 print(Solution().twoSumLessThanK(a, b))
 
-a = [358,898,450,732,672,672,256,542,320,573,423,543,591,280,399,923,920,254,135,952,115,536,143,896,411,722,815,635,353,486,127,146,974,495,229,21,733,918,314,670,671,537,533,716,140,599,758,777,185,549]
+a = [358, 898, 450, 732, 672, 672, 256, 542, 320, 573, 423, 543, 591, 280, 399, 923, 920, 254, 135, 952, 115, 536, 143, 896, 411,
+     722, 815, 635, 353, 486, 127, 146, 974, 495, 229, 21, 733, 918, 314, 670, 671, 537, 533, 716, 140, 599, 758, 777, 185, 549]
 b = 1800
 print(Solution().twoSumLessThanK(a, b))

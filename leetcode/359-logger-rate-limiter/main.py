@@ -24,15 +24,15 @@ class Logger(object):
         :type message: str
         :rtype: bool
         """
-        if message not in self.ht:
-            self.ht[message] = timestamp
-            return True
-        else:
-            if self.ht[message] <= timestamp - 10:
+        if message in self.ht:
+            last = self.ht[message]
+            if timestamp - last >= 10:
                 self.ht[message] = timestamp
                 return True
             else:
                 return False
+        self.ht[message] = timestamp
+        return True
 
 
 # Your Logger object will be instantiated and called as such:

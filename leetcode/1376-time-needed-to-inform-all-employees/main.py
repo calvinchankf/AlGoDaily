@@ -13,7 +13,7 @@ from collections import defaultdict
 
     Time    O(N + edges)
     Space   O(edges)
-    1792 ms, faster than 54.68%
+    1436 ms, faster than 75.93%
 """
 
 
@@ -22,22 +22,17 @@ class Solution:
 
         connections = defaultdict(list)
         for i in range(n):
-            m = manager[i]
-            connections[m].append([i, 0])
-
-        for key in connections:
-            t = informTime[key]
-            edges = connections[key]
-            for i in range(len(edges)):
-                connections[key][i][1] = t
+            supervisor = manager[i]
+            connections[supervisor].append(i)
 
         res = 0
         q = [(headID, 0)]
         while len(q) > 0:
-            node, cost = q.pop(0)
-            res = max(res, cost)
-            for child, t in connections[node]:
-                q.append((child, cost + t))
+            node, time = q.pop(0)
+            res = max(res, time)
+            if node in connections:
+                for child in connections[node]:
+                    q.append((child, time + informTime[node]))
         return res
 
 
