@@ -19,12 +19,9 @@
 
 class Solution(object):
     def convertBST(self, root):
-        """
-        :type root: TreeNode
-        :rtype: TreeNode
-        """
         if root == None:
             return None
+        # inorder
         arr = []
 
         def inorder(node):
@@ -34,19 +31,22 @@ class Solution(object):
             arr.append(node.val)
             inorder(node.right)
         inorder(root)
-        suffixMap = {}
-        suffixSum = 0
+        # suffix sum
+        sfs = 0
+        sfsMap = {}
         for i in range(len(arr)-1, -1, -1):
-            suffixSum += arr[i]
-            suffixMap[arr[i]] = suffixSum
+            sfs += arr[i]
+            sfsMap[arr[i]] = sfs
 
+        # traverse again to update the values
         def addSuffixSum(node):
             if node == None:
                 return
-            node.val = suffixMap[node.val]
+            node.val = sfsMap[node.val]
             addSuffixSum(node.left)
             addSuffixSum(node.right)
         addSuffixSum(root)
+
         return root
 
 

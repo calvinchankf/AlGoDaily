@@ -69,3 +69,42 @@ b = 1
 print(Solution().threeSumClosest(a, b))
 
 print("---")
+
+"""
+    2nd approach: 2 pointers
+	- e.g. [2,3,6,10], 10
+	pair=0,3, sum = 12, diff=+2, right--
+	pair=0,2, sum = 8, diff=-2, left++
+	pair=1,2, sum = 9, diff=-1, cannot move any pointers
+    ...
+    
+    reminder:
+    - since closest means the result can be either smaller or bigger than the target,
+        the 2 pointers loop ends only either: 
+        - left==right
+        - OR total == target
+
+	Time		O(n^2)
+	Space		O(1)
+	132 ms, faster than 71.46%
+"""
+
+
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        res = sys.maxsize
+        nums = sorted(nums)
+        for i in range(len(nums)):
+            left = i + 1
+            right = len(nums) - 1
+            while left < right:
+                cur = nums[i] + nums[left] + nums[right]
+                if abs(cur - target) < abs(res - target):
+                    res = cur
+                if cur == target:
+                    return cur
+                elif cur < target:
+                    left += 1
+                else:
+                    right -= 1
+        return res

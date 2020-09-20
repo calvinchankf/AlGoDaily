@@ -15,7 +15,7 @@ class Node(object):
 def isValid(root, n1, n2):
 
     hs = set()
-    q = [n1]
+    q = [root]
     while len(q) > 0:
         node = q.pop(0)
         hs.add(node)
