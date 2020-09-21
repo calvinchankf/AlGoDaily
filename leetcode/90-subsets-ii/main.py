@@ -61,11 +61,13 @@ class Solution(object):
     def dfs(self, nums, path):
         self.result.append(path)
         for i in range(len(nums)):
-            if i == 0 or (i > 0 and nums[i-1] != nums[i]):
+            if i == 0 or nums[i-1] != nums[i]:
                 self.dfs(nums[i+1:], path+[nums[i]])
 
 
-print(Solution().subsetsWithDup([1, 2, 2, 3]))
+s = Solution()
+
+print(s.subsetsWithDup([1, 2, 2, 3]))
 
 """
     Iteratively append the next item to calculated items with a constraint
@@ -82,7 +84,7 @@ print(Solution().subsetsWithDup([1, 2, 2, 3]))
 """
 
 
-class Solution1(object):
+class Solution(object):
     def subsetsWithDup(self, nums):
         nums = sorted(nums)
         res = [[]]
@@ -97,4 +99,6 @@ class Solution1(object):
         return res
 
 
-print(Solution1().subsetsWithDup([1, 2, 2, 3]))
+s = Solution()
+
+print(s.subsetsWithDup([1, 2, 2, 3]))

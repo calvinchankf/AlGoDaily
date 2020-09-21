@@ -66,3 +66,30 @@ class Solution(object):
     def swapCols(self, matrix):
         for i in range(len(matrix)):
             matrix[i].reverse()
+
+
+"""
+    variation: anti transpose
+    123     963
+    456 ->  852
+    789     741
+"""
+
+
+class Solution(object):
+    def rotate(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: void Do not return anything, modify matrix in-place instead.
+        """
+        N = len(matrix)  # <- N = R = C
+        for i in range(N):
+            for j in range(N-i):
+                matrix[i][j], matrix[N-j-1][N-i-1] \
+                    = matrix[N-j-1][N-i-1], matrix[i][j]
+
+
+s = Solution()
+a = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+s.rotate(a)
+print(a)

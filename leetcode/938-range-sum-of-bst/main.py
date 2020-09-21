@@ -6,15 +6,16 @@ class TreeNode(object):
         self.right = None
 
 
+"""
+    1st approach: dfs all the nodes, and sum sup the values within the ranges
+
+    Time    O(n)
+    Space   O(h)
+    296 ms, faster than 59.63%
+"""
+
+
 class Solution(object):
-    """
-        1st approach: dfs all the nodes, and sum sup the values within the ranges
-
-        Time    O(n)
-        Space   O(h)
-        296 ms, faster than 59.63%
-    """
-
     def __init__(self):
         self.res = 0
 

@@ -63,10 +63,6 @@ print("-----")
 
 class Solution(object):
     def intToRoman(self, num):
-        """
-        :type num: int
-        :rtype: str
-        """
         m = {
             1: 'I',
             4: 'IV',
@@ -82,22 +78,20 @@ class Solution(object):
             900: 'CM',
             1000: 'M'
         }
-        res = ""
-        i = 0
-        count = 0
+        res = ''
+        scale = 0
         while num > 0:
-            digit = num % 10
-            num /= 10
-            cur = digit * 10 ** count
+            d = num % 10
+            cur = d * (10**scale)
+            num = num // 10
             if cur in m:
                 res = m[cur] + res
-            elif digit < 4:
-                res = digit * m[10**count] + res
-            elif digit < 9:
-                five = m[5*10**count]
-                one = m[10**count]
-                res = five + (digit-5)*one + res
-            count += 1
+            else:
+                if d < 4:
+                    res = m[10**scale] * d + res
+                if d > 5:
+                    res = m[5 * 10**scale] + m[10**scale] * (d - 5) + res
+            scale += 1
         return res
 
 

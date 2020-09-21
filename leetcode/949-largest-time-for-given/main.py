@@ -32,3 +32,36 @@ class Solution(object):
         for i in range(len(cands)):
             cand = cands[i]
             self.permute(cands[:i]+cands[i+1:], chosen+str(cand))
+
+
+"""
+    2nd: try all timeslots
+
+    Time    O(24*60*60) = (86,400)
+    Space   O(1)
+    200 ms, faster than 5.04%
+"""
+
+
+class Solution:
+    def largestTimeFromDigits(self, A: List[int]) -> str:
+        ht = 10 * [0]
+        for a in A:
+            ht[a] += 1
+
+        for i in range(23, -1, -1):
+            for j in range(59, -1, -1):
+                temp = 10 * [0]
+                temp[i//10] += 1
+                temp[i % 10] += 1
+                temp[j//10] += 1
+                temp[j % 10] += 1
+
+                allMatch = True
+                for k in range(10):
+                    if temp[k] != ht[k]:
+                        allMatch = False
+                if allMatch:
+                    return "%02d:%02d" % (i, j)
+
+        return ''
