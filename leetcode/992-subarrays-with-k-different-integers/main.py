@@ -3,10 +3,10 @@ from collections import Counter
 
 """
     1st: sliding window + hashtable
-    - similar to lc3, 159, 340
+    - similar to lc3, 159, 340, 1248
     - the crux of the problem based on the fact that:
-        1. atMost(nums, K) - atMost(nums, K-1)
-        2. to find the number of subarrays with atMost K, we use res += i-j
+        1. atMostK(nums, K) - atMostK(nums, K-1) = exactlyK(nums, K)
+        2. to find the number of subarrays with atMost K, we use res += i - j + 1
 
     e.g.
 
@@ -37,15 +37,12 @@ class Solution:
         res = 0
         for i in range(len(A)):
             c = A[i]
-
             window[c] += 1
-
             while len(window) > K:
                 last = A[j]
                 window[last] -= 1
                 if window[last] == 0:
                     del window[last]
                 j += 1
-
-            res += i-j + 1
+            res += i - j + 1
         return res
