@@ -38,3 +38,49 @@ class Solution:
                 oddCount -= last % 2
             res += i - j + 1
         return res
+
+
+"""
+    2nd: same as 1st but different Implementation
+
+    ref:
+    - https://leetcode.com/problems/subarrays-with-k-different-integers/solution/
+
+    Time    O(N)
+    Space   O(N)
+    1424 ms, faster than 7.00%
+"""
+
+
+class Solution(object):
+    def numberOfSubarrays(self, A, K):
+        window1 = Window()
+        window2 = Window()
+        res = 0
+        left1, left2 = 0, 0
+
+        for i in range(len(A)):
+            window1.add(A[i])
+            window2.add(A[i])
+            while window1.size() > K:
+                window1.remove(A[left1])
+                left1 += 1
+            while window2.size() > K-1:
+                window2.remove(A[left2])
+                left2 += 1
+            res += left2 - left1
+        return res
+
+
+class Window:
+    def __init__(self):
+        self.oddCount = 0
+
+    def add(self, x):
+        self.oddCount += x % 2
+
+    def remove(self, x):
+        self.oddCount -= x % 2
+
+    def size(self):
+        return self.oddCount
