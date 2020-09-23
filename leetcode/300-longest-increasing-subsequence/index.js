@@ -25,3 +25,38 @@ var lengthOfLIS = function (nums) {
 	}
 	return res;
 };
+
+let a;
+a = [5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35];
+console.log(lengthOfLIS(a));
+
+/*
+    follow up: print the subsequence
+*/
+var printLIS = function (nums) {
+	const n = nums.length;
+	const dp = [];
+	for (let i = 0; i < n; i++) {
+		dp.push([nums[i]]);
+	}
+	for (let i = 0; i < n; i++) {
+		for (let j = 0; j < i; j++) {
+			if (nums[j] < nums[i]) {
+				if (dp[j].length + 1 > dp[i].length) {
+					dp[i] = [...dp[j], nums[i]];
+				}
+			}
+		}
+	}
+	console.log(dp);
+	let res = [];
+	for (let i = 0; i < n; i++) {
+		if (dp[i].length > res.length) {
+			res = dp[i];
+		}
+	}
+	return res;
+};
+
+a = [5, 7, -24, 12, 10, 2, 3, 12, 5, 6, 35];
+console.log(printLIS(a));
