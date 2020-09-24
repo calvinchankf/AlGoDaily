@@ -1,3 +1,4 @@
+import sys
 """
     questions to ask:
     - upper case == lower case? yes
@@ -14,11 +15,6 @@
 
 class Solution(object):
     def shortestCompletingWord(self, licensePlate, words):
-        """
-        :type licensePlate: str
-        :type words: List[str]
-        :rtype: str
-        """
         licensePlate = licensePlate.lower()
         structure = 26 * [0]
         for c in licensePlate:

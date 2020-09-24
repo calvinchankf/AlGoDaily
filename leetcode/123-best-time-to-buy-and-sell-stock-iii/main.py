@@ -1,3 +1,6 @@
+import sys
+
+
 class Solution(object):
     def maxProfit(self, prices):
         """
@@ -55,31 +58,29 @@ class Solution(object):
         Time    O(2n)
         Space   O(1)
         1988 ms, faster than 5.24%
+
+        Aug31 2020 LTE
         """
         if len(prices) < 2:
             return 0
-        # save the maxprofit on each day when we traverse forward
-        bay = prices[0]
+
+        dip = sys.maxsize
         forwardDiff = 0
         forwardDiffs = []
         for price in prices:
-            if price < bay:
-                bay = price
-            if price - bay > forwardDiff:
-                forwardDiff = price - bay
+            dip = min(dip, price)
+            forwardDiff = max(forwardDiff, price - dip)
             forwardDiffs.append(forwardDiff)
-        # save the maxprofit on each day when we traverse backward
-        peak = prices[-1]
+
+        peak = -sys.maxsize
         backwardDiff = 0
         backwardDiffs = []
         for i in range(len(prices)-1, -1, -1):
             price = prices[i]
-            if price > peak:
-                peak = price
-            if peak - price > backwardDiff:
-                backwardDiff = peak - price
+            peak = max(peak, price)
+            backwardDiff = max(backwardDiff, peak - price)
             backwardDiffs = [backwardDiff] + backwardDiffs
-        # the result will be the max sum of profit on day i, which is forward[i]+backward[i]
+
         result = 0
         for i in range(len(forwardDiffs)):
             result = max(result, forwardDiffs[i]+backwardDiffs[i])

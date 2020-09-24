@@ -4,32 +4,32 @@ class Node(object):
         self.children = children
 
 
+"""
+    1st: BFS
+    - level order traversal
+
+    Time    O(N)
+    Space   O(N)
+    52 ms, faster than 81.93%
+"""
+
+
 class Solution(object):
     def levelOrder(self, root):
-        """
-        :type root: Node
-        :rtype: List[List[int]]
-        """
         if root == None:
             return []
-        result = []
-        queue = []
-        queue.append(root)
-        while len(queue) > 0:
-            size = len(queue)
-            nodes_on_the_same_level = []
-            # iterate the nodes on the same level
-            for i in range(size):
-                # add each node to an array
-                temp = queue[0]
-                queue = queue[1:]
-                nodes_on_the_same_level.append(temp.val)
-                # add its children to the queue
-                for j in range(len(temp.children)):
-                    if temp.children[j] != None:
-                        queue.append(temp.children[j])
-            result.append(nodes_on_the_same_level)
-        return result
+        res = []
+        q = [root]
+        while len(q) > 0:
+            n = len(q)
+            arr = []
+            for _ in range(n):
+                node = q.pop(0)
+                arr.append(node.val)
+                for child in node.children:
+                    q.append(child)
+            res.append(arr)
+        return res
 
 
 #       1

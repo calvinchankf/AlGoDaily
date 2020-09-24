@@ -15,22 +15,21 @@ class Solution(object):
         if root == None:
             return []
         res = []
-        q = []
-        q.append(root)
-        cnt = 0
+        q = [root]
+        level = 0
         while len(q) > 0:
             n = len(q)
-            temp = []
+            row = []
             for i in range(n):
-                head = q.pop(0)
-                if cnt % 2 == 0:
-                    temp.append(head.val)
-                else:
-                    temp.insert(0, head.val)
-                if head.left != None:
-                    q.append(head.left)
-                if head.right != None:
-                    q.append(head.right)
-            res.append(temp)
-            cnt += 1
+                node = q.pop(0)
+                row.append(node.val)
+                if (node.left):
+                    q.append(node.left)
+                if (node.right):
+                    q.append(node.right)
+            if level % 2 == 0:
+                res.append(row)
+            else:
+                res.append(row[::-1])
+            level += 1
         return res

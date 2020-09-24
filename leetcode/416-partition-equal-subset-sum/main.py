@@ -178,8 +178,8 @@ print("-----")
 """
     4th approach: bottom-up iterative 2d array
     - create a 2d array to store if we can add up to target by including/excluding some numbers
-    - the array should have number of row with the size of 'nums'
-    - since target = sum/2, we create row with target size of 'target'
+    - the array should have len(nums) rows
+    - since target = sum//2, every row should have len(target) columns
     - to determind dp[i][remain_sum]
         - if dp[i-1][remain_sum] == True, it means that already add up to 'target', exclude the nums[i], 
         i.e. dp[i][j] = dp[i-1][j]

@@ -1,3 +1,4 @@
+from collections import Counter
 import re
 
 """
@@ -43,6 +44,38 @@ class Solution(object):
             if ht[key] > res_cnt:
                 res_cnt = ht[key]
                 res = key
+        return res
+
+
+a = "Bob hit a  ball, the hit BALL flew far after it was hit."
+print(Solution().mostCommonWord(a, ["hit"]))
+
+a = "a, a, a, a, b,b,b,c, c"
+print(Solution().mostCommonWord(a, ["a"]))
+
+a = "Bob!"
+print(Solution().mostCommonWord(a, ["hit"]))
+
+print("------")
+
+
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        banSet = set(banned)
+        paragraph = paragraph.lower()
+        words = re.split(r'\W+', paragraph)
+        ht = Counter()
+        maxCount = 0
+        res = None
+        for w in words:
+            if len(w) == 0:
+                continue
+            if w in banSet:
+                continue
+            ht[w] += 1
+            if ht[w] > maxCount:
+                maxCount = ht[w]
+                res = w
         return res
 
 

@@ -33,3 +33,28 @@ class StockSpanner(object):
             weight += pop[1]
         self.stack.append((price, weight))
         return weight
+
+
+"""
+    2nd: same approach but using a wrapper class instead of a tuple
+"""
+
+
+class StackItem:
+    def __init__(self, val, count=1):
+        self.val = val
+        self.count = count
+
+
+class StockSpanner:
+
+    def __init__(self):
+        self.stack = []
+
+    def next(self, price: int) -> int:
+        count = 1
+        while len(self.stack) > 0 and self.stack[-1].val <= price:
+            si = self.stack.pop()
+            count += si.count
+        self.stack.append(StackItem(price, count))
+        return count
