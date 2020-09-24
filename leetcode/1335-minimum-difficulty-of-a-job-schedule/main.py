@@ -34,7 +34,7 @@ class Solution:
                         max(nums[:i]), 
                         max(nums[i:])
                     )
-
+# sub problem: find the minimum sum from all the a + b pairs
     Time    O(NNK)
     Space   O(N)
     2152 ms, faster than 25.61%
@@ -43,27 +43,27 @@ class Solution:
 
 class Solution:
     def minDifficulty(self, jobDifficulty: List[int], d: int) -> int:
-        ht = {}
-        res = self.dfs(jobDifficulty, d, ht)
+        res = self.dfs(jobDifficulty, d, {})
         if res == maxsize:
             return -1
         return res
 
     def dfs(self, nums, K, ht):
-        if K == 1:
+        if K == 0:
             if len(nums) == 0:
-                return maxsize
-            return max(nums)
+                return 0
+            return maxsize
+
         key = (len(nums), K)
         if key in ht:
             return ht[key]
-        # sub problem: find the minimum sum from all the a + b pairs
-        res = maxsize
-        a = 0
+
+        minSum = maxsize
+        leftMax = 0
         for i in range(len(nums)):
-            a = max(a, nums[i])
-            b = self.dfs(nums[i+1:], K-1, ht)
-            if a + b < res:
-                res = a + b
-        ht[key] = res
-        return res
+            leftMax = max(leftMax, nums[i])
+            rightMax = self.dfs(nums[i+1:], K-1, ht)
+            minSum = min(minSum, leftMax + rightMax)
+
+        ht[key] = minSum
+        return minSum
