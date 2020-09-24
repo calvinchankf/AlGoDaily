@@ -7,10 +7,10 @@ from collections import defaultdict
     - no negative numbers, so the prefixsum is monotonic increasing
 
     e.g.        [1, 1, 3, 1, 5, 1, 2, 1]
-    prefixs ->  [*, *, 2, 2, *, *, *, 3] store the length of subarrays sum to k when we go forward
+    pfs     ->  [*, *, 2, 2, *, *, *, 3] store the length of subarrays sum to k when we go forward
     prefixs ->  [*, *, 2, 2, 2, 2, 2, 2] store the min length of subarrays when we go forward
 
-    suffixs <-  [*, 2, 2, *, *, 3, *, *] store the length of subarrays sum to k when we go backward
+    sfs     <-  [*, 2, 2, *, *, 3, *, *] store the length of subarrays sum to k when we go backward
     suffixs <-  [2, 2, 2, 3, 3, 3, *, *] store the min length of subarrays when we go backward
 
     - Since we only find 2 subarrays, result must be one from left and another from the right

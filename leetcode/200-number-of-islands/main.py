@@ -65,14 +65,15 @@ class Solution(object):
             i, j = q.pop(0)
             if i < 0 or i == len(grid) or j < 0 or j == len(grid[0]):
                 continue
+            if grid[i][j] == '0':
+                continue
             if (i, j) in seen:
                 continue
             seen.add((i, j))
-            if grid[i][j] == '1':
-                q.append((i-1, j))
-                q.append((i+1, j))
-                q.append((i, j-1))
-                q.append((i, j+1))
+            q.append((i-1, j))
+            q.append((i+1, j))
+            q.append((i, j-1))
+            q.append((i, j+1))
 
 
 """

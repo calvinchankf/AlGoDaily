@@ -1,3 +1,4 @@
+from collections import deque
 import bisect
 
 """
@@ -80,3 +81,56 @@ class Solution(object):
                 # last item in the window is the max
                 res.append(window[-1])
         return res
+
+
+"""
+    3rd: deque(double-ended queue) <- suggested approach
+
+    - the idea is monotonic queue: when you push an element, a monotonic queue pop all the items smaller than that 
+    e.g. [1,3,-1,-3,5,3,6,7]
+
+                                window          max
+    [1] 3 -1 -3 5 3 6 7         [1]             n/a
+    [1 3] -1 -3 5 3 6 7         [3]             n/a
+    [1 3 -1] -3 5 3 6 7         [3, -1]         3
+    1 [3 -1 -3] 5 3 6 7         [3,-1,-3]       3
+    1 3 [-1 -3 5] 3 6 7         [5]             5
+    1 3 -1 [-3 5 3] 6 7         [5,3]           5
+    1 3 -1 -3 [5 3 6] 7         [6]             6
+    1 3 -1 -3 5 [3 6 7]         [7]             7
+
+
+    Time    O(2N)
+    Space   O(N)
+"""
+
+
+class Solution(object):
+    def maxSlidingWindow(self, nums, k):
+        # base cases
+        n = len(nums)
+        if n * k == 0:
+            return []
+        if k == 1:
+            return nums
+
+        # init deque and output
+        window = []
+        output = []
+        # build output
+        for i in range(n):  # for i in range(k, n):
+            # remove indexes of elements not in sliding window
+            # since we push item one by one, the first one is guaranteed to be the one to remove if len(window) > k
+            if len(window) > 0 and window[0] == i - k:
+                window.pop(0)
+            # remove from deq indexes of all elements
+            # which are smaller than current element nums[i]
+            while len(window) > 0 and nums[i] > nums[window[-1]]:
+                window.pop()
+
+            # append the current index
+            window.append(i)
+
+            if i+1 >= k:
+                output.append(nums[window[0]])
+        return output

@@ -1,7 +1,7 @@
 function quickselect(array, k) {
 	// Write your code here.
 	if (k <= 0 || k > array.length) {
-		return -1;
+		return null;
 	}
 	const idx = quicksort(array, 0, array.length - 1, k);
 	return array[idx];

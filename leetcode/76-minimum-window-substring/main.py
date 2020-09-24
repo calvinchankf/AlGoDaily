@@ -132,36 +132,52 @@ class Solution(object):
         :type t: str
         :rtype: str
         """
-        if len(s) < len(t):
-            return ""
-        targetStructure = 128*[0]
-        for c in t:
-            idx = ord(c)
-            targetStructure[idx] += 1
+        smallHt = self.constructHt(t)
 
-        curStructure = 128*[0]
-        slow = 0
-        res = s+'#'
-        # move forward the fast pointer until the window contains "satisfies" the target
+        res = s
+        curHt = {}
+        cur = ''
+        j = 0
         for i in range(len(s)):
             c = s[i]
-            idx = ord(c)
-            curStructure[idx] += 1
-            # if the window satisfies the target, keep moving the slow pointer to find the minimum window
-            while self.checkAHasB(curStructure, targetStructure):
-                sub = s[slow:i+1]
-                if len(sub) < len(res):
-                    res = sub
-                slowIdx = ord(s[slow])
-                curStructure[slowIdx] -= 1
-                slow += 1
-        if res == s+'#':
-            return ''
-        return res
+            cur += c
 
-    def checkAHasB(self, arrA, arrB):
-        for i in range(128):
-            if arrB[i] > arrA[i]:
+            if c in curHt:
+                curHt[c] += 1
+            else:
+                curHt[c] = 1
+
+            while self.ifAContainB(curHt, smallHt):
+
+                if len(cur) < len(res):
+                    res = cur
+
+                last = s[j]
+                j += 1
+
+                cur = cur[1:]
+                curHt[last] -= 1
+                if curHt[last] == 0:
+                    del curHt[last]
+
+        if self.ifAContainB(self.constructHt(res), smallHt):
+            return res
+        return ""
+
+    def constructHt(self, s):
+        ht = {}
+        for c in s:
+            if c in ht:
+                ht[c] += 1
+            else:
+                ht[c] = 1
+        return ht
+
+    def ifAContainB(self, a, b):
+        for key in b:
+            if key not in a:
+                return False
+            if a[key] < b[key]:
                 return False
         return True
 
