@@ -139,7 +139,7 @@ print("-----")
     2nd: another BFS approach
     - instead of BFS through the bus stops, we BFS through the bus routes
 
-    Time    O(RRS + R^2) ???
+    Time    O(RRS + RR) ???
     Space   O(N)
     2816 ms, faster than 5.02%
 """
