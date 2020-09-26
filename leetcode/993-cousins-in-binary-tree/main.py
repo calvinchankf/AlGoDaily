@@ -21,27 +21,21 @@ class Solution(object):
     def isCousins(self, root, x, y):
         if root == None:
             return False
-        # bfs starts with the root
-        q = [(-1, root)]  # (parent, currentNode)
+        xParent = -1
+        xDepth = -1
+        yParent = -1
+        yDepth = -1
+        q = [(root, None, 0)]
         while len(q) > 0:
-            n = len(q)
-            hs = {}
-            # only iterate the nodes on the same layer
-            for _ in range(n):
-                # dequeue
-                parent, node = q.pop(0)
-                hs[node.val] = parent
-                # enqueue if children are non-null
-                if node.left != None:
-                    q.append((node.val, node.left))
-                if node.right != None:
-                    q.append((node.val, node.right))
-            # check if cousions
-            if x in hs and y in hs:
-                if hs[x] != hs[y]:
-                    # yeah!!! nodes are on the same layer and have diff parents
-                    return True
-                else:
-                    # description said that there would be no duplicate values, so it means no need to explore anymore
-                    return False
-        return False
+            node, parent, depth = q.pop(0)
+            if node.val == x:
+                xParent = parent
+                xDepth = depth
+            if node.val == y:
+                yParent = parent
+                yDepth = depth
+            if node.left:
+                q.append([node.left, node, depth + 1])
+            if node.right:
+                q.append([node.right, node, depth + 1])
+        return xDepth == yDepth and xParent != yParent

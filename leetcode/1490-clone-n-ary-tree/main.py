@@ -4,8 +4,7 @@
 
     Time    O(N)
     Space   O(N) recursion tree
-    Runtime: 80 ms
-    Memory Usage: 17.6 MB
+    108 ms, faster than 90.27%
 """
 
 
@@ -13,10 +12,11 @@ class Solution:
     def cloneTree(self, root: 'Node') -> 'Node':
         if root == None:
             return None
-        node = Node(root.val)
+        clone = Node(root.val)
         for child in root.children:
-            node.children.append(self.cloneTree(child))
-        return node
+            temp = self.cloneTree(child)
+            clone.children.append(temp)
+        return clone
 
 
 """

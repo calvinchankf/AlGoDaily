@@ -29,7 +29,7 @@ class Solution(object):
             ab = int(str(a)+str(b))
             ba = int(str(b)+str(a))
             return ba-ab
-        nums = sorted(nums, cmp=cmptr)
+        nums.sort(cmp=cmptr)
         # construct result
         res = ""
         for num in nums:

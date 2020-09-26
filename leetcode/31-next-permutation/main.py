@@ -1,16 +1,28 @@
 """
-    1st attempt
+    classic approach: Next lexicographical permutation algorithm(use a stack)
 
     similar to lc556
 
-    1. find the pivot point
-    2. find the FURTHEST number which is a bit larger than the pivot in 2nd half
-    3. swap the pivot and the number
-    4. sort the 2nd half
-    see idea.png
-    time 	O(n+n)
-    space 	O(1)
-    beats 100%
+	e.g. 43143221
+	- find the non-increasing suffix, e.g. 431<43221>
+	- once it encounters a smaller number from the end, this is the target we want
+		e.g. 43 <1> 43221
+	- i need to swap the target with the value in the stack which is just larger then it
+		e.g. 43 <1> 43221
+                       ^
+         => 43 <2> 43211
+                      ^
+	- reverse the right half and put it back to the number
+		e.g. 43 <2> 43211 => 43 <2> 11234
+	- combine them together and form the result
+		e.g. 43 <2> 11234 => 43211234
+
+	ref:
+	- https://www.nayuki.io/page/next-lexicographical-permutation-algorithm
+
+	Time	O(n)
+	Space	O(n)
+	8 ms, faster than 100.00%
 """
 
 
@@ -20,31 +32,30 @@ class Solution(object):
         :type nums: List[int]
         :rtype: None Do not return anything, modify nums in-place instead.
         """
-        # find the pivot from the increasing sequence from the right
-        pivot = -1
-        for i in range(len(nums)-2, -1, -1):
-            if nums[i] < nums[i+1]:
-                pivot = i
-                break
-        # if not pivot, it means this permutation is the largest,
-        # so the next permutation is the smallest permutation
-        if pivot == -1:
+        n = len(nums)
+        # find the monotonic increasing suffix
+        i = n - 1
+        while i - 1 >= 0 and nums[i-1] >= nums[i]:
+            i -= 1
+
+        if i == 0:
             self.reverse(nums, 0, len(nums)-1)
             return
-        # find the number to swap
-        target = -1
-        for i in range(len(nums)-1, -1, -1):
-            if nums[i] > nums[pivot]:
-                target = i
-                break
-        # swap
-        nums[pivot], nums[target] = nums[target], nums[pivot]
-        # reverse the increasing sequence from the right
-        self.reverse(nums, pivot+1, len(nums)-1)
+        # pivot is the num next to the suffix
+        pivot = i - 1
 
-    def reverse(self, nums, start, end):
-        left = start
-        right = end
+        # find the successor
+        j = n - 1
+        while j - 1 >= 0 and nums[j] <= nums[pivot]:
+            j -= 1
+
+        # swap the numbers at pivot and the successor
+        nums[pivot], nums[j] = nums[j], nums[pivot]
+
+        # reverse the suffix
+        self.reverse(nums, i, len(nums)-1)
+
+    def reverse(self, nums, left, right):
         while left < right:
             nums[left], nums[right] = nums[right], nums[left]
             left += 1
