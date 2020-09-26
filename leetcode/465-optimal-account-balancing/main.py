@@ -58,45 +58,43 @@ from collections import defaultdict
                 there are n-1 possibilities to subtract(then to the next recursion)
 
     Space   O(N + H!) H: height of the recursion tree
-    504 ms, faster than 62.86% 
+    416 ms, faster than 65.07% 
 """
 
 
 class Solution:
     def minTransfers(self, transactions):
         ht = defaultdict(int)
+        # 0: calculate the net balance for everyone
         for x, y, z in transactions:
             ht[x] -= z
             ht[y] += z
         # filter not all the zero balances
         balences = [ht[person] for person in ht if ht[person] != 0]
-
         return self.dfs(balences)
 
     def dfs(self, balences):
         # base case
         if len(balences) == 0:
             return 0
-        # no operation is needed at index 0, consider the rest of the balences
-        if balences[0] == 0:
-            return self.dfs(balences[1:])
-        # try to find the counterpart for balences[0]
+        # try to find the counterpart for head
+        head = balences[0]
         for i in range(1, len(balences)):
-            if balences[0] == -balences[i]:
-                clone = balences[1:i] + [0] + balences[i+1:]
-                return 1 + self.dfs(clone)
+            if head == -balences[i]:
+                remain = balences[1:i] + balences[i+1:]
+                return self.dfs(remain) + 1
         # for every possible pair, sum them up
         # for all pairs, find the pair with minimal number of steps to reach the bottom
         res = []
         for i in range(1, len(balences)):
-            if balences[0] * balences[i] < 0:
-                clone = balences[1:i] + \
-                    [balences[i]+balences[0]] + \
-                    balences[i+1:]
-                steps = self.dfs(clone)
+            if head * balences[i] < 0:
+                remain = balences[1:i] \
+                    + [balences[i]+head] \
+                    + balences[i+1:]
+                steps = self.dfs(remain)
                 res.append(steps)
-        # we now merge balences[0] and balences[i], so increment the count
-        return 1 + min(res)
+        # we now merge head and balences[i], so increment the count
+        return min(res) + 1
 
 
 s = Solution()
