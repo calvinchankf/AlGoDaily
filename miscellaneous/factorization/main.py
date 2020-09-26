@@ -10,7 +10,6 @@ from math import sqrt, ceil
 
 def getFactors(n):
     root = int(ceil(sqrt(n)))
-    print(root)
     res = set()
     for i in range(1, root+1):
         if n % i == 0:

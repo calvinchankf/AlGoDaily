@@ -114,24 +114,23 @@ class Solution(object):
         if k == 1:
             return nums
 
-        def clean_deque(i):
-            # remove indexes of elements not in sliding window
-            # since we push item one by one, the first one is guaranteed to be the one to remove if len(window) > k
-            if len(deq) > 0 and deq[0] == i - k:
-                deq.popleft()
-            # remove from deq indexes of all elements
-            # which are smaller than current element nums[i]
-            while len(deq) > 0 and nums[i] > nums[deq[-1]]:
-                deq.pop()
-
         # init deque and output
-        deq = deque()
+        window = []
         output = []
         # build output
         for i in range(n):  # for i in range(k, n):
-            clean_deque(i)
-            deq.append(i)
+            # remove indexes of elements not in sliding window
+            # since we push item one by one, the first one is guaranteed to be the one to remove if len(window) > k
+            if len(window) > 0 and window[0] == i - k:
+                window.pop(0)
+            # remove from deq indexes of all elements
+            # which are smaller than current element nums[i]
+            while len(window) > 0 and nums[i] > nums[window[-1]]:
+                window.pop()
+
+            # append the current index
+            window.append(i)
 
             if i+1 >= k:
-                output.append(nums[deq[0]])
+                output.append(nums[window[0]])
         return output

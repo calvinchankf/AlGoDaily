@@ -63,21 +63,14 @@ print("--------------------")
 
 class Solution(object):
     def coinChange(self, coins, amount):
-        dp = (amount+1)*[0]
+        dp = (amount + 1) * [0]
         for i in range(1, amount+1):
-            minSteps = sys.maxsize
-            for coin in coins:
-                remain = i-coin
-                """
-                    be careful, if we use
-                    if remain < 0:
-                        break
-                    we need to sort coins first
-                """
-                if remain >= 0:
-                    minSteps = min(minSteps, dp[remain])
-            dp[i] = minSteps + 1
-        if dp[amount] >= sys.maxsize:
+            minCount = sys.maxsize
+            for c in coins:
+                if i - c >= 0:
+                    minCount = min(minCount, dp[i-c]+1)
+            dp[i] = minCount
+        if dp[amount] == sys.maxsize:
             return -1
         return dp[amount]
 

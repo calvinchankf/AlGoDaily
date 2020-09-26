@@ -10,7 +10,7 @@
     - actually we did [cat,sand,ogab], we know that "ogab" is breakable after the recursion,
         therefore we can save "ogab" as "true" so that we can avoid redundant computation if we meet "ogab" again
 
-    Time    O(n^2)
+    Time    O(n^2) whereas brute force O(N^N)
     Space   O(n)
 
     32 ms, faster than 57.40%
@@ -88,24 +88,18 @@ print("----------------------------------------")
 
 class Solution(object):
     def wordBreak(self, s, wordDict):
-        """
-        :type s: str
-        :type wordDict: List[str]
-        :rtype: bool
-        """
         wordSet = set(wordDict)
-        ht = {}
-        return self.dfs(s, wordSet, ht)
+        return self.dfs(s, wordSet, {})
 
     def dfs(self, s, wordSet, ht):
-        if s in ht:
-            return ht[s]
         if len(s) == 0:
             return True
+        if s in ht:
+            return False
         for w in wordSet:
             n = len(w)
-            cand = s[:n]
-            if cand == w:
+            prefix = s[:n]
+            if prefix == w:
                 if self.dfs(s[n:], wordSet, ht):
                     return True
         ht[s] = False

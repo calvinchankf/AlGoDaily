@@ -2,7 +2,7 @@ import sys
 
 """
     3rd approach: Kadan's algorithm
-    - idea similar to leetcode 53:maximum subarray
+    - idea similar to leetcode 53:maximum subarray, 1567
     - for each item, store the max&mix among itself, or extend the previous max&min with itself
       e.g. dp[i] chooses between dp[i-1]+nums[i] and nums[i]
     - the result is the largest dp[i]
