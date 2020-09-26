@@ -109,53 +109,33 @@ print("-----")
 
     Time    O(N^2)
     Space   O(N)
-    40 ms, faster than 33.41%
+    20 ms, faster than 75.00%
 """
 
 
 class Solution:
     def minSwapsCouples(self, row: List[int]) -> int:
-        arr = row[:]
+        n = len(row)
         i = 0
-        res = 0
-        while i < len(arr):
-            if self.isPairedUp(arr):
-                return res
-            # move forward to find the next unpair numbers at indices (i, i+1)
-            while i < len(arr):
-                if arr[i] % 2 == 0:
-                    if arr[i+1] != arr[i] + 1:
-                        break
-                else:
-                    if arr[i+1] != arr[i] - 1:
-                        break
-                i += 2
-            # calculate the target for number at index i
-            partner = None
-            if arr[i] % 2 == 0:
-                partner = arr[i] + 1
-            else:
-                partner = arr[i] - 1
-            # look for the target in the rest of the array, and swap(i+1, j) so to fullfil numbers at (i, i+1)
-            for j in range(i+1, len(arr)):
-                if arr[j] == partner:
-                    arr[i+1], arr[j] = arr[j], arr[i+1]
-                    break
-            # record & iterate
-            res += 1
-            i += 2
+        count = 0
+        while i < n:
 
-    def isPairedUp(self, arr):
-        i = 0
-        while i < len(arr):
-            if arr[i] % 2 == 0:
-                if arr[i+1] != arr[i] + 1:
-                    return False
+            x = row[i]
+            y = None
+            if x % 2 == 0:
+                y = x + 1
             else:
-                if arr[i+1] != arr[i] - 1:
-                    return False
+                y = x - 1
+
+            if row[i+1] != y:
+                for j in range(i+1, n):
+                    if row[j] == y:
+                        row[i+1], row[j] = row[j], row[i+1]
+                        break
+                count += 1
+
             i += 2
-        return True
+        return count
 
 
 s = Solution()
