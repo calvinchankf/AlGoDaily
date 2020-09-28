@@ -78,42 +78,39 @@ print("-----")
 """
 
 
-class Solution(object):
+class Solution:
+    def calculate(self, s: str) -> int:
+        q = [c for c in s]
+        return self.helper(q)
 
-    def calculate(self, s):
-        arr = []
-        for c in s:
-            arr.append(c)
-        return self.helper(arr)
-
-    def helper(self, s):
-        if len(s) == 0:
-            return 0
+    def helper(self, q):
         stack = []
         sign = '+'
         num = 0
-        # instead of iterating the string
-        # we dequeue the string because we want our string becomes smaller and smaller for the recursion
-        while len(s) > 0:
-            c = s.pop(0)
+        while len(q) > 0:
+            c = q.pop(0)
             if c.isdigit():
-                num = num*10+int(c)
+                num = num*10 + int(c)
+            # regard '(...)' as a number
             if c == '(':
-                # do recursion to calculate the sum within the next (...)
-                num = self.helper(s)
-            if len(s) == 0 or (c == '+' or c == '-' or c == '*' or c == '/' or c == ')'):
+                num = self.helper(q)
+            if len(q) == 0 or c == '+' or c == '-' or c == '*' or c == '/' or c == ')':
                 if sign == '+':
                     stack.append(num)
                 elif sign == '-':
                     stack.append(-num)
                 elif sign == '*':
-                    stack[-1] = stack[-1]*num
+                    stack[-1] = stack[-1] * num
                 elif sign == '/':
-                    stack[-1] = int(stack[-1]/float(num))
+                    if stack[-1] < 0:
+                        stack[-1] = -(-stack[-1] // num)
+                    else:
+                        stack[-1] = stack[-1] // num
+                # finish and return
+                if c == ')':
+                    return sum(stack)
                 sign = c
                 num = 0
-                if sign == ')':
-                    break
         return sum(stack)
 
 

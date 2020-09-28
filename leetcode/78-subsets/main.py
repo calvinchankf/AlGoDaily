@@ -37,8 +37,10 @@ class Solution(object):
             self.dfs(nums[i+1:], chosen+[nums[i]])
 
 
-print(Solution().subsets([1, 2, 3]))
-print(len(Solution().subsets([1, 2, 3, 4])))
+s = Solution()
+
+print(s.subsets([1, 2, 3]))
+print(s.subsets([1, 2, 3, 4]))
 
 print("-----")
 
@@ -68,8 +70,10 @@ class Solution(object):
         return result
 
 
-print(Solution().subsets([1, 2, 3]))
-print(len(Solution().subsets([1, 2, 3, 4])))
+s = Solution()
+
+print(s.subsets([1, 2, 3]))
+print(s.subsets([1, 2, 3, 4]))
 
 print("-----")
 
@@ -106,8 +110,10 @@ class Solution(object):
         self.recur(nums, chosen[:], curIdx+1)
 
 
-print(Solution().subsets([1, 2, 3]))
-print(len(Solution().subsets([1, 2, 3, 4])))
+s = Solution()
+
+print(s.subsets([1, 2, 3]))
+print(s.subsets([1, 2, 3, 4]))
 
 print("-----")
 
@@ -135,5 +141,6 @@ class Solution(object):
         return res
 
 
-print(Solution().subsets([1, 2, 3]))
-print(len(Solution().subsets([1, 2, 3, 4])))
+s = Solution()
+print(s.subsets([1, 2, 3]))
+print(s.subsets([1, 2, 3, 4]))

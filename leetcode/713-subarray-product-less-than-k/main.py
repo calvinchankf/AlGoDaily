@@ -26,15 +26,15 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        if k <= 1:
+        if k == 0:
             return 0
-        prod = 1
-        slow = 0
         res = 0
+        j = 0
+        prod = 1
         for i in range(len(nums)):
             prod *= nums[i]
-            while prod >= k:
-                prod /= nums[slow]
-                slow += 1
-            res += i - slow + 1
+            while j <= i and prod >= k:
+                prod /= nums[j]
+                j += 1
+            res += i - j + 1
         return res

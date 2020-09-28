@@ -3,8 +3,10 @@ package main
 import "fmt"
 
 /*
-	naive solution
-	hashtable
+	1st: hashtable
+
+	Time    O(N)
+    Space   O(N)
 	beats 10%
 */
 func firstUniqChar(s string) int {

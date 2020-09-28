@@ -51,7 +51,7 @@ class Solution(object):
 
     Time    O(2NlogN)
     Space   O(N)
-    64 ms, faster than 65.23%
+    52 ms, faster than 99.69%
 """
 
 
@@ -61,16 +61,10 @@ class Solution(object):
         :type intervals: List[List[int]]
         :rtype: int
         """
-        if len(intervals) == 0:
-            return 0
-
-        intervals = sorted(intervals, key=lambda x: x[0])
-
+        intervals.sort()
         pq = []
-        for i in range(len(intervals)):
-            start, end = intervals[i]
-            if len(pq) > 0 and start >= pq[0]:
-                heapq.heapreplace(pq, end)
-            else:
-                heapq.heappush(pq, end)
+        for s, e in intervals:
+            if len(pq) > 0 and s >= pq[0]:
+                pop = heapq.heappop(pq)
+            heapq.heappush(pq, e)
         return len(pq)

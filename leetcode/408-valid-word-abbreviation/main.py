@@ -114,16 +114,17 @@ class Solution(object):
             if word[i] == abbr[j]:
                 i += 1
                 j += 1
-            elif abbr[j].isdigit():
-                num = 0
-                while j < len(abbr) and abbr[j].isdigit():
-                    if num == 0 and int(abbr[j]) == 0:
-                        return False
-                    num = num*10 + int(abbr[j])
-                    j += 1
-                i += num
+            elif abbr[j].isdigit() == False:
+                return False
             else:
-                break
+                if abbr[j] == '0':
+                    return False
+                num = int(abbr[j])
+                while j+1 < len(abbr) and abbr[j+1].isdigit():
+                    j += 1
+                    num = num * 10 + int(abbr[j])
+                i += num
+                j += 1
         return i == len(word) and j == len(abbr)
 
 

@@ -120,3 +120,54 @@ print(s.longestConsecutive(a))
 
 a = [100, 4, 200, 1, 3, 2, 5, 7, 8, 6, 9]
 print(s.longestConsecutive(a))
+
+print("-----")
+
+"""
+    2nd: hashtable
+    - similar to lc5, expand to the left, expand to the right
+    - use a hashtable to avoid redundant calculation
+    - similar to algoexpert: largest range
+
+    Time    O(N)
+    Space   O(N)
+    84 ms, faster than 67.86%
+"""
+
+
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        seen = set()
+        hs = set(nums)
+        res = 0
+        for i in range(len(nums)):
+            x = nums[i]
+
+            if x in seen:
+                continue
+
+            left = x
+            while left - 1 in hs:
+                left -= 1
+                seen.add(left)
+
+            right = x
+            while right + 1 in hs:
+                right += 1
+                seen.add(right)
+
+            res = max(res, right - left + 1)
+
+        return res
+
+
+s = Solution()
+
+a = [100, 4, 200, 1, 3, 2]
+print(s.longestConsecutive(a))
+
+a = [100, 4, 200, 1, 3, 2, 7, 8, 6, 9, 10]
+print(s.longestConsecutive(a))
+
+a = [100, 4, 200, 1, 3, 2, 5, 7, 8, 6, 9]
+print(s.longestConsecutive(a))
