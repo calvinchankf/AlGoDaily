@@ -8,8 +8,8 @@
         ....
     }
 
-    Time O(N)
-    Space O(N)
+    Time    O(N)
+    Space   O(N)
     24 ms, faster than 97.55%
 """
 
@@ -27,14 +27,14 @@ class Solution(object):
         def dfs(node, parent):
             if node == None:
                 return
-            arr = [parent, -1, -1]
+            neighbours = [parent, -1, -1]
             if node.left != None:
-                arr[1] = node.left.val
-                dfs(node.left, node.val)
+                neighbours[1] = node.left.val
             if node.right != None:
-                arr[2] = node.right.val
-                dfs(node.right, node.val)
-            connections[node.val] = arr
+                neighbours[2] = node.right.val
+            dfs(node.left, node.val)
+            dfs(node.right, node.val)
+            connections[node.val] = neighbours
         dfs(root, -1)
 
         q = [(target.val, 0)]
@@ -50,7 +50,7 @@ class Solution(object):
             if steps == K:
                 res.append(node)
                 continue
-            children = connections[node]
-            for child in children:
-                q.append((child, steps + 1))
+            neighbours = connections[node]
+            for nb in neighbours:
+                q.append((nb, steps + 1))
         return res

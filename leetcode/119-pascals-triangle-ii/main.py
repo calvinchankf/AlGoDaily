@@ -1,22 +1,21 @@
 """
     naive approach
 
-    Time    O(n!)
-    Space   O(n)
-    20 ms, faster than 77.84%
+    Time    O(N^2)
+    Space   O(N)
+    16 ms, faster than 84.81%
 """
 
 
 class Solution(object):
     def getRow(self, rowIndex):
-        """
-        :type rowIndex: int
-        :rtype: List[int]
-        """
-        nums = [1]
-        for i in range(1, rowIndex+1):
-            temp = (i+1) * [1]
-            for j in range(1, len(temp)-1):
-                temp[j] = nums[j-1] + nums[j]
-            nums = temp
-        return nums
+        n = rowIndex + 1
+        if n < 1:
+            return []
+        res = []
+        for i in range(1, n+1):
+            row = i * [1]
+            for j in range(1, i-1):
+                row[j] = res[j-1] + res[j]
+            res = row
+        return res

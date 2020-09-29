@@ -78,19 +78,24 @@ class Solution(object):
             900: 'CM',
             1000: 'M'
         }
+        # 458
         res = ''
         scale = 0
         while num > 0:
-            d = num % 10
-            cur = d * (10**scale)
-            num = num // 10
-            if cur in m:
-                res = m[cur] + res
+            digit = num % 10
+            num //= 10
+            x = digit * (10**scale)
+            if x in m:
+                res = m[x] + res
             else:
-                if d < 4:
-                    res = m[10**scale] * d + res
-                if d > 5:
-                    res = m[5 * 10**scale] + m[10**scale] * (d - 5) + res
+                if digit < 5:
+                    # 2,3
+                    s = m[10**scale] * digit
+                    res = s + res
+                else:
+                    # 6,7,8
+                    s = m[5 * 10**scal)] + m[10**scale] * (digit - 5)
+                    res=s + res
             scale += 1
         return res
 

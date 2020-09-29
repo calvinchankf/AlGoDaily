@@ -24,7 +24,7 @@ class Solution(object):
         i = 0
         while num > 0:
             remain = num % 1000
-            num = num / 1000
+            num = num // 1000
             threeDigitWord = self.threeDigitsToWords(remain)
             # imagine if we have 1,000,000, we should check if the '3digits' is empty before appending to the result
             if len(threeDigitWord) > 0:

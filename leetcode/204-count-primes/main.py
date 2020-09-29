@@ -1,3 +1,8 @@
+"""
+    https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+"""
+
+
 class Solution(object):
     def countPrimes(self, n):
         """
