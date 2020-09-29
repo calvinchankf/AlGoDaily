@@ -114,6 +114,9 @@ print("----- 1 -----")
 
 """
     follow-up1: what if we want to find out all combinations?
+    - every number can be used at most once
+    - every result is unique e.g. if there is a [1,2,3], then [3,2,1] should not be in the result array
+    - there might be duplicate numbers in the input
 
     Time    O(2^n)
     Space   O(2^n)

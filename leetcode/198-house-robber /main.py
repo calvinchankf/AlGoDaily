@@ -42,15 +42,13 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums) == 0:
-            return 0
-        included = nums[0]
-        excluded = 0
-        for i in range(1, len(nums)):
-            temp = included
-            included = max(excluded + nums[i], included)
-            excluded = temp
-        return included
+        rob = 0
+        notRob = 0
+        for x in nums:
+            temp = rob
+            rob = max(rob, notRob + x)
+            notRob = temp
+        return max(rob, notRob)
 
 
 """

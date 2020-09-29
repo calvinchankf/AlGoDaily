@@ -57,13 +57,15 @@ class Solution(object):
         return result[target]
 
 
-print(Solution().combinationSum([2, 3, 5], 8))
-print(Solution().combinationSum([2, 3, 6, 7], 7))
-print(Solution().combinationSum([1, 2, 3, 4], 15))
+s = Solution()
+
+print(s.combinationSum([2, 3, 5], 8))
+print(s.combinationSum([2, 3, 6, 7], 7))
+print(s.combinationSum([1, 2, 3, 4], 15))
 print("------------------------------")
 
 
-class Solution1(object):
+class Solution(object):
     """
     2nd approach: recursive dfs, avoid duplicate by considering the candidates which are >= num
     beats 76.61%
@@ -93,9 +95,11 @@ class Solution1(object):
             self.dfs(candidates, target-can, path+[can], i)
 
 
-print(Solution1().combinationSum([2, 3, 5], 8))
-print(Solution1().combinationSum([2, 3, 6, 7], 7))
-print(Solution1().combinationSum([1, 2, 3, 4], 15))
+s = Solution()
+
+print(s.combinationSum([2, 3, 5], 8))
+print(s.combinationSum([2, 3, 6, 7], 7))
+print(s.combinationSum([1, 2, 3, 4], 15))
 print("------------------------------")
 
 
@@ -128,7 +132,9 @@ class Solution(object):
                     self.dfs(candidates, target, path+[can], total+can)
 
 
-print(Solution().combinationSum([2, 3, 5], 8))
-print(Solution().combinationSum([2, 3, 6, 7], 7))
-print(Solution().combinationSum([1, 2, 3, 4], 15))
+s = Solution()
+
+print(s.combinationSum([2, 3, 5], 8))
+print(s.combinationSum([2, 3, 6, 7], 7))
+print(s.combinationSum([1, 2, 3, 4], 15))
 print("------------------------------")

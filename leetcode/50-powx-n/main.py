@@ -66,33 +66,24 @@ print("----------")
 class Solution(object):
 
     def myPow(self, x, n):
-        """
-        :type x: float
-        :type n: int
-        :rtype: float
-        """
-        if n == 0:
-            return 1
-        if n < 0:
-            return 1.0/self.helper(x, -n)
-        return self.helper(x, n)
+        if n >= 0:
+            return self.dfs(x, n)
+        return 1 / self.dfs(x, -n)
 
     def helper(self, x, n):
         # if n == 0, x^0 = 1
         if n == 0:
             return 1
-        # e.g.1 n = 5, left = 2
-        # e.g.2 n = 4, left = 2
-        # e.g.3 n = 1, left = 0
-        left = n/2
-        # e.g.1,2 temp = 2^2
-        temp = self.helper(x, left)
+        # e.g.1 n = 5, n//2 = 2*2
+        # e.g.2 n = 4, n//2 = 2*2
+        # e.g.3 n = 1, n//2 = 0
+        half = self.dfs(x, n//2)
         if n % 2 == 0:
             # since n is an even, return 2^2 * 2^2
-            return temp * temp
+            return half * half
         # since n is an odd, return 2^2 * 2^2 * 2
         # base case when n = 1, return 1 * 1 * x
-        return temp * temp * x
+        return half * half * x
 
 
 print(Solution().myPow(2.0, 10))

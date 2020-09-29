@@ -37,19 +37,21 @@ class Solution(object):
 	now 					a+b+c+d+c+f=20
 	
     so...
-	e/c=720/540=4/3
-	e-c=1
+	e/c = 720/540 = 4/3
+	e-c = 1
 	
     solve the equation
-	c=3, e=4
+	c = 3, e = 4
 
     However, when N=10000000, x! will stackoverflow the int32
 	therefore we should not use 'mutiply'
-	lets say for [1, 2, 3, 3, 5, 6] what if we...
+    
+    lets say for [1, 2, 3, 3, 5, 6] what if we...
 	a^2 + b^2 + c^2 + d^2 + e^2 + f^2 = 91
-						minus both sides
-	a^2 + b^2 + c^2 + c^2 + d^2 + f^2 = 84
-	there will be an equation, e^2 - c^2 = 91-75 = 7
+    a^2 + b^2 + c^2 + c^2 + d^2 + f^2 = 84
+    --------------------------------------
+                            e^2 - c^2 = 7
+
 	e - c = 1
 	e + c = 7
 	c=3, e=4
