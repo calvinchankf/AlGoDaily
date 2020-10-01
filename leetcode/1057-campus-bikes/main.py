@@ -27,14 +27,14 @@ class Solution(object):
             x, y = bikes[bIdx]
             for wIdx in range(len(workers)):
                 a, b = workers[wIdx]
-                dist = abs(x-a)+abs(y-b)
-                heapq.heappush(pq, (dist, (wIdx, bIdx)))
+                dist = abs(x - a) + abs(y - b)
+                pq.append((dist, wIdx, bIdx))
+        heapq.heapify(pq)
         bUsed = set()
         wUsed = set()
         res = len(workers) * [-1]
         while len(pq) > 0:
-            d, wb = heapq.heappop(pq)
-            w, b = wb
+            d, w, b = heapq.heappop(pq)
             if b in bUsed or w in wUsed:
                 continue
             bUsed.add(b)
@@ -70,7 +70,7 @@ print("-----")
 
     Time    O(WBlogWB)
     Space   O(WB)
-    2140 ms, faster than 5.91% 
+    1848 ms, faster than 18.51%
 """
 
 
@@ -87,10 +87,10 @@ class Solution(object):
             x, y = bikes[bidx]
             for widx in range(len(workers)):
                 a, b = workers[widx]
-                dist = abs(x-a)+abs(y-b)
+                dist = abs(x - a) + abs(y - b)
                 pq.append((dist, widx, bidx))
         # sort the distances order by workerIdx, bikeIdx
-        pq = sorted(pq)
+        pq.sort()
         bUsed = set()
         wUsed = set()
         res = len(workers) * [-1]

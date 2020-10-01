@@ -6,7 +6,7 @@
 
     Time    O(RC)
     Space    O(RC)
-    268 ms, faster than 73.33%
+    236 ms, faster than 100.00%
 """
 
 
