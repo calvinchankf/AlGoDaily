@@ -1,16 +1,18 @@
+"""
+    1st approach: brute force, bottom up recursively with memorization
+    - intuitively go through all the path with i+1 OR j+1
+    - count the path which reaches to the destination coordinate (m, n)
+    - cache the count of the coordinates which we have calculated before
+    - if the current grid, grid[i][j], is blocked, tell its parent that this way is blocked by return 0
+    - sum up all the coordinates' count
+
+    Time    O(m*n) 0->m, 0->n. since we cache the intermediate coordinates, we dont have duplicate sets of i, j
+    Space   O(m*n) depth of recursion calls
+"""
+
+
 class Solution(object):
     def uniquePathsWithObstacles(self, obstacleGrid):
-        """
-        1st approach: brute force, bottom up recursively with memorization
-        - intuitively go through all the path with i+1 OR j+1
-        - count the path which reaches to the destination coordinate (m, n)
-        - cache the count of the coordinates which we have calculated before
-        - if the current grid, grid[i][j], is blocked, tell its parent that this way is blocked by return 0
-        - sum up all the coordinates' count
-
-        Time    O(m*n) 0->m, 0->n. since we cache the intermediate coordinates, we dont have duplicate sets of i, j
-        Space   O(m*n) depth of recursion calls
-        """
         if len(obstacleGrid) == 0 or len(obstacleGrid[0]) == 0:
             return 0
         seen = {}
@@ -34,41 +36,42 @@ class Solution(object):
         seen[key] = left + right
         return left + right
 
+s = Solution()
 
 a = [
     [0, 0, 0],
     [0, 1, 0],
     [0, 0, 0]
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))
 
 a = [
     [0, 1, 0],
     [0, 1, 0],
     [0, 0, 0]
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))
 
 a = [
     [0, 0, 1],
     [0, 1, 0],
     [0, 0, 0]
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))
 
 a = [
     [0, 1, 0],
     [1, 1, 0],
     [0, 0, 0]
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))
 
 a = [
     [0, 0, 1],
     [0, 1, 0],
     [1, 0, 0]
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))
 
 a = [
     [0, 0, 0, 0],
@@ -76,81 +79,85 @@ a = [
     [0, 0, 0, 0],
     [0, 0, 0, 0],
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))
+
+print("-----")
+
+"""
+    2nd approach: dynamic programming, iterative top down
+    - the basic idea is to sum up the count from left and top
+        i.e. dp[i][j] = dp[i-1][j] + dp[i][j-1] 
+    - https://leetcode.com/articles/unique-paths-ii/
+
+
+    Time    O(m*n) iterate the 2d array
+    Space   O(m*n) the dp array
+    36 ms, faster than 94.84% 
+"""
 
 
 class Solution(object):
     def uniquePathsWithObstacles(self, obstacleGrid):
-        """
-        2nd approach: dynamic programming, iterative top down
-        - the basic idea is to sum up the count from left and top
-            i.e. dp[i][j] = dp[i-1][j] + dp[i][j-1] 
-        - https://leetcode.com/articles/unique-paths-ii/
-
-
-        Time    O(m*n) iterate the 2d array
-        Space   O(m*n) the dp array
-        """
-        dp = []
-        for i in range(len(obstacleGrid)):
-            dp.append([0]*len(obstacleGrid[0]))
-        if obstacleGrid[0][0] == 1:
+        R, C = len(obstacleGrid), len(obstacleGrid[0])
+        if obstacleGrid[0][0] == 1 or obstacleGrid[-1][-1] == 1:
             return 0
-        for i in range(len(obstacleGrid)):
-            for j in range(len(obstacleGrid[0])):
-                if i == 0 and j == 0:
-                    dp[0][0] = 1
-                elif i == 0:
-                    dp[0][j] = dp[0][j-1]
-                    if obstacleGrid[i][j] == 1:
-                        dp[0][j] = 0
-                elif j == 0:
-                    dp[i][0] = dp[i-1][0]
-                    if obstacleGrid[i][j] == 1:
-                        dp[i][0] = 0
-                else:
+        dp = [C * [0] for _ in range(R)]
+        # consider the first row, if [0,0,1,0,0], the dp should be [1,1,0,0,0]
+        for i in range(R):
+            if obstacleGrid[i][0] == 0:
+                dp[i][0] = 1
+            else:
+                break
+        # consider the first col, if [0,0,1,0,0], the dp should be [1,1,0,0,0]
+        for j in range(C):
+            if obstacleGrid[0][j] == 0:
+                dp[0][j] = 1
+            else:
+                break
+        # dp[i][j] = dp[i-1][j] + dp[i][j-1]
+        for i in range(1, R):
+            for j in range(1, C):
+                if obstacleGrid[i][j] == 0:
                     dp[i][j] = dp[i-1][j] + dp[i][j-1]
-                    if obstacleGrid[i][j] == 1:
-                        dp[i][j] = 0
         return dp[-1][-1]
 
 
-print('2nd approach')
+s = Solution()
 
 a = [
     [0, 0, 0],
     [0, 1, 0],
     [0, 0, 0]
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))
 
 a = [
     [0, 1, 0],
     [0, 1, 0],
     [0, 0, 0]
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))
 
 a = [
     [0, 0, 1],
     [0, 1, 0],
     [0, 0, 0]
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))
 
 a = [
     [0, 1, 0],
     [1, 1, 0],
     [0, 0, 0]
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))
 
 a = [
     [0, 0, 1],
     [0, 1, 0],
     [1, 0, 0]
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))
 
 a = [
     [0, 0, 0, 0],
@@ -158,4 +165,4 @@ a = [
     [0, 0, 0, 0],
     [0, 0, 0, 0],
 ]
-print(Solution().uniquePathsWithObstacles(a))
+print(s.uniquePathsWithObstacles(a))

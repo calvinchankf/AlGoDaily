@@ -18,7 +18,7 @@ class Solution(object):
         for i in range(len(T)):
             t = T[i]
             while len(stack) > 0 and t > stack[-1][0]:
-                pop, idx = stack.pop()
-                res[idx] = i-idx
+                top, j = stack.pop()
+                res[idx] = i - j
             stack.append((t, i))
         return res

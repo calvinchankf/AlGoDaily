@@ -24,7 +24,7 @@ class Solution(object):
         i = 0
         while num > 0:
             remain = num % 1000
-            num = num / 1000
+            num = num // 1000
             threeDigitWord = self.threeDigitsToWords(remain)
             # imagine if we have 1,000,000, we should check if the '3digits' is empty before appending to the result
             if len(threeDigitWord) > 0:
@@ -38,15 +38,15 @@ class Solution(object):
         tens = ["", "", "Twenty", "Thirty", "Forty",
                 "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"]
         a = num // 100
-        num = num % 100
+        bc = num % 100
         temp = ""
         if a > 0:
             temp += digits[a] + " Hundred"
-        if num < 20:
-            temp += " " + digits[num]
+        if bc < 20:
+            temp += " " + digits[bc]
         else:
-            b = num // 10
-            c = num % 10
+            b = bc // 10
+            c = bc % 10
             temp += " " + tens[b]
             temp += " " + digits[c]
         return temp.strip()
