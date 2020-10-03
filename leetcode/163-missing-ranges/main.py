@@ -1,51 +1,5 @@
 """
-    1st approach: hashtable
-
-    Time    O(n) n might be 2^31-1 at most
-    Space   O(n)
-    LTE
-"""
-
-
-class Solution(object):
-    def findMissingRanges(self, nums, lower, upper):
-        """
-        :type nums: List[int]
-        :type lower: int
-        :type upper: int
-        :rtype: List[str]
-        """
-        if lower > upper:
-            return []
-        start = None
-        end = None
-        hs = set(nums)
-        res = []
-        for i in range(lower, upper+1):
-            if i not in hs:
-                if start == None:
-                    start = i
-                    end = i
-                else:
-                    end = i
-            else:
-                if start != None:
-                    if start < end:
-                        res.append(str(start)+"->"+str(end))
-                    else:
-                        res.append(str(start))
-                    start = None
-                    end = None
-        if start != None:
-            if start < end:
-                res.append(str(start)+"->"+str(end))
-            else:
-                res.append(str(start))
-        return res
-
-
-"""
-    2nd approach: array
+    1st approach: array
 
     Time    O(n) number of nums
     Space   O(1)

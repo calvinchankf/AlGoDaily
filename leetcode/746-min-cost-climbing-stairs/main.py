@@ -1,3 +1,5 @@
+import sys
+
 """
 	2nd approach: bottom-up DP, learned from others https://zhuanlan.zhihu.com/p/32980698
 	e.g. [10,15,20,30,4]
@@ -59,7 +61,7 @@ class Solution(object):
         :rtype: int
         """
         n = len(cost)
-        dp = n * [0]
+        dp = n * [sys.maxsize]
         dp[0] = cost[0]
         dp[1] = cost[1]
         for i in range(2, n):

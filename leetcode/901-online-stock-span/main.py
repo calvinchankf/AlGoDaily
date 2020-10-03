@@ -23,13 +23,34 @@ class StockSpanner(object):
         self.stack = []
 
     def next(self, price):
-        """
-        :type price: int
-        :rtype: int
-        """
-        weight = 1
-        while self.stack and self.stack[-1][0] <= price:
-            pop = self.stack.pop()
-            weight += pop[1]
-        self.stack.append((price, weight))
-        return weight
+        count = 1
+        while len(self.stack) > 0 and price >= self.stack[-1][0]:
+            x, c = self.stack.pop()
+            count += c
+        self.stack.append((price, count))
+        return count
+
+
+"""
+    2nd: same approach but using a wrapper class instead of a tuple
+"""
+
+
+class StackItem:
+    def __init__(self, val, count=1):
+        self.val = val
+        self.count = count
+
+
+class StockSpanner:
+
+    def __init__(self):
+        self.stack = []
+
+    def next(self, price: int) -> int:
+        count = 1
+        while len(self.stack) > 0 and self.stack[-1].val <= price:
+            si = self.stack.pop()
+            count += si.count
+        self.stack.append(StackItem(price, count))
+        return count
