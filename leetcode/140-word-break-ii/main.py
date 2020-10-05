@@ -8,6 +8,7 @@
 
 """
     classic approach: bottom-up recursion + memorization
+    - similar to lc132
     - see ./idea.png
 
     ref:

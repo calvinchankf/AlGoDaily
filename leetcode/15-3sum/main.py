@@ -190,6 +190,7 @@ class Solution(object):
                 total = nums[i] + nums[left] + nums[right]
                 if total == 0:
                     res.append([nums[i], nums[left], nums[right]])
+                    # !!! we skip indices only if total == 0 !!!
                     # skip if the next number which equals to this num when we right--
                     while left < right and nums[left] == nums[left+1]:
                         left += 1

@@ -35,3 +35,28 @@ class Solution:
         for i in range(2, n):
             day[i] = (day[i-2] + day[i-1]) * (k-1)
         return day[n-1]
+
+"""
+    2nd: recursion + hashtable
+    - similar to lc70, 509
+
+    Time    O(N)
+    Space   O(N)
+    12 ms, faster than 97.42%
+"""
+class Solution(object):
+    def numWays(self, n, k):
+        return self.f(n, k, {})
+        
+    def f(self, n, k, ht):
+        if n == 0:
+            return 0
+        if n == 1:
+            return k
+        if n == 2:
+            return k*k
+        if n in ht:
+            return ht[n]
+        total = (self.f(n-1, k, ht) + self.f(n-2, k, ht)) * (k-1)
+        ht[n] = total
+        return ht[n]
