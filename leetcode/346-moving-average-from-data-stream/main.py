@@ -3,29 +3,21 @@
 
     Time    O(1) next()
     Space   O(k) k: size since we need to store the sliding window
-    56 ms, faster than 70.34%
+    68 ms, faster than 73.33%
 """
 
 
 class MovingAverage(object):
 
-    def __init__(self, size):
-        """
-        Initialize your data structure here.
-        :type size: int
-        """
+    def __init__(self, size: int):
         self.size = size
-        self.arr = []
-        self.sum = 0
+        self.window = []
+        self.total = 0
 
-    def next(self, val):
-        """
-        :type val: int
-        :rtype: float
-        """
-        if len(self.arr) > 0 and len(self.arr) == self.size:
-            left = self.arr.pop(0)
-            self.sum -= left
-        self.sum += val
-        self.arr.append(val)
-        return self.sum/float(len(self.arr))
+    def next(self, val: int) -> float:
+        self.window.append(val)
+        self.total += val
+        if len(self.window) > self.size:
+            left = self.window.pop(0)
+            self.total -= left
+        return self.total / len(self.window)

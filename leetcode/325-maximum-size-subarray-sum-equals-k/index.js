@@ -11,7 +11,7 @@
 
     Time O(n)
     Space O(n) hashtable
-    164 ms, faster than 20.51% 
+    104 ms, faster than 74.83%
 */
 var maxSubArrayLen = function (nums, k) {
 	let res = 0;
@@ -27,7 +27,7 @@ var maxSubArrayLen = function (nums, k) {
 		if (remain in ht) {
 			res = Math.max(res, i - ht[remain]);
 		}
-		if (ht[pfs] === undefined) {
+		if (pfs in ht === false) {
 			ht[pfs] = i;
 		}
 	}

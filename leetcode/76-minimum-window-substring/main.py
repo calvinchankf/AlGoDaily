@@ -132,7 +132,7 @@ class Solution(object):
         :type t: str
         :rtype: str
         """
-        smallHt = self.constructHt(t)
+        targetHt = self.constructHt(t)
 
         res = s
         curHt = {}
@@ -147,7 +147,7 @@ class Solution(object):
             else:
                 curHt[c] = 1
 
-            while self.ifAContainB(curHt, smallHt):
+            while self.ifAContainB(curHt, targetHt):
 
                 if len(cur) < len(res):
                     res = cur
@@ -160,7 +160,7 @@ class Solution(object):
                 if curHt[last] == 0:
                     del curHt[last]
 
-        if self.ifAContainB(self.constructHt(res), smallHt):
+        if self.ifAContainB(self.constructHt(res), targetHt):
             return res
         return ""
 
