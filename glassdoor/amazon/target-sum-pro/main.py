@@ -81,3 +81,58 @@ print(find3sumInArray(a))
 
 a = [8, 3, 2, 1, 5, 5]
 print(find3sumInArray(a))
+
+a = [0, 0, 0]
+print(find3sumInArray(a))
+
+a = [2, 2, 4, 4]
+print(find3sumInArray(a))
+
+a = [1, 0, 0, 1]
+print(find3sumInArray(a))
+
+print("-----")
+
+
+def find3sumInArray(nums):
+    nums.sort()
+    n = len(nums)
+    ht = defaultdict(list)
+    for i in range(n):
+        x = nums[i]
+        ht[x].append(i)
+    res = set()
+    for i in range(n):
+        for j in range(i+1, n):
+            total = nums[i] + nums[j]
+            if total in ht:
+                if i in ht[total] and j in ht[total]:
+                    if len(ht[total]) > 2:
+                        triplet = (nums[i], nums[j], total)
+                        res.add(triplet)
+                elif i in ht[total] or j in ht[total]:
+                    if len(ht[total]) > 1:
+                        triplet = (nums[i], nums[j], total)
+                        res.add(triplet)
+                else:
+                    triplet = (nums[i], nums[j], total)
+                    res.add(triplet)
+    return list(res)
+
+a = [9, 3, 2, 1, 5]
+print(find3sumInArray(a))
+
+a = [9, 3, 2, 1, 5, 5]
+print(find3sumInArray(a))
+
+a = [8, 3, 2, 1, 5, 5]
+print(find3sumInArray(a))
+
+a = [0, 0, 0]
+print(find3sumInArray(a))
+
+a = [2, 2, 4, 4]
+print(find3sumInArray(a))
+
+a = [1, 0, 0, 1]
+print(find3sumInArray(a))

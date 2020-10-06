@@ -36,3 +36,41 @@ class Solution(object):
             prevMin = min(prevMin, curMin)
             prevMax = max(prevMax, curMax)
         return res
+
+"""
+    2nd: similar to 1st
+    - but use indices to see if there is a index collision
+
+    Time    O(N)
+    Space   O(1)
+    140 ms, faster than 100.00%
+"""
+class Solution:
+    def maxDistance(self, arrays: List[List[int]]) -> int:
+        minNum1 = sys.maxsize
+        minNum2 = sys.maxsize
+        minIdx = -1
+        
+        maxNum1 = -sys.maxsize
+        maxNum2 = -sys.maxsize
+        maxIdx = -1
+        
+        for i in range(len(arrays)):
+            nums = arrays[i]
+            if nums[0] < minNum1:
+                minNum2 = minNum1
+                minNum1 = nums[0]
+                minIdx = i
+            elif nums[0] < minNum2:
+                minNum2 = nums[0]
+            
+            if nums[-1] > maxNum1:
+                maxNum2 = maxNum1
+                maxNum1 = nums[-1]
+                maxIdx = i
+            elif nums[-1] > maxNum2:
+                maxNum2 = nums[-1]
+        
+        if minIdx != maxIdx:
+            return maxNum1 - minNum1
+        return max(maxNum1-minNum2, maxNum2-minNum1)

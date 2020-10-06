@@ -12,26 +12,17 @@ import collections
 
 class Solution(object):
     def isIsomorphic(self, a, b):
-        """
-        :type s: str
-        :type t: str
-        :rtype: bool
-        """
         forward = {}
         backward = {}
-        for i in range(len(a)):
-            c1 = a[i]
-            c2 = b[i]
+        for i in range(len(s)):
+            c1 = s[i]
+            c2 = t[i]
             if c1 not in forward:
                 forward[c1] = c2
-            else:
-                if forward[c1] != c2:
-                    return False
             if c2 not in backward:
                 backward[c2] = c1
-            else:
-                if backward[c2] != c1:
-                    return False
+            if forward[c1] != c2 or backward[c2] != c1:
+                return False
         return True
 
 
@@ -55,11 +46,6 @@ class Solution(object):
 
 class Solution(object):
     def isIsomorphic(self, a, b):
-        """
-        :type s: str
-        :type t: str
-        :rtype: bool
-        """
         signA = self.getSignature(a)
         signB = self.getSignature(b)
         return signA == signB

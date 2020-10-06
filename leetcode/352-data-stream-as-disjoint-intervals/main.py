@@ -77,3 +77,54 @@ class SummaryRanges(object):
 # obj = SummaryRanges()
 # obj.addNum(val)
 # param_2 = obj.getIntervals()
+
+"""
+    2nd: sort + hashtable
+    - similar to lc128, algoexpert largestRange
+
+    Time of addNum()            O(1)
+    Time if getIntervals()      O(N + AlogA)
+    2608 ms, faster than 5.12%
+"""
+
+
+class SummaryRanges:
+
+    def __init__(self):
+        self.nums = []
+
+    def addNum(self, val: int) -> None:
+        self.nums.append(val)
+
+    def getIntervals(self) -> List[List[int]]:
+        n = len(self.nums)
+        res = []
+        hs = set(self.nums)
+        seen = set()
+        for i in range(n):
+            x = self.nums[i]
+
+            # use a hashset to de-duplicate
+            if x in seen:
+                continue
+            seen.add(x)
+
+            # expand from center to find out the largest consecutive sequence
+            left = x
+            while left - 1 in hs:
+                left -= 1
+                seen.add(left)
+
+            right = x
+            while right + 1 in hs:
+                right += 1
+                seen.add(right)
+
+            res.append([left, right])
+        return sorted(res)
+
+
+# Your SummaryRanges object will be instantiated and called as such:
+# obj = SummaryRanges()
+# obj.addNum(val)
+# param_2 = obj.getIntervals()

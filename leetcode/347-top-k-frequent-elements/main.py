@@ -1,11 +1,10 @@
 import heapq
-import collections
+from collections import Counter
 
 """
-    1st approach
+    1st approach: hashtable + sort
     - count num: freq into a hashtable
     - put the hashtable key&value into a priority queue
-    - the first k elements are the top k elements in the priority queue
 
     92 ms, faster than 78.84%
     3july2019
@@ -14,30 +13,14 @@ import collections
 
 class Solution(object):
     def topKFrequent(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
-        if k > len(nums):
-            return []
-        ht = {}
-        pq = []
-        # count the freq for each num
-        for num in nums:
-            if num in ht:
-                ht[num] += 1
-            else:
-                ht[num] = 1
-        # put the num: freq into a prioroity queue
-        for key in ht:
-            heapq.heappush(pq, (-ht[key], key))
-        # pop the first k element from the priority queue
+        counter = Counter(nums)
+        freqs = []
+        for num in counter:
+            freqs.append((counter[num], num))
+        freqs.sort(reverse=True)
         res = []
-        for i in range(k):
-            pri, key = heapq.heappop(pq)
-            res.append(key)
-
+        for i in range(min(len(freqs), k)):
+            res.append(freqs[i][1])
         return res
 
 
@@ -50,8 +33,11 @@ print(Solution().topKFrequent([1, 1, 1, 2, 2, 3], 2))
 print(Solution().topKFrequent(
     [1, 1, 1, 2, 2, 3, 4, 1, 2, 1, 3, 3, 4, 3], 2))
 
+print("-----")
+
 """
-    2nd approach
+    2nd approach: hashtable + quick select
+    - "You can return the answer in any order" <- because of this, we can use quickselect
     - count num: freq into a hashtable
     - use quick select the arrange the k-1 smallest elements present before kth elements
 
@@ -62,15 +48,10 @@ print(Solution().topKFrequent(
 
 class Solution(object):
     def topKFrequent(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
         if k > len(nums):
             return []
         # a list of tuples, for value it is (value, freq)
-        counts = list(collections.Counter(nums).items())
+        counts = list(Counter(nums).items())
         kth = self.kthBiggest(counts, k)
         res = []
         for x in counts[:kth+1]:
@@ -96,13 +77,14 @@ class Solution(object):
         pIdx = left
         for i in range(left, right):
             # > for descending
-            if nums[i][1] > pivot:
+            if nums[i][1] >= pivot:
                 nums[i], nums[pIdx] = nums[pIdx], nums[i]
                 pIdx += 1
         nums[pIdx], nums[right] = nums[right], nums[pIdx]
         return pIdx
 
 
+print(Solution().topKFrequent([1, 1, 1, 2, 2, 3], 2))
 print(Solution().topKFrequent([1, 1, 1, 2, 2, 3, 4, 1, 2, 1, 3, 3, 4, 3], 2))
 
 print("-----")
@@ -122,11 +104,6 @@ print("-----")
 
 class Solution(object):
     def topKFrequent(self, nums, k):
-        """
-        :type nums: List[int]
-        :type k: int
-        :rtype: List[int]
-        """
         # count occurence of each num
         maxFreq = 0
         ht = {}

@@ -52,25 +52,18 @@ class Solution(object):
 
 class Solution(object):
     def wordPattern(self, pattern, sentence):
-        """
-        :type pattern: str
-        :type str: str
-        :rtype: bool
-        """
         words = sentence.split()
         if len(pattern) != len(words):
             return False
         s1 = self.calSignature(pattern)
         s2 = self.calSignature(words)
         return s1 == s2
-
+        
     def calSignature(self, s):
         signature = ""
         seen = {}
-        nth = 0
         for c in s:
             if c not in seen:
-                seen[c] = str(nth)
-                nth += 1
-            signature += seen[c] + '#'
+                seen[c] = len(seen)
+            signature += str(seen[c]) + ','
         return signature
