@@ -16,26 +16,25 @@ from typing import List
     Space   O(n)
     628 ms, faster than 25.28%
 """
+
+
 class Solution(object):
     def ladderLength(self, beginWord, endWord, wordList):
-        wordSet = set(wordList) # avoid duplicate words
-        # BFS
-        q = []
-        q.append((beginWord, 1))
-        seen = set() # avoid revisting a seen word
-        alphabets = "abcdefghijklmnopqrstuvwxyz"
+        wordSet = set(wordList)
+        seen = set()
+        q = [(beginWord, 1)]
         while len(q) > 0:
-            word, level = q.pop(0)
-            if word == endWord:
-                return level
-            # explore at index=0 hit => ait, bit, cit....
-            # explore at index=1 hit => hat, hbt, hct....
-            for i in range(len(word)):
-                for c in alphabets:
-                    newWord = word[:i] + c + word[i+1:]
-                    if newWord in wordSet and newWord not in seen:
-                        q.append((newWord, level + 1))
-                        seen.add(newWord)
+            w, steps = q.pop(0)
+            if w == endWord:
+                return steps
+            if w in seen:
+                continue
+            seen.add(w)
+            for i in range(len(w)):
+                for x in 'abcdefghijklmnopqrstuvwxyz':
+                    cand = w[:i] + x + w[i+1:]
+                    if cand in wordSet:
+                        q.append((cand, steps + 1))
         return 0
 
 
@@ -76,8 +75,6 @@ print("-----")
     524 ms, faster than 31.22%
 """
 class Solution:
-    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
-        class Solution:
     def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
         wordSet = set(wordList)
         if endWord not in wordSet:
