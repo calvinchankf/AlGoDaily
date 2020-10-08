@@ -23,3 +23,40 @@ class RecentCounter(object):
         while len(self.arr) > 0 and self.arr[0] < t-3000:
             self.arr.pop(0)
         return len(self.arr)
+
+"""
+    2nd: binary search
+
+    Time of ping()      O(logN)
+    Space               O(N)
+    388 ms, faster than 34.59%
+"""
+class RecentCounter:
+
+    def __init__(self):
+        self.calls = []
+
+    def ping(self, t: int) -> int:
+        self.calls.append(t)
+        j = self.lowerbsearch(self.calls, t - 3000)
+        return len(self.calls) - j
+
+        # it also works but the Time will be linear O(j)
+        # self.calls = self.calls[j:]
+        # return len(self.calls)
+    
+    def lowerbsearch(self, nums, t):
+        left = 0
+        right = len(nums)
+        while left < right:
+            mid = (left + right) // 2
+            if t <= nums[mid]:
+                right = mid
+            else:
+                left = mid + 1
+        return left
+
+
+# Your RecentCounter object will be instantiated and called as such:
+# obj = RecentCounter()
+# param_1 = obj.ping(t)

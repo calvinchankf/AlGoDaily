@@ -1,5 +1,6 @@
 """
     1st approach: dynamic programming
+    - similar to lc198
 
     ref: Longest Increasing Subsequence
     - https://www.youtube.com/watch?v=CE2b_-XfVDk
@@ -16,15 +17,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        dp = len(nums) * [1]
-        for i in range(len(nums)):
+        n = len(nums)
+        if n == 0:
+            return 0
+        dp = n * [1]
+        for i in range(1, n):
+            maxCount = 0
             for j in range(i):
                 if nums[j] < nums[i]:
-                    dp[i] = max(dp[j] + 1, dp[i])
-        res = 0
-        for x in dp:
-            res = max(res, x)
-        return res
+                    maxCount = max(maxCount, dp[j])
+            dp[i] = dp[i] + maxCount
+        return max(dp)
 
 
 s = Solution()

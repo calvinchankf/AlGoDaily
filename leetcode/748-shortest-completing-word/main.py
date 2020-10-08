@@ -15,23 +15,26 @@ import sys
 
 class Solution(object):
     def shortestCompletingWord(self, licensePlate, words):
-        licensePlate = licensePlate.lower()
-        structure = 26 * [0]
-        for c in licensePlate:
-            if c.isalpha():
-                structure[ord(c)-ord('a')] += 1
-        resultLength = sys.maxsize
-        result = ""
-        for word in words:
-            tempStruct = 26 * [0]
-            for c in word:
-                tempStruct[ord(c)-ord('a')] += 1
-            found = True
-            for i in range(26):
-                if tempStruct[i] < structure[i]:
-                    found = False
-                    break
-            if found and len(word) < resultLength:
-                resultLength = len(word)
-                result = word
-        return result
+        targetHt = self.getStructure(licensePlate)
+        res = 'aaaaaaaaaaaaaaaaaaaaaaaaa'
+        for w in words:
+            curHt = self.getStructure(w)
+            if self.ifContain(curHt, targetHt):
+                if len(w) < len(res):
+                    res = w
+        return res
+
+    def getStructure(self, s):
+        s = s.lower()
+        ht = 26 * [0]
+        for c in s:
+            i = ord(c) - ord('a')
+            if 0 <= i < 26:
+                ht[i] += 1
+        return ht
+
+    def ifContain(self, curHt, targetHt):
+        for i in range(26):
+            if curHt[i] < targetHt[i]:
+                return False
+        return True

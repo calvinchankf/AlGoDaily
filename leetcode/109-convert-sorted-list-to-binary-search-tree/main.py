@@ -51,3 +51,34 @@ class Solution(object):
         node.left = self.buildBST(nums[:mid])
         node.right = self.buildBST(nums[mid+1:])
         return node
+
+
+
+"""
+    2nd: optimize the speed by using indices instead of array slicing
+
+    Time    O(2n)
+    Space   O(n)
+    124 ms, faster than 81.05%
+"""
+class Solution(object):
+    def sortedListToBST(self, head):
+        """
+        :type head: ListNode
+        :rtype: TreeNode
+        """
+        nums = []
+        cur = head
+        while cur != None:
+            nums.append(cur.val)
+            cur = cur.next
+        return self.buildBST(nums, 0, len(nums)-1)
+    
+    def buildBST(self, nums, left, right):
+        if left > right:
+            return None
+        mid = (left + right) // 2
+        node = TreeNode(nums[mid])
+        node.left = self.buildBST(nums, left, mid - 1)
+        node.right = self.buildBST(nums, mid + 1, right)
+        return node

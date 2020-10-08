@@ -29,13 +29,13 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        if x == x*x:
+        if x == x**2:
             return x
         left = 1
         right = x
         while left < right:
-            mid = (left + right)/2
-            if x >= mid*mid:
+            mid = (left + right) // 2
+            if x >= mid**2:
                 left = mid + 1
             else:
                 right = mid
