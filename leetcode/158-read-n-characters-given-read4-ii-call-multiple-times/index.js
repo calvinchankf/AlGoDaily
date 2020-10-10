@@ -1,16 +1,15 @@
 /**
  * Definition for read4()
  * 
- * @param {character[]} buf4 Destination buffer
- * @return {number} The number of actual characters read
+ * @param {character[]} buf Destination buffer
+ * @return {number} The number of characters read
  * read4 = function(buf4) {
  *     ...
  * };
  */
 
-
 /*
-    1st: array
+    1st: use js closure
     - bad description
     - in short, lets say we want to read the first 5 characters from "leetcode" using read4()
 
@@ -29,14 +28,13 @@
     80 ms, faster than 45.87%
 */
 var solution = function(read4) {
+    const cands = []
     /**
      * @param {character[]} buf Destination buffer
      * @param {number} n Number of characters to read
      * @return {number} The number of actual characters read
      */
     return function(buf, n) {
-        
-        let cands = []
         let total = 0
         
         while (total < n) {
@@ -49,7 +47,8 @@ var solution = function(read4) {
             }
             
             while (cands.length > 0 && total < n) {
-                buf.push(cands.shift())
+                const top = cands.shift()
+                buf.push(top)
                 total += 1
             }
         }
