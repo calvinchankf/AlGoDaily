@@ -23,27 +23,19 @@ import math
 
 class Solution(object):
     def numSquares(self, n):
-        """
-        :type n: int
-        :rtype: int
-        """
-        if n <= 0:
-            return 0
-        root = int(math.sqrt(n))
-        squares = []
-        for i in range(1, root+1):
-            squares.append(i*i)
+        cands = []
+        for i in range(1, int(math.sqrt(n))+1):
+            cands.append(i**2)
+
         dp = (n + 1) * [0]
-        dp[1] = 1
-        for i in range(2, n+1):
-            minSteps = sys.maxsize
-            for sq in squares:
-                remain = i - sq
-                if remain >= 0:
-                    minSteps = min(minSteps, dp[remain] + 1)
+        for i in range(1, n+1):
+            minCount = sys.maxsize
+            for cand in cands:
+                if i - cand >= 0:
+                    minCount = min(minCount, dp[i-cand] + 1)
                 else:
                     break
-            dp[i] = minSteps
+            dp[i] = minCount
         return dp[-1]
 
 

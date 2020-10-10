@@ -145,3 +145,30 @@ print(Solution().findPairs(a, b))
 a = [1, 1, 1, 2, 1]
 b = 1
 print(Solution().findPairs(a, b))
+
+print("-----")
+
+from collections import Counter
+
+"""
+    3rd: remove the paired number from the hashtable
+
+    Time    O(NlogN + logN)
+    Space   O(N)
+    88 ms, faster than 97.98% 
+"""
+class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        ht = Counter(nums)
+        res = set()
+        for x in nums:
+            if x + k in ht:
+                if x == x + k:
+                    if ht[x] > 1:
+                        res.add((x, x))
+                        ht[x + k] -= 1
+                elif ht[x + k] > 0:
+                    res.add((x, x+k))
+                    ht[x + k] -= 1
+        return len(res)

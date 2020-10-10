@@ -60,27 +60,27 @@ print(Solution().findAnagrams("abab", "ab"))
 
 class Solution(object):
     def findAnagrams(self, s, p):
-        pHt = 26 * [0]
+        N, M = len(s), len(p)
+        target = 26 * [0]
         for c in p:
-            pHt[ord(c) - ord('a')] += 1
-
+            key = ord(c) - ord('a')
+            target[key] += 1
         res = []
         j = 0
         window = 26 * [0]
-        for i in range(len(s)):
-            c = s[i]
-            window[ord(c) - ord('a')] += 1
-            if i >= len(p):
-                last = s[j]
+        for i in range(N):
+            window[ord(s[i]) - ord('a')] += 1
+            if i >= M:
+                left = s[j]
                 j += 1
-                window[ord(last) - ord('a')] -= 1
-            if self.areTheSame(window, pHt):
+                window[ord(left) - ord('a')] -= 1
+            if self.sameStructure(target, window):
                 res.append(j)
         return res
-
-    def areTheSame(self, a, b):
+            
+    def sameStructure(self, target, window):
         for i in range(26):
-            if a[i] != b[i]:
+            if target[i] != window[i]:
                 return False
         return True
 

@@ -58,3 +58,57 @@ class Solution(object):
         inorder(root)
         postorder(root.right)
         return boundary
+
+
+
+"""
+    2nd: suboptimal but the way easier to explain in interviews
+
+    Time    O(4n)
+    Space   O(n)
+    36 ms, faster than 99.00%
+"""
+class Solution:
+    def boundaryOfBinaryTree(self, root: TreeNode) -> List[int]:
+        if root == None:
+            return []
+        if not root.left and not root.right:
+            return [root.val]
+        leftBoundary = []
+        def getLeft(node):
+            if node == None:
+                return
+            if not node.left and not node.right:
+                return
+            leftBoundary.append(node.val)
+            if node.left:
+                getLeft(node.left)
+            else:
+                getLeft(node.right)
+        getLeft(root.left)
+        
+        rightBoundary = []
+        def getRight(node):
+            if node == None:
+                return
+            if not node.left and not node.right:
+                return
+            rightBoundary.append(node.val)
+            if node.right:
+                getRight(node.right)
+            else:
+                getRight(node.left)
+        getRight(root.right)
+        rightBoundary.reverse()
+        
+        leaves = []
+        def getLeaves(node):
+            if node == None:
+                return
+            if not node.left and not node.right:
+                leaves.append(node.val)
+            getLeaves(node.left)
+            getLeaves(node.right)
+        getLeaves(root)
+
+        return [root.val] + leftBoundary + leaves + rightBoundary

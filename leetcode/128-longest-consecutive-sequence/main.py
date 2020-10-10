@@ -131,7 +131,7 @@ print("-----")
 
     Time    O(N)
     Space   O(N)
-    84 ms, faster than 67.86%
+    32 ms, faster than 99.43%
 """
 
 
@@ -142,22 +142,20 @@ class Solution:
         res = 0
         for i in range(len(nums)):
             x = nums[i]
-
+            # avoid redundancy
             if x in seen:
                 continue
-
+            # explore on the left
             left = x
             while left - 1 in hs:
                 left -= 1
                 seen.add(left)
-
+            # explore on the right
             right = x
             while right + 1 in hs:
                 right += 1
                 seen.add(right)
-
             res = max(res, right - left + 1)
-
         return res
 
 
