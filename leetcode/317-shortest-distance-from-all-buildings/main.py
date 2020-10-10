@@ -10,63 +10,52 @@ import sys
 
     Time    O(kRRCC) k: number of buildings
     Space   O(2RC)
-    1048 ms, faster than 14.66% 
+    1112 ms, faster than 24.56%
 """
 
 
 class Solution(object):
     def shortestDistance(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
-        """
         if len(grid) == 0 or len(grid[0]) == 0:
             return -1
-        # distance from buildings
-        dist = []
-        for _ in range(len(grid)):
-            dist.append(len(grid[0]) * [0])
-        # no of buildings
+        R, C = len(grid), len(grid[0])
+        dists = []
         visitCounts = []
-        for _ in range(len(grid)):
-            visitCounts.append(len(grid[0]) * [0])
+        for _ in range(R):
+            dists.append(C * [0])
+            visitCounts.append(C * [0])
         buildingCount = 0
-        # reverse the graph
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
+        for i in range(R):
+            for j in range(C):
                 if grid[i][j] == 1:
-                    # bfs
                     buildingCount += 1
-                    self.bfs(grid, i, j, dist, visitCounts)
-        # get the min distance from the cells as long as each cell has been visited by all buildings
+                    self.bfs(grid, i, j, dists, visitCounts)
         res = sys.maxsize
-        for i in range(len(grid)):
-            for j in range(len(grid[0])):
+        for i in range(R):
+            for j in range(C):
                 if grid[i][j] == 0 and visitCounts[i][j] == buildingCount:
-                    res = min(res, dist[i][j])
+                    res = min(res, dists[i][j])
         if res == sys.maxsize:
             return -1
         return res
-
-    def bfs(self, grid, x, y, dist, visitCounts):
+    
+    def bfs(self, grid, x, y, dists, visitCounts):
         q = [(x, y, 0)]
         seen = set()
         while len(q) > 0:
             i, j, steps = q.pop(0)
+            if i < 0 or i == len(grid) or j < 0 or j == len(grid[0]):
+                continue
             if (i, j) in seen:
                 continue
             seen.add((i, j))
             if (i == x and j == y) or (grid[i][j] != 1 and grid[i][j] != 2):
-                dist[i][j] += steps
+                dists[i][j] += steps
                 visitCounts[i][j] += 1
-                if i-1 >= 0:
-                    q.append((i-1, j, steps + 1))
-                if i+1 < len(grid):
-                    q.append((i+1, j, steps + 1))
-                if j-1 >= 0:
-                    q.append((i, j-1, steps + 1))
-                if j+1 < len(grid[0]):
-                    q.append((i, j+1, steps + 1))
+                q.append((i-1, j, steps + 1))
+                q.append((i+1, j, steps + 1))
+                q.append((i, j-1, steps + 1))
+                q.append((i, j+1, steps + 1))
 
 
 a = [

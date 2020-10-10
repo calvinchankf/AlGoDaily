@@ -19,16 +19,20 @@ class Solution(object):
         :rtype: int
         """
         result = 0
-        pfsum = 0
-        mod_map = {
-            0: 1
-        }
+        pfs = 0
+        ht = {}
         for i in range(len(A)):
-            pfsum += A[i]
-            if pfsum % K in mod_map:
-                val = mod_map[pfsum % K]
-                result += val
-                mod_map[pfsum % K] = val+1
+            pfs += A[i]
+
+            mod = pfs % K
+            if mod == 0:
+                result += 1
+
+            if mod in ht:
+                result += ht[mod]
+
+            if mod in ht:
+                ht[mod] += 1
             else:
-                mod_map[pfsum % K] = 1
+                ht[mod] = 1
         return result

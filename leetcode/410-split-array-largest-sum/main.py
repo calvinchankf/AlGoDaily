@@ -65,8 +65,8 @@ class Solution:
         res = sys.maxsize
         for i in range(start, len(nums) - 1):
             pfs += nums[i]
-            temp = self.dfs(nums, i+1, m - 1, ht, suffixSums)
-            cur = max(pfs, temp)
+            sfs = self.dfs(nums, i+1, m - 1, ht, suffixSums)
+            cur = max(pfs, sfs)
             res = min(res, cur)
         ht[key] = res
         return res

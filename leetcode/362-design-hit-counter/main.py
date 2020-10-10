@@ -100,15 +100,14 @@ class HitCounter:
         self.ht[timestamp] += 1
 
     def getHits(self, timestamp: int) -> int:
+        lower = max(timestamp-300, 0)
+        clone = Counter()
         res = 0
-        toRemove = []
-        for key in self.ht:
-            if key > timestamp - 300:
-                res += self.ht[key]
-            else:
-                toRemove.append(key)
-        for x in toRemove:
-            del self.ht[x]
+        for k in self.ht:
+            if k > lower:
+                clone[k] = self.ht[k]
+                res += self.ht[k]
+        self.ht = clone
         return res
 
 

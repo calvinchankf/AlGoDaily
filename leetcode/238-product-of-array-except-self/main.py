@@ -13,19 +13,18 @@
 	104 ms, faster than 61.41%
 	8ay2019
 """
+
+
 class Solution(object):
     def productExceptSelf(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        forward = len(nums) * [1]
-        backward = len(nums) * [1]
-        for i in range(1, len(nums)):
+        n = len(nums)
+        forward = n * [1]
+        backward = n * [1]
+        for i in range(1, n):
             forward[i] = forward[i-1] * nums[i-1]
-        for i in range(len(nums)-2, -1, -1):
+        for i in range(n-2, -1, -1):
             backward[i] = backward[i+1] * nums[i+1]
-        res = len(nums) * [1]
-        for i in range(len(nums)):
+        res = n * [1]
+        for i in range(n):
             res[i] = forward[i] * backward[i]
         return res
