@@ -1,5 +1,6 @@
 /*
     1st approach: stack
+    - similar to lc1614
     
     e.g. ()))((
 
