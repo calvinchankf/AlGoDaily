@@ -5,8 +5,7 @@
 
     Time    O(nlogn)
     Space   O(n)
-    88 ms, faster than 24.16%
-    20apr2019
+    84 ms, faster than 87.62%
 """
 
 
@@ -19,13 +18,14 @@ class Solution(object):
         if len(intervals) == 0:
             return []
         intervals = sorted(intervals, key=lambda x: x[0])
-        merged = [intervals[0]]
-        for itv in intervals:
-            if itv[0] <= merged[-1][1]:
-                merged[-1][1] = max(merged[-1][1], itv[1])
+        res = [intervals[0]]
+        for i in range(1, len(intervals)):
+            s, e = intervals[i]
+            if s <= res[-1][1]:
+                res[-1][1] = max(res[-1][1], e)
             else:
-                merged.append(itv)
-        return merged
+                res.append(intervals[i])
+        return res
 
 
 a = [[1, 3], [2, 6], [8, 10], [15, 18]]
@@ -61,9 +61,9 @@ class Solution(object):
         intervals = sorted(intervals, cmp=cmpter)
         res = [intervals[0]]
         for i in range(1, len(intervals)):
-            cur = intervals[i]
-            if cur[0] <= res[-1][1]:
-                res[-1][1] = cur[1]
+            s, e = intervals[i]
+            if s <= res[-1][1]:
+                res[-1][1] = max(res[-1][1], e)
             else:
-                res.append(cur)
+                res.append(intervals[i])
         return res

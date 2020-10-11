@@ -1,6 +1,9 @@
 """
     1st: hashtable
-	  136ms beats 57.31%
+
+    Time    O(N)
+    Space   O(N)
+	136ms beats 57.31%
 """
 
 

@@ -15,23 +15,23 @@
  */
 var merge = function (intervals) {
 	if (intervals.length == 0) {
-		return [];
-	}
-	intervals = intervals.sort((a, b) => {
-		if (a[0] == b[0]) {
-			return a[1] - b[1];
-		}
-		return a[0] - b[0];
-	});
-	const res = [intervals[0]];
-	for (let i = 0; i < intervals.length; i++) {
-		const lastIdx = res.length - 1;
-		intv = intervals[i];
-		if (intv[0] <= res[lastIdx][1]) {
-			res[lastIdx][1] = Math.max(res[lastIdx][1], intv[1]);
-		} else {
-			res.push(intv);
-		}
-	}
-	return res;
+        return []
+    }
+    intervals = intervals.sort((a, b) => {
+        if (a[0] == b[0]) {
+            return a[1] - b[1]
+        }
+        return a[0] - b[0]
+    })
+    const res = [intervals[0]]
+    for (let i = 0; i < intervals.length; i++) {
+        const n = res.length
+        const [s, e] = intervals[i]
+        if (s <= res[n-1][1]) {
+            res[n-1][1] = Math.max(res[n-1][1], e)
+        } else {
+            res.push(intervals[i])
+        }
+    }
+    return res
 };

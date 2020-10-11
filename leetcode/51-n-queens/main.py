@@ -5,8 +5,8 @@
     - basically try every possisbilities within the safe region
     - for each coordinate, we need to check the whole board to see if it is safe to place a queen
 
-    Time    O(n^4) for each coordinate, we need to check if safe
-    Space   O(n^2)
+    Time    O(N! NN)
+    Space   O(N)
     348 ms, faster than 6.62%
 """
 
@@ -74,6 +74,96 @@ class Board(object):
             temp.append(self.m[i])
         return temp
 
+s = Solution()
+print(s.solveNQueens(4))
+print(s.solveNQueens(5))
+print("-----")
 
-print(Solution().solveNQueens(4))
-print(Solution().solveNQueens(5))
+"""
+    2nd: backtracking with hashtable
+    - optimize the 1st with a hashtable by storing the used rol, col, diag, antidiag indices
+
+    Time    O(N!)
+    Space   O(N)
+    156 ms, faster than 24.22%
+"""
+class Solution:
+    def solveNQueens(self, n: int) -> List[List[str]]:
+        rowHt = set()
+        colHt = set()
+        diagHt = set()
+        antiDiagHt = set()
+        
+        self.res = {}
+        board = self.getBoard(n)
+        self.dfs(n, 0, rowHt, colHt, diagHt, antiDiagHt, board)
+        
+        final = []
+        for key in self.res:
+            final.append(self.res[key])
+        return final
+    
+    def dfs(self, n, i, rowHt, colHt, diagHt, antiDiagHt, board):
+        if i == n:
+            key = self.getBoardKey(board)
+            val = self.getBoardResult(board)
+            self.res[key] = val
+            return
+        
+        for j in range(n):
+            diagKey = i - j
+            antiDiagKey = i + j
+            if i not in rowHt\
+                and j not in colHt\
+                and diagKey not in diagHt\
+                and antiDiagKey not in antiDiagHt:
+                
+                rowHt.add(i)
+                colHt.add(j)
+                diagHt.add(diagKey)
+                antiDiagHt.add(antiDiagKey)
+                
+                clone = self.copyBoard(board)
+                clone[i][j] = 'Q'
+                
+                self.dfs(n, i+1, rowHt, colHt, diagHt, antiDiagHt, clone)
+                
+                rowHt.remove(i)
+                colHt.remove(j)
+                diagHt.remove(diagKey)
+                antiDiagHt.remove(antiDiagKey)
+    
+    def getBoard(self, n):
+        board = []
+        for _ in range(n):
+            board.append(n * ['.'])
+        return board
+                
+    def copyBoard(self, board):
+        n = len(board)
+        clone = self.getBoard(n)
+        for i in range(n):
+            for j in range(n):
+                clone[i][j] = board[i][j]
+        return clone
+    
+    def getBoardKey(self, board):
+        n = len(board)
+        res = ''
+        for i in range(n):
+            for j in range(n):
+                res += board[i][j]
+        return res
+    
+    def getBoardResult(self, board):
+        n = len(board)
+        res = []
+        for i in range(n):
+            s = ''.join(board[i])
+            res.append(s)
+        return res
+
+s = Solution()
+print(s.solveNQueens(4))
+print(s.solveNQueens(5))
+print("-----")
