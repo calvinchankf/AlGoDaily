@@ -20,21 +20,19 @@ var insertIntoBST = function (root, val) {
 		return new TreeNode(val);
 	}
 	let cur = root;
-	while (cur != null) {
+	while (cur !== null) {
 		if (val < cur.val) {
-			if (cur.left == null) {
+			if (cur.left === null) {
 				cur.left = new TreeNode(val);
 				break;
-			} else {
-				cur = cur.left;
 			}
-		} else if (val > cur.val) {
-			if (cur.right == null) {
+			cur = cur.left;
+		} else {
+			if (cur.right === null) {
 				cur.right = new TreeNode(val);
 				break;
-			} else {
-				cur = cur.right;
 			}
+			cur = cur.right;
 		}
 	}
 	return root;

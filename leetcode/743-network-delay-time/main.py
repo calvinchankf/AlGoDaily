@@ -9,7 +9,7 @@ class Solution(object):
         :type K: int
         :rtype: int
 
-        It can be solved by DFS, but the main purpose of this attempt is to understand Dijkstra's Algorithm
+        It can be solved by BFS, but the main purpose of this attempt is to understand Dijkstra's Algorithm
         - Time  O(NlogN) logN due to the heap
         - Space O(N) result dict
         116ms beats 61.11%

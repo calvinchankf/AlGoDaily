@@ -43,8 +43,8 @@ StockSpanner.prototype.next = function (price) {
 		this.stack.length > 0 &&
 		this.stack[this.stack.length - 1][0] <= price
 	) {
-		const pop = this.stack.pop();
-		weight += pop[1];
+		const [top, count] = this.stack.pop();
+		weight += count;
 	}
 	this.stack.push([price, weight]);
 	return weight;
