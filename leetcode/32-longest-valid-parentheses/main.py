@@ -58,19 +58,23 @@ print("---------------")
 
 
 """
-    2nd approach: stack
-    1. when we see an open parenthesis, we put the index of it onto the stack
-    2. when we see a close parenthesis, we check if the last item on the stack is a open parenthesis
-        if yes, we pop the stack and the diff = i-stack[-1] is the length of a valid balenced parentheses string
-        if no, we push the curent index onto the stack
-    3. we can get the global max by comparing with the diff when we pop the stack
+    2nd: stack
+    - similar to lc20
 
-    ref:
-    https://www.youtube.com/watch?v=r0-zx5ejdq0
+    e.g. ")()(()))"
 
-    Time    O(n)
-    Space   O(n)
-    44 ms, faster than 58.92%
+    01234567
+    )()(()))()
+     ^    ^
+    the longest valid one
+
+
+    1. just store the parentheses and corresponding indices into a stack [(parentheses, index), ...]
+    2. then when we see a (, we can calculate the length of a valid parentheses by i - stack[-1][1]
+
+    Time    O(N)
+    Space   O(N)
+    84 ms, faster than 79.21%
 """
 
 
@@ -81,22 +85,22 @@ class Solution(object):
         :rtype: int
         """
         res = 0
-        stack = [-1]
+        stack = []
         for i in range(len(s)):
             c = s[i]
             if c == '(':
-                stack.append(i)
+                stack.append((c, i))
             elif c == ')':
-                if stack[-1] != -1:
-                    idx = stack[-1]
-                    if s[idx] == '(':
-                        pop = stack.pop()
-                        diff = i - stack[-1]
-                        res = max(res, diff)
+                if len(stack) > 0 and stack[-1][0] == '(':
+                    stack.pop()
+                    diff = None
+                    if len(stack) > 0:
+                        diff = i - stack[-1][1]
                     else:
-                        stack.append(i)
+                        diff = i + 1
+                    res = max(res, diff)
                 else:
-                    stack.append(i)
+                    stack.append((c, i))
         return res
 
 

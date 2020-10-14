@@ -1,5 +1,5 @@
 """
-    1st: brute force
+    0th: brute force
     Time    O(2^(M+N))
     LTE:
 """
@@ -113,6 +113,53 @@ c = "cacabaabacaabccbabcaaacacbac"
 print(s.isInterleave(a, b, c))
 
 print("-----")
+
+
+"""
+    2nd: dynamic programming, recursive dfs + hashtable
+    - recursively check the suffix, to see if we can form s3 from the end
+
+    e.g.
+    s1 = abc
+    s2 = def
+    s3 = abdecf
+
+    At the bottom of the recursion:
+    s2[2:] = s3[5:], f = f so we return true
+
+    then we see that:
+    s1[2] == s3[4] and s2[2:] = s3[5:](the result from recursion), so we return true
+
+    ....do the steps over and over again we will get the result
+
+    Time    O(MN)
+    Space   O(M+N)
+    24 ms, faster than 79.12% 
+"""
+
+
+class Solution(object):
+    def isInterleave(self, s1, s2, s3):
+        if len(s1) + len(s2) != len(s3):
+            return False
+        return self.dfs(s1, s2, s3, {})
+
+    def dfs(self, s1, s2, s3, ht):
+        if len(s1) == 0 and len(s2) == 0:
+            if len(s3) == 0:
+                return True
+            return False
+        key = (len(s1), len(s2), len(s3))
+        if key in ht:
+            return ht[key]
+        b = False
+        if len(s1) > 0 and s1[0] == s3[0]:
+            b |= self.dfs(s1[1:], s2, s3[1:], ht)
+        if len(s2) > 0 and s2[0] == s3[0]:
+            b |= self.dfs(s1, s2[1:], s3[1:], ht)
+        ht[key] = b
+        return b
+
 
 """
     3rd: dynamic programming, 2d array bottom up

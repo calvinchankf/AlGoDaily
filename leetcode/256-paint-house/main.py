@@ -21,10 +21,10 @@ class Solution(object):
         """
         red, blue, green = 0, 0, 0
         for x, y, z in costs:
-            tempRed = x + min(blue, green)
-            tempBlue = y + min(red, green)
-            tempGreen = z + min(red, blue)
-            red, blue, green = tempRed, tempBlue, tempGreen
+            nextRed = x + min(blue, green)
+            nextBlue = y + min(red, green)
+            nextGreen = z + min(red, blue)
+            red, blue, green = nextRed, nextBlue, nextGreen
         return min(red, blue, green)
 
 
