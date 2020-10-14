@@ -107,36 +107,29 @@ class FreqStack(object):
 """
 
 
+from collections import Counter
+
 class FreqStack(object):
 
     def __init__(self):
-        self.counter = {}
-        self.map = []
+        self.counter = Counter()
+        self.freqs = []
 
     def push(self, x):
-        """
-        :type x: int
-        :rtype: None
-        """
-        if x not in self.counter:
-            self.counter[x] = 1
-        else:
-            self.counter[x] += 1
+        self.counter[x] += 1
         idx = self.counter[x] - 1
-        if idx == len(self.map):
-            self.map.append([x])
+        if idx == len(self.freqs):
+            self.freqs.append([x])
         else:
-            self.map[idx].append(x)
+            self.freqs[idx].append(x)
+        
 
     def pop(self):
-        """
-        :rtype: int
-        """
-        freqArr = self.map[-1]
+        freqArr = self.freqs[-1]
         x = freqArr.pop()
         self.counter[x] -= 1
         if len(freqArr) == 0:
-            self.map.pop()
+            self.freqs.pop()
         if self.counter[x] == 0:
             del self.counter[x]
         return x
