@@ -2,8 +2,8 @@
     1st approach: hashtable
 
     Time    O(m*(n+m)+m)  m: average length of characters, n: length of input array
-    Space   O(26 * n)
-    88 ms, faster than 75.36%
+    Space   O(n)
+    88 ms, faster than 75.36% 
 */
 var commonChars = function (A) {
 	const caches = [];

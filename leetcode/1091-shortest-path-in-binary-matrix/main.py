@@ -15,25 +15,30 @@ class Solution(object):
         :type grid: List[List[int]]
         :rtype: int
         """
-        if len(grid) == 0 or len(grid[0]) == 0 or grid[0][0] == 1:
+        if grid[0][0] == 1 or grid[-1][-1] == 1:
             return -1
-        seen = set()
-        q = []
-        q.append((0, 0, 1))
+        ht = {}
+        R, C = len(grid), len(grid[0])
+        q = [(0, 0, 1)]
         while len(q) > 0:
             i, j, steps = q.pop(0)
-            if (i, j) in seen:
+            if i < 0 or i == R or j < 0 or j == C:
                 continue
-            seen.add((i, j))
-            if i+1 == len(grid) and j+1 == len(grid[0]) and grid[i][j] == 0:
+
+            if grid[i][j] != 0:
+                continue
+
+            if i+1 == R and j+1 == C:
                 return steps
 
-            directions = [(-1, 0), (-1, 1), (0, 1), (1, 1),
-                          (1, 0), (1, -1), (0, -1), (-1, -1)]
-            for di, dj in directions:
-                x = i + di
-                y = j + dj
-                if x >= 0 and x < len(grid) and y >= 0 and y < len(grid[0]) and grid[x][y] == 0:
-                    q.append((x, y, steps+1))
+            key = (i, j)
+            if key in ht:
+                continue
+            ht[key] = True
+
+            dirs = [(-1, 0), (-1, 1), (0, 1), (1, 1),
+                    (1, 0), (1, -1), (0, -1), (-1, -1)]
+            for di, dj in dirs:
+                q.append((i+di, j+dj, steps+1))
 
         return -1

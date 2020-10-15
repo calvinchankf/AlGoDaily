@@ -34,30 +34,27 @@ class Solution(object):
         """
         if n < 0:
             return -1
-        # transform the digits to an array
+        # change to an array
         nums = []
         while n > 0:
             nums = [n % 10] + nums
             n /= 10
-        # find the pivot from the increasing sequence from the right
-        pivot = -1
-        for i in range(len(nums)-2, -1, -1):
-            if nums[i] < nums[i+1]:
-                pivot = i
-                break
-        # if no pivot, return fail to get the next one
-        if pivot == -1:
+        # find the monotonic increasing suffix
+        i = len(nums) - 1
+        while i - 1 >= 0 and nums[i-1] >= nums[i]:
+            i -= 1
+        if i == 0:
             return -1
         # find the number to swap
-        target = -1
-        for i in range(len(nums)-1, -1, -1):
-            if nums[i] > nums[pivot]:
-                target = i
-                break
-        # swap
-        nums[pivot], nums[target] = nums[target], nums[pivot]
+        pivot = i - 1
+        # find the successor
+        j = len(nums) - 1
+        while j - 1 >= 0 and nums[j] <= nums[pivot]:
+            j -= 1
+        # swap the numbers at pivot and the successor
+        nums[pivot], nums[j] = nums[j], nums[pivot]
         # reverse the increasing sequence from the right
-        self.reverse(nums, pivot+1, len(nums)-1)
+        self.reverse(nums, i, len(nums)-1)
         # transform back to an integer
         res = 0
         for num in nums:
@@ -67,9 +64,7 @@ class Solution(object):
             return -1
         return res
 
-    def reverse(self, nums, start, end):
-        left = start
-        right = end
+    def reverse(self, nums, left, right):
         while left < right:
             nums[left], nums[right] = nums[right], nums[left]
             left += 1

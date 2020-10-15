@@ -1,7 +1,7 @@
 /*
     3rd: iterative BST search
 
-	Time		O(logn)
+	Time		O(logN) -> O(N)
     Space	    O(height of the tree) the call stack
     104 ms, faster than 20.98%
 */
