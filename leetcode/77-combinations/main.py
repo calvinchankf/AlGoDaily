@@ -49,24 +49,19 @@ class Solution(object):
     Implementation similar to permutations
     Time    O(nCk)
     Space   O(nCk) due to the recrusion
-    beats   21.53%
+    648 ms, faster than 39.65%
     """
-
-    def __init__(self):
-        self.result = []
-
     def combine(self, n, k):
-        if k < 1 or k > n:
-            return []
-        self.dfs(1, n, [], k)
-        return self.result
-
-    def dfs(self, start, n, path, k):
-        if len(path) == k:
-            self.result.append(path)
-        elif len(path) < k:
-            for i in range(start, n+1):
-                self.dfs(i+1, n, path + [i], k)
+        self.res = []
+        self.dfs(n, 1, k, [])
+        return self.res
+    
+    def dfs(self, n, start, k, chosen):
+        if len(chosen) == k:
+            self.res.append(chosen)
+            return
+        for i in range(start, n+1):
+            self.dfs(n, i+1, k, chosen + [i])
 
 
 s = Solution()

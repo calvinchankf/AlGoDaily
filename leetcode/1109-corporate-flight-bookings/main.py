@@ -1,11 +1,4 @@
 """
-    0th: brute force
-    Time    O(n^2)
-    Space   O(n)
-    LTE
-"""
-
-"""
     1st: math
     - similar to lcl094, 1589
     - typical range frequency counting technique to deal with values on a range
@@ -25,10 +18,11 @@ class Solution(object):
         :type n: int
         :rtype: List[int]
         """
-        res = (n+1) * [0]
-        for a, b, c in bookings:
-            res[a-1] += c
-            res[b] -= c
-        for i in range(1, len(res)):
+        res = (n + 2) * [0]
+        # range counting technique
+        for i, j, k in bookings:
+            res[i] += k
+            res[j+1] -= k
+        for i in range(1, n+1):
             res[i] += res[i-1]
-        return res[:-1]
+        return res[1:-1]

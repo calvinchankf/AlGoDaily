@@ -11,15 +11,8 @@
 
 class Solution(object):
     def numRollsToTarget(self, d, f, target):
-        """
-        :type d: int
-        :type f: int
-        :type target: int
-        :rtype: int
-        """
-        ht = {}
-        total = self.dfs(target, d, f, ht)
-        return total % (10**9+7)
+        total = self.dfs(target, d, f, {}})
+        return total
 
     def dfs(self, d, f, target, ht):
         if target < 0:
@@ -35,5 +28,5 @@ class Solution(object):
         total = 0
         for i in range(1, f+1):
             total += self.dfs(d-1, f, target - i, ht)
-        ht[key] = total
-        return total
+        ht[key] = total % (10**9+7)
+        return ht[key]
