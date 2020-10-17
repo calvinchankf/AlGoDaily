@@ -42,6 +42,8 @@ class Solution(object):
 
 print(Solution().getFactors(252))
 
+print("-----")
+
 """
     2nd approach: recursion
     - for every number from 2 to n-1, if it can divide the current number, it is one of the factors
@@ -85,3 +87,41 @@ class Solution(object):
 
 
 print(Solution().getFactors(252))
+
+print("-----")
+
+"""
+    3rd: factorization + lc39
+
+    Time    ???
+    Space   ???
+    20 ms, faster than 80.77%
+"""
+class Solution(object):
+    def getFactors(self, n):
+        if n <= 1:
+            return []
+        nums = sorted(self.genFactors(n))
+        self.res = []
+        self.dfs(nums, [], 1, n)
+        return self.res
+        
+    def genFactors(self, n):
+        r = int(math.sqrt(n))
+        res = set()
+        for i in range(2, r+1):
+            if n%i == 0:
+                res.add(i)
+                res.add(n//i)
+        return res
+
+    
+    def dfs(self, nums, chosen, total, n):
+        if total == n:
+            self.res.append(chosen)
+            return
+        if total > n:
+            return
+        for i in range(len(nums)):
+            if len(chosen) == 0 or chosen[-1] <= nums[i]:
+                self.dfs(nums, chosen + [nums[i]], total * nums[i], n)

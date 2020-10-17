@@ -1,3 +1,15 @@
+"""
+    1st approach: stack + hashtable
+    - similar to leetcode316, 331, 735, 901, 1081
+    - first count the number of occurence for each character
+    - then we use a stack to store the temp result as we move forward
+        - when the current character is lexicographicallly less than stack[-1] and stack[-] still has occurence larger than 0, we pop the stack
+    - we push the current character onto the stack
+    - we can use a hashtable to indicate which characters are currently in the stack
+
+    Time    O(n)
+    Space   O(n)
+"""
 class Solution(object):
     def smallestSubsequence(self, s):
         """

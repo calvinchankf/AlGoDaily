@@ -6,7 +6,7 @@
 
     Time    O(mn)
     Space   O(mn)
-     332 ms, faster than 8.52%
+    332 ms, faster than 8.52%
 """
 
 

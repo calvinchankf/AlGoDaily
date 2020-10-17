@@ -1,5 +1,6 @@
 /*
     1st approach:
+    - similar to lc56, 252, 253, 435, 452, 646
 	1. sort the intervals by start time
 	2. prepare a temporary array for nonoverlapping intervals
 	3. when the current interval follows(behind and not overlap) the temp array last item, append to the temp array

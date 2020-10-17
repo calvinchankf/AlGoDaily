@@ -18,17 +18,17 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
+        ht = {}
         stack = []
-        m = {}
-        for num in nums2:
-            while len(stack) > 0 and num > stack[-1]:
-                pop = stack.pop()
-                m[pop] = num
-            stack.append(num)
-        while len(stack) > 0:
-            pop = stack.pop()
-            m[pop] = -1
+        for x in nums2:
+            while len(stack) > 0 and stack[-1] < x:
+                top = stack.pop()
+                ht[top] = x
+            stack.append(x)
         res = []
-        for num in nums1:
-            res.append(m[num])
+        for x in nums1:
+            if x in ht:
+                res.append(ht[x])
+            else:
+                res.append(-1)
         return res

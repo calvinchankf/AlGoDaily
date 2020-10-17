@@ -1,58 +1,40 @@
 """
-    1st approach: binary search + hashtable
+    1st approach: sort + binary search
     - sort the intervals (remember the original index by appending to the end, or create a class)
-    - for each sorted interval, binary search to find the interval which start >= end
-    - using a hashtable to cache the result such that we can construct the result
+    - for each input interval, binary search to find the interval[j] which start[j] >= end[i]
 
     Time    O(nlogn)
     Space   O(n)
-    360 ms, faster than 22.68%
+    388 ms, faster than 36.55%
 """
 
 
 class Solution(object):
     def findRightInterval(self, intervals):
-        """
-        :type intervals: List[List[int]]
-        :rtype: List[int]
-        """
-        nodes = []
-        for i in range(len(intervals)):
-            # start, end, index
-            temp = (intervals[i][0], intervals[i][1], i)
-            nodes.append(temp)
-        # sort by start time
-        nodes = sorted(nodes, key=lambda x: x[0])
-        # since question said that there will be no duplicate start
-        m = {}
-        for i in range(len(nodes)):
-            x, y, z = nodes[i]
-            key = str(x) + ',' + str(y)
-            if i+1 == len(nodes):
-                m[key] = -1
-            else:
-                idx = self.upperBSearch(nodes, y) - 1
-                # find the interval which the start point is >= target endpoint
-                if nodes[idx][0] < y:
-                    idx += 1
-                # check if found index is within the boundary
-                if idx < len(nodes):
-                    m[key] = nodes[idx][2]
-                else:
-                    m[key] = -1
+        n = len(intervals)
+        intvs = []
+        for i in range(n):
+            x = intervals[i]
+            intvs.append((x[0], x[1], i))
+        intvs.sort()
         res = []
-        for x, y in intervals:
-            key = str(x) + ',' + str(y)
-            res.append(m[key])
+        for i in range(n):
+            s, e = intervals[i]
+            j = self.lowerBsearch(intvs, e)
+            if j >= 0 and j < n:
+                idx = intvs[j][2]
+                res.append(idx)
+            else:
+                res.append(-1)
         return res
 
-    def upperBSearch(self, nums, target):
+    def lowerBsearch(self, nums, target):
         left = 0
         right = len(nums)
         while left < right:
-            mid = (left + right)//2
-            if target >= nums[mid][0]:
-                left = mid + 1
-            else:
+            mid = (left + right) // 2
+            if target <= nums[mid][0]:
                 right = mid
+            else:
+                left = mid + 1
         return left

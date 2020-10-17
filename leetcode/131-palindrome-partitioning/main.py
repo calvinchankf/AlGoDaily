@@ -37,3 +37,26 @@ class Solution(object):
             sub = s[:i+1]
             if sub == sub[::-1]:
                 self.dfs(s[i+1:], cur + [sub])
+
+
+"""
+    same logic but with optimization
+"""
+
+
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        self.res = []
+        self.dfs(s, [])
+        return self.res
+
+    def dfs(self, s, chosen):
+        if len(s) == 0:
+            self.res.append(chosen)
+        sub = ''
+        revSub = ''
+        for i in range(len(s)):
+            sub += s[i]
+            revSub = s[i] + revSub
+            if sub == revSub:
+                self.dfs(s[i+1:], chosen + [sub])
