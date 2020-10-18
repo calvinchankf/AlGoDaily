@@ -7,8 +7,8 @@ import heapq
     - each interval, compare the last meeting(since sorted) amongst the meeting in the meeting rooms
     - if there is no collision, put the meeting in that room, else create a new meeting room for the interval
     
-    Time		O(NlogN)    sort
-    Space 	    O(N)	    result array
+    Time		O(NlogN + MN)   sort + iterate over the 'ends'
+    Space 	    O(N)	        result array
     76 ms, faster than 52.42% 
 """
 
@@ -61,17 +61,10 @@ class Solution(object):
         :type intervals: List[List[int]]
         :rtype: int
         """
-        if len(intervals) == 0:
-            return 0
-
-        intervals = sorted(intervals, key=lambda x: x[0])
-
+        intervals.sort()
         pq = []
-        for i in range(len(intervals)):
-            start, end = intervals[i]
-            if len(pq) > 0 and start >= pq[0]:
-                heapq.heappop(pq)
-                heapq.heappush(pq, end)
-            else:
-                heapq.heappush(pq, end)
+        for s, e in intervals:
+            if len(pq) > 0 and s >= pq[0]:
+                pop = heapq.heappop(pq)
+            heapq.heappush(pq, e)
         return len(pq)

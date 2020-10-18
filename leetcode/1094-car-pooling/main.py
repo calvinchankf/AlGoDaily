@@ -12,25 +12,22 @@
 
 class Solution(object):
     def carPooling(self, trips, capacity):
-        """
-        :type trips: List[List[int]]
-        :type capacity: int
-        :rtype: bool
-        """
-        trips = sorted(trips, key=lambda x: x[1])
+        n = 0
+        for c, s, e in trips:
+            n = max(n, e)
+        occupiedCounts = (n + 1) * [0]
 
-        maxIdx = max([x[2] for x in trips])
-        slots = (maxIdx+1) * [0]  # or slots = 1001 * [0] according to the desc
+        # range counting technique
+        for c, s, e in trips:
+            occupiedCounts[s] += c
+            occupiedCounts[e] -= c
+        for i in range(1, n+1):
+            occupiedCounts[i] = occupiedCounts[i-1] + occupiedCounts[i]
 
-        for num, start, end in trips:
-            slots[start] += num
-            slots[end] -= num
-        cur = 0
-        for i in range(len(slots)):
-            cur += slots[i]
-            if cur > capacity:
-                return False
-        return True
+        maxCount = 0
+        for i in range(n+1):
+            maxCount = max(maxCount, occupiedCounts[i])
+        return maxCount <= capacity
 
 
 s = Solution()

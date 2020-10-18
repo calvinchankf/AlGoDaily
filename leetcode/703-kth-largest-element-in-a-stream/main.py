@@ -45,6 +45,15 @@ class KthLargest(object):
 """
     2nd approach: use a min heap with capacity
 
+    let's say k = 4, start with [2,1,3,1]
+
+    .add(5)     [2,1,3,1,5] -> [2,3,1,5]
+    .add(7)     [1,2,3,5,7] -> [2,3,5,7]
+    .add(2)     [2,3,5,7,2] -> [2,3,5,7]
+    .add(6)     [2,3,5,7,6] -> [3,5,7,6]
+
+    therefore, it means it always keep the K largest numbers in an unsorted order
+
     Time    O(n) __init__, O(logn) add
     Space   O(n)
     140 ms, faster than 38.36%

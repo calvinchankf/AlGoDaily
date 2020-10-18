@@ -12,7 +12,7 @@
 
     Time	O(n)
     Space   O(n)
-    1may2019
+    876 ms, faster than 38.92%
 """
 
 
@@ -29,22 +29,19 @@ class Solution(object):
             else:
                 arr.append(1)
         m = {}
-        total = 0
+        pfs = 0
         res = 0
         for i in range(len(arr)):
-            total += arr[i]
+            pfs += arr[i]
 
-            if total == 0:
+            if pfs == 0:
                 res = max(res, i+1)
 
-            if total in m:
-                leftMostIdx = m[total][0]
-                diff = i - leftMostIdx
-                res = max(res, diff)
+            if pfs in m:
+                leftMostIdx = m[pfs]
+                res = max(res, i - leftMostIdx)
 
-            if total not in m:
-                m[total] = [i]
-            else:
-                m[total].append(i)
+            if pfs not in m:
+                m[pfs] = i
 
         return res

@@ -84,7 +84,7 @@ print(Solution().exist(a, "ABCESEEEFS"))
 
     Time    O(N * 3^L) N: number of cells, L: length of target word, 3^L instead of 4^L because we dont go backward
     Space   O(N)
-    556 ms, faster than 21.93%
+    348 ms, faster than 59.46%
 """
 
 
@@ -93,27 +93,28 @@ class Solution:
         for i in range(len(board)):
             for j in range(len(board[0])):
                 if board[i][j] == word[0]:
-                    hs = set()
-                    b = self.dfs(board, i, j, word, hs)
-                    if b:
+                    if self.dfs(board, word, i, j, {}):
                         return True
         return False
-
-    def dfs(self, board, i, j, word, hs):
-        if len(word) == 0:
-            return True
+    
+    def dfs(self, board, word, i, j, ht):
         if i < 0 or i == len(board) or j < 0 or j == len(board[0]):
             return False
+        # not match
         if word[0] != board[i][j]:
             return False
+        # only store the possible path in ht
         key = (i, j)
-        if key in hs:
+        if key in ht:
             return False
-        hs.add(key)
-        dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
-        for di, dj in dirs:
-            b = self.dfs(board, i+di, j+dj, word[1:], hs)
-            if b:
-                return True
-        hs.remove(key)
-        return False
+        # last character
+        if len(word) == 1:
+            return True
+        # backtracking
+        ht[key] = True
+        b = self.dfs(board, word[1:], i-1, j, ht)\
+            or self.dfs(board, word[1:], i+1, j, ht)\
+            or self.dfs(board, word[1:], i, j-1, ht)\
+            or self.dfs(board, word[1:], i, j+1, ht)
+        del ht[key]
+        return b
