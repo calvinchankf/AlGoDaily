@@ -55,7 +55,7 @@ class Solution(object):
 	- sort the array
 	- make that array into a linked list
     
-	Time	O(NlogN) N=n*k
+	Time	O(Nlogk)
 	Space	O(N)
 	124 ms, faster than 41.48% 
 """
@@ -81,3 +81,9 @@ class Solution(object):
             cur.next = node
             cur = cur.next
         return dump.next
+
+"""
+    Variation: merge k sort arrays iterator
+
+    see /glassdoor/facebook/merge-sorted-lists-iterator
+"""

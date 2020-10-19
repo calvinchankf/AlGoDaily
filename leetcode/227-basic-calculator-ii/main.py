@@ -140,7 +140,7 @@ class Solution(object):
         for i in range(len(s)):
             c = s[i]
             if c.isdigit():
-                num = num*10+int(c)
+                num = num*10 + int(c)
             if i + 1 == len(s) or (c == '+' or c == '-' or c == '*' or c == '/'):
                 if sign == '+':
                     stack.append(num)
