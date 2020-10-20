@@ -6,7 +6,7 @@
     - then we do recursion to select the same age/young players who have the score <= player[i] has
     - we can cache the result by doing the recursion from the bottom
 
-    Time    O(N^3)
+    Time    O(NlogN + N^2) for every (index, limit) pair, it is visited once
     Space   O(N^2)
     3544 ms, faster than 9.52%
 """
@@ -38,3 +38,37 @@ class Solution(object):
                 maxScore = max(maxScore, temp)
         ht[key] = maxScore
         return ht[key]
+    
+
+"""
+    2nd: dynamic programming (2D array)
+    - longest increasing subsequence
+
+    Time    O(NlogN + N^2)
+    Space   O(N)
+    1408 ms, faster than 82.14%
+"""
+class Solution(object):
+    def bestTeamScore(self, scores, ages):
+        """
+        :type scores: List[int]
+        :type ages: List[int]
+        :rtype: int
+        """
+        n = len(scores)
+        players = []
+        for i in range(n):
+            players.append((ages[i], scores[i]))
+        players.sort()
+        
+        maxScores = n * [0]
+        for i in range(n):
+            age, score = players[i]
+            maxScore = 0
+            for j in range(i):
+                if players[j][1] <= score:
+                        maxScore = max(maxScore, maxScores[j])
+            maxScores[i] = maxScore + score
+        return max(maxScores)
+        
+        
