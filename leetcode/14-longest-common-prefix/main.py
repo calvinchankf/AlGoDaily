@@ -5,7 +5,6 @@
 	Time		O(n*m)
 	Space		O(m)
 	0ms beats 100%
-	2jun2019
 """
 
 
@@ -16,14 +15,14 @@ class Solution(object):
         :rtype: str
         """
         if len(strs) == 0:
-            return ''
+            return ""
         res = strs[0]
         for i in range(1, len(strs)):
             s = strs[i]
-            for j in range(min(len(res), len(s))):
-                if res[j] != s[j]:
-                    res = s[:j]
+            j = 0
+            while j < len(res) and j < len(s):
+                if s[j] != res[j]:
                     break
-            if len(s) < len(res):
-                res = s
+                j += 1
+            res = s[:j]
         return res

@@ -2,10 +2,10 @@ class TicTacToe(object):
 
     def __init__(self, n):
         self.n = n
-        self.rows = n*[0]
-        self.cols = n*[0]
-        self.diag = 0
-        self.antiDiag = 0
+        self.ht_row = n*[0]
+        self.ht_col = n*[0]
+        self.ht_diag1 = 0
+        self.ht_diag2 = 0
 
     def move(self, row, col, player):
         """
@@ -18,16 +18,23 @@ class TicTacToe(object):
         44 ms, faster than 84.21%
         26feb2019
         """
-        toAdd = 1 if player == 1 else -1
-        self.rows[row] += toAdd
-        self.cols[col] += toAdd
+        score = 0
+        if player == 1:
+            score = 1
+        else:
+            score = -1
+        self.ht_row[row] += score
+        self.ht_col[col] += score
         if row == col:
-            self.diag += toAdd
-        if row + col == self.n-1:
-            self.antiDiag += toAdd
-        if abs(self.rows[row]) == self.n \
-                or abs(self.cols[col]) == self.n \
-                or abs(self.diag) == self.n \
-                or abs(self.antiDiag) == self.n:
+            self.ht_diag1 += score
+        if row + col == self.n - 1:
+            self.ht_diag2 += score
+
+        ifWin = abs(self.ht_row[row]) == self.n\
+            or abs(self.ht_col[col]) == self.n \
+            or abs(self.ht_diag1) == self.n \
+            or abs(self.ht_diag2) == self.n
+
+        if ifWin:
             return player
         return 0

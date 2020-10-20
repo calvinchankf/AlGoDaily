@@ -12,31 +12,33 @@ import heapq
 """
 
 
+class Interval:
+    def __init__(self, start: int = None, end: int = None):
+        self.start = start
+        self.end = end
+
+
 class Solution(object):
-    def employeeFreeTime(self, schedule):
-        """
-        :type schedule: List[List[List[int]]]
-        :rtype: List[List[int]]
-        """
-        pq = []
-        for intvs in schedule:
-            for intv in intvs:
-                heapq.heappush(pq, (intv[0], intv[1]))
-        if len(pq) == 0:
+    def employeeFreeTime(self, schedule: '[[Interval]]') -> '[Interval]':
+        intvs = []
+        for arr in schedule:
+            for x in arr:
+                intvs.append([x.start, x.end])
+        if len(intvs) == 0:
             return []
-        start, end = heapq.heappop(pq)
-        merged = [[start, end]]
-        while len(pq) > 0:
-            start, end = heapq.heappop(pq)
-            if start <= merged[-1][1]:
-                merged[-1][1] = max(merged[-1][1], end)
+        intvs.sort()
+        merged = [intvs[0]]
+        for i in range(1, len(intvs)):
+            s, e = intvs[i]
+            if s <= merged[-1][1]:
+                merged[-1][1] = max(merged[-1][1], e)
             else:
-                merged.append([start, end])
+                merged.append([s, e])
         res = []
         for i in range(1, len(merged)):
-            start = merged[i-1][1]
-            end = merged[i][0]
-            res.append([start, end])
+            s = merged[i-1][1]
+            e = merged[i][0]
+            res.append(Interval(s, e))
         return res
 
 

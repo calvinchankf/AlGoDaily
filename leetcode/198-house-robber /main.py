@@ -1,12 +1,36 @@
 """
+    0th: suboptimal dynamic programming
+    - similar to lc300, 746
+
+    Time    O(N^2)
+    Space   O(N)
+    36 ms, faster than 45.56%
+"""
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 0:
+            return 0
+        if n == 1:
+            return nums[0]
+        dp = n * [0]
+        dp[0] = nums[0]
+        dp[1] = nums[1]
+        for i in range(2, n):
+            maxFromLeft = 0
+            for j in range(i-1):
+                maxFromLeft = max(maxFromLeft, dp[j])
+            dp[i] = maxFromLeft + nums[i]
+        return max(dp[-1], dp[-2])
+
+
+"""
     1st approach: dynamic programming
     
-    Time    O(n)
-    Space   O(n)
+    Time    O(N)
+    Space   O(N)
     16 ms, faster than 89.83%
 """
-
-
 class Solution(object):
     def rob(self, nums):
         """
@@ -30,12 +54,10 @@ class Solution(object):
 """
     2nd approach: dynamic programming
     
-    Time    O(n)
-    Space   O(1)
-    16 ms, faster than 89.83%
+    Time    O(N)
+    Space   O(N)
+    12 ms, faster than 98.42% 
 """
-
-
 class Solution(object):
     def rob(self, nums):
         """

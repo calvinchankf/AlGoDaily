@@ -13,25 +13,24 @@ class Solution:
         right = 2500
         while left < right:
             mid = (left + right) // 2
-            b = self.canSwim(grid, mid)
-            if b:
+            if self.canSwim(grid, mid):
                 right = mid
             else:
                 left = mid + 1
         return left
 
     def canSwim(self, grid, mid):
-        R = len(grid)
-        C = len(grid[0])
-
+        R, C = len(grid), len(grid[0])
         hs = set()
         q = [(0, 0)]
         while len(q) > 0:
             i, j = q.pop(0)
             if i < 0 or i == R or j < 0 or j == C:
                 continue
+
             if grid[i][j] > mid:
                 continue
+
             key = (i, j)
             if key in hs:
                 continue
