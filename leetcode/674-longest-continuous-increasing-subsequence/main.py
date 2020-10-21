@@ -1,9 +1,9 @@
 """
-    2nd approach: same logic + followup: print the result array
+    1st: sliding window
 
     Time    O(n)
     Space   O(n)
-    48 ms, faster than 62.45%
+    68 ms, faster than 95.02% 
 """
 
 
@@ -13,22 +13,17 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums) == 0:
-            return 0
+        n = len(nums)
+        if n <= 1:
+            return n
         res = 0
-        prev = nums[0]
-        count = 1
-        for i in range(1, len(nums)):
-            if nums[i] > prev:
-                prev = nums[i]
-                count += 1
+        cur = 1
+        for i in range(1, n):
+            if nums[i] > nums[i-1]:
+                cur += 1
             else:
-                if count > res:
-                    res = count
-                prev = nums[i]
-                count = 1
-        if count > res:
-            res = count
+                cur = 1
+            res = max(res, cur)
         return res
 
 
@@ -55,9 +50,7 @@ class Solution(object):
             if nums[i] > cur[-1]:
                 cur.append(nums[i])
             else:
-                if len(cur) > len(res):
-                    res = cur
                 cur = [nums[i]]
-        if len(cur) > len(res):
-            res = cur
+            if len(cur) > len(res):
+                res = cur
         return res

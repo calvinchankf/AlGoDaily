@@ -35,7 +35,7 @@ class Solution(object):
 
         usersHistory = defaultdict(list)
         for i in range(n):
-            username, website = arr[i][0], arr[i][2]
+            username, _, website = arr[i]
             usersHistory[username].append(website)
 
         counts = defaultdict(int)

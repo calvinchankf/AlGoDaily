@@ -1,9 +1,9 @@
 /*
     1st approach: hashtable
 
-    Time    O(A+B)
-    Space   O(A+B)
-    88 ms, faster than 38.10% 
+    Time    O(M+N)
+    Space   O(M)
+    36 ms, faster than 52.13%
 */
 var intersect = function (nums1, nums2) {
 	const ht = {};
