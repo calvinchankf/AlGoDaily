@@ -3,8 +3,7 @@ import sys
 
 """
     1st: dynamic programming, recursion + hashtable
-    - similar to lc813, lc1043
-    - 
+    - similar to lc813, 1043, 1335
 
     LTE 
     26 / 27 test cases passed.
@@ -36,6 +35,7 @@ class Solution:
 
 """
     2nd:
+    - similar to lc813, 1043, 1335
     - optimize 1st approach with suffix sum and use start index instead of array slicing
 
     Time    O(M * N^2)
@@ -74,6 +74,7 @@ class Solution:
 
 """
     3rd: bottom up iteration
+    - similar to lc813, 1043, 1335
     - tbh, it is hard to transform the recursive approach into this approach....
 
     ref:

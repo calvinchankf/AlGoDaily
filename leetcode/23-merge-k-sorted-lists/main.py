@@ -68,16 +68,20 @@ class Solution(object):
         :rtype: ListNode
         """
         pq = []
-        for l in lists:
-            cur = l
+        for head in lists:
+            cur = head
             while cur != None:
                 heapq.heappush(pq, cur.val)
                 cur = cur.next
-        dump = ListNode(0)
-        cur = dump
+        dumphead = ListNode(0)
+        cur = dumphead
         while len(pq) > 0:
-            pop = heapq.heappop(pq)
-            node = ListNode(pop)
-            cur.next = node
+            cur.next = ListNode(heapq.heappop(pq))
             cur = cur.next
-        return dump.next
+        return dumphead.next
+
+"""
+    Variation: merge k sort arrays iterator
+
+    see /glassdoor/facebook/merge-sorted-lists-iterator
+"""

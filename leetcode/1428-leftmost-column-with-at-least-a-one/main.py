@@ -2,7 +2,7 @@
     binary search
     - similar to lc278
 
-    Time    O(logN)
+    Time    O(RlogC)
     Space   O(1)
     88 ms, faster than 100.00%
 """
