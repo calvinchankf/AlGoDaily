@@ -49,24 +49,19 @@ print("-----")
 
 
 class Solution(object):
-
-    def __init__(self):
-        self.cache = {}
-
     def climbStairs(self, n):
-        """
-        :type n: int
-        :rtype: int
-        """
+        return self.f(n, {})
+        
+    def f(self, n, ht):
         if n == 0:
-            # when n == 0, we retuen 1 because it means this path be subtracted down to 0
             return 1
-        elif n < 0:
+        if n < 0:
             return 0
-        if n in self.cache:
-            return self.cache[n]
-        self.cache[n] = self.climbStairs(n-1) + self.climbStairs(n-2)
-        return self.cache[n]
+        if n in ht:
+            return ht[n]
+        fn = self.f(n-1, ht) + self.f(n-2, ht)
+        ht[n] = fn
+        return fn
 
 
 print(Solution().climbStairs(0))

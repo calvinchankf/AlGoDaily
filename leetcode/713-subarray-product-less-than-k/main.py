@@ -34,7 +34,7 @@ class Solution(object):
         for i in range(len(nums)):
             prod *= nums[i]
             while j <= i and prod >= k:
-                prod /= nums[j]
+                prod //= nums[j]
                 j += 1
             res += i - j + 1
         return res

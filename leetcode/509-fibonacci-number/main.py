@@ -10,23 +10,19 @@
 
 class Solution(object):
 
-    def __init__(self):
-        self.m = {}
-
     def fib(self, N):
-        """
-        :type N: int
-        :rtype: int
-        """
-        if N <= 0:
+        return self.f(N, {})
+        
+    def f(self, n, ht):
+        if n == 0:
             return 0
-        elif N == 1:
+        if n == 1:
             return 1
-        if N in self.m:
-            return self.m[N]
-        temp = self.fib(N-1) + self.fib(N-2)
-        self.m[N] = temp
-        return temp
+        if n in ht:
+            return ht[n]
+        fn = self.f(n-1, ht) + self.f(n-2, ht)
+        ht[n] = fn
+        return fn
 
 
 print(Solution().fib(0))

@@ -2,7 +2,7 @@ from typing import List
 
 """
     1st: dynamic programming, recursion + hashtable
-    - similar to lc410, lc813
+    - similar to lc410, 813, 1335
     - solve it by solving its subproblems, optimize the speed by caching the result of subproblems
 
     For example [1,15,7,9,2,5,10], 
@@ -50,7 +50,7 @@ print("-----")
 
 """
     2nd: transform the 1st approach to a bottom-up iteration approach
-    - similar to lc322: coin change
+    - similar to lc410, 813, 1335
     - go forward, compute the current max subarray sum DP[i] with DP[i-j]
 
     Time    O(KN)

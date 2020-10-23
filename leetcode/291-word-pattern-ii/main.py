@@ -17,11 +17,11 @@
 """
 
 
-class Solution(object):
-    def wordPatternMatch(self, pattern, s):
-        forward = {}
-        backward = {}
-        b = self.backtracking(pattern, s, forward, backward)
+class Solution:
+    def wordPatternMatch(self, pattern: str, sentence: str) -> bool:
+        forward = {} # p -> sub
+        backward = {} # sub ->
+        b = self.backtracking(pattern, sentence, forward, backward)
         return b
 
     def backtracking(self, pattern, s, forward, backward):
@@ -33,12 +33,15 @@ class Solution(object):
         p = pattern[0]
         for i in range(len(s)):
             cand = s[:i+1]
-
+            
+            # check forward mapping and backward mapping
             if p in forward and forward[p] != cand:
                 continue
             if cand in backward and backward[cand] != p:
                 continue
-
+            
+            # set mappings
+            # but if that mappings existed before, rmb not to backtrack after exploration
             wasMapped = False
             if p not in forward and cand not in backward:
                 forward[p] = cand
@@ -46,8 +49,8 @@ class Solution(object):
             else:
                 wasMapped = True
 
-            b = self.backtracking(pattern[1:], s[i+1:], forward, backward)
-            if b:
+            # explore the rest of the pattern and sentence
+            if self.backtracking(pattern[1:], s[i+1:], forward, backward):
                 return True
 
             if not wasMapped:

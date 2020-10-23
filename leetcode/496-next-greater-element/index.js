@@ -8,8 +8,8 @@ var nextGreaterElement = function (nums1, nums2) {
 	const stack = [];
 	for (let x of nums2) {
 		while (stack.length > 0 && x > stack[stack.length - 1]) {
-			const pop = stack.pop();
-			ht[pop] = x;
+			const top = stack.pop();
+			ht[top] = x;
 		}
 		stack.push(x);
 	}

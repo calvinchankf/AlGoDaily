@@ -10,34 +10,41 @@
 
 class Solution(object):
     def intToRoman(self, num):
-        """
-        :type num: int
-        :rtype: str
-        """
-        m = ["I", "V", "X", "L", "C", "D", "M"]
-        res = ""
-        i = 0
+        m = {
+            1: 'I',
+            5:  'V',
+            10: 'X',
+            50: 'L',
+            100: 'C',
+            500: 'D',
+            1000: 'M'
+        }
+        res = ''
+        scale = 0
         while num > 0:
-            cur = num % 10
-            num /= 10
-            j = i*2
-            i += 1
-
-            if cur == 0:
-                continue
-
-            if cur < 5:
-                if cur < 4:
-                    res = cur*m[j] + res  # add I,II,III
-                else:
-                    res = m[j] + m[j+1] + res  # add IV
-            elif cur == 5:
-                res = m[j+1] + res  # add V
+            digit = num%10
+            num //= 10
+            
+            x = digit * (10**scale)
+            if x in m:
+                res = m[x] + res
             else:
-                if cur < 9:
-                    res = m[j+1] + (cur-5)*m[j] + res  # add VI,VII,VIII
-                else:
-                    res = m[j] + m[j+2] + res  # add IX
+                one = 10**scale
+                five = 10**scale * 5
+                ten = 10**scale * 10
+                if 1 <= digit < 4:
+                    s = m[one] * digit
+                    res = s + res
+                elif digit == 4:
+                    s = m[one] + m[five]
+                    res = s + res
+                elif 6 <= digit < 9:
+                    s = m[five] + m[one] * (digit - 5)
+                    res = s + res
+                elif digit == 9:
+                    s = m[one] + m[ten]
+                    res = s + res
+            scale += 1
         return res
 
 

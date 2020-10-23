@@ -34,15 +34,15 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
+        n = len(nums)
+        nums.sort()
         res = 0
-        nums = sorted(nums)
-        for i in range(len(nums)):
-            num = nums[i]
+        for i in range(n):
             left = i + 1
-            right = len(nums) - 1
+            right = n - 1
             while left < right:
-                cur = num + nums[left] + nums[right]
-                if cur < target:
+                total = nums[i] + nums[left] + nums[right]
+                if total < target:
                     res += right - left
                     left += 1
                 else:
