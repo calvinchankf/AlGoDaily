@@ -34,9 +34,11 @@ class Solution(object):
             return True
         if node.val <= left or node.val >= right:
             return False
-        a = self.helper(node.left, left, node.val)
-        b = self.helper(node.right, node.val, right)
-        return a and b
+        if not self.helper(node.left, left, node.val):
+            return False
+        if not self.helper(node.right, node.val, right):
+            return False
+        return True
 
 
 """
@@ -93,46 +95,3 @@ class Solution(object):
         b = self.helper(node.right, node.val, right)
         # we should return a node if there is one
         return a or b
-
-
-"""
-    3rd: bottom up dfs
-    - compare the node.val with min & max in each recursion
-    
-    Time 	O(n)
-    Space	O(h)
-    52ms beats 19.48%
-    28 ms, faster than 95.00%
-"""
-
-
-class Solution(object):
-    def isValidBST(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
-        if root == None:
-            return True
-        a, _, _ = self.dfs(root)
-        return a
-
-    def dfs(self, node):
-        if node == None:
-            return True, -sys.maxsize, sys.maxsize
-
-        isLeftBST, left_lower, left_upper = True, node.val, -sys.maxsize
-        isRightBST, right_lower, right_upper = True, sys.maxsize, node.val
-
-        if node.left:
-            isLeftBST, left_lower, left_upper = self.dfs(node.left)
-        if node.right:
-            isRightBST, right_lower, right_upper = self.dfs(node.right)
-
-        if isLeftBST == False or isRightBST == False:
-            return False, -sys.maxsize, sys.maxsize
-
-        if left_upper < node.val < right_lower:
-            return True, left_lower, right_upper
-
-        return False, -sys.maxsize, sys.maxsize

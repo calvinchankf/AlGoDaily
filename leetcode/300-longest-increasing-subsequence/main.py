@@ -26,7 +26,7 @@ class Solution(object):
             for j in range(i):
                 if nums[j] < nums[i]:
                     maxCount = max(maxCount, dp[j])
-            dp[i] = dp[i] + maxCount
+            dp[i] += maxCount
         return max(dp)
 
 

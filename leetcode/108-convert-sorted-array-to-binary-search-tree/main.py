@@ -26,10 +26,10 @@ class Solution(object):
     def buildBST(self, nums, left, right):
         if left > right:
             return None
-        mean = (left + right) / 2
-        node = TreeNode(nums[mean])
-        node.left = self.buildBST(nums, left, mean - 1)
-        node.right = self.buildBST(nums, mean + 1, right)
+        mid = (left + right) / 2
+        node = TreeNode(nums[mid])
+        node.left = self.buildBST(nums, left, mid - 1)
+        node.right = self.buildBST(nums, mid + 1, right)
         return node
 
 
