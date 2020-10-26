@@ -28,9 +28,9 @@ class Solution(object):
                 minP = min(minP*num, num)
                 maxP = max(maxP*num, num)
             else:
-                temp = minP
+                prevMinP = minP
                 minP = min(maxP*num, num)
-                maxP = max(temp*num, num)
+                maxP = max(prevMinP*num, num)
             res = max(res, maxP)
         return res
 
