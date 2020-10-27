@@ -2,7 +2,7 @@
     3rd approach: learned from others
 	- calculate the products from the front & from the back
 		e.g.
-								2			3 		4 		5
+							2		3 		4 		5
 						->	1		1*2		2*3		2*3*4
 							3*4*5	4*5		5*1			1		<-
 							-----------------------
