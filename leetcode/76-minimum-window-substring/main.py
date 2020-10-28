@@ -7,78 +7,7 @@ import sys
 """
 
 """
-    Time    O(nk)
-    Space   O(n)
-    456 ms beats 6.27%
-"""
-
-
-class Solution(object):
-    def minWindow(self, s, t):
-        """
-        :type s: str
-        :type t: str
-        :rtype: str
-        """
-        indexes = []
-        minimum = s
-        targetStructure = {}
-        for c in t:
-            if c in targetStructure:
-                targetStructure[c] += 1
-            else:
-                targetStructure[c] = 1
-        curStructure = {}
-        for key in targetStructure:
-            curStructure[key] = 0
-
-        for i in range(len(s)):
-            c = s[i]
-            if c in targetStructure:
-                indexes.append(i)
-                curStructure[c] += 1
-                # check recursively
-                while self.checkSameStructure(targetStructure, curStructure):
-                    end = indexes[-1]
-                    start = indexes[0]
-                    length = end-start+1
-                    if length < len(minimum):
-                        minimum = s[start:end+1]
-                    popped = indexes.pop(0)
-                    curStructure[s[popped]] -= 1
-        if len(minimum) == len(s):
-            cur = {}
-            for key in targetStructure:
-                cur[key] = 0
-            for i in range(len(s)):
-                c = s[i]
-                if c in targetStructure:
-                    cur[c] += 1
-            if self.checkSameStructure(targetStructure, cur):
-                return s
-            else:
-                return ""
-        return minimum
-
-    def checkSameStructure(self, a, b):
-        for key in a:
-            if key not in b:
-                return False
-            elif a[key] > b[key]:
-                return False
-        return True
-
-
-print(Solution().minWindow("ADOBECODEBANC", "ABC"))
-print(Solution().minWindow("ADOBECODEBANC", "ABCB"))
-print(Solution().minWindow("ADOBECODEBANCBABB", "ABC"))
-print(Solution().minWindow("ADOBBECCOBDEBANC", "ABC"))
-print(Solution().minWindow("ADOBECODEBANC", "ABc"))
-
-print("-----")
-
-"""
-    2nd approach: hashtable
+    1st approach: hashtable
     - move forward the fast pointer until the window contains "satisfies" the target
     - if the window satisfies the target, keep moving the slow pointer to find the minimum window
 
@@ -119,9 +48,9 @@ print("-----")
     ref:
     - https://www.youtube.com/watch?v=eS6PZLjoaq8
 
-    Time    O(128n) 128 ascii-characters
-    Space   O(n)
-    1516 ms, faster than 5.06%
+    Time    O(N^2 x 128) at most 128 characters in hashtable if we consider ascii code only
+    Space   O(N)
+    644 ms, faster than 6.97%
 """
 
 
@@ -132,52 +61,30 @@ class Solution(object):
         :type t: str
         :rtype: str
         """
-        targetHt = self.constructHt(t)
-
-        res = s
-        curHt = {}
-        cur = ''
+        n = len(s)
+        targetHt = Counter(t)
+        ht = Counter()
         j = 0
-        for i in range(len(s)):
+        res = None
+        for i in range(n):
             c = s[i]
-            cur += c
-
-            if c in curHt:
-                curHt[c] += 1
-            else:
-                curHt[c] = 1
-
-            while self.ifAContainB(curHt, targetHt):
-
-                if len(cur) < len(res):
-                    res = cur
-
+            ht[c] += 1
+            while self.containTarget(ht, targetHt):
+                if res == None or i - j + 1 < len(res):
+                    res = s[j:i+1]
                 last = s[j]
+                ht[last] -= 1
                 j += 1
-
-                cur = cur[1:]
-                curHt[last] -= 1
-                if curHt[last] == 0:
-                    del curHt[last]
-
-        if self.ifAContainB(self.constructHt(res), targetHt):
-            return res
-        return ""
-
-    def constructHt(self, s):
-        ht = {}
-        for c in s:
-            if c in ht:
-                ht[c] += 1
-            else:
-                ht[c] = 1
-        return ht
-
-    def ifAContainB(self, a, b):
-        for key in b:
-            if key not in a:
+        
+        if res == None:
+            return ''
+        return res
+    
+    def containTarget(self, ht, target):
+        for key in target:
+            if key not in ht:
                 return False
-            if a[key] < b[key]:
+            if ht[key] < target[key]:
                 return False
         return True
 
@@ -188,3 +95,45 @@ print(Solution().minWindow("ADOBECODEBANC", "ABC"))
 print(Solution().minWindow("ADOBECODEBANC", "ABCB"))
 print(Solution().minWindow("ADOBECODEBANCBABB", "ABC"))
 print(Solution().minWindow("ADOBBECCOBDEBANC", "ABC"))
+
+print("-----")
+
+from collections import Counter
+
+"""
+    same as 1st approach but use indices
+    , so we dont use string slice which we can optimize the time complexity
+
+    Time    O(N x 128) at most 128 characters in hashtable if we consider ascii code only
+    Space   O(N)
+    644 ms, faster than 6.97%
+"""
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        n = len(s)
+        targetHt = Counter(t)
+        ht = Counter()
+        j = 0
+        L, R = 0, n+1
+        for i in range(n):
+            c = s[i]
+            ht[c] += 1
+            while self.containTarget(ht, targetHt):
+                if i - j + 1 < R - L + 1:
+                    L = j
+                    R = i + 1
+                last = s[j]
+                ht[last] -= 1
+                j += 1
+        
+        if R == n+1:
+            return ''
+        return s[L:R]
+    
+    def containTarget(self, ht, target):
+        for key in target:
+            if key not in ht:
+                return False
+            if ht[key] < target[key]:
+                return False
+        return True

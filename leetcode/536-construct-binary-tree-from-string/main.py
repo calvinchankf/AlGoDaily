@@ -29,7 +29,7 @@ class Solution(object):
 
         Time    O(n)
         Space   O(h)
-        176 ms, faster than 56.04%
+        160 ms, faster than 50.32%
         """
         arr = []
         for c in s:
@@ -39,31 +39,20 @@ class Solution(object):
     def dfs(self, arr):
         if len(arr) == 0:
             return None
-
-        # construct number
-        isNegative = False
-        if arr[0] == "-":
-            arr.pop(0)
-            isNegative = True
-        num = ""
-        node = None
+        
+        s = ""
         while len(arr) > 0 and arr[0] != "(" and arr[0] != ")":
-            num += arr.pop(0)
-        if isNegative:
-            node = TreeNode(-int(num))
-        else:
-            node = TreeNode(int(num))
-
-        # construct nofe.left with recusively
+            s += arr.pop(0)
+        
+        num = int(s)
+        node = TreeNode(num)
+        
         if len(arr) > 0 and arr[0] == "(":
             arr.pop(0)
             node.left = self.dfs(arr)
-
-        # construct nofe.right with recusively
         if len(arr) > 0 and arr[0] == "(":
             arr.pop(0)
             node.right = self.dfs(arr)
-        # remove )
         if len(arr) > 0 and arr[0] == ")":
             arr.pop(0)
         return node

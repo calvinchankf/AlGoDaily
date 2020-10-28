@@ -16,12 +16,11 @@ class NumArray(object):
         """
         :type nums: List[int]
         """
-        prefixSums = []
-        prefixSum = 0
-        for num in nums:
-            prefixSum += num
-            prefixSums.append(prefixSum)
-        self.prefixSums = prefixSums
+        pfs = 0
+        self.pfss = []
+        for i in range(len(nums)):
+            pfs += nums[i]
+            self.pfss.append(pfs)
 
     def sumRange(self, i, j):
         """
@@ -29,9 +28,6 @@ class NumArray(object):
         :type j: int
         :rtype: int
         """
-        if i < 0 or i+1 > len(self.prefixSums) or j < 0 or j+1 > len(self.prefixSums):
-            return
         if i == 0:
-            return self.prefixSums[j]
-        else:
-            return self.prefixSums[j] - self.prefixSums[i-1]
+            return self.pfss[j]
+        return self.pfss[j] - self.pfss[i-1]
