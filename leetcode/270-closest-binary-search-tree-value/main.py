@@ -64,14 +64,10 @@ class Solution(object):
         res = root.val
         cur = root
         while cur != None:
-            a = abs(cur.val - target)
-            b = abs(res - target)
-            if a < b:
+            if abs(cur.val - target) < abs(res - target):
                 res = cur.val
             if target < cur.val:
                 cur = cur.left
-            elif target > cur.val:
-                cur = cur.right
             else:
-                return cur.val
+                cur = cur.right
         return res

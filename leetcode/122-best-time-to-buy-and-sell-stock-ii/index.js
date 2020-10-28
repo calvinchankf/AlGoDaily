@@ -1,24 +1,16 @@
-/**
- * 1st: maintain a dip
- * Time     O(N)
- * Space    O(1)
- * 64ms beats 46.52%
- *
- * @param {number[]} prices
- * @return {number}
- */
+/*
+    1st: array
+
+    Time     O(N)
+    Space    O(1)
+    84 ms, faster than 50.20%
+*/
 var maxProfit = function (prices) {
-	let dip = Number.MAX_SAFE_INTEGER;
-	let res = 0;
-	for (let p of prices) {
-		if (p < dip) {
-			dip = p;
-		}
-		diff = p - dip;
-		if (diff > 0) {
-			res += diff;
-			dip = p;
-		}
-	}
-	return res;
+	let res = 0
+    for (let i = 1; i < prices.length; i++) {
+        if (prices[i] > prices[i-1]) {
+            res += prices[i] - prices[i-1]
+        }
+    }
+    return res
 };

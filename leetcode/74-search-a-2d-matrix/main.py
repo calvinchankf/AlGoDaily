@@ -3,7 +3,7 @@
 	- upper bound binary search to look for the target range
 	- binary search to look for the item within that range
     
-	Time 	O(logR x logC)
+	Time 	O(logR + logC)
 	Space   O(1)
 	48 ms, faster than 49.53%
 """

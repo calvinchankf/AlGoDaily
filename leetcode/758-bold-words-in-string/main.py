@@ -1,5 +1,6 @@
 """
     1st approach: merge intervals
+    - similar to lc56, 452, 616, 758
     1. find the positions for the bold tags, [start, end)
 	2. sort the intervals, O(nlogn)
 	3. merge the intervals

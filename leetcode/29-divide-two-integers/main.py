@@ -44,18 +44,19 @@ class Solution(object):
 
         return res
 
+s = Solution()
 
 a = 32
 b = 3
-print(Solution().divide(a, b))
+print(s.divide(a, b))
 
 a = 91
 b = 3
-print(Solution().divide(a, b))
+print(s.divide(a, b))
 
 a = -2147483648
 b = -1
-# print(Solution().divide(a, b))
+# print(s.divide(a, b))
 
 print('------')
 
@@ -125,22 +126,70 @@ class Solution:
 
         return res
 
+s = Solution()
 
 a = 32
 b = 3
-print(Solution().divide(a, b))
+print(s.divide(a, b))
 
 a = 91
 b = 3
-print(Solution().divide(a, b))
+print(s.divide(a, b))
 
 a = -2147483648
 b = -1
-print(Solution().divide(a, b))
+print(s.divide(a, b))
 
+print("-----")
 
-a = True
-b = False
-c = True
-d = True
-print(a + b + c + d)
+"""
+    3rd: binary search
+    - the best way for interviews to tackle this problem
+
+    Time    O(logN)
+    Space   O(1)
+    36 ms, faster than 45.66%
+"""
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        sign = 1
+        if (dividend < 0 and divisor > 0) or (dividend > 0 and divisor < 0):
+            sign = -1
+        
+        dividend = abs(dividend)
+        divisor = abs(divisor)
+        left = -(2**31)
+        right = 2**31
+        res = None
+        while left <= right:
+            mid = (left + right) // 2
+            if dividend < mid * divisor:
+                right = mid - 1 
+            elif dividend > mid * divisor:
+                left = mid + 1
+            else:
+                res = mid * sign
+                break
+        if res == None:
+            res = right * sign
+        
+        if res < -(2**31):
+            return -(2**31)
+        elif res > (2**31)-1:
+            return (2**31)-1
+
+        return res
+
+s = Solution()
+
+a = 32
+b = 3
+print(s.divide(a, b))
+
+a = 91
+b = 3
+print(s.divide(a, b))
+
+a = -2147483648
+b = -1
+print(s.divide(a, b))
