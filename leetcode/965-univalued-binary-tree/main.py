@@ -63,24 +63,23 @@ class Solution(object):
     3rd approach: bfs
 
     Time    O(n)
-    Space   O(h)
+    Space   O(w)
     20 ms, faster than 58.34%
 """
 
 
 class Solution(object):
     def isUnivalTree(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
-        hs = set()
+        if root == None:
+            return True
+        cur = root.val
         q = [root]
         while len(q) > 0:
-            head = q.pop(0)
-            hs.add(head.val)
-            if head.left != None:
-                q.append(head.left)
-            if head.right != None:
-                q.append(head.right)
-        return len(hs) == 1
+            node = q.pop(0)
+            if node.val != cur:
+                return False
+            if node.left != None:
+                q.append(node.left)
+            if node.right != None:
+                q.append(node.right)
+        return True

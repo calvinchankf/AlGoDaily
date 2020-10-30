@@ -5,6 +5,7 @@ from functools import cmp_to_key
 """
     1st: sort the end times
     - activity selection
+    - similar to lc56, 252, 253, 435, 452, 646
 
     ref:
     - https://www.cse.cuhk.edu.hk/~taoyf/course/3160/19-fall/lec/disj_intv.pdf
