@@ -4,7 +4,9 @@
     2. after count, compare with the intermediate result
     3. the final intermediate result is the reuslt
 
-    380ms beats 20.77%
+    Time    O(N)
+    Space   O(1)
+    352 ms, faster than 76.16%
 """
 
 
@@ -16,11 +18,10 @@ class Solution(object):
         """
         res = 0
         cur = 0
-        for i in range(len(nums)):
-            num = nums[i]
-            if num == 1:
+        for x in nums:
+            if x == 1:
                 cur += 1
-            if num == 0 or i+1 == len(nums):
-                res = max(res, cur)
+            else:
                 cur = 0
+            res = max(res, cur)
         return res

@@ -11,7 +11,7 @@ class TreeNode(object):
 
 """
     easy approach: similar to lc536, 572, 606
-    e.g. (1(2(3)())4()())
+    e.g. 1(2()())(3(4()())(5()()))
 
     Time    O(n)
     Space   O(h)
@@ -28,14 +28,15 @@ class Codec:
         :rtype: str
         """
         if node == None:
-            return '()'
+            return ''
         left = self.serialize(node.left)
         right = self.serialize(node.right)
-        return '('+str(node.val) + left + right + ')'
+        return str(node.val) + '(' + left + ')(' + right + ')'
+        
 
     def deserialize(self, s):
         """Decodes your encoded data to tree.
-
+        
         :type data: str
         :rtype: TreeNode
         """
@@ -43,33 +44,22 @@ class Codec:
             return None
         arr = []
         # execpt the open and end parentheses
-        for i in range(1, len(s)-1):
-            arr.append(s[i])
+        for c in s:
+            arr.append(c)
         return self.deserializeHelper(arr)
-
+    
     def deserializeHelper(self, arr):
         if len(arr) == 0:
             return None
-
-        # negative
-        isNegative = False
-        if arr[0] == "-":
-            arr.pop(0)
-            isNegative = True
-
-        # multiple digits
-        num = ""
-        node = None
+                
+        s = ""
         while len(arr) > 0 and arr[0] != "(" and arr[0] != ")":
-            num += arr.pop(0)
-
-        # put negative
-        if isNegative:
-            if len(num) != 0:
-                node = TreeNode(-int(num))
-        else:
-            if len(num) != 0:
-                node = TreeNode(int(num))
+            s += arr.pop(0)
+        
+        node = None
+        if len(s) > 0:
+            num = int(s)
+            node = TreeNode(num)
 
         # left child
         if len(arr) > 0 and arr[0] == "(":
