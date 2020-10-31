@@ -67,8 +67,9 @@ class Solution(object):
         for i in range(1, amount+1):
             minCount = sys.maxsize
             for c in coins:
-                if i - c >= 0:
-                    minCount = min(minCount, dp[i-c]+1)
+                remain = i - c
+                if remain >= 0:
+                    minCount = min(minCount, dp[remain]+1)
             dp[i] = minCount
         if dp[amount] == sys.maxsize:
             return -1
