@@ -1,6 +1,6 @@
 /*
     1st: min-max 2 arrays
-    - similar to lc135, 487, 915, 1493
+    - similar to lc42, 135, 487, 689, 915, 1493
 
     Time    O(3N)
     Space   O(2N)
