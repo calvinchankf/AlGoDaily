@@ -16,7 +16,7 @@
     - get all the paths
     - see if each path has substring of linked list
 
-    Time    O(L+T * T Width)
+    Time    O(L+T)
     Space   O(L+T)
     92 ms, faster than 92.28%
 """

@@ -1,5 +1,6 @@
 /*
     1st approach: sort
+    - similar to lc56, 452, 616, 758
     1. sort the intervals by start time
     2. iterate the intervals and compare the cur interval start time with the last interval end time
 

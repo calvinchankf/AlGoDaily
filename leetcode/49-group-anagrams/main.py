@@ -41,7 +41,7 @@ print("-----")
     Time O(nk) n:number of words, k:length of charactors
     Space O(nk)
 
-    136 ms, faster than 46.18%
+    120 ms, faster than 35.33%
 """
 
 
@@ -49,28 +49,22 @@ class Solution(object):
     def groupAnagrams(self, strs):
         ht = {}
         for s in strs:
-            encrypedtStr = self.encrypt(s)
-            if encrypedtStr in ht:
-                ht[encrypedtStr].append(s)
-            else:
-                ht[encrypedtStr] = [s]
+            key = self.getSignature(s)
+            if key not in ht:
+                ht[key] = []
+            ht[key].append(s)
         res = []
         for key in ht:
             res.append(ht[key])
         return res
-
-    def encrypt(self, s):
-        arr = 26*[0]
+            
+        
+    def getSignature(self, s):
+        freqs = 26 * [0]
         for c in s:
-            i = ord(c)-ord('a')
-            arr[i] += 1
-        alphbets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-        key = ""
-        # save the key as a0b1c1...z0
-        for i in range(len(arr)):
-            if arr[i] > 0:
-                key += alphbets[i] + str(arr[i])
-        return key
+            i = ord(c) - ord('a')
+            freqs[i] += 1
+        return tuple(freqs)
 
 
 print(Solution().groupAnagrams(["eat", "tea", "tan", "ate", "nat", "bat"]))

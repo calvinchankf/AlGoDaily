@@ -70,7 +70,7 @@ class Solution(object):
 
     Time    O(2^n)
     Space   O(2^n)
-    LTE
+    48 ms, faster than 86.49%
 """
 
 
