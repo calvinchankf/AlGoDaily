@@ -33,15 +33,11 @@ class Solution(object):
         res = 0
         for i in range(len(arr)):
             pfs += arr[i]
-
             if pfs == 0:
                 res = max(res, i+1)
-
             if pfs in m:
-                leftMostIdx = m[pfs]
-                res = max(res, i - leftMostIdx)
-
-            if pfs not in m:
+                res = max(res, i - m[pfs])
+            else:
                 m[pfs] = i
 
         return res
