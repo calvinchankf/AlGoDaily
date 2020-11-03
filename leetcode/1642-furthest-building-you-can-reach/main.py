@@ -51,3 +51,32 @@ class Solution(object):
             if heights[i] - heights[i-1] > 0:
                 diffs.append(heights[i] - heights[i-1])
         return diffs
+
+"""
+    2nd: heap only
+    - we use bricks to climb the smaller diffs first
+    - we use ladder to climb the remaining diffs in the heap
+    - we return False if we dont have enough bricks
+
+    Time        O(NlogK)
+    Space       O(K)
+    552 ms, faster than 64.18%    
+"""
+class Solution(object):
+    def furthestBuilding(self, heights, bricks, ladders):
+        """
+        :type heights: List[int]
+        :type bricks: int
+        :type ladders: int
+        :rtype: int
+        """
+        pq = []
+        for i in range(1, len(heights)):
+            diff = heights[i] - heights[i-1]
+            if diff > 0:
+                heapq.heappush(pq, diff)
+            if len(pq) > ladders:
+                bricks -= heapq.heappop(pq)
+            if bricks < 0:
+                return i - 1
+        return len(heights) - 1
