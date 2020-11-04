@@ -1,6 +1,5 @@
 /*
-    2nd : stack
-    - better version
+    2nd : string construction + stack
     - put every substring (not '.' and '..') into a stack
     - when we see a '..', pop the stack
     - join the stack to return a result

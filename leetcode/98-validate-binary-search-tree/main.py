@@ -34,9 +34,11 @@ class Solution(object):
             return True
         if node.val <= left or node.val >= right:
             return False
-        a = self.helper(node.left, left, node.val)
-        b = self.helper(node.right, node.val, right)
-        return a and b
+        if not self.helper(node.left, left, node.val):
+            return False
+        if not self.helper(node.right, node.val, right):
+            return False
+        return True
 
 
 """

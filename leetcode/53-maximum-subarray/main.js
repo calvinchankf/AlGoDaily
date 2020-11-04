@@ -18,8 +18,8 @@
     - what if circular
 */
 var maxSubArray = function (nums) {
-	let cur = Number.MIN_SAFE_INTEGER;
-	let res = Number.MIN_SAFE_INTEGER;
+	let cur = Number.MIN_SAFE_INTEGER; // or -(2**31)
+	let res = Number.MIN_SAFE_INTEGER; // or -(2**31)
 	for (let x of nums) {
 		cur = Math.max(cur + x, x);
 		res = Math.max(res, cur);
