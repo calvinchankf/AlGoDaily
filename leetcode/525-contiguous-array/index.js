@@ -26,11 +26,9 @@ var findMaxLength = function (nums) {
 		if (pfs === 0) {
 			res = i + 1;
 		}
-		const remain = pfs;
-		if (remain in ht) {
-			res = Math.max(res, i - ht[remain]);
-		}
-		if (pfs in ht === false) {
+		if (pfs in ht) {
+			res = Math.max(res, i - ht[pfs]);
+		} else {
 			ht[pfs] = i;
 		}
 	}

@@ -7,8 +7,8 @@ import heapq
     - each interval, compare the last meeting(since sorted) amongst the meeting in the meeting rooms
     - if there is no collision, put the meeting in that room, else create a new meeting room for the interval
     
-    Time		O(NlogN)    sort
-    Space 	    O(N)	    result array
+    Time		O(NlogN + MN)   sort + iterate over the 'ends'
+    Space 	    O(N)	        result array
     76 ms, faster than 52.42% 
 """
 

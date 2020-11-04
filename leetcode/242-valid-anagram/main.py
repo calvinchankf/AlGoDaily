@@ -1,5 +1,5 @@
 """
-    2nd approach: char array
+    1st approach: hashtable
 
     Time    O(s+t)
     Space   O(52) -> O(1)

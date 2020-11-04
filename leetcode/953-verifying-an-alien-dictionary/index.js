@@ -13,9 +13,8 @@ var isAlienSorted = function (words, order) {
 	for (let i = 1; i < words.length; i++) {
 		const prev = words[i - 1];
 		const cur = words[i];
-		let j = 0;
 		const n = Math.min(prev.length, cur.length);
-		for (; j < n; j++) {
+		for (let j = 0; j < n; j++) {
 			const p = prev[j];
 			const c = cur[j];
 			if (mapping[p] < mapping[c]) {
