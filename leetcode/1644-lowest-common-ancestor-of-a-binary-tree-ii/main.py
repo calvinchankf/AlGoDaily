@@ -41,9 +41,7 @@ class Solution(object):
             return root
         if left != None:
             return left
-        if right != None:
-            return right
-        return None
+        return right
 
     def hasNode(self, root, target):
         if root == None:
