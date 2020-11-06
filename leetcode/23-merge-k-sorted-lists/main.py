@@ -10,8 +10,8 @@ class ListNode(object):
 """
     2nd approach: reuse the sorted 2 lists
 
-    Time    O(nk)
-    Space   O(nk)
+    Time    O(NK)
+    Space   O(NK)
 	5344 ms, faster than 7.60%
 """
 
@@ -50,14 +50,14 @@ class Solution(object):
 
 
 """
-    3rd approach: heap (its actually=sort)
+    3rd approach: heap
 	- iterate the list and put all the values into an array
 	- sort the array
 	- make that array into a linked list
     
-	Time	O(Nlogk)
-	Space	O(N)
-	124 ms, faster than 41.48% 
+	Time	O(NlogK)
+	Space	O(K)
+	100 ms, faster than 72.27%
 """
 
 
@@ -68,19 +68,20 @@ class Solution(object):
         :rtype: ListNode
         """
         pq = []
-        for l in lists:
-            cur = l
-            while cur != None:
-                heapq.heappush(pq, cur.val)
-                cur = cur.next
-        dump = ListNode(0)
-        cur = dump
+        for head in lists:
+            if head != None:
+                heapq.heappush(pq, (head.val, head))
+        
+        dumphead = ListNode()
+        cur = dumphead
         while len(pq) > 0:
-            pop = heapq.heappop(pq)
-            node = ListNode(pop)
-            cur.next = node
+            val, node = heapq.heappop(pq)
+            cur.next = ListNode(val)
             cur = cur.next
-        return dump.next
+            if node.next != None:
+                nextNode = node.next
+                heapq.heappush(pq, (nextNode.val, nextNode))
+        return dumphead.next
 
 """
     Variation: merge k sort arrays iterator

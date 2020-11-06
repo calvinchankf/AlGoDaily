@@ -23,12 +23,12 @@
     
 	Time		O(n)
     Space 	    O(1) since in-place
-    60 ms, faster than 56.22%
+    80 ms, faster than 75.61%
 */
 var reverseList = function (head) {
     let newHead = head
     while (head != null && head.next != null) {
-        temp = head.next
+        const temp = head.next
         head.next = head.next.next
         temp.next = newHead
         newHead = temp

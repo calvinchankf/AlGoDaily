@@ -152,33 +152,28 @@ print("-----")
 """
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
-        sign = 1
-        if (dividend < 0 and divisor > 0) or (dividend > 0 and divisor < 0):
-            sign = -1
+        if dividend == 0:
+            return 0
+        sign = 1 if dividend * divisor >= 0 else -1
+        temp = self.bsearch(abs(dividend), abs(divisor)) * sign
+        if temp < -2**31 or temp > 2**31-1:
+            return 2**31-1
+        return temp
         
-        dividend = abs(dividend)
-        divisor = abs(divisor)
-        left = -(2**31)
+    
+    def bsearch(self, dividend, divisor):
+        left = 1
         right = 2**31
-        res = None
         while left <= right:
             mid = (left + right) // 2
-            if dividend < mid * divisor:
-                right = mid - 1 
-            elif dividend > mid * divisor:
+            temp = mid * divisor
+            if temp == dividend:
+                return mid
+            elif temp < dividend:
                 left = mid + 1
             else:
-                res = mid * sign
-                break
-        if res == None:
-            res = right * sign
-        
-        if res < -(2**31):
-            return -(2**31)
-        elif res > (2**31)-1:
-            return (2**31)-1
-
-        return res
+                right = mid - 1
+        return right
 
 s = Solution()
 

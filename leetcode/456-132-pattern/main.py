@@ -69,3 +69,54 @@ class Solution(object):
                     return True
                 stack.append(nums[i])
         return False
+
+import heapq
+
+"""
+    3rd: heap
+    - this is the way easier to come up with
+
+    e.g. [6, 12, 3, 4, 6, 11, 20]
+    
+    1. Calculate the running minimums
+    mins [6,  6, 3, 3, 3,  3,  3]
+
+    2. use a heap to find out the number between nums[i] and mins[i] from the back
+
+    [6, 12, 3, 4, 6, 11, 20]
+    [6,  6, 3, 3, 3,  3,  3]
+                          ^[20] use a sorted array to represent the min heap, its easier to explain
+                      ^[11,20]
+                  ^[6,11,20]
+                ^[4,6,11,20]
+            ^[3,4,6,11,20]
+        ^[11,20] <- 1. pop all the numbers less than mins[i] = 3
+                    2. then we see that the heap[0] is also less than nums[i]
+                    it means WE FOUND THE 132 pattern !!!
+
+    Time    O(NlogN)
+    Space   O(N)
+    76 ms, faster than 95.03%
+"""
+class Solution(object):
+    def find132pattern(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        if len(nums) <= 1:
+            return False
+        mins = [nums[0]]
+        minVal = nums[0]
+        for i in range(1, len(nums)):
+            minVal = min(minVal, nums[i])
+            mins.append(minVal)
+        pq = []
+        for i in range(len(nums)-1, -1, -1):
+            if mins[i] < nums[i]:
+                heapq.heappush(pq, nums[i])
+                while len(pq) > 0 and pq[0] <= mins[i]:
+                    heapq.heappop(pq)
+                if pq[0] < nums[i]:
+                    return True
+        return False
