@@ -35,25 +35,23 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        dp = []
-        for _ in range(len(nums)):
-            dp.append([1, 1])
-        for i in range(len(nums)):
+        n = len(nums)
+        dp = n * [1]
+        counts = n * [1]
+        maxLen = 1
+        for i in range(n):
             for j in range(i):
-                if nums[j] < nums[i]:
-                    curLen = dp[j][0] + 1
-                    if curLen > dp[i][0]:
-                        # if >, we update the posibilites to that of dp[j]
-                        dp[i] = [curLen, dp[j][1]]
-                    elif curLen == dp[i][0]:
-                        # if ==, we increment the posibilites to that of dp[j]
-                        dp[i][1] += dp[j][1]
-        resLen = 0
-        resCount = 0
-        for l, c in dp:
-            if l > resLen:
-                resLen = l
-                resCount = c
-            elif l == resLen:
-                resCount += c
-        return resCount
+                if nums[j] >= nums[i]:
+                    continue
+                curLen = dp[j] + 1
+                if curLen > dp[i]:
+                    dp[i] = curLen
+                    counts[i] = counts[j]
+                elif curLen == dp[i]:
+                    counts[i] += counts[j]
+            maxLen = max(maxLen, dp[i])
+        res = 0
+        for i in range(n):
+            if dp[i] == maxLen:
+                res += counts[i]
+        return res

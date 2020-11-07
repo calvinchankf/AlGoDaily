@@ -14,10 +14,11 @@ class Solution:
 
 """
     2nd: upper boundy binary search
+    - similar to lc162, 852
 
     Time    O(logN)
     Space   O(1)
-    112 ms, faster than 14.14%
+    68 ms, faster than 93.13%
 """
 
 
@@ -31,4 +32,6 @@ class Solution:
                 left = mid + 1
             else:
                 right = mid
+        if right-1 < 0:
+            return 0
         return right - 1

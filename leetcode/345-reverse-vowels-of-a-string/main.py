@@ -10,7 +10,7 @@
 
     Time  O(n)
     Space O(n)
-    68 ms, faster than 53.33%
+    48 ms, faster than 87.75%
 """
 
 
@@ -20,20 +20,18 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        arr = []
-        for c in s:
-            arr.append(c)
+        n = len(s)
+        arr = [c for c in s]
         i = 0
-        j = len(s) - 1
-        hs = set(['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'])
+        j = n - 1
         while i < j:
-            if arr[i] in hs and arr[j] in hs:
+            if arr[i] in 'aeiouAEIOU' and arr[j] in 'aeiouAEIOU':
                 arr[i], arr[j] = arr[j], arr[i]
                 i += 1
                 j -= 1
-            elif arr[i] in hs:
+            elif arr[i] in 'aeiouAEIOU':
                 j -= 1
-            elif arr[j] in hs:
+            elif arr[j] in 'aeiouAEIOU':
                 i += 1
             else:
                 i += 1
