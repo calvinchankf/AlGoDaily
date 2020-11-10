@@ -2,6 +2,7 @@ import sys
 
 """
     1st: array
+    - for each position, move all chips to here and see how much does it cost
 
     Time    O(N^2)
     Space   O(N^2)

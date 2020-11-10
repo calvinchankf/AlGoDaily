@@ -37,7 +37,7 @@ var reorderList = function (head) {
 
 /*
     2nd:
-    1. find the middlge point
+    1. find the middle point
     2. reverse the 2nd half
     3. merge 2 lists
 
