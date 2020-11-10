@@ -1,6 +1,8 @@
+from collections import Counter
+
 """
     1st approach: hashtable + sliding window
-    - similar to lc3, 159, 904
+    - similar to lc3, 159, 340, 904
     - in each iteration
         1. put the character into the hastable counter
         2. if the number of keys > k, remove the leftmost character in the window as well as increment its count
@@ -19,29 +21,19 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
+        j = 0
+        ht = Counter()
         res = 0
-        left = 0
-        ht = {}
         for i in range(len(s)):
-            # put the character into the hastable counter
-            c = s[i]
-            if c not in ht:
-                ht[c] = 1
-            else:
-                ht[c] += 1
-
-            # if the total number of keys of hashtable > k, we
+            cur = s[i]
+            ht[cur] += 1
             while len(ht) > k:
-                last = s[left]
-                ht[last] -= 1
-                # dont forget to remove the keys from hashtable if no more count on it
-                if ht[last] == 0:
-                    del ht[last]
-                # move the left pointer to the right by 1 unit
-                left += 1
-            # update the result if the number of keys is <= k
-            res = max(res, i-left+1)
-
+                left = s[j]
+                j += 1
+                ht[left] -= 1
+                if ht[left] == 0:
+                    del ht[left]
+            res = max(res, i-j+1)
         return res
 
 

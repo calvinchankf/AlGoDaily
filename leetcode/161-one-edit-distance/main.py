@@ -126,23 +126,19 @@ print("------------------")
 
 class Solution(object):
     def isOneEditDistance(self, s, t):
-        minLen = min(len(s), len(t))
-        for i in range(minLen):
-            if s[i] != t[i]:
-                if len(s) == len(t):
-                    return s[i+1:] == t[i+1:]
-                elif len(s) < len(t):
-                    # remove one character from t
-                    return s[i:] == t[i+1:]
-                else:
-                    # remove one character from s
-                    return s[i+1:] == t[i:]
-        # after we have done all the above
-        # if the s is just one digit away from t, return true
-        # e.g. "" and "a"
-        if abs(len(s)-len(t)) == 1:
-            return True
-        return False
+        m, n = len(s), len(t)
+        for i in range(min(m, n)):
+            if s[i] == t[i]:
+                continue
+            if s[i+1:] == t[i:]:
+                return True
+            elif s[i:] == t[i+1:]:
+                return True
+            elif s[i+1:] == t[i+1:]:
+                return True
+            else:
+                return False
+        return abs(m - n) == 1
 
 
 a = "ab"
