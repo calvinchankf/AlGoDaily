@@ -24,7 +24,8 @@ class Solution:
 
 """
     2nd: min heap, learned from others
-    - similar to lc23, 373, 378
+    - same logic as 786
+    - similar to lc23, 373, 378, 786
     - since the arrays are sorted, we dont have to consider all pairs
     we can just care if we can pop k smallest items out from the stack
     
