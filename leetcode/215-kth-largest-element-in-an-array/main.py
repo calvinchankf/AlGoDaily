@@ -40,11 +40,12 @@ class Solution(object):
 
 """
     2nd approach: min heap
+    - similar to lc215, 703
     - maintain a min heap of size k, the top item in the minheap at the end is the kth largest item
 
 	Time		O(nlogk)
 	Space		O(n)
-	80 ms, faster than 48.50%
+	72 ms, faster than 40.76%
 """
 
 
@@ -98,3 +99,9 @@ class Solution:
                 pIdx += 1
         nums[pIdx], nums[right] = nums[right], nums[pIdx]
         return pIdx
+
+
+"""
+    followup1: kth smallest
+    followup2: distinct
+"""

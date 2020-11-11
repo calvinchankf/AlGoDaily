@@ -1,5 +1,6 @@
 """
     1st approach: BFS + nodes coloring
+    - similar to lc784, 886
     - see .idea.png
 
     idea learned from others:
@@ -17,26 +18,25 @@ class Solution(object):
         :type graph: List[List[int]]
         :rtype: bool
         """
-        seen = {}
-        # we need to check every node because it is possible that graph[0] doesn't have any vertices connected
-        for i in range(len(graph)):
-            if i not in seen:
-                if self.check(graph, i, seen) == False:
+        n = len(graph)
+        cache = {}
+        for i in range(n):
+            if i not in cache:
+                if self.bfs(graph, i, cache) == False:
                     return False
         return True
 
-    def check(self, graph, start, seen):
+    def bfs(self, graph, start, cache):
         q = [(start, 1)]
         while len(q) > 0:
-            pop, color = q.pop(0)
-            if pop in seen:
-                if seen[pop] != color:
+            node, color = q.pop(0)
+            if node in cache:
+                if cache[node] != color:
                     return False
                 continue
-            seen[pop] = color
-            vertices = graph[pop]
-            for v in vertices:
-                q.append((v, -color))
+            cache[node] = color
+            for nb in graph[node]:
+                q.append((nb, -color))
         return True
 
 

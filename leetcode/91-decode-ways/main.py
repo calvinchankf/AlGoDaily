@@ -121,3 +121,49 @@ print(Solution().numDecodings("226"))
 print(Solution().numDecodings("1212"))
 print(Solution().numDecodings(
     "9371597631128776948387197132267188677349946742344217846154932859125134924241649584251978418763151253"))
+print("-----")
+
+
+class Solution:
+    def numDecodings(self, s: str) -> int:
+        return self.f(s, 0, {})
+
+    def f(self, s, fromIdx, ht):
+        if fromIdx == len(s):
+            return 1
+        if fromIdx + 1 == len(s):
+            if int(s[fromIdx]) == 0:
+                return 0
+            return 1
+        else:
+            if fromIdx in ht:
+                return ht[fromIdx]
+
+            a = s[fromIdx]
+            b = s[fromIdx+1]
+            c = int(a + b)
+
+            if int(a) == 0:
+                return 0
+
+            ways1, ways2 = 0, 0
+
+            if c <= 26:
+                ways1 = self.f(s, fromIdx + 1, ht)
+                ways2 = self.f(s, fromIdx + 2, ht)
+            else:
+                ways1 = self.f(s, fromIdx + 1, ht)
+
+            ht[fromIdx] = ways1 + ways2
+            return ht[fromIdx]
+
+
+print(Solution().numDecodings("0"))
+print(Solution().numDecodings("10"))
+print(Solution().numDecodings("12"))
+print(Solution().numDecodings("102"))
+print(Solution().numDecodings("226"))
+print(Solution().numDecodings("1212"))
+print(Solution().numDecodings(
+    "9371597631128776948387197132267188677349946742344217846154932859125134924241649584251978418763151253"))
+print("-----")
