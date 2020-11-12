@@ -1,8 +1,8 @@
 /*
     2nd approach: reuse the sorted 2 lists
 
-    Time    O(nk)
-    Space   O(nk)
+    Time    O(NK)
+    Space   O(NK)
 	296 ms, faster than 40.40%
 */
 var mergeKLists = function (lists) {

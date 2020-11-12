@@ -17,7 +17,6 @@ class TreeNode(object):
     Time 	O(n)
     Space	O(h)
     52ms beats 19.48%
-    23apr2019
 """
 
 
@@ -47,8 +46,7 @@ class Solution(object):
 
     Time 	O(n)
     Space	O(h)
-    44 ms, faster than 30.58%
-    3july2019
+     44 ms, faster than 67.43%
 """
 
 
