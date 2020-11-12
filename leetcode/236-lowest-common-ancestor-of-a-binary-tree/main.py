@@ -55,9 +55,15 @@ class Solution(object):
             return x
         return self.dfs(node.left, target, x) or self.dfs(node.right, target, x)
 
-# suggested solution:
-# recursion ./236.png
-# O(n)
+
+"""
+    suggested solution: recursion
+    - - similar to lc236, 1644, 1650
+    
+    see ./236.png
+    Time    O(N)
+    Space   O(N)
+"""
 
 
 class Solution1(object):
