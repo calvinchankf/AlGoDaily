@@ -28,28 +28,18 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
-        self.dfs(root)
+        self.dfs(root, None)
         return self.res
 
-    def dfs(self, node):
+    def dfs(self, node, parentVal):
         if node == None:
-            return (10001, -1)
+            return (parentVal, parentVal)
 
-        mid = node.val
-        leftMin, leftMax = self.dfs(node.left)
-        rightMin, rightMax = self.dfs(node.right)
-
-        a, b, c, d = 0, 0, 0, 0
-        if leftMin != 10001 and leftMax != -1:
-            a = abs(mid - leftMin)
-            b = abs(mid - leftMax)
-
-        if rightMin != 10001 and rightMax != -1:
-            c = abs(mid - rightMin)
-            d = abs(mid - rightMax)
-
-        self.res = max(self.res, max(a, max(b, max(c, d))))
-
-        left = min(mid, min(leftMin, rightMin))
-        right = max(mid, max(leftMax, rightMax))
-        return (left, right)
+        leftMin, leftMax = self.dfs(node.left, node.val)
+        rightMin, rightMax = self.dfs(node.right, node.val)
+        curMin = min(leftMin, rightMin)
+        curMax = max(leftMax, rightMax)
+        a = abs(curMin - node.val)
+        b = abs(curMax - node.val)
+        self.res = max(self.res, a, b)
+        return min(node.val, curMin), max(node.val, curMax)

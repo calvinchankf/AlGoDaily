@@ -153,3 +153,27 @@ class Solution(object):
 print(Solution().kClosest([[1, 3], [-2, 2]], 1))
 print(Solution().kClosest([[1, 3], [-2, 2]], 3))
 print(Solution().kClosest([[3, 3], [5, -1], [-2, 4]], 2))
+
+"""
+    followup: the target is not orign, but a coordinate
+"""
+
+
+class Solution(object):
+    def kClosest(self, points, target, K):
+        """
+        :type points: List[List[int]]
+        :type K: int
+        :rtype: List[List[int]]
+        """
+        if len(points) == 0:
+            return []
+        arr = []
+        for x, y in points:
+            dist = (x - target[0])**2 + (y - target[1])**2
+            arr.append((x, y, dist))
+        arr = sorted(arr, key=lambda x: x[2])
+        res = []
+        for x, y, _ in arr[:K]:
+            res.append([x, y])
+        return res

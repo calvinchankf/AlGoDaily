@@ -59,20 +59,19 @@ class Solution(object):
         :rtype: bool
         """
         q = [root]
-        isNullAbove = False
+        seenNullAbove = False
         while len(q) > 0:
             n = len(q)
-            isNull = False
-            for i in range(n):
-                pop = q.pop(0)
-                if pop != None:
+            seenNull = False
+            for _ in range(n):
+                node = q.pop(0)
 
-                    if isNull or isNullAbove:
-                        return False
-
-                    q.append(pop.left)
-                    q.append(pop.right)
+                if node == None:
+                    seenNull = True
                 else:
-                    isNull = True
-            isNullAbove = isNull
+                    if seenNull or seenNullAbove:
+                        return False
+                    q.append(node.left)
+                    q.append(node.right)
+            seenNullAbove = seenNull
         return True

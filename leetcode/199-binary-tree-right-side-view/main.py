@@ -23,19 +23,21 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        if root == None:
+        if not root:
             return []
         res = []
-        stack = []
-        stack.append((root, 1))
-        while len(stack) > 0:
-            node, depth = stack.pop()
-            if depth > len(res):
+
+        def dfs(node, depth):
+            if node == None:
+                return
+            if depth == len(res):
                 res.append(node.val)
-            if node.left:
-                stack.append((node.left, depth + 1))
             if node.right:
-                stack.append((node.right, depth + 1))
+                dfs(node.right, depth + 1)
+            if node.left:
+                dfs(node.left, depth + 1)
+        dfs(root, 0)
+
         return res
 
 
@@ -57,17 +59,18 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
-        if root == None:
+        if not root:
             return []
         res = []
-        q = []
-        q.append((root, 1))
+        q = [(root, 0)]
         while len(q) > 0:
-            node, depth = q.pop(0)
-            if depth > len(res):
-                res.append(node.val)
-            if node.right:
-                q.append((node.right, depth + 1))
-            if node.left:
-                q.append((node.left, depth + 1))
+            n = len(q)
+            for _ in range(n):
+                node, depth = q.pop(0)
+                if depth == len(res):
+                    res.append(node.val)
+                if node.right:
+                    q.append((node.right, depth + 1))
+                if node.left:
+                    q.append((node.left, depth + 1))
         return res

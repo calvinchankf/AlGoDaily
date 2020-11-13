@@ -15,23 +15,20 @@
 
 
 class Solution(object):
-
-    def __init__(self):
-        self.res = 0
-
     def findTilt(self, root):
         """
         :type root: TreeNode
         :rtype: int
         """
-        _, res = self.dfs(root)
-        self.res += res
+        self.res = 0
+        self.dfs(root)
         return self.res
 
     def dfs(self, node):
         if node == None:
-            return 0, 0
-        left, t1 = self.dfs(node.left)
-        right, t2 = self.dfs(node.right)
-        self.res += t1 + t2
-        return node.val + left + right, abs(left-right)
+            return 0
+        cur = node.val
+        left = self.dfs(node.left)
+        right = self.dfs(node.right)
+        self.res += abs(left - right)
+        return cur + left + right

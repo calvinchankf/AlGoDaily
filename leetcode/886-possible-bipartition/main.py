@@ -1,12 +1,13 @@
 """
     1st approach: BFS + nodes coloring
+    - similar to lc784, 886
 
     idea learned from others:
     - https://www.youtube.com/watch?v=VlZiMD7Iby4
 
     Time    O(V+E)
     Space   O(V+E)
-    780 ms, faster than 28.52%
+    812 ms, faster than 22.78%
 """
 
 
@@ -17,33 +18,33 @@ class Solution(object):
         :type dislikes: List[List[int]]
         :rtype: bool
         """
-        connections = []
-        for _ in range(N+1):
-            connections.append([])
+        graph = {}
+        for i in range(1, N+1):
+            graph[i] = []
 
         for a, b in dislikes:
-            connections[a].append(b)
-            connections[b].append(a)
+            graph[a].append(b)
+            graph[b].append(a)
 
-        seen = {}
-        for i in range(len(connections)):
-            if i not in seen:
-                if self.check(connections, i, seen) == False:
+        # n = len(graph)
+        cache = {}
+        for i in range(1, N+1):
+            if i not in cache:
+                if self.bfs(graph, i, cache) == False:
                     return False
         return True
 
-    def check(self, connections, start, seen):
+    def bfs(self, graph, start, cache):
         q = [(start, 1)]
         while len(q) > 0:
-            pop, color = q.pop(0)
-            if pop in seen:
-                if seen[pop] != color:
+            node, color = q.pop(0)
+            if node in cache:
+                if cache[node] != color:
                     return False
                 continue
-            seen[pop] = color
-            vertices = connections[pop]
-            for v in vertices:
-                q.append((v, -color))
+            cache[node] = color
+            for nb in graph[node]:
+                q.append((nb, -color))
         return True
 
 

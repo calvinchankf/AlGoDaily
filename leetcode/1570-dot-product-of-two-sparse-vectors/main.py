@@ -1,31 +1,24 @@
 """
+    1st: hashtable
+
     Time    O(N)
     Space   O(N)
-    1712 ms, faster than 100.00%
+    1656 ms, faster than 91.45%
 """
 
 
 class SparseVector:
-    def __init__(self, nums):
-        """
-        :type nums: List[int]
-        """
-        self.nums = nums
+    def __init__(self, nums: List[int]):
+        ht = {}
+        for i in range(len(nums)):
+            if nums[i] != 0:
+                ht[i] = nums[i]
+        self.ht = ht
 
     # Return the dotProduct of two sparse vectors
-    def dotProduct(self, vec):
-        """
-        :type vec: 'SparseVector'
-        :rtype: int
-        """
+    def dotProduct(self, vec: 'SparseVector') -> int:
         res = 0
-        n = min(len(self.nums), len(vec.nums))
-        for i in range(n):
-            res += self.nums[i] * vec.nums[i]
+        for i in self.ht:
+            if i in vec.ht:
+                res += self.ht[i] * vec.ht[i]
         return res
-
-
-# Your SparseVector object will be instantiated and called as such:
-# v1 = SparseVector(nums1)
-# v2 = SparseVector(nums2)
-# ans = v1.dotProduct(v2)

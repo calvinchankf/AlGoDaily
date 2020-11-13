@@ -2,8 +2,8 @@
     naive approach: brute forace with nested iteration O(n^2)
 
     1st approach: math + hashtable
-    - We only need to consider each song length modulo 60
-    - We can count the number of songs with (length % 60) equal to r, and store that in an array of size 60
+    - we only need to consider each song length modulo 60
+    - we can count the number of songs with (length % 60) equal to r, and store that in an array of size 60
 
     e.g. [60, 60, 20, 40, 100, 63]
     cache[0] = 2

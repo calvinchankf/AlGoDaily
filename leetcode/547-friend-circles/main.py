@@ -3,8 +3,8 @@
     - put the friends connections into an union find
     - return the total 'cluster' as a result
 
-    Time		O(n^2logn) -> O(n^3)
-    Space		O(n)
+    Time		O(NNlogN) -> O(N^3)
+    Space		O(N)
     204 ms, faster than 24.89
 """
 
@@ -15,9 +15,10 @@ class Solution(object):
         :type M: List[List[int]]
         :rtype: int
         """
-        uf = UnionFind(len(M))
-        for i in range(len(M)):
-            for j in range(len(M[0])):
+        N = len(M)
+        uf = UnionFind(N)
+        for i in range(N):
+            for j in range(i+1, N):
                 if M[i][j] == 1:
                     uf.union(i, j)
         return uf.count
@@ -65,8 +66,8 @@ class UnionFind(object):
     - for each person, bfs to find all of his friends and put them into history
     - after finished one bfs, it means that we are done with one 'cluster'
 
-    Time		O(n^2)
-    Space		O(n)
+    Time		O(NN)
+    Space		O(N)
     220 ms, faster than 23.64%
     23apr2019
 """
