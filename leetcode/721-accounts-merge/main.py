@@ -19,40 +19,30 @@ class Solution(object):
         :type accounts: List[List[str]]
         :rtype: List[List[str]]
         """
-        emailSet = set()
-        emailToName = {}
-        for x in accounts:
-            if len(x) < 2:
-                continue
-            name = x[0]
-            emails = x[1:]
-            for em in emails:
-                emailSet.add(em)
-                emailToName[em] = name
-
-        uf = UnionFind(emailSet)
-
-        for x in accounts:
-            if len(x) < 2:
-                continue
-            name = x[0]
-            emails = x[1:]
-            first = emails[0]
-            for i in range(1, len(emails)):
-                uf.union(first, emails[i])
-
-        resSet = defaultdict(list)
-        for key in uf.ids:
-            root = uf.find(key)
-            resSet[root].append(key)
-
+        emails = {}
+        for row in accounts:
+            username = row[0]
+            for i in range(1, len(row)):
+                email = row[i]
+                emails[email] = username
+        # union
+        uf = UnionFind(emails)
+        for row in accounts:
+            a = row[1]
+            for i in range(2, len(row)):
+                b = row[i]
+                uf.union(a, b)
+        # group the emails
+        resultSet = defaultdict(list)
+        for e in emails:
+            root = uf.find(e)
+            resultSet[root].append(e)
+        # construct the result
         res = []
-        for key in resSet:
-            arr = []
-            arr.append(emailToName[key])
-            arr += sorted(resSet[key])
-            res.append(arr)
-
+        for rootEmail in resultSet:
+            username = emails[rootEmail]
+            row = [username] + sorted(resultSet[rootEmail])
+            res.append(row)
         return res
 
 

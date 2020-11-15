@@ -40,20 +40,26 @@ class Solution(object):
     Space   O(1)
     48 ms, faster than 68.75%
 """
+
+
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        n = len(s)
         s = s.lower()
+        n = len(s)
         i = 0
         j = n - 1
-        while i <= j:
-            while i+1 <= j and s[i].isalnum() == False:
-                i += 1
-            while j-1 >= i and s[j].isalnum() == False:
+        while i < j:
+            if s[i].isalnum() and s[j].isalnum():
+                if s[i] == s[j]:
+                    i += 1
+                    j -= 1
+                else:
+                    return False
+            elif s[i].isalnum():
                 j -= 1
-            if s[i] == s[j]:
+            elif s[j].isalnum():
                 i += 1
-                j -= 1
             else:
-                return False
+                i += 1
+                j -= 1
         return True

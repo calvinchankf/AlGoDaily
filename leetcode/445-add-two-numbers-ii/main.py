@@ -13,7 +13,7 @@ class ListNode(object):
 
 	Time	O(2m+2n)
 	Space	O(m+n)
-	16 ms, faster than 100.00%
+	72 ms, faster than 27.17%
 """
 
 
@@ -24,22 +24,11 @@ class Solution(object):
         :type l2: ListNode
         :rtype: ListNode
         """
-        # put values into stacks
-        stack1 = []
-        cur = l1
-        while cur != None:
-            stack1.append(cur.val)
-            cur = cur.next
-        stack2 = []
-        cur = l2
-        while cur != None:
-            stack2.append(cur.val)
-            cur = cur.next
-        # start from a dump node
-        dump = ListNode(-1)
+        stack1 = self.getStack(l1)
+        stack2 = self.getStack(l2)
+        cur = None
         carry = 0
-        # pop the stacks
-        while len(stack1) > 0 or len(stack2) > 0:
+        while len(stack1) > 0 or len(stack2) > 0 or carry > 0:
             a = 0
             if len(stack1) > 0:
                 a = stack1.pop()
@@ -47,14 +36,17 @@ class Solution(object):
             if len(stack2) > 0:
                 b = stack2.pop()
             temp = a + b + carry
-            carry = temp/10
-            num = temp%10
-            node = ListNode(num)
-            node.next = dump.next
-            dump.next = node
-        # if unfortunately there is an extra one
-        if carry > 0:
-            node = ListNode(1)
-            node.next = dump.next
-            dump.next = node
-        return dump.next
+            d = temp % 10
+            carry = temp//10
+            newHead = ListNode(d)
+            newHead.next = cur
+            cur = newHead
+        return cur
+
+    def getStack(self, l):
+        stack = []
+        cur = l
+        while cur != None:
+            stack.append(cur.val)
+            cur = cur.next
+        return stack

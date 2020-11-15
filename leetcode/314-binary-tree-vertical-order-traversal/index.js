@@ -2,7 +2,7 @@
     2nd approach: bfs + hashtable + sort
     - similar to lc987
 
-    Time    O(n)
+    Time    O(NlogN)
     Space   O(h+n) the height of tree(recursion) + the result
     24ms beats 100%
 */

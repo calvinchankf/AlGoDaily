@@ -1,4 +1,27 @@
 """
+    0th: brute force
+
+    Time		O(N)
+	Space		O(N)
+	48ms beats 79%
+"""
+
+
+class Solution:
+    def flipAndInvertImage(self, A: List[List[int]]) -> List[List[int]]:
+        R, C = len(A), len(A[0])
+        for i in range(R):
+            row = A[i]
+            r = row[::-1]
+            newRow = C * [0]
+            for j in range(C):
+                if r[j] == 0:
+                    newRow[j] = 1
+            A[i] = newRow
+        return A
+
+
+"""
     1st approach
 	1. swap the columns
 	2. NOT the binary value using ^
@@ -6,7 +29,7 @@
         - one to zeor: 1^1 = 1
 
 
-	Time		O(2n)
+	Time		O(2N)
 	Space		O(1)
 	4ms beats 100%
 	18apr2019
@@ -45,7 +68,7 @@ print("-------------------------")
         - one to zeor: 1^1 = 1
     3. do the ^ within the same loop
 
-	Time		O(n)
+	Time		O(N)
 	Space		O(1)
 	4ms beats 100%
 	18apr2019

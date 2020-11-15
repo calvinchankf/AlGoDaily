@@ -8,35 +8,26 @@ from collections import *
 
     Time    O(S+T)
     Space   O(T)
-    24 ms, faster than 38.33%
+    20 ms, faster than 58.70%
 """
 
 
 class Solution(object):
     def customSortString(self, S, T):
-        """
-        :type S: str
-        :type T: str
-        :rtype: str
-        """
         # count the occurence, N, of each character and put the count in a hashtable
-        m = {}
-        for c in T:
-            if c not in m:
-                m[c] = 1
-            else:
-                m[c] += 1
+        counter = Counter(T)
         # for each c in S, if c is in the hashtable,
         # append the N*"c" in the result string and remove c from the hashtbale
-        res = ""
+        res = ''
         for c in S:
-            if c in m:
-                res += m[c] * c
-                del m[c]
+            if c in counter:
+                count = counter[c]
+                res += count * c
+                del counter[c]
         # for the remaining characters in the hashtable, put them back to the result string
-        for key in m:
-            res += m[key] * key
-
+        for c in counter:
+            count = counter[c]
+            res += count * c
         return res
 
 
