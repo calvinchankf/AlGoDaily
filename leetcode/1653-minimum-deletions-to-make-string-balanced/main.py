@@ -1,5 +1,6 @@
 """
     The intuition is that, let's say you have "aababbab"
+    - similar to lc926, 1653
 
     indices of all the 'a'
     A = [0,1,3,6]
@@ -70,3 +71,38 @@ print(s.minimumDeletions(a))
 # should delete a instead of bbb, so the answer is 1
 a = "bbba"
 print(s.minimumDeletions(a))
+
+print('-----')
+
+"""
+    2nd: stack
+    - similar to lc926, 1653
+    - the idea is whenever you see an 'a', remove the previous 'b' if there is
+    
+    e.g. 'aababba'
+                a a b a b b a
+    # of ones   0 0 1 0 1 2 1
+    -------------------------
+    result      0 0 0 1 1 1 2
+
+    ref:
+    https://leetcode.com/problems/flip-string-to-monotone-increasing/discuss/183896/Prefix-Suffix-Java-O(N)-One-Pass-Solution-Space-O(1)
+
+    Time    O(N)
+    Space   O(1)
+    392 ms, faster than 100.00%
+"""
+
+
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        b = 0
+        res = 0
+        for i in range(len(s)):
+            if s[i] == 'b':
+                b += 1
+            elif s[i] == 'a':
+                if b > 0:
+                    b -= 1
+                    res += 1
+        return res

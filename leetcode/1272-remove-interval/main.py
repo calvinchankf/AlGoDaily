@@ -3,7 +3,7 @@
 
     Time    O(N) N: number of intervals
     Space   O(N)
-    340 ms, faster than 84.52%
+    332 ms, faster than 34.48%
 """
 
 
@@ -15,16 +15,14 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         res = []
-        for start, end in intervals:
-            if start >= toBeRemoved[0] and end <= toBeRemoved[1]:
-                continue
-            elif end <= toBeRemoved[0] or start >= toBeRemoved[1]:
-                res.append([start, end])
-            elif start < toBeRemoved[0] and end > toBeRemoved[1]:
-                res.append([start, toBeRemoved[0]])
-                res.append([toBeRemoved[1], end])
-            elif start < toBeRemoved[1] and end > toBeRemoved[1]:
-                res.append([toBeRemoved[1], end])
-            elif start < toBeRemoved[0] and end > toBeRemoved[0]:
-                res.append([start, toBeRemoved[0]])
+        for s, e in intervals:
+            if e < toBeRemoved[0] or s > toBeRemoved[1]:
+                res.append([s, e])
+            elif s < toBeRemoved[0] and e > toBeRemoved[1]:
+                res.append([s, toBeRemoved[0]])
+                res.append([toBeRemoved[1], e])
+            elif s < toBeRemoved[0] and e > toBeRemoved[0]:
+                res.append([s, toBeRemoved[0]])
+            elif s < toBeRemoved[1] and e > toBeRemoved[1]:
+                res.append([toBeRemoved[1], e])
         return res
