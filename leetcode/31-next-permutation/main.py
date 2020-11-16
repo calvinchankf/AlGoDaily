@@ -22,7 +22,7 @@
 
 	Time	O(n)
 	Space	O(n)
-	8 ms, faster than 100.00%
+	28 ms, faster than 69.06%
 """
 
 
@@ -39,7 +39,7 @@ class Solution(object):
             i -= 1
 
         if i == 0:
-            self.reverse(nums, 0, len(nums)-1)
+            self.reverse(nums, 0, n-1)
             return
         # pivot is the num next to the suffix
         pivot = i - 1
@@ -53,7 +53,7 @@ class Solution(object):
         nums[pivot], nums[j] = nums[j], nums[pivot]
 
         # reverse the suffix
-        self.reverse(nums, i, len(nums)-1)
+        self.reverse(nums, i, n-1)
 
     def reverse(self, nums, left, right):
         while left < right:
