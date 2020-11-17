@@ -52,6 +52,11 @@ print(Solution().mySqrt(1587654567))
     2nd approach: common binary search
     - if mid*mid == target, return mid
     - if no absolute value, the result must be the right(since right < left after iteration)
+
+
+    Time    O(logN)
+    Space   O(1)
+    24 ms, faster than 61.75%
 """
 
 
@@ -61,16 +66,14 @@ class Solution(object):
         :type x: int
         :rtype: int
         """
-        if x == x*x:
-            return x
         left = 1
         right = x
         while left <= right:
-            mid = (left + right)//2
-            if x < mid*mid:
-                right = mid - 1
-            elif x > mid*mid:
+            mid = (left + right) // 2
+            if mid**2 == x:
+                return mid
+            elif mid**2 < x:
                 left = mid + 1
             else:
-                return mid
+                right = mid - 1
         return right

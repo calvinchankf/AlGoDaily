@@ -19,13 +19,13 @@ I believe that practising algorithms every day is a long-term investment in my l
 -   Queue
 -   Array
 -   Sorting
--   Hash Table
 -   Heap
+-   Hash Table
 -   Linked list
 -   Bit Operation
+-   Backtracking
 -   Dynamic programming(Kadan's, Binary Lifting)
--   Backtracking(Permutations & Combinations & Subsets...etc)
--   Math
+-   Math (Reservoir Sampling...etc)
 -   and more...
 
 #### Questions from
@@ -61,6 +61,7 @@ console.log(Math.ceil((now - start) / (1000 * 3600 * 24)));
 -   [Day 501 - 600](./markdowns/day501-600.md)
 -   [Day 601 - 700](./markdowns/day601-700.md)
 -   [Day 701 - 800](./markdowns/day701-800.md)
+
 
 | Day | Question                                                                                                                                    | Type                | From                                                                                                         | remarks         |
 | --- | ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------ | --------------- |

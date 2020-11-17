@@ -1,5 +1,6 @@
 """
     1st approach: stack
+    - similar to lc1614
 	1. for each add, push to stack
 	2. for each close and no counterpart in stack, result++
 	3. result = res + len(stack)

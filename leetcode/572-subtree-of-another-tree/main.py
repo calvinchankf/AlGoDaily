@@ -57,8 +57,7 @@ class Solution(object):
 
     Time    O(S+T)
     Space   O(h)
-    64 ms, faster than 95.22%
-    2may2019
+    68 ms, faster than 96.06%
 """
 
 
@@ -69,74 +68,18 @@ class Solution(object):
         :type t: TreeNode
         :rtype: bool
         """
-        if s is None and t is None:
-            return True
-        elif s is None or t is None:
-            return False
-
         sStr = self.serialize(s)
         tStr = self.serialize(t)
         if tStr in sStr:
             return True
         return False
 
-    # it converts a tree to e.g. (1(2(3)())4()())
     def serialize(self, node):
         if node == None:
             return '()'
         left = self.serialize(node.left)
         right = self.serialize(node.right)
         return '('+str(node.val) + left + right + ')'
-
-    # followup: deserialize
-    # there might be negative numbers, and the numbers can be > 9(multiple digits)
-    def deserialize(self, s):
-        if len(s) == 0:
-            return None
-        arr = []
-        # execpt the open and end parentheses
-        for i in range(1, len(s)-1):
-            arr.append(s[i])
-        return self.deserializeHelper(arr)
-
-    def deserializeHelper(self, arr):
-        if len(arr) == 0:
-            return None
-
-        # negative
-        isNegative = False
-        if arr[0] == "-":
-            arr.pop(0)
-            isNegative = True
-
-        # multiple digits
-        num = ""
-        node = None
-        while len(arr) > 0 and arr[0] != "(" and arr[0] != ")":
-            num += arr.pop(0)
-
-        # put negative
-        if isNegative:
-            if len(num) != 0:
-                node = TreeNode(-int(num))
-        else:
-            if len(num) != 0:
-                node = TreeNode(int(num))
-
-        # left child
-        if len(arr) > 0 and arr[0] == "(":
-            arr.pop(0)
-            node.left = self.deserializeHelper(arr)
-
-        # right child
-        if len(arr) > 0 and arr[0] == "(":
-            arr.pop(0)
-            node.right = self.deserializeHelper(arr)
-
-        # end this scope
-        if len(arr) > 0 and arr[0] == ")":
-            arr.pop(0)
-        return node
 
 # helpers
 

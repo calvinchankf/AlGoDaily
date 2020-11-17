@@ -42,64 +42,109 @@
 
     Time    O(128n) 128 ascii-characters
     Space   O(n)
-    568 ms, faster than 5.01%
+    328 ms, faster than 5.08%
 */
-var minWindow = function (s, t) {
-	const smallHt = constructHt(t);
-	let res = s;
-	const curHt = {};
-	let cur = "";
-	let j = 0;
-	for (let i = 0; i < s.length; i++) {
-		const c = s[i];
-		cur += c;
-
-		if (c in curHt) {
-			curHt[c] += 1;
-		} else {
-			curHt[c] = 1;
-		}
-
-		while (ifAContainB(curHt, smallHt)) {
-			if (cur.length < res.length) {
-				res = cur;
-			}
-			const last = s[j];
-			j += 1;
-			cur = cur.slice(1);
-			curHt[last] -= 1;
-			if (curHt[last] == 0) {
-				delete curHt[last];
-			}
-		}
-	}
-
-	if (ifAContainB(constructHt(res), smallHt)) {
-		return res;
-	}
-	return "";
+var minWindow = function(s, t) {
+    const targetHt = {}
+    for (let c of t) {
+        if (c in targetHt === false) {
+            targetHt[c] = 0
+        }
+        targetHt[c] += 1
+    }
+    const curHt = {}
+    let j = 0
+    let res = s + '.'
+    for (let i = 0; i < s.length; i++) {
+        const c = s[i]
+        
+        if (c in curHt === false) {
+            curHt[c] = 0
+        }
+        curHt[c] += 1
+        
+        while (curContainTarget(curHt, targetHt)) {
+            
+            const sub = s.slice(j, i+1)
+            if (sub.length < res.length) {
+                res = sub
+            }
+            
+            const left = s[j]
+            j += 1
+            curHt[left] -= 1
+        }
+    }
+    if (res == s + '.') {
+        return ''
+    }
+    return res
 };
 
-var constructHt = function (s) {
-	const ht = {};
-	for (let c of s) {
-		if (c in ht) {
-			ht[c] += 1;
-		} else {
-			ht[c] = 1;
-		}
-	}
-	return ht;
+const curContainTarget = (curHt, targetHt) => {
+    for (let key in targetHt) {
+        if (key in curHt === false) {
+            return false
+        }
+        if (curHt[key] < targetHt[key]) {
+            return false
+        }
+    }
+    return true
+}
+
+/*
+    same as 1st but use indices to compare
+*/
+var minWindow = function(s, t) {
+    const targetHt = {}
+    for (let c of t) {
+        if (c in targetHt === false) {
+            targetHt[c] = 0
+        }
+        targetHt[c] += 1
+    }
+    const curHt = {}
+    
+    let j = 0
+    
+    let _j = 0
+    let _i = s.length + 1
+    
+    for (let i = 0; i < s.length; i++) {
+        const c = s[i]
+        
+        if (c in curHt === false) {
+            curHt[c] = 0
+        }
+        curHt[c] += 1
+        
+        while (curContainTarget(curHt, targetHt)) {
+            
+            if (i - j + 1 < _i - _j + 1) {
+                _i = i
+                _j = j
+            }
+            
+            const left = s[j]
+            j += 1
+            curHt[left] -= 1
+        }
+    }
+    if (_i == s.length + 1) {
+        return ''
+    }
+    return s.slice(_j, _i + 1)
 };
 
-var ifAContainB = function (a, b) {
-	for (let key in b) {
-		if (a[key] === undefined) {
-			return false;
-		}
-		if (a[key] < b[key]) {
-			return false;
-		}
-	}
-	return true;
-};
+const curContainTarget = (curHt, targetHt) => {
+    for (let key in targetHt) {
+        if (key in curHt === false) {
+            return false
+        }
+        if (curHt[key] < targetHt[key]) {
+            return false
+        }
+    }
+    return true
+}

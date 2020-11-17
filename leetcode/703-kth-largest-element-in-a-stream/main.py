@@ -44,6 +44,7 @@ class KthLargest(object):
 
 """
     2nd approach: use a min heap with capacity
+    - similar to lc215, 703
 
     let's say k = 4, start with [2,1,3,1]
 
@@ -56,7 +57,7 @@ class KthLargest(object):
 
     Time    O(n) __init__, O(logn) add
     Space   O(n)
-    140 ms, faster than 38.36%
+    100 ms, faster than 61.58%
 """
 
 
@@ -68,9 +69,9 @@ class KthLargest(object):
         :type nums: List[int]
         """
         self.nums = nums
-        heapq.heapify(self.nums)
         self.k = k
-        while len(self.nums) > k:
+        heapq.heapify(self.nums)
+        while len(self.nums) > self.k:
             heapq.heappop(self.nums)
 
     def add(self, val):
@@ -82,3 +83,10 @@ class KthLargest(object):
         if len(self.nums) > self.k:
             heapq.heappop(self.nums)
         return self.nums[0]
+
+
+"""
+    followup1: kth smallest
+
+    approach: max heap
+"""
