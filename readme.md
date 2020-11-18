@@ -19,13 +19,13 @@ I believe that practising algorithms every day is a long-term investment in my l
 -   Queue
 -   Array
 -   Sorting
--   Hash Table
 -   Heap
+-   Hash Table
 -   Linked list
 -   Bit Operation
+-   Backtracking
 -   Dynamic programming(Kadan's, Binary Lifting)
--   Backtracking(Permutations & Combinations & Subsets...etc)
--   Math
+-   Math (Reservoir Sampling...etc)
 -   and more...
 
 #### Questions from

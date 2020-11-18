@@ -123,3 +123,42 @@ class Solution(object):
         self.m[col].append((node.val, row))
         self.dfs(node.left, row+1, col-1)
         self.dfs(node.right, row+1, col+1)
+
+
+"""
+    2nd approach: bfs + hashtable + sort
+    - similar to lc987
+
+    Time    O(NlogN)
+    Space   O(h+n) the height of tree(recursion) + the result
+    20ms beats 78.65%
+"""
+
+
+class Solution(object):
+    def verticalOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if root == None:
+            return []
+        ht = defaultdict(list)
+
+        q = [(root, 0)]  # (node, col)
+        while len(q) > 0:
+            node, col = q.pop(0)
+            ht[col].append(node.val)
+            if node.left:
+                q.append((node.left, col - 1))
+            if node.right:
+                q.append((node.right, col + 1))
+
+        rawRes = []
+        for c in ht:
+            rawRes.append((c, ht[c]))
+
+        res = []
+        for c, arr in sorted(rawRes):
+            res.append(arr)
+        return res

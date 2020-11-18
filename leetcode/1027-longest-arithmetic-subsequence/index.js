@@ -1,7 +1,8 @@
 /*
     1st: dynamic programming, hashtable
     - learned from others
-    - similar to lc1218
+    - longest increasing subsequnce but 2D because we want to store the diff between any arr[i] and arr[j]
+    - similar to lc1027, 1218
 
     for each index, store a hashtable of diff : count of longest subsequence
     
@@ -36,6 +37,17 @@
     3188 ms, faster than 20.63%
 */
 var longestArithSeqLength = function (A) {
+    /*
+        dp = [
+            {
+                diff: count
+            },
+            {
+                diff: count
+            }
+            ,...
+        ]
+    */
 	const dp = [];
 	for (let i = 0; i < A.length; i++) {
 		dp[i] = {};

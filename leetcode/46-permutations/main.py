@@ -9,6 +9,8 @@
     therefore, the time complexity is nPk = n!/(n-k)!
 
     therefore, the crux is dfs(nums[:i]+arr[i+1:], prefix+[nums[i]])
+
+    Time		O(N!) -> O(N x N!)
     beats 32.64%
 """
 

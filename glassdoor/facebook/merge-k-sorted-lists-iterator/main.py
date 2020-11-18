@@ -2,25 +2,36 @@ import sys
 import heapq
 
 """
-    1st: heap
+    1st: min heap
+    - similar to lc23, 373, 378
 
-    Time of init()          O(KN log KN) K: len(lists), N: average length of list[i]
+    Time of init()          O(NlogK) N: all items, K: number of lists
     Time of hasNext()       O(1)
-    Time of returnNext()    O(logKN)
-    Space                   O(kN)
+    Time of returnNext()    O(logK)
+    Space                   O(K)
 """
+
+
 class MergeListsIterator(object):
     def __init__(self, lists):
         self.pq = []
         for nums in lists:
-            for x in nums:
-                heapq.heappush(self.pq, x)
+            if len(nums) > 0:
+                head = nums.pop(0)
+                heapq.heappush(self.pq, (head, nums))
 
     def hasNext(self):
         return len(self.pq) > 0
 
     def returnNext(self):
-        return heapq.heappop(self.pq)
+        if not self.hasNext():
+            return None
+        head, nums = heapq.heappop(self.pq)
+        if len(nums) > 0:
+            nextHead = nums.pop(0)
+            heapq.heappush(self.pq, (nextHead, nums))
+        return head
+
 
 a = [
     [1, 3, 6, 8],
@@ -29,8 +40,7 @@ a = [
 ]
 s = MergeListsIterator(a)
 for i in range(10):
-    print(s.hasNext())
-    print(s.returnNext())
+    print(s.hasNext(), s.returnNext())
 print(s.hasNext())
 
 print("-----")
@@ -43,6 +53,8 @@ print("-----")
     Time of returnNext()    O(K)
     Space                   O(kN)
 """
+
+
 class MergeListsIterator(object):
     def __init__(self, lists):
         self.lists = lists
@@ -68,6 +80,7 @@ class MergeListsIterator(object):
         self.pointers[minPointer] += 1
         return minNum
 
+
 a = [
     [1, 3, 6, 8],
     [2, 3, 5],
@@ -75,6 +88,5 @@ a = [
 ]
 s = MergeListsIterator(a)
 for i in range(10):
-    print(s.hasNext())
-    print(s.returnNext())
+    print(s.hasNext(), s.returnNext())
 print(s.hasNext())

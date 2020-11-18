@@ -66,23 +66,17 @@ print("----------")
 class Solution(object):
 
     def myPow(self, x, n):
-        if n >= 0:
-            return self.dfs(x, n)
-        return 1 / self.dfs(x, -n)
+        if n < 0:
+            res = self.dfs(x, -n)
+            return 1/res
+        return self.dfs(x, n)
 
-    def helper(self, x, n):
-        # if n == 0, x^0 = 1
+    def dfs(self, x, n):
         if n == 0:
             return 1
-        # e.g.1 n = 5, n//2 = 2*2
-        # e.g.2 n = 4, n//2 = 2*2
-        # e.g.3 n = 1, n//2 = 0
         half = self.dfs(x, n//2)
         if n % 2 == 0:
-            # since n is an even, return 2^2 * 2^2
             return half * half
-        # since n is an odd, return 2^2 * 2^2 * 2
-        # base case when n = 1, return 1 * 1 * x
         return half * half * x
 
 

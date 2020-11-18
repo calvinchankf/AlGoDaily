@@ -1,5 +1,6 @@
 /*
     1st: lower bound binary search
+    - similar to lc778, 875, 1011, 1283, 1482, 1617
     - we have to find a point that the sum is <= threshold
     - look at the examples
 

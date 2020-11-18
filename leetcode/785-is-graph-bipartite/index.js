@@ -1,5 +1,6 @@
 /*
     1st: dfs + hashtable
+    - similar to lc784, 886
     - node coloring
     - see .idea.png
 

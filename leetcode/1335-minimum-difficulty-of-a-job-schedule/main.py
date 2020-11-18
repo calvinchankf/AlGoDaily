@@ -34,7 +34,7 @@ class Solution:
                         max(nums[:i]), 
                         max(nums[i:])
                     )
-# sub problem: find the minimum sum from all the a + b pairs
+    sub problem: find the minimum sum from all the a + b pairs
     Time    O(NNK)
     Space   O(N)
     2152 ms, faster than 25.61%

@@ -44,8 +44,7 @@ class WordDictionary:
                 return False
 
             key = ord(firstChar) - ord('a')
-            nextNode = node.children[key]
-            return dfs(nextRemain, nextNode)
+            return dfs(nextRemain, node.children[key])
 
         return dfs(word, self.root)
 

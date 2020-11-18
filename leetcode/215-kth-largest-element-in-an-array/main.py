@@ -40,11 +40,12 @@ class Solution(object):
 
 """
     2nd approach: min heap
+    - similar to lc215, 703
     - maintain a min heap of size k, the top item in the minheap at the end is the kth largest item
 
-	Time		O(nlogk)
+	Time		O(NlogK)
 	Space		O(n)
-	80 ms, faster than 48.50%
+	72 ms, faster than 40.76%
 """
 
 
@@ -57,12 +58,12 @@ class Solution(object):
         """
         if len(nums) == 0 or k <= 0:
             return -1
-        pq = []
-        for num in nums:
-            heapq.heappush(pq, num)
-            if len(pq) > k:
-                heapq.heappop(pq)
-        return heapq.heappop(pq)
+        minHeap = []
+        for x in nums:
+            heappush(minHeap, x)
+            if len(minHeap) > k:
+                heappop(minHeap)
+        return minHeap[0]
 
 
 """
@@ -98,3 +99,9 @@ class Solution:
                 pIdx += 1
         nums[pIdx], nums[right] = nums[right], nums[pIdx]
         return pIdx
+
+
+"""
+    followup1: kth smallest
+    followup2: distinct
+"""

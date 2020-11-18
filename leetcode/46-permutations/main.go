@@ -3,8 +3,8 @@ package main
 import "fmt"
 
 // recursive dfs
-// time		O(n!)
-// space	O(n!) due to the call stack
+// time		O(N!) -> O(N x N!)
+// space	O(N!) due to the call stack
 // beats 77.21%
 func permute(nums []int) [][]int {
 	result := [][]int{}

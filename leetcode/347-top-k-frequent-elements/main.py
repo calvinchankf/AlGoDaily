@@ -6,8 +6,9 @@ from collections import Counter
     - count num: freq into a hashtable
     - put the hashtable key&value into a priority queue
 
+    Time    O(NlogN)
+    SPace   O(N)
     92 ms, faster than 78.84%
-    3july2019
 """
 
 
@@ -15,12 +16,13 @@ class Solution(object):
     def topKFrequent(self, nums, k):
         counter = Counter(nums)
         freqs = []
-        for num in counter:
-            freqs.append((counter[num], num))
+        for key in counter:
+            f = counter[key]
+            freqs.append((f, key))
         freqs.sort(reverse=True)
         res = []
-        for i in range(min(len(freqs), k)):
-            res.append(freqs[i][1])
+        for f, key in freqs[:k]:
+            res.append(key)
         return res
 
 
@@ -95,44 +97,31 @@ print("-----")
     - create buckets with maxfreq
     - pop the first k num with the maxfreq
 
-    Time    O(n)
-    Space   O(n)
-    88 ms, faster than 88.59%
-    9july2019
+    Time    O(N)
+    Space   O(N)
+    84 ms, faster than 75.45%
 """
 
 
 class Solution(object):
     def topKFrequent(self, nums, k):
         # count occurence of each num
-        maxFreq = 0
-        ht = {}
-        for num in nums:
-            if num not in ht:
-                ht[num] = 1
-            else:
-                ht[num] += 1
-            # getting the maxFreq
-            maxFreq = max(maxFreq, ht[num])
+        ht = Counter(nums)
         # create buckets
-        occurArr = []
-        for _ in range(maxFreq+1):
-            occurArr.append([])
-        # index of occurArr is the occurence
-        for key in ht:
-            occurence = ht[key]
-            occurArr[occurence].append(key)
-        # construct result
+        minFreq, maxFreq = 2**32, 0
+        freqs = defaultdict(list)
+        for x in ht:
+            f = ht[x]
+            freqs[f].append(x)
+            minFreq = min(minFreq, f)
+            maxFreq = max(maxFreq, f)
+        # put k items into the array
         res = []
-        count = 0
-        # start from num with max freq
-        for i in range(len(occurArr)-1, -1, -1):
-            arr = occurArr[i]
-            for num in arr:
+        for f in range(maxFreq, minFreq-1, -1):
+            if f not in freqs:
+                continue
+            for num in freqs[f]:
                 res.append(num)
-                count += 1
-                if count == k:
-                    # if k <= number of unique nums
+                if len(res) == k:
                     return res
-        # if k > number of unique nums
         return res

@@ -44,6 +44,7 @@ class Solution(object):
 
         return res
 
+
 s = Solution()
 
 a = 32
@@ -126,6 +127,7 @@ class Solution:
 
         return res
 
+
 s = Solution()
 
 a = 32
@@ -150,35 +152,32 @@ print("-----")
     Space   O(1)
     36 ms, faster than 45.66%
 """
+
+
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
-        sign = 1
-        if (dividend < 0 and divisor > 0) or (dividend > 0 and divisor < 0):
-            sign = -1
-        
-        dividend = abs(dividend)
-        divisor = abs(divisor)
-        left = -(2**31)
+        if dividend == 0:
+            return float("inf")
+        sign = 1 if dividend * divisor >= 0 else -1
+        temp = self.bsearch(abs(dividend), abs(divisor)) * sign
+        if temp < -2**31 or temp > 2**31-1:
+            return 2**31-1
+        return temp
+
+    def bsearch(self, dividend, divisor):
+        left = 1
         right = 2**31
-        res = None
         while left <= right:
             mid = (left + right) // 2
-            if dividend < mid * divisor:
-                right = mid - 1 
-            elif dividend > mid * divisor:
+            temp = mid * divisor
+            if temp == dividend:
+                return mid
+            elif temp < dividend:
                 left = mid + 1
             else:
-                res = mid * sign
-                break
-        if res == None:
-            res = right * sign
-        
-        if res < -(2**31):
-            return -(2**31)
-        elif res > (2**31)-1:
-            return (2**31)-1
+                right = mid - 1
+        return right
 
-        return res
 
 s = Solution()
 
@@ -193,3 +192,33 @@ print(s.divide(a, b))
 a = -2147483648
 b = -1
 print(s.divide(a, b))
+
+"""
+    4th: upper bound binary search
+    - the best way for interviews to tackle this problem
+    - be careful on left - 1 in bsearch, consider the testcase -2147483648/1
+
+    Time    O(logN)
+    Space   O(1)
+    28 ms, faster than 88.54%
+"""
+
+
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        sign = 1 if dividend * divisor >= 0 else -1
+        res = self.bsearch(abs(dividend), abs(divisor)) * sign
+        if res < -2**31 or res > 2**31-1:
+            return 2**31-1
+        return res
+
+    def bsearch(self, dividend, divisor):
+        left = 1
+        right = 2**31 + 1
+        while left < right:
+            mid = (left + right) // 2
+            if dividend >= divisor*mid:
+                left = mid + 1
+            else:
+                right = mid
+        return left - 1
