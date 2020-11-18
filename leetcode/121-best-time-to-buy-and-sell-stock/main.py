@@ -67,3 +67,22 @@ print(Solution().maxProfit([2, 3, 10, 6, 4, 8, 1]))
 print(Solution().maxProfit([7, 9, 5, 6, 3, 2]))
 print(Solution().maxProfit([1, 2, 90, 10, 110]))
 print(Solution().maxProfit([80, 2, 6, 3, 100]))
+
+"""
+    followup: find the indices as well
+"""
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        dip = 2**31
+        dipIdx = 0
+        peakIdx = 0
+        res = 0
+        for i in range(len(prices)):
+            p = prices[i]
+            if p < dip:
+                dip = p
+                dipIdx = i
+            if p - dip > res:
+                res = p - dip
+                peakIdx = i
+        return res, dipIdx, peakIdx

@@ -52,6 +52,11 @@ print("-----")
 """
     2nd approach: simialar to lc90(subset 2)
 
+    similar to subset2, permutation2
+    nums[i-1] != nums[i]
+    - to avoid having the same prefix for the next recursions
+    - to ensure that any number can only be used at most once
+
     it is hard to determind the Time Complexity, it depends on the input
     108 ms, faster than 32.29%
     17june2019

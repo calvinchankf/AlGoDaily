@@ -66,7 +66,7 @@ print("---------------")
     01234567
     )()(()))()
      ^    ^
-    the longest valid one
+    the longest valid one = 6 - 0 = 6
 
 
     1. just store the parentheses and corresponding indices into a stack [(parentheses, index), ...]
@@ -84,8 +84,8 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        res = 0
         stack = []
+        res = 0
         for i in range(len(s)):
             c = s[i]
             if c == '(':
@@ -93,7 +93,7 @@ class Solution(object):
             elif c == ')':
                 if len(stack) > 0 and stack[-1][0] == '(':
                     stack.pop()
-                    diff = None
+                    diff = 0
                     if len(stack) > 0:
                         diff = i - stack[-1][1]
                     else:

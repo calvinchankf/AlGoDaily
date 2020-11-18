@@ -1,5 +1,6 @@
 """
     1st approach: DP
+    - same approach can solve another classic problem: K-Palindrome
     - clone and revert the input string
     - do longest common subsequence against the input string
 

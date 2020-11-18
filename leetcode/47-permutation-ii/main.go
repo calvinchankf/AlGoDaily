@@ -8,7 +8,7 @@ import (
 
 // naive approach
 // recursively dfs all the possibilities and avoid duplicate paths by using a hashtable
-// time		O(n!)
+// time		O(N!) -> O(N x N!)
 // space	O(n!)
 // beats 	7.41%
 func permuteUnique(nums []int) [][]int {

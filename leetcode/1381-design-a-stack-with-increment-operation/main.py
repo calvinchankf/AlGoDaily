@@ -52,62 +52,66 @@ class CustomStack(object):
 # obj.increment(k,val)
 
 """
-    2nd: 
-    - learned from others
-    - use an additional array to record the increment value
-    - inc[i] means for all elements from stack[0] to stack[i], we should plus inc[i] when we pop() from the stack
-    - then inc[i-1] += inc[i], so that we will keep the increment value for the next pop()
+    2nd: similar logic as min stack
+    - similar to lc155
+
+    e.g.
+    stack = [1,2,3,4,5], maxSize = 5
+
+    increment(2, 100) => stack = [1, 2,   3, 4, 5]
+                        incres = [0, 0, 100, 0, 5]
+    increment(9, 100) => stack = [1, 2,   3, 4,   5]
+                        incres = [0, 0, 100, 0, 105]
+
+    when we pop(), we add the increment to the stack[-1]
+    pop() returns 5 + 100 = 105
+    the stack becomes    stack = [1, 2,   3,   4]
+                        incres = [0, 0, 100, 100]
+
+    when we pop() again, do the same thing
+    pop() returns 4 + 100 = 104
+    the stack becomes    stack = [1, 2,   3]
+                        incres = [0, 0, 200]
+    
+    when we pop() again, do the same thing
+    pop() returns 3 + 200 = 203
+    the stack becomes    stack = [1,   2]
+                        incres = [0, 200]
 
     ref:
-    - https://leetcode.com/problems/design-a-stack-with-increment-operation/discuss/539716/JavaC%2B%2BPython-Lazy-increment-O(1)
+    https://leetcode.com/problems/design-a-stack-with-increment-operation/discuss/542205/Python-Prefix-sum-with-1-array
 
-    Time    O(1) for all func
-    Space   O(2N)
-    80 ms, faster than 87.86%
+    Time    O(1)
+    Space   O(1)
+    132 ms, faster than 59.04%
 """
 
 
 class CustomStack(object):
 
     def __init__(self, maxSize):
-        """
-        :type maxSize: int
-        """
         self.maxSize = maxSize
-        self.arr = []
-        self.inc = maxSize * [0]
+        self.stack = []
 
     def push(self, x):
-        """
-        :type x: int
-        :rtype: None
-        """
-        if len(self.arr) == self.maxSize:
-            return
-        self.arr.append(x)
+        if len(self.stack) < self.maxSize:
+            self.stack.append([x, 0])
 
     def pop(self):
-        """
-        :rtype: int
-        """
-        if len(self.arr) == 0:
+        if not self.stack:
             return -1
-        i = len(self.arr) - 1
-        if i > 0:
-            self.inc[i-1] += self.inc[i]
-        res = self.arr.pop() + self.inc[i]
-        self.inc[i] = 0
+
+        res, inc = self.stack.pop()
+        res += inc
+
+        if self.stack:
+            self.stack[-1][1] += inc
+
         return res
 
     def increment(self, k, val):
-        """
-        :type k: int
-        :type val: int
-        :rtype: None
-        """
-        last = min(k, len(self.arr)) - 1
-        if last >= 0:
-            self.inc[last] += val
+        if self.stack:
+            self.stack[min(k, len(self.stack)) - 1][1] += val
 
 
 # Your CustomStack object will be instantiated and called as such:

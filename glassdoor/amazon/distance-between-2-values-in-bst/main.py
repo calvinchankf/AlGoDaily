@@ -11,20 +11,20 @@ class TreeNode(object):
         self.right = None
 
 
-def inserBst(node, val):
+def insertNodeInBst(node, val):
     if node == None:
         return TreeNode(val)
     if val < node.val:
-        node.left = inserBst(node.left, val)
+        node.left = insertNodeInBst(node.left, val)
     else:
-        node.right = inserBst(node.right, val)
+        node.right = insertNodeInBst(node.right, val)
     return node
 
 
 def buildBst(nums):
     root = None
     for x in nums:
-        root = inserBst(root, x)
+        root = insertNodeInBst(root, x)
     return root
 
 
