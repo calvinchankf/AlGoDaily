@@ -25,26 +25,27 @@
 	80 ms, faster than 92.96%
 */
 var nextPermutation = function (nums) {
-	// Find non-increasing suffix
-	let i = nums.length - 1;
+    // Find non-increasing suffix
+    const n = nums.length
+	let i = n - 1;
 	while (i > 0 && nums[i - 1] >= nums[i]) i--;
 
 	if (i <= 0) {
-		return reverse(nums, 0, nums.length - 1);
+		return reverse(nums, 0, n - 1);
 	}
 
 	// pivot
 	const pivot = i - 1;
 
 	// Find successor to pivot
-	let j = nums.length - 1;
+	let j = n - 1;
 	while (nums[j] <= nums[pivot]) j--;
 
 	// swap the pivot and succesor
 	[nums[pivot], nums[j]] = [nums[j], nums[pivot]];
 
 	// Reverse suffix
-	reverse(nums, i, nums.length - 1);
+	reverse(nums, i, n - 1);
 };
 
 const reverse = (nums, i, j) => {

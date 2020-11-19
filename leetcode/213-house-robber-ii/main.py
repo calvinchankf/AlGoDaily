@@ -20,8 +20,6 @@ class Solution(object):
             return 0
         if len(nums) == 1:
             return nums[0]
-        if len(nums) == 2:
-            return max(nums[0], nums[1])
         a = self.simpleRob(nums[:-1])
         b = self.simpleRob(nums[1:])
         return max(a, b)
@@ -31,13 +29,10 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        if len(nums) == 0:
-            return 0
-        included = nums[0]
-        excluded = 0
-        for i in range(1, len(nums)):
-            temp = included
-            included = max(excluded+nums[i], included)
-            excluded = temp
-        # return included
-        return max(included, excluded)
+        rob = 0
+        notRob = 0
+        for x in nums:
+            temp = rob
+            rob = max(rob, notRob + x)
+            notRob = temp
+        return max(rob, notRob)

@@ -92,15 +92,19 @@ class Solution(object):
             counts[age] += 1
         for a in counts:
             for b in counts:
-                if self.request(a, b):
+                if self.aCanRequestB(a, b):
                     if a == b:
                         res += counts[a] * (counts[b] - 1)
                     else:
                         res += counts[a] * counts[b]
         return res
 
-    def request(self, a, b):
-        return not (b <= 0.5 * a + 7 or b > a)
+    def aCanRequestB(self, a, b):
+        if b > a:
+            return False
+        if b <= 0.5 * a + 7:
+            return False
+        return True
 
 
 s = Solution()

@@ -4,8 +4,8 @@
     Recursive DFS using hashtables to avoid duplicates, see ./idea.jpeg
     Method similar to what I did for Permutation II
 
-    Time    O(2^n) worst
-    Space   O(2^n) recursion
+    Time    O(2^N) worst
+    Space   O(2^N) recursion
     24 ms, faster than 100.00%
 """
 
@@ -38,8 +38,8 @@ class Solution(object):
     2nd approach: recursion
     - similar to 1st dont need to use a hashtable(since the array is sorted)
     
-    Time    O(2^n) worst
-    Space   O(2^n) recursion
+    Time    O(2^N) worst
+    Space   O(2^N) recursion
     24 ms, faster than 100.00%
 """
 
@@ -61,6 +61,9 @@ class Solution(object):
     def dfs(self, nums, path):
         self.result.append(path)
         for i in range(len(nums)):
+            # nums[i-1] != nums[i]
+            # - to avoid having the same prefix for the next recursions
+            # - to ensure that any number can only be used at most once
             if i == 0 or nums[i-1] != nums[i]:
                 self.dfs(nums[i+1:], path+[nums[i]])
 

@@ -2,12 +2,14 @@
     0th: recursion
     LTE 13 / 20 test cases passed.
 """
+
+
 class Solution(object):
     def addOperators(self, num, target):
         self.res = []
         self.dfs(num, target, '')
         return self.res
-        
+
     def dfs(self, s, target, exp):
         if len(s) == 0:
             if len(exp) > 0 and eval(exp) == target:
@@ -15,10 +17,10 @@ class Solution(object):
         for i in range(len(s)):
             sub = s[:i+1]
             num = int(sub)
-            
+
             if str(num) != sub:
                 break
-            
+
             if len(exp) == 0:
                 self.dfs(s[i+1:], target, sub)
             else:
@@ -27,10 +29,9 @@ class Solution(object):
                 self.dfs(s[i+1:], target, exp + '*' + sub)
 
 
-
 """
     1st: recursion
-    - using eval() at the bottom of the recursion is too slow, we can evaluation the total along the way
+    - using eval() at the bottom of the recursion is too slow, so we should evaluate the total along the way
     - keep in mind that * has a higher priority
 
     e.g.1. 12 + 4 * 6
@@ -48,26 +49,43 @@ class Solution(object):
     Space   O(N)
     936 ms, faster than 77.16%
 """
+
+
 class Solution(object):
     def addOperators(self, num, target):
         self.res = []
         self.dfs(num, target, '', 0, None)
         return self.res
-        
-    def dfs(self, s, target, exp, total, prev):
+
+    def dfs(self, s, target, cur, total, prev):
         if len(s) == 0:
             if total == target:
-                self.res.append(exp)
+                self.res.append(cur)
         for i in range(len(s)):
-            sub = s[:i+1]
-            num = int(sub)
-            
-            if str(num) != sub:
+            prefix = s[:i+1]
+            remain = s[i+1:]
+            num = int(prefix)
+
+            # to avoid leading zeros 01 becoming 1, 012 becoming 12...etc
+            if str(num) != prefix:
                 break
-            
-            if len(exp) == 0:
-                self.dfs(s[i+1:], target, sub, num, num)
+
+            if len(cur) == 0:
+                self.dfs(remain, target, prefix, num, num)
             else:
-                self.dfs(s[i+1:], target, exp + '+' + sub, total + num, num)
-                self.dfs(s[i+1:], target, exp + '-' + sub, total - num, -num)
-                self.dfs(s[i+1:], target, exp + '*' + sub, total - prev + prev * num, prev*num)
+                self.dfs(remain, target, cur + '+' + prefix, total + num, num)
+                self.dfs(remain, target, cur + '-' + prefix,
+                         total - num, -num)  # prev = -num
+                self.dfs(remain, target, cur + '*' + prefix,
+                         total - prev + prev * num, prev*num)  # prev = prev*num
+
+
+"""
+    followups:
+    - no *:
+        if only + and -, we dont need to use prev in recursion
+    - add /:
+        - ask about floating numbers
+        - add this line:
+            self.dfs(remain, target, cur + '/' + prefix, total - prev + prev // num, prev//num)
+"""

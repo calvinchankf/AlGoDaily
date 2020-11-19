@@ -20,11 +20,12 @@ class Solution(object):
         :rtype: int
         """
         red, blue, green = 0, 0, 0
-        for x, y, z in costs:
-            nextRed = x + min(blue, green)
-            nextBlue = y + min(red, green)
-            nextGreen = z + min(red, blue)
-            red, blue, green = nextRed, nextBlue, nextGreen
+        for i in range(len(costs)):
+            row = costs[i]
+            _red = row[0] + min(blue, green)
+            _blue = row[1] + min(red, green)
+            _green = row[2] + min(red, blue)
+            red, blue, green = _red, _blue, _green
         return min(red, blue, green)
 
 

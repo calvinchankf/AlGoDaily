@@ -1,6 +1,7 @@
 /*
     1st: dyanamic programming with hashtable
-    - similar to lc1027
+    - similar to lc560 but witout prefix sum
+    - related to lc1027
     - use a hashtable to store the { distinct number : max length of a sequence }
 
     e.g.

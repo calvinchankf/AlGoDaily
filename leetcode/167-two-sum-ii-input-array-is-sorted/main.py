@@ -14,15 +14,15 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
-        if len(nums) == 0:
-            return []
-        left, right = 0, len(nums) - 1
+        n = len(nums)
+        left = 0
+        right = n - 1
         while left < right:
-            cur = nums[left] + nums[right]
-            if cur == target:
-                return [left+1, right+1]
-            elif cur > target:
+            total = nums[left] + nums[right]
+            if total < target:
+                left += 1
+            elif total > target:
                 right -= 1
             else:
-                left += 1
+                return [left+1, right+1]
         return []

@@ -3,7 +3,7 @@
 
     Time    O(MN)
     Space   O(N)
-    20 ms, faster than 90.49%
+    8 ms, faster than 100.00%
 """
 
 
@@ -16,19 +16,26 @@ class Solution(object):
         """
         mapping = {}
         for i in range(len(order)):
-            mapping[order[i]] = i
+            key = order[i]
+            mapping[key] = i
 
         for i in range(1, len(words)):
             prev = words[i-1]
             cur = words[i]
             n = min(len(prev), len(cur))
+            curLargerThanPrev = False
             for j in range(n):
                 p = prev[j]
                 c = cur[j]
                 if mapping[p] < mapping[c]:
+                    curLargerThanPrev = True
                     break
                 elif mapping[p] > mapping[c]:
                     return False
+                else:
+                    continue
+            if curLargerThanPrev:
+                continue
             if prev[:n] == cur[:n] and len(prev) > len(cur):
                 return False
         return True

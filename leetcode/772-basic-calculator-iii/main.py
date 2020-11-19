@@ -91,10 +91,11 @@ class Solution:
             c = q.pop(0)
             if c.isdigit():
                 num = num*10 + int(c)
-            # regard '(...)' as a number
+            # 1. ( must follow a +-*/, so it means the previous characters are processed
+            # 2. so we can justregard '(...)' as a number
             if c == '(':
                 num = self.helper(q)
-            if len(q) == 0 or c == '+' or c == '-' or c == '*' or c == '/' or c == ')':
+            if c in '+-*/)' or len(q) == 0:
                 if sign == '+':
                     stack.append(num)
                 elif sign == '-':

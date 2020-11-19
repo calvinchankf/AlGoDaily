@@ -1,11 +1,11 @@
-import heapq
+from heapq import *
 
 """
     1st approach: upper bound binary search
 
     Time    O(n * (logk + k)) since insert takes O(k)
     Space   O(k)
-    112 ms, faster than 33.23% 
+    112 ms, faster than 33.23%
 """
 
 
@@ -43,7 +43,7 @@ class Solution(object):
     - similar to lc215, 703
     - maintain a min heap of size k, the top item in the minheap at the end is the kth largest item
 
-	Time		O(nlogk)
+	Time		O(NlogK)
 	Space		O(n)
 	72 ms, faster than 40.76%
 """
@@ -58,13 +58,27 @@ class Solution(object):
         """
         if len(nums) == 0 or k <= 0:
             return -1
-        pq = []
-        for num in nums:
-            heapq.heappush(pq, num)
-            if len(pq) > k:
-                heapq.heappop(pq)
-        return heapq.heappop(pq)
+        minHeap = []
+        for x in nums:
+            heappush(minHeap, x)
+            if len(minHeap) > k:
+                heappop(minHeap)
+        return minHeap[0]
 
+
+s = Solution()
+
+a = [3, 2, 1, 5, 6, 4]
+b = 2
+print(s.findKthLargest(a, b))
+
+# [1, 2, 2, 3, 3, 4, 5, 5, 6]
+#                 ^
+a = [3, 2, 3, 1, 2, 4, 5, 5, 6]
+b = 4
+print(s.findKthLargest(a, b))
+
+print("-----")
 
 """
     3rd: quick select
@@ -76,7 +90,7 @@ class Solution(object):
 
 
 class Solution:
-    def findKthLargest(self, nums: List[int], k: int) -> int:
+    def findKthLargest(self, nums, k):
         return self.quickSelect(nums, 0, len(nums)-1, k)
 
     def quickSelect(self, nums, left, right, k):
@@ -105,3 +119,33 @@ class Solution:
     followup1: kth smallest
     followup2: distinct
 """
+
+
+class Solution(object):
+    def findKthLargest(self, nums, k):
+        # followup2
+        if len(nums) == 0 or k <= 0:
+            return -1
+        seen = set()
+        minHeap = []
+        for x in nums:
+            if x in seen:
+                continue
+            seen.add(x)
+            heappush(minHeap, x)
+            if len(minHeap) > k:
+                heappop(minHeap)
+        return minHeap[0]
+
+
+s = Solution()
+
+a = [3, 2, 1, 5, 6, 4]
+b = 2
+print(s.findKthLargest(a, b))
+
+# [1, 2, 3, 4, 5, 6]
+#        ^
+a = [3, 2, 3, 1, 2, 4, 5, 5, 6]
+b = 4
+print(s.findKthLargest(a, b))

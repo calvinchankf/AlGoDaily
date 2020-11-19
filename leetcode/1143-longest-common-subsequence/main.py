@@ -1,7 +1,7 @@
 """
     class dynamic programming problem
     - longest common substring
-    - similar to lc712
+    - similar to lc516, 712
     - see miscellaneous/longest-common-subsequence/idea.png
 
     ref:

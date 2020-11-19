@@ -14,7 +14,7 @@
 
     Time    O(n^2)
     Space   O(n)
-    16 ms, faster than 99.95%
+    12 ms, faster than 99.83%
 """
 
 
@@ -26,7 +26,7 @@ class Solution(object):
     def dfs(self, s, wordSet, ht):
         if len(s) == 0:
             return True
-        if s in ht:
+        if s in ht:  # or use len(s) as the key
             return False
         for w in wordSet:
             n = len(w)

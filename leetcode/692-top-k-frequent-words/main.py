@@ -1,4 +1,5 @@
-from collections import defaultdict
+from heapq import *
+from collections import *
 from functools import cmp_to_key
 
 """
@@ -8,7 +9,7 @@ from functools import cmp_to_key
 	3. put the hashtable key&value into a bucket with freq as an index
 	4. the first k elements are the top k elements in the bucket
 
-	Time	O(nlogn * klogk)
+	Time	O(NlogN)
 	Space	O(n)
 	44 ms, faster than 67.17%
 	30may2019
@@ -17,23 +18,14 @@ from functools import cmp_to_key
 
 class Solution(object):
     def topKFrequent(self, words, k):
-        ht = defaultdict(int)
-        for w in words:
-            ht[w] += 1
-
-        arr = []
-        for key in ht:
-            arr.append((ht[key], key))
-
-        def cmptr(a, b):
-            if a[0] == b[0]:
-                return -1 if a[1] < b[1] else 1
-            return b[0] - a[0]
-        arr.sort(key=cmp_to_key(cmptr))
-
+        ht = Counter(words)
+        freqs = []
+        for w in ht:
+            freqs.append((ht[w], w))
+        freqs.sort(key=lambda x: (-x[0], x[1]))
         res = []
-        for i in range(min(k, len(arr))):
-            res.append(arr[i][1])
+        for f, w in freqs[:k]:
+            res.append(w)
         return res
 
 
@@ -49,7 +41,56 @@ a = ["aaa", "aa", "a"]
 b = 2
 print(Solution().topKFrequent(a, b))
 
+a = ["i", "love", "leetcode", "i", "love", "coding"]
+b = 3
+print(Solution().topKFrequent(a, b))
+
 print("-----")
+
+
+class WrapString:
+    def __init__(self, string):
+        self.val = string
+
+    def __eq__(self, other):
+        return self.val == other.val
+
+    def __lt__(self, other):
+        # goal: desceding order
+        return self.val > other.val
+
+
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        ht = Counter(words)
+        minHeap = []
+        for w in ht:
+            f = ht[w]
+            heappush(minHeap, (f, WrapString(w), w))
+            if len(minHeap) > k:
+                heappop(minHeap)
+        res = []
+        while len(minHeap) > 0:
+            f, o, w = heappop(minHeap)
+            res.append(w)
+        return res[::-1]
+
+
+a = ["love", "i", "leetcode", "i", "love", "coding"]
+b = 2
+print(Solution().topKFrequent(a, b))
+
+a = ["the", "day", "is", "sunny", "the", "the", "the", "sunny", "is", "is"]
+b = 4
+print(Solution().topKFrequent(a, b))
+
+a = ["aaa", "aa", "a"]
+b = 2
+print(Solution().topKFrequent(a, b))
+
+a = ["i", "love", "leetcode", "i", "love", "coding"]
+b = 3
+print(Solution().topKFrequent(a, b))
 
 """
     followup: if there is a tie, two words have the same frequency, return them by the insertion order

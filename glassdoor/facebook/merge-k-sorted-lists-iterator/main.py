@@ -1,5 +1,5 @@
 import sys
-import heapq
+from heapq import *
 
 """
     1st: min heap
@@ -14,22 +14,22 @@ import heapq
 
 class MergeListsIterator(object):
     def __init__(self, lists):
-        self.pq = []
+        self.minHeap = []
         for nums in lists:
             if len(nums) > 0:
-                head = nums.pop(0)
-                heapq.heappush(self.pq, (head, nums))
+                minNum = nums.pop(0)
+                heappush(self.minHeap, (minNum, nums))
 
     def hasNext(self):
-        return len(self.pq) > 0
+        return len(self.minHeap) > 0
 
     def returnNext(self):
         if not self.hasNext():
             return None
-        head, nums = heapq.heappop(self.pq)
+        head, nums = heappop(self.minHeap)
         if len(nums) > 0:
-            nextHead = nums.pop(0)
-            heapq.heappush(self.pq, (nextHead, nums))
+            minNum = nums.pop(0)
+            heappush(self.minHeap, (minNum, nums))
         return head
 
 

@@ -20,11 +20,13 @@
     Space   O(4)
     20 ms, faster than 99.15%
 """
+
+
 class Solution:
-    
+
     def __init__(self):
         self.buf4 = []
-    
+
     def read(self, buf: List[str], n: int) -> int:
         total = 0
         while total < n:
@@ -35,7 +37,6 @@ class Solution:
                     break
                 self.buf4 = buf4[:c]
             while total < n and len(self.buf4) > 0:
-                top = self.buf4.pop(0)
-                buf[total] = top
+                buf[total] = self.buf4.pop(0)
                 total += 1
         return total
