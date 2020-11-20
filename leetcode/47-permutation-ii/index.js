@@ -7,7 +7,7 @@
     compute permutations of 2(index 2)
     compute permutations of 3(index 3)
 
-    time        O(n!) worst case
+    time        O(N!) -> O(N x N!)
     space	    O(n!)
     40 ms, faster than 98.27%
 */

@@ -88,12 +88,13 @@ class Solution(object):
                 self.res.append(chosen)
             return
         num = digits[0]
+        remain = digits[1:]
         # if num not in self.ht:
         #     self.dfs(digits[1:], chosen)
         #     return
         cands = self.ht[num]
         for cand in cands:
-            self.dfs(digits[1:], chosen + cand)
+            self.dfs(remain, chosen + cand)
 
 
 print(Solution().letterCombinations(""))

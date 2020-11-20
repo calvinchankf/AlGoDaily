@@ -52,18 +52,15 @@ class Solution(object):
 
 class Solution(object):
     def wordPattern(self, pattern, sentence):
-        words = sentence.split()
-        if len(pattern) != len(words):
-            return False
-        s1 = self.calSignature(pattern)
-        s2 = self.calSignature(words)
-        return s1 == s2
-        
-    def calSignature(self, s):
-        signature = ""
-        seen = {}
-        for c in s:
-            if c not in seen:
-                seen[c] = len(seen)
-            signature += str(seen[c]) + ','
-        return signature
+        a = self.getSignature(pattern)
+        b = self.getSignature(s.split(' '))
+        return a == b
+
+    def getSignature(self, arr):
+        ht = {}
+        signs = []
+        for x in arr:
+            if x not in ht:
+                ht[x] = len(ht)
+            signs.append(ht[x])
+        return tuple(signs)

@@ -33,14 +33,14 @@ class Solution(object):
         sentences = []
         for w in wordSet:
             n = len(w)
-            prefix = s[:n]
-            if prefix == w:
-                options = self.dfs(s[n:], wordSet, ht)
-                for sf in options:
-                    sentence = w + ' ' + sf
+            sub = s[:n]
+            if w == sub:
+                cands = self.dfs(s[n:], wordSet, ht)
+                for cand in cands:
+                    sentence = w + ' ' + cand
                     sentences.append(sentence.strip())
         ht[s] = sentences
-        return ht[s]
+        return sentences
 
 
 s = "catsandog"

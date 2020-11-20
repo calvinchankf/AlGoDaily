@@ -27,6 +27,7 @@ import random
     = 1/n
 """
 
+
 """
     Approach for an array
 """
@@ -45,11 +46,45 @@ def reservoirSampling(nums, k):
     return sampleSet
 
 
+print("--- 1D ---")
 a = [59, 100, 2, 30, 63, 71, 12, 25, 86, 48]
 b = 3
 print(reservoirSampling(a, 3))
 
-print("-----")
+
+"""
+    Approach for an 2D array: 
+    Create an 2D binary array which there are k cells are 1
+"""
+
+
+def reservoirSampling2D(R, C, k):
+    samples = []
+    for i in range(R*C):
+        coor = (i // R, i % R)
+        if i < k:
+            samples.append(coor)
+        else:
+            r = random.randint(0, i)
+            if r < k:
+                samples[r] = coor
+    sampleSet = set(samples)
+    res = []
+    for i in range(R):
+        row = C * [0]
+        for j in range(C):
+            if (i, j) in sampleSet:
+                row.append(1)
+        res.append(row)
+    return res
+
+
+print("--- 2D ---")
+a = 4
+b = 4
+c = 4
+print(reservoirSampling2D(a, b, c))
+
 
 """
     Approach for a Data Stream
@@ -79,6 +114,7 @@ class ReservoirSampling(object):
         return self.getSampleSet()
 
 
+print("--- 1D data stream ---")
 rs = ReservoirSampling(3)
 print(rs.addAndGet(59))
 print(rs.addAndGet(100))

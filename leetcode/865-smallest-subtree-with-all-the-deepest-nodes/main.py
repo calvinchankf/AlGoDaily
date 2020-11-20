@@ -7,10 +7,12 @@
 
 """
     1st approach: bfs + lowest common ancestor
-    
-    Time    O(kn) -> O(n^2) worst
-    Space   O(n)
-    16 ms, faster than 95.53%
+    - bfs to record the nodes with maxDepth
+    - find the LCA of the leftmost leaf and the rightmost leaf
+
+    Time    O(2N)
+    Space   O(N)
+    36 ms, faster than 59.33%
 """
 
 
@@ -20,29 +22,32 @@ class Solution(object):
         :type root: TreeNode
         :rtype: TreeNode
         """
-        q = [root]
-        leaves = []
+        maxDepth = 0
+        maxDepthNodes = []
+        q = [(root, 0)]
         while len(q) > 0:
-            n = len(q)
-            arr = []
-            for i in range(n):
-                head = q.pop(0)
-                arr.append(head)
-                if head.left != None:
-                    q.append(head.left)
-                if head.right != None:
-                    q.append(head.right)
-            leaves = arr
-        res = leaves[0]
-        for i in range(1, len(leaves)):
-            res = self.lcs(root, leaves[i], res)
-        return res
+            node, d = q.pop(0)
 
-    def lcs(self, node, p, q):
-        if node == None or node == p or node == q:
+            if d > maxDepth:
+                maxDepth = d
+                maxDepthNodes = [node]
+            elif d == maxDepth:
+                maxDepthNodes.append(node)
+
+            if node.left:
+                q.append((node.left, d+1))
+            if node.right:
+                q.append((node.right, d+1))
+
+        if len(maxDepthNodes) == 1:
+            return maxDepthNodes[0]
+        return self.lca(root, maxDepthNodes[0], maxDepthNodes[-1])
+
+    def lca(self, node, a, b):
+        if node == None or node == a or node == b:
             return node
-        left = self.lcs(node.left, p, q)
-        right = self.lcs(node.right, p, q)
+        left = self.lca(node.left, a, b)
+        right = self.lca(node.right, a, b)
         if left != None and right != None:
             return node
         if left != None:

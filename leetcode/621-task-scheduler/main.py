@@ -10,8 +10,8 @@ from collections import *
         - put the tasks back to the queue with decremented count
     3. remove trailing '-'(idle)
 
-    Time    O(nlog26) -> O(n)
-    Space   O(n)
+    Time    O(Nlog26) -> O(N)
+    Space   O(N)
     744 ms, faster than 26.51%
 """
 

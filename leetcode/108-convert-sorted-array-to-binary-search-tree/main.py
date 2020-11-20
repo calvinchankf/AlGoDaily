@@ -7,33 +7,6 @@ class TreeNode(object):
 
 
 """
-    recursion:
-    0. to create a balence tree, u must sort the array first
-    1. sort the array
-    2. build the tree recursively in the way of binary search
-"""
-
-
-class Solution(object):
-    def sortedArrayToBST(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: TreeNode
-        """
-        nums = sorted(nums)
-        return self.buildBST(nums, 0, len(nums)-1)
-
-    def buildBST(self, nums, left, right):
-        if left > right:
-            return None
-        mid = (left + right) / 2
-        node = TreeNode(nums[mid])
-        node.left = self.buildBST(nums, left, mid - 1)
-        node.right = self.buildBST(nums, mid + 1, right)
-        return node
-
-
-"""
     recursion: using slice, but keep in mind that slicing takes O(n)
     0. to create a balence tree, u must sort the array first
     1. sort the array
@@ -46,8 +19,8 @@ class Solution(object):
 		2			6
 	1	  3		5		7
 
-	Time	O(n)
-	Space	O(n)
+	Time	O(N^2) array slicing takes linear time
+	Space	O(N)
 """
 
 
@@ -66,4 +39,34 @@ class Solution(object):
         node = TreeNode(nums[mid])
         node.left = self.buildBST(nums[:mid])
         node.right = self.buildBST(nums[mid+1:])
+        return node
+
+
+"""
+    Recursion:
+    0. to create a balence tree, u must sort the array first
+    1. sort the array
+    2. build the tree recursively in the way of binary search
+
+    Time	O(N)
+	Space	O(N)
+"""
+
+
+class Solution(object):
+    def sortedArrayToBST(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: TreeNode
+        """
+        nums = sorted(nums)
+        return self.buildBST(nums, 0, len(nums)-1)
+
+    def buildBST(self, nums, left, right):
+        if left > right:
+            return None
+        mid = (left + right) // 2
+        node = TreeNode(nums[mid])
+        node.left = self.buildBST(nums, left, mid - 1)
+        node.right = self.buildBST(nums, mid + 1, right)
         return node

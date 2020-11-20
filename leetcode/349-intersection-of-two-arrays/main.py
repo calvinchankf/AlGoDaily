@@ -1,3 +1,12 @@
+"""
+    1st approach: hashtable
+
+    Time    O(A+B)
+    Space   O(A+B)
+    36 ms, faster than 97.24%
+"""
+
+
 class Solution(object):
     def intersection(self, nums1, nums2):
         """
@@ -5,21 +14,12 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
-
-        # count occurence
-        setA, setB = set(), set()
-        for num in nums1:
-            setA.add(num)
-        for num in nums2:
-            setB.add(num)
-        # declare hastables for iteration
-        largerSet = setA
-        smallerSet = setB
-        if len(largerSet) < len(smallerSet):
-            smallerSet, largerSet = largerSet, smallerSet
-        # # find the duplicates
+        ht = {}
+        for x in nums1:
+            ht[x] = True
         res = []
-        for key in largerSet:
-            if key in smallerSet:
-                res.append(key)
+        for x in nums2:
+            if x in ht:
+                res.append(x)
+                del ht[x]
         return res

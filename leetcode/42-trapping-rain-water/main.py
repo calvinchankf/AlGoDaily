@@ -1,5 +1,6 @@
 """
     1st approach: 2pointers
+    - similar to lc42, 135, 487, 689, 915, 1493
     - calculate max from the front
     - calculate max from the end
     - the min(forward[i], backward[i]) - height[i] is the volumn of the trapping water on that cell

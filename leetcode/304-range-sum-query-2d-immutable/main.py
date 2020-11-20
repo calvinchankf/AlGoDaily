@@ -6,6 +6,8 @@
     Space               O(RC)
     212 ms, faster than 6.65%
 """
+
+
 class NumMatrix(object):
 
     def __init__(self, matrix):
@@ -20,7 +22,6 @@ class NumMatrix(object):
                 pfs += x
                 pfss.append(pfs)
             self.cache.append(pfss)
-        
 
     def sumRegion(self, row1, col1, row2, col2):
         """
@@ -59,6 +60,7 @@ class NumMatrix(object):
     96 ms, faster than 55.66%
 """
 
+
 class NumMatrix(object):
 
     def __init__(self, matrix):
@@ -76,7 +78,6 @@ class NumMatrix(object):
                 topLeft = cache[i-1][j-1] if i-1 >= 0 and j-1 >= 0 else 0
                 cache[i][j] = matrix[i][j] + top + left - topLeft
         self.cache = cache
-        
 
     def sumRegion(self, row1, col1, row2, col2):
         """
@@ -90,5 +91,32 @@ class NumMatrix(object):
             return 0
         top = self.cache[row1-1][col2] if row1-1 >= 0 else 0
         left = self.cache[row2][col1-1] if col1-1 >= 0 else 0
-        topLeft = self.cache[row1-1][col1-1] if row1-1 >= 0 and col1-1 >= 0 else 0
+        topLeft = self.cache[row1-1][col1-1] if row1 - \
+            1 >= 0 and col1-1 >= 0 else 0
         return self.cache[row2][col2] - top - left + topLeft
+
+
+"""
+    same appraoch as 2nd but cleaner
+    96 ms, faster than 98.05%
+"""
+
+
+class NumMatrix:
+
+    def __init__(self, matrix: List[List[int]]):
+        if not matrix or not matrix[0]:
+            return
+        R, C = len(matrix), len(matrix[0])
+        cache = [(C+1) * [0] for _ in range(R+1)]
+        for i in range(R):
+            for j in range(C):
+                # matrix[i][j] + top + left - topLeft
+                cache[i+1][j+1] = matrix[i][j] + \
+                    cache[i][j+1] + cache[i+1][j] - cache[i][j]
+        self.cache = cache
+
+    def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
+        c = self.cache
+        # cache[bottom][right] - top - left + topLeft
+        return c[row2+1][col2+1] - c[row1][col2+1] - c[row2+1][col1] + c[row1][col1]
