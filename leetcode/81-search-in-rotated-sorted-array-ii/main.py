@@ -11,6 +11,8 @@
 	Space	O(1)
 	40 ms, faster than 46.93%
 """
+
+
 class Solution(object):
     def search(self, nums, target):
         """
@@ -21,11 +23,11 @@ class Solution(object):
         left = 0
         right = len(nums)-1
         while left <= right:
-            
+
             # this is the trickiest part, if both ends have the same number
-            # e.g. [4,1,2,3,4,4,4]
-		    # dont consider the left most number until there are no duplicate numbers on both ends
-            while left < right and nums[left] == nums[right]:
+            # e.g. [5,1,1,1,1,2,3,4]
+            # dont consider the next number when it is the same as the current one
+            while left + 1 < right and nums[left] == nums[left+1]:
                 left += 1
 
             mid = (left + right)/2
@@ -47,18 +49,19 @@ class Solution(object):
                 return True
         return False
 
-a = [4,5,6,7,0,1,2]
+
+a = [4, 5, 6, 7, 0, 1, 2]
 b = 0
 print(Solution().search(a, b))
 
-a = [4,5,6,7,0,1,2]
+a = [4, 5, 6, 7, 0, 1, 2]
 b = 3
 print(Solution().search(a, b))
 
-a = [4,5,6,7,0,0,1,2]
+a = [4, 5, 6, 7, 0, 0, 1, 2]
 b = 0
 print(Solution().search(a, b))
 
-a = [4,5,6,7,7,0,1,1,2]
+a = [4, 5, 6, 7, 7, 0, 1, 1, 2]
 b = 3
 print(Solution().search(a, b))

@@ -109,16 +109,20 @@
 
 
 """
-    approach: caching
+    approach:
+    - similar to prefix sum, i accumulate the number of * during iteration
+    - cache the position of the nearest left compartment at every index
+    - cache the position of the nearest right compartment at every index
 
             0 1 2 3 4 5 6 7 8 9
             * * | * * * | * * *
     left   -1-1 2 2 2 2 6 6 6 6
     right   2 2 2 6 6 6 6-1-1-1
-    items   1 2 2 3 4 5 5 6 7 8
+    pfs     1 2 2 3 4 5 5 6 7 8
 
-    query [0, 7] = items[left[7]] - items[right[0]] = items[6] - items[2] = 5 - 2 = 3
-    query [1, 3] = items[left[3]] - items[right[1]] = items[2] - items[2] = 2 - 2 = 0
+    - then when we do query, we can find the compartment in the middle, and calculate the * inside using pfs[right] - pfs[left]
+    query(0, 7) = pfs[left[7]] - pfs[right[0]] = pfs[6] - pfs[2] = 5 - 2 = 3
+    query(1, 3) = pfs[left[3]] - pfs[right[1]] = pfs[2] - pfs[2] = 2 - 2 = 0
 """
 
 

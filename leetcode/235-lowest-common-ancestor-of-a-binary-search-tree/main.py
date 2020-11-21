@@ -42,6 +42,7 @@ class Solution(object):
 
 """
     2nd approach: recursive bst dfs
+    - similar to lc236, 1644
 
     idea: common anestor of 2 nodes must inclusively lies between left and right
     left <= anestor <= right

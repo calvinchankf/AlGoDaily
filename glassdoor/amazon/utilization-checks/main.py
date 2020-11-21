@@ -3,23 +3,12 @@ from math import *
 """
     https://leetcode.com/discuss/interview-question/924314/
 
-    Last seen: 4th November 2020, Role: Experience, Location: EU, Medium: HackerRank
-
-    Amazon Cloud Instances
-    1.1 Coding exercise
-    (see below)
-
-    1.2 Coding approach
-    Describe your approach to coding the solution
-    Describe the run time complexity of your solution
-    Introduction
     Amazon monitors the average utilization of cloud instances for services every second in order to adopt instances based on demand.
 
-    If average utilization in the past second is below 25%, it performs the action to half the number of instances running taking the ceiling if the half does not represent an integer. If the number of instances equals one, do nothing.
-
-    If the avg. utilization is between 25%-65%, do nothing.
-
-    Finally, if the average utilization is above 65%, perform the action of doubling the number of instances if the number of instances does not exceed 2*10^8.
+    - If average utilization in the past second is below 25%, it performs the action to half the number of instances running taking the ceiling if the half does not represent an integer. 
+    - If the number of instances equals one, do nothing.
+    - If the avg. utilization is between 25%-65%, do nothing.
+    - If the average utilization is above 65%, perform the action of doubling the number of instances if the number of instances does not exceed 2*10^8.
 
     Every time an action is performed, the following 10 seconds are ignored.
 

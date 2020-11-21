@@ -1,47 +1,20 @@
 /*
-  1st approach
-  - itereate once, use splice to remove the target
-  Time  O(n)
-  Space O(1)
-  72ms beats 14.82
-  23jan2019
-*/
-var removeElement = function (nums, val) {
-  let i = 0
-  while (i < nums.length) {
-    if (nums[i] == val) {
-      nums.splice(i, 1)
-    } else {
-      i++
-    }
-  }
-  return nums.length
-};
+    1st: same logic as Quick Sort
+    similar to lc283
 
-/*
-  2nd approach
-  - 2 pointers
-  - itereate once, if the slow pointer == val, swap the element to the rigth
-  Time  O(n)
-  Space O(1)
-  72ms beats 14.82
-  23jan2019
+    Time    O(N)
+    Space   O(1)
+    80 ms, faster than 61.45% 
 */
-var removeElement = function (nums, val) {
-  let i = 0
-  let j = 0
-  while (j < nums.length) {
-    if (nums[i] != val) {
-      i++
-    } else if (nums[j] != val) {
-      const temp = nums[i]
-      nums[i] = nums[j]
-      nums[j] = temp
-      i++
+var removeElement = function(nums, val) {
+    let j = 0
+    for (let i = 0; i < nums.length; i++) {
+        if (nums[i] != val) {
+            [nums[i], nums[j]] = [nums[j], nums[i]]
+            j += 1
+        }
     }
-    j++
-  }
-  return i
+    return j
 };
 
 let a = [3, 2, 2, 3]

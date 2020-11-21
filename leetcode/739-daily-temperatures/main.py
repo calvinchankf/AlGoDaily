@@ -13,12 +13,12 @@ class Solution(object):
         :type T: List[int]
         :rtype: List[int]
         """
-        res = len(T) * [0]
-        stack = []
-        for i in range(len(T)):
-            t = T[i]
-            while len(stack) > 0 and t > stack[-1][0]:
-                top, j = stack.pop()
-                res[idx] = i - j
-            stack.append((t, i))
+        n = len(T)
+        res = n * [0]
+        stack = []  # item, index
+        for i in range(n):
+            while len(stack) > 0 and stack[-1][0] < T[i]:
+                _, j = stack.pop()
+                res[j] = i - j
+            stack.append((T[i], i))
         return res

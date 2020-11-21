@@ -24,12 +24,12 @@ class Solution(object):
         """
         ht = {}
         for i in range(len(nums)):
-            num = nums[i]
-            remain = target - num
+            x = nums[i]
+            remain = target - x
             if remain in ht:
-                return [i, ht[remain]]
-            ht[num] = i
-        return [-1, -1]
+                return [ht[remain], i]
+            ht[x] = i
+        return []
 
 
 """

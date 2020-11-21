@@ -47,7 +47,12 @@ def zombieInMatrix(grid):
     minDays = 0
     for i in range(R):
         for j in range(C):
-            minDays = max(minDays, days[i][j])
+            if grid[i][j] == 0:
+                # no zombie in the beginning, no human infected at the end
+                if days[i][j] == sys.maxsize:
+                    return -1
+                # otherwise, normal case
+                minDays = max(minDays, days[i][j])
     return minDays
 
 
@@ -73,5 +78,10 @@ a = [
     [0, 1, 0, 1, 0],
     [0, 0, 0, 0, 1],
     [0, 1, 0, 0, 0],
+]
+print(zombieInMatrix(a))
+
+a = [
+    [0, 0, 0]
 ]
 print(zombieInMatrix(a))

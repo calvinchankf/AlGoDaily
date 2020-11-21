@@ -10,9 +10,12 @@ class TreeNode(object):
         self.left = None
         self.right = None
 
-# my intuitive solution:
-# get the paths, compare the paths
-# O(p+q+min(p,q)) = O(3k) = O(n) TLE
+
+"""
+    my intuitive solution:
+    get the paths, compare the paths
+    O(p+q+min(p,q)) = O(3k) = O(n) TLE
+"""
 
 
 class Solution(object):
@@ -57,10 +60,14 @@ class Solution(object):
 
 
 """
-    suggested solution: recursion
-    - - similar to lc236, 1644, 1650
-    
-    see ./236.png
+    suggested solution:
+    - similar to lc235
+    - recursion ./236.png
+
+    potential followups:
+    - if u r given the values instead of nodes reference?
+    - it is possible that P or/and Q are not int the tree, lc1644
+
     Time    O(N)
     Space   O(N)
 """
@@ -99,7 +106,7 @@ print("ans=", ans.val)
 
 
 """
-    followup: if u r given the values instead of nodes reference?
+    followup1: if u r given the values instead of nodes reference?
 """
 
 
