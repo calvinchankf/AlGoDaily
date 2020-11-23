@@ -1,9 +1,9 @@
 """
     1st approach: hashtable
 
-    Time    O(A+B+max(A,B))
+    Time    O(A+B)
     Space   O(A+B)
-    36 ms, faster than 52.13%
+    32 ms, faster than 77.47%
 """
 
 
@@ -14,29 +14,12 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
-
-        # count occurence
-        htA, htB = {}, {}
-        for num in nums1:
-            if num not in htA:
-                htA[num] = 1
-            else:
-                htA[num] += 1
-        for num in nums2:
-            if num not in htB:
-                htB[num] = 1
-            else:
-                htB[num] += 1
-        # declare hastables for iteration
-        largerHt = htA
-        smallerHt = htB
-        if len(largerHt) < len(smallerHt):
-            smallerHt, largerHt = largerHt, smallerHt
-        # find the duplicates
+        ht = Counter(nums1)
         res = []
-        for key in largerHt:
-            if key in smallerHt:
-                occurence = min(largerHt[key], smallerHt[key])
-                temp = occurence * [key]
-                res += temp
+        for x in nums2:
+            if x in ht:
+                res.append(x)
+                ht[x] -= 1
+                if ht[x] == 0:
+                    del ht[x]
         return res

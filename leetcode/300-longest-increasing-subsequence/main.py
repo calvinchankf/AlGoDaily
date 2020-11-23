@@ -18,15 +18,12 @@ class Solution(object):
         :rtype: int
         """
         n = len(nums)
-        if n == 0:
-            return 0
+        res = 1
         dp = n * [1]
-        for i in range(1, n):
-            maxCount = 0
+        for i in range(n):
             for j in range(i):
-                if nums[j] < nums[i]:
-                    maxCount = max(maxCount, dp[j])
-            dp[i] += maxCount
+                if nums[i] > nums[j]:
+                    dp[i] = max(dp[i], dp[j] + 1)
         return max(dp)
 
 

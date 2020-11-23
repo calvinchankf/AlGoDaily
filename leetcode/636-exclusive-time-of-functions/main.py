@@ -33,3 +33,4 @@ class Solution:
                 res[stack.pop()] += t - prevTime + 1
                 prevTime = t + 1
         return res
+

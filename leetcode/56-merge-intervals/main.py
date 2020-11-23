@@ -6,7 +6,7 @@
 
     Time    O(nlogn)
     Space   O(n)
-    84 ms, faster than 87.62%
+    72 ms, faster than 43.18%
 """
 
 
@@ -18,7 +18,7 @@ class Solution(object):
         """
         if len(intervals) == 0:
             return []
-        intervals = sorted(intervals, key=lambda x: x[0])
+        intervals.sort()
         res = [intervals[0]]
         for i in range(1, len(intervals)):
             s, e = intervals[i]

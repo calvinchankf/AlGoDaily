@@ -10,8 +10,8 @@
     compute permutations of 2(index 2)
     compute permutations of 3(index 3)
 
-    time      O(n!) worst case
-    space	    O(n!)
+    Time        O(N!) -> O(N x N!)
+    Space	    O(N!)
     beats     46.47%
 """
 
@@ -47,6 +47,11 @@ class Solution(object):
     skip computation for index 1 becos - 1(index 0) has been considered
     compute permutations of 2(index 2)
     compute permutations of 3(index 3)
+
+    similar to subset2
+    nums[i-1] != nums[i]
+    - to avoid having the same prefix for the next recursions
+    - to ensure that any number can only be used at most once
 
     time      O(n!) worst case
     space	    O(n!)

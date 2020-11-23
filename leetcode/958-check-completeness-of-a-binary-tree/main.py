@@ -65,7 +65,6 @@ class Solution(object):
             seenNull = False
             for _ in range(n):
                 node = q.pop(0)
-
                 if node == None:
                     seenNull = True
                 else:

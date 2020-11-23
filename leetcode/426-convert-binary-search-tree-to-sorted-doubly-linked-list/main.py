@@ -12,9 +12,9 @@ class Node(object):
     - put the nodes in an array in ascending order
     - update the values of the nodes
 
-    Time    O(2n)
-    Space   O(n)
-    824 ms, faster than 41.54%
+    Time    O(2N)
+    Space   O(N)
+    32 ms, faster than 96.20%
 """
 
 
@@ -54,3 +54,42 @@ class Solution(object):
             nodes[i].right = right
 
         return dump.right
+
+
+"""
+    2nd: recursion
+    - reassign the pointers during the inorder traversal process
+
+    Time    O(N)
+    Space   O(N)
+    36 ms, faster than 56.19%
+"""
+
+
+class Solution:
+    def treeToDoublyList(self, root: 'Node') -> 'Node':
+        if root == None:
+            return None
+        # declare a dumphead
+        dumphead = Node(-1)
+        self.prev = dumphead
+        # do recursion to reassign the pointers
+        self.inorder(root)
+        # final work on the 1st and n-1the node
+        head = dumphead.right
+        head.left = self.prev  # first.left point to the last
+        self.prev.right = head  # last.right point to the first
+        return head
+
+    def inorder(self, node):
+        if node == None:
+            return None
+        self.inorder(node.left)
+
+        # reassign the pointers
+        # things are on the left, so the logic wont affect the future traversal on the right
+        self.prev.right = node
+        node.left = self.prev
+        self.prev = node
+
+        self.inorder(node.right)

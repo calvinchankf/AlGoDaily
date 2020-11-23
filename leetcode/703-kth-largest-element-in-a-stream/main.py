@@ -61,28 +61,21 @@ class KthLargest(object):
 """
 
 
-class KthLargest(object):
+class KthLargest:
 
-    def __init__(self, k, nums):
-        """
-        :type k: int
-        :type nums: List[int]
-        """
-        self.nums = nums
+    def __init__(self, k: int, nums: List[int]):
+        self.minHeap = []
         self.k = k
-        heapq.heapify(self.nums)
-        while len(self.nums) > self.k:
-            heapq.heappop(self.nums)
+        for x in nums:
+            heappush(self.minHeap, x)
+            if len(self.minHeap) > k:
+                heappop(self.minHeap)
 
-    def add(self, val):
-        """
-        :type val: int
-        :rtype: int
-        """
-        heapq.heappush(self.nums, val)
-        if len(self.nums) > self.k:
-            heapq.heappop(self.nums)
-        return self.nums[0]
+    def add(self, val: int) -> int:
+        heappush(self.minHeap, val)
+        if len(self.minHeap) > self.k:
+            heappop(self.minHeap)
+        return self.minHeap[0]
 
 
 """

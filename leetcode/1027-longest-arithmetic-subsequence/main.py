@@ -62,3 +62,27 @@ class Solution:
                 dp[i][diff] = max(dp[i][diff], dp[j][diff] + 1)
                 res = max(res, dp[i][diff])
         return res
+
+
+"""
+    or we dont use counter
+"""
+
+
+class Solution(object):
+    def longestArithSeqLength(self, A):
+        n = len(A)
+        ht = {}
+        for i in range(n):
+            ht[i] = {}
+        res = 0
+        for i in range(n):
+            for j in range(i):
+                diff = A[i] - A[j]
+                if diff not in ht[j]:
+                    ht[j][diff] = 1
+                if diff not in ht[i]:
+                    ht[i][diff] = 0
+                ht[i][diff] = max(ht[i][diff], ht[j][diff] + 1)
+                res = max(res, ht[i][diff])
+        return res

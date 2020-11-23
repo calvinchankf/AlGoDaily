@@ -157,7 +157,7 @@ print("-----")
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
         if dividend == 0:
-            return 0
+            return float("inf")
         sign = 1 if dividend * divisor >= 0 else -1
         temp = self.bsearch(abs(dividend), abs(divisor)) * sign
         if temp < -2**31 or temp > 2**31-1:

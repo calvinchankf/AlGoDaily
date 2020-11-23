@@ -14,29 +14,27 @@ class Solution(object):
         :type num2: str
         :rtype: str
         """
+        if num1 == '0' or num2 == '0':
+            return '0'
         M, N = len(num1), len(num2)
-        nums = (M+N) * [0]
-        num1 = num1[::-1]
-        num2 = num2[::-1]
+        digits = (M + N) * [0]
         for i in range(M):
             for j in range(N):
-                p = int(num1[i]) * int(num2[j])
-                nums[i+j] += p % 10
-                nums[i+j+1] += p//10
-        # for every slot, calculate the digit and put carry to the next slot
-        carry = 0
-        for i in range(len(nums)):
-            d = (carry + nums[i]) % 10
-            carry = (carry + nums[i])//10
-            nums[i] = d
-        # construct the result
+                _i = M - i - 1
+                _j = N - j - 1
+                temp = int(num1[_i]) * int(num2[_j])
+                digits[i+j] += temp % 10
+                digits[i+j+1] += temp//10
+        for i in range(len(digits)-1):
+            carry = digits[i]//10
+            digits[i] = digits[i] % 10
+            digits[i+1] += carry
+        digits.reverse()
         res = ''
-        for i in range(len(nums)-1, -1, -1):
-            if nums[i] == 0 and res == '':  # ignore leading zeros
+        for i in range(len(digits)):
+            if res == '' and digits[i] == 0:
                 continue
-            res += str(nums[i])
-        if res == '':
-            return '0'
+            res += str(digits[i])
         return res
 
 

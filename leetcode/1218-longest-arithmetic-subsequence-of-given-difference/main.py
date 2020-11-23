@@ -37,6 +37,10 @@ class Solution(object):
     [1, 5, 7, 8, 5, 3, 4, 2, 1], -2
      1  1  1  1  2  3  1  2  4       <- for each number, find if ht[x-dff] exists and update ht[x] with the max length of a sequence
     
+    be carefull of the corn case:
+    arr     = [8,8,8,1,8]
+    diff    = 0
+
     Time    O(N)
     Space   O(N)
     664 ms, faster than 26.39%
@@ -48,6 +52,26 @@ class Solution:
         ht = Counter()
         for x in arr:
             remain = x - difference
+            if remain in ht:
+                ht[x] = max(ht[x], ht[remain] + 1)
+            else:
+                ht[x] = 1
+        return max(ht.values())
+
+
+"""
+    Same as above using a hashtable
+"""
+
+
+class Solution:
+
+    def longestSubsequence(self, arr: List[int], diff: int) -> int:
+        ht = {}
+        for x in arr:
+            if x not in ht:
+                ht[x] = 0
+            remain = x - diff
             if remain in ht:
                 ht[x] = max(ht[x], ht[remain] + 1)
             else:

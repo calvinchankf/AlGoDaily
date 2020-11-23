@@ -19,12 +19,12 @@ from functools import cmp_to_key
 
 class Solution:
     def findLongestChain(self, pairs: List[List[int]]) -> int:
-        intvs = sorted(pairs, key=lambda x: x[1])
+        pairs.sort(key=lambda x: x[1])
         count = 0
-        pos = -sys.maxsize
-        for s, e in intvs:
-            if s > pos:
-                pos = e
+        curEnd = -sys.maxsize
+        for s, e in pairs:
+            if s > curEnd:
+                curEnd = e
                 count += 1
         return count
 

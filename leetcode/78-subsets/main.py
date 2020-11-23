@@ -15,26 +15,24 @@ class Solution(object):
     explanation:
     in the recursion tree, for each number, we can either include or exclude it the result, therefore we have 2^n options in total
 
-    Time    O(2^n)
-    Space   O(2^n) recursion
-    beats   35.29%
+    Time    O(2^N)
+    Space   O(2^N) recursion
+    20 ms, faster than 75.55%
     """
-
-    def __init__(self):
-        self.result = []
 
     def subsets(self, nums):
         """
         :type nums: List[int]
         :rtype: List[List[int]]
         """
+        self.res = []
         self.dfs(nums, [])
         return self.result
 
     def dfs(self, nums, chosen):
         self.result.append(chosen)
         for i in range(len(nums)):
-            self.dfs(nums[i+1:], chosen+[nums[i]])
+            self.dfs(nums[i+1:], chosen + [nums[i]])
 
 
 s = Solution()
@@ -48,8 +46,8 @@ print("-----")
 class Solution(object):
     """
     Iterative DFS
-    Time    O(2^n)
-    Space   O(2^n)
+    Time    O(2^N)
+    Space   O(2^N)
     beats   3.67%
     """
 
