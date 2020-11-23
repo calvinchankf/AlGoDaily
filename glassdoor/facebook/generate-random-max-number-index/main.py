@@ -45,21 +45,21 @@ import random
 
 def getRandomIndexOfMaxNumber(nums):
     maxNum = -2**31
-    maxIdx = -1
+    maxNumIdx = -1
     targetIndexCount = 0
     res = []
     for i in range(len(nums)):
         x = nums[i]
         if x > maxNum:
             maxNum = x
-            maxIdx = i
+            maxNumIdx = i
             count = 1
         elif x == maxNum:
             # pick the current number with probability 1 / count (reservoir sampling)
             targetIndexCount += 1
             if random.randint(1, targetIndexCount) == 1:
-                maxIdx = i
-        res.append(maxIdx)
+                maxNumIdx = i
+        res.append(maxNumIdx)
     return res
 
 

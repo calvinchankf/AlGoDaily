@@ -80,29 +80,23 @@ print("-----")
 
 class Solution(object):
     def decodeString(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
-        chars = []
-        for c in s:
-            chars.append(c)
-        return self.dfs(chars)
+        q = [c for c in s]
+        return self.helper(q)
 
-    def dfs(self, chars):
-        res = ''
+    def helper(self, q):
         num = 0
-        while len(chars) > 0:
-            pop = chars.pop(0)
-            if pop.isdigit():
-                num = num*10 + int(pop)
-            elif pop == '[':
-                res += num * self.dfs(chars)
+        res = ''
+        while len(q) > 0:
+            c = q.pop(0)
+            if c.isdigit():
+                num = num * 10 + int(c)
+            elif c == '[':
+                res += self.helper(q) * num
                 num = 0
-            elif pop == ']':
+            elif c == ']':
                 return res
             else:
-                res += pop
+                res += c
         return res
 
 

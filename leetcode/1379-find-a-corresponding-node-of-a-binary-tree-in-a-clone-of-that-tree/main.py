@@ -43,13 +43,13 @@ class Solution:
 
 class Solution:
     def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
-        if not original or not cloned:
-            return None
-        if original == target:
+        if original == None or original == target:
             return cloned
         left = self.getTargetCopy(original.left, cloned.left, target)
         right = self.getTargetCopy(original.right, cloned.right, target)
-        return left or right
+        if left != None:
+            return left
+        return right
 
 
 """
@@ -69,8 +69,8 @@ class Solution:
         if original == target:
             return cloned
         res = None
-        for i in range(len(original.subviews)):
-            a = original.subviews[i]
-            b = cloned.subviews[i]
+        for i in range(len(original.children)):
+            a = original.children[i]
+            b = cloned.children[i]
             res = res or self.getTargetCopy(a, b, target)
         return res

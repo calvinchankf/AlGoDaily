@@ -59,9 +59,7 @@ print(reservoirSampling(a, 3))
 
 
 def reservoirSampling2D(R, C, k):
-    res = [C * [0] for _ in range(R)]
     samples = []
-    count = 0
     for i in range(R*C):
         coor = (i // R, i % R)
         if i < k:
@@ -70,8 +68,14 @@ def reservoirSampling2D(R, C, k):
             r = random.randint(0, i)
             if r < k:
                 samples[r] = coor
-    for i, j in samples:
-        res[i][j] = 1
+    sampleSet = set(samples)
+    res = []
+    for i in range(R):
+        row = C * [0]
+        for j in range(C):
+            if (i, j) in sampleSet:
+                row.append(1)
+        res.append(row)
     return res
 
 

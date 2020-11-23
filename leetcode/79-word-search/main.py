@@ -92,29 +92,32 @@ class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
         for i in range(len(board)):
             for j in range(len(board[0])):
-                if board[i][j] == word[0]:
-                    if self.dfs(board, word, i, j, {}):
+                if word[0] == board[i][j]:
+                    if self.backtrack(board, i, j, word, set()):
                         return True
         return False
-    
-    def dfs(self, board, word, i, j, ht):
+
+    def backtrack(self, board, i, j, word, hs):
+        # last character
+        if len(word) == 0:
+            return True
+        # boundary
         if i < 0 or i == len(board) or j < 0 or j == len(board[0]):
             return False
-        # not match
-        if word[0] != board[i][j]:
+        c = word[0]
+        remain = word[1:]
+        if board[i][j] != c:
             return False
         # only store the possible path in ht
         key = (i, j)
-        if key in ht:
+        if key in hs:
             return False
-        # last character
-        if len(word) == 1:
-            return True
+        hs.add(key)
+        # for 4 directions
+        dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+        for di, dj in dirs:
+            if self.backtrack(board, i+di, j+dj, remain, hs):
+                return True
         # backtracking
-        ht[key] = True
-        b = self.dfs(board, word[1:], i-1, j, ht)\
-            or self.dfs(board, word[1:], i+1, j, ht)\
-            or self.dfs(board, word[1:], i, j-1, ht)\
-            or self.dfs(board, word[1:], i, j+1, ht)
-        del ht[key]
-        return b
+        hs.remove(key)
+        return False

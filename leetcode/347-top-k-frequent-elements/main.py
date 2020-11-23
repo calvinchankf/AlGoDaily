@@ -1,10 +1,10 @@
-import heapq
+from heapq import *
 from collections import Counter
 
 """
-    1st approach: hashtable + sort
+    0th approach: hashtable + sort
     - count num: freq into a hashtable
-    - put the hashtable key&value into a priority queue
+    - sort the numbers by frequencies
 
     Time    O(NlogN)
     SPace   O(N)
@@ -14,18 +14,50 @@ from collections import Counter
 
 class Solution(object):
     def topKFrequent(self, nums, k):
-        ht = Counter()
-        for x in nums:
-            ht[x] += 1
+        counter = Counter(nums)
         freqs = []
-        for key in ht:
-            freqs.append((ht[key], key))
-        freqs.sort()
+        for key in counter:
+            f = counter[key]
+            freqs.append((f, key))
+        freqs.sort(reverse=True)
         res = []
-        for i in range(k):
-            if len(freqs) > 0:
-                freq, num = freqs.pop()
-                res.append(num)
+        for f, key in freqs[:k]:
+            res.append(key)
+        return res
+
+
+print(Solution().topKFrequent([], 0))
+print(Solution().topKFrequent([], 1))
+print(Solution().topKFrequent([1], 0))
+print(Solution().topKFrequent([1], 1))
+print(Solution().topKFrequent([1], 2))
+print(Solution().topKFrequent([1, 1, 1, 2, 2, 3], 2))
+print(Solution().topKFrequent(
+    [1, 1, 1, 2, 2, 3, 4, 1, 2, 1, 3, 3, 4, 3], 2))
+
+print("-----")
+
+"""
+    1st approach: min heap
+    - count num: freq into a hashtable
+    - put the key&value into a min heap
+
+    Time    O(NlogK + K)
+    SPace   O(N)
+    88 ms, faster than 97.41% 
+"""
+
+
+class Solution(object):
+    def topKFrequent(self, nums, k):
+        counter = Counter(nums)
+        minHeap = []
+        for key in counter:
+            f = counter[key]
+            heappush(minHeap, (f, key))
+            if len(minHeap) > k:
+                heappop(minHeap)
+        res = [x for f, x in minHeap]  # we dont care about the order
         return res
 
 
@@ -102,7 +134,7 @@ print("-----")
 
     Time    O(N)
     Space   O(N)
-    92 ms, faster than 54.73%
+    84 ms, faster than 75.45%
 """
 
 
@@ -111,8 +143,7 @@ class Solution(object):
         # count occurence of each num
         ht = Counter(nums)
         # create buckets
-        minFreq = nums[0]
-        maxFreq = nums[0]
+        minFreq, maxFreq = 2**32, 0
         freqs = defaultdict(list)
         for x in ht:
             f = ht[x]
@@ -121,8 +152,11 @@ class Solution(object):
             maxFreq = max(maxFreq, f)
         # put k items into the array
         res = []
-        for i in range(maxFreq, minFreq-1, -1):
-            if i not in freqs:
+        for f in range(maxFreq, minFreq-1, -1):
+            if f not in freqs:
                 continue
-            res += freqs[i]
-        return res[:k]
+            for num in freqs[f]:
+                res.append(num)
+                if len(res) == k:
+                    return res
+        return res
