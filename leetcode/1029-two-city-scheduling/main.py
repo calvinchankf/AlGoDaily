@@ -4,9 +4,33 @@ import sys
 """
     1st: sort
     - learned from others
+    - first fill CityA, then the remaning people go to CityB
 
+    e.g.1
+    [[10,20],[30,200],[400,50],[30,20]]
+    
+    consider idx0, cityA is the way cheaper to go
+    consider idx1, cityA is the way cheaper to go
+
+    so we can sort the costs by diff btw going to cityA and cityB
+
+    person1     person0   person3   person2
+    ------------------------------------------
+    [[30, 200], [10, 20], [30, 20], [400, 50]]
+        -170        -10     10          350     <= diff
+
+
+    e.g.2 
+    [[259, 770], [448, 54], [926, 667], [184, 139], [840, 118], [577, 469]]
+
+    person0      person3     person5     person2     person1    person4
+    -----------------------------------------------------------------------
+    [[259, 770], [184, 139], [577, 469], [926, 667], [448, 54], [840, 118]]
+        -551        45          108         259         394         722     <= diff
+    
     ref:
     - https://leetcode.com/problems/two-city-scheduling/solution/
+    - https://www.youtube.com/watch?v=3A98vh5zsqw
 
     Time    O(NlogN)
     Space   O(1)
@@ -16,16 +40,14 @@ import sys
 
 class Solution:
     def twoCitySchedCost(self, costs: List[List[int]]) -> int:
-        # Sort by a gain which company has
-        # by sending a person to city A and not to city B
         costs.sort(key=lambda x: x[0] - x[1])
         total = 0
-        half = len(costs) // 2
-        # To optimize the company expenses,
-        # send the first n persons to the city A
-        # and the others to the city B
-        for i in range(half):
-            total += costs[i][0] + costs[i + half][1]
+        n = len(costs) // 2
+        for i in range(len(costs)):
+            if i < n:
+                total += costs[i][0]
+            else:
+                total += costs[i][1]
         return total
 
 
@@ -52,25 +74,35 @@ print('-----')
     128 ms, faster than 5.15%
 """
 
+s = Solution()
+
+a = [[10, 20], [30, 200], [400, 50], [30, 20]]
+print(s.twoCitySchedCost(a))
+
+a = [[10, 20], [30, 200], [400, 50], [20, 30]]
+print(s.twoCitySchedCost(a))
+
+a = [[259, 770], [448, 54], [926, 667], [184, 139], [840, 118], [577, 469]]
+print(s.twoCitySchedCost(a))
+
+print('-----')
+
 
 class Solution:
     def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        n = len(costs) // 2
         self.cached = {}
-        return self.dfs(costs, 0, 0, 0)
+        return self.dfs(costs, 0, n, n)
 
-    def dfs(self, costs, count_a, count_b, index):
-        # Valid division of people
-        if count_a == count_b and count_a * 2 == len(costs):
+    def dfs(self, costs, i, countA, countB):
+        if countA == 0 and countB == 0:
             return 0
-        # Invalid division of people
-        if index == len(costs):
-            return sys.maxsize
-        key = (count_a, count_b)
+        if i == len(costs):
+            return 2**32
+        key = (countA, countB)
         if key in self.cached:
             return self.cached[key]
-        minCost = min(
-            costs[index][0] + self.dfs(costs, count_a + 1, count_b, index + 1),
-            costs[index][1] + self.dfs(costs, count_a, count_b + 1, index + 1)
-        )
-        self.cached[key] = minCost
-        return minCost
+        left = self.dfs(costs, i+1, countA - 1, countB) + costs[i][0]
+        right = self.dfs(costs, i+1, countA, countB - 1) + costs[i][1]
+        self.cached[key] = min(left, right)
+        return self.cached[key]

@@ -5,35 +5,39 @@
 
     Time    O(N^2)
     Space   O(N^2)
-    120 ms, faster than 5.22%
+    116 ms, faster than 7.24%
 */
-var twoCitySchedCost = function (costs) {
-	const ht = {};
-	const res = dfs(costs, 0, 0, 0, ht);
-	return res;
+var twoCitySchedCost = function(costs) {
+    const n2 = costs.length
+    const n = n2/2
+    const ht = {}
+    const dfs = (i, countA, countB) => {
+        if (countA == 0 && countB == 0) {
+            return 0
+        }
+        if (i == n2) {
+            return 2**32
+        }
+        const key = `${countA},${countB}`
+        if (key in ht) {
+            return ht[key]
+        }
+        const left = dfs(i+1, countA-1, countB) + costs[i][0]
+        const right = dfs(i+1, countA, countB-1) + costs[i][1]
+        ht[key] = Math.min(left, right)
+        return ht[key]
+    }
+    const res = dfs(0, n, n)
+    return res
 };
 
-var dfs = function (costs, i, a, b, ht) {
-	if (a == b && 2 * a === costs.length) {
-		return 0;
-	}
-	if (i === costs.length) {
-		return Number.MAX_SAFE_INTEGER;
-	}
-	const key = `${a},${b}`;
-	if (key in ht) {
-		return ht[key];
-	}
-	const c = dfs(costs, i + 1, a + 1, b, ht) + costs[i][0];
-	const d = dfs(costs, i + 1, a, b + 1, ht) + costs[i][1];
-	ht[key] = Math.min(c, d);
-	return ht[key];
-};
+let a
 
-let a = [
-	[10, 20],
-	[30, 200],
-	[400, 50],
-	[30, 20],
-];
+a = [[10, 20],[30, 200],[400, 50],[30, 20]];
+console.log(twoCitySchedCost(a));
+
+a = [[259,770],[448,54],[926,667],[184,139],[840,118],[577,469]]
+console.log(twoCitySchedCost(a));
+
+a = [[515,563],[451,713],[537,709],[343,819],[855,779],[457,60],[650,359],[631,42]]
 console.log(twoCitySchedCost(a));

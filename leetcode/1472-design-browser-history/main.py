@@ -8,7 +8,7 @@
     
     Time    O(N^2)
     Space   O(N)
-    436 ms, faster than 27.01%
+    296 ms, faster than 32.74%
 """
 
 
@@ -25,18 +25,20 @@ class BrowserHistory:
 
     def back(self, steps: int) -> str:
         n = len(self.backwards)
-        steps = min(n-1, steps)
-        pops = self.backwards[n-steps:]
-        self.backwards = self.backwards[:n-steps]
-        self.forwards += pops[::-1]
+        k = max(n - steps, 1)
+        pops = self.backwards[k:]
+        self.backwards = self.backwards[:k]
+        while len(pops) > 0:
+            self.forwards.append(pops.pop())
         return self.backwards[-1]
 
     def forward(self, steps: int) -> str:
         n = len(self.forwards)
-        steps = min(n, steps)
-        pops = self.forwards[n-steps:]
-        self.forwards = self.forwards[:n-steps]
-        self.backwards += pops[::-1]
+        k = max(n - steps, 0)
+        pops = self.forwards[k:]
+        self.forwards = self.forwards[:k]
+        while len(pops) > 0:
+            self.backwards.append(pops.pop())
         return self.backwards[-1]
 
 

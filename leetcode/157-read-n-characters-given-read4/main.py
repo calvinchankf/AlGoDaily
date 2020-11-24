@@ -36,10 +36,12 @@ read4(buf4) # read4 returns 3. Now buf = ['i','j','k',...], fp points to end of 
     Space   O(4)
     32 ms, faster than 58.76%
 """
+
+
 class Solution:
     def __init__(self):
         self.buf4 = []
-    
+
     def read(self, buf, n):
         """
         :type buf: Destination buffer (List[str])
@@ -55,7 +57,31 @@ class Solution:
                     break
                 self.buf4 = buf4[:c]
             while total < n and len(self.buf4) > 0:
-                top = self.buf4.pop(0)
-                buf[total] = top
+                buf[total] = self.buf4.pop(0)
+                total += 1
+        return total
+
+
+"""
+    2nd: the size of buf4 always = 4
+"""
+
+
+class Solution:
+    def read(self, buf, n):
+        """
+        :type buf: Destination buffer (List[str])
+        :type n: Number of characters to read (int)
+        :rtype: The number of actual characters read (int)
+        """
+        buf4 = 4 * ['']
+        total = 0
+        count = 4
+        while total < n and count == 4:
+            count = read4(buf4)
+            for i in range(count):
+                if total == n:
+                    return total
+                buf[total] = buf4[i]
                 total += 1
         return total

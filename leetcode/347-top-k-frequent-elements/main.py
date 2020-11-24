@@ -1,10 +1,10 @@
-import heapq
+from heapq import *
 from collections import Counter
 
 """
-    1st approach: hashtable + sort
+    0th approach: hashtable + sort
     - count num: freq into a hashtable
-    - put the hashtable key&value into a priority queue
+    - sort the numbers by frequencies
 
     Time    O(NlogN)
     SPace   O(N)
@@ -23,6 +23,41 @@ class Solution(object):
         res = []
         for f, key in freqs[:k]:
             res.append(key)
+        return res
+
+
+print(Solution().topKFrequent([], 0))
+print(Solution().topKFrequent([], 1))
+print(Solution().topKFrequent([1], 0))
+print(Solution().topKFrequent([1], 1))
+print(Solution().topKFrequent([1], 2))
+print(Solution().topKFrequent([1, 1, 1, 2, 2, 3], 2))
+print(Solution().topKFrequent(
+    [1, 1, 1, 2, 2, 3, 4, 1, 2, 1, 3, 3, 4, 3], 2))
+
+print("-----")
+
+"""
+    1st approach: min heap
+    - count num: freq into a hashtable
+    - put the key&value into a min heap
+
+    Time    O(NlogK + K)
+    SPace   O(N)
+    88 ms, faster than 97.41% 
+"""
+
+
+class Solution(object):
+    def topKFrequent(self, nums, k):
+        counter = Counter(nums)
+        minHeap = []
+        for key in counter:
+            f = counter[key]
+            heappush(minHeap, (f, key))
+            if len(minHeap) > k:
+                heappop(minHeap)
+        res = [x for f, x in minHeap]  # we dont care about the order
         return res
 
 
