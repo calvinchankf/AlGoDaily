@@ -43,8 +43,8 @@ class Solution(object):
             else:
                 midX = (left + right) // 2
                 midY = (top + bottom) // 2
-                q.append((right, top, midX+1, midY+1))
-                q.append((right, midY, midX+1, bottom))
-                q.append((midX, midY, left, bottom))
-                q.append((midX, top, left, midY+1))
+                q.append((right, top, midX+1, midY+1))  # top right
+                q.append((right, midY, midX+1, bottom))  # bottom right
+                q.append((midX, midY, left, bottom))    # bottom left
+                q.append((midX, top, left, midY+1))     # top left
         return res
