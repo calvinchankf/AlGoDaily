@@ -3,6 +3,9 @@ import heapq
 """
     dijkstra on a directed graph:
     find the shortest path(least weight) from one node to all the nodes
+    
+    Time    O((E + V) x logV)
+    Space   O(V)
 """
 
 
