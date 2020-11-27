@@ -8,52 +8,9 @@ class Node(object):
         self.child = child
 """
 
-"""
-    1st approach: recursion
-    - get all the nodes. if a node has child, go into the child linked list
-    - construct the linked list with the nodes in order
-
-    Time    O(2n)
-    Space   O(n)
-    1460 ms, faster than 24.38%
-"""
-
-
-class Solution(object):
-
-    def __init__(self):
-        self.arr = []
-
-    def flatten(self, head):
-        """
-        :type head: Node
-        :rtype: Node
-        """
-        if head == None:
-            return None
-        self.dfs(head)
-        dump = Node(0)
-        cur = dump
-        for i in range(len(self.arr)):
-            x = self.arr[i]
-            temp = Node(x, None, None, None)
-            cur.next = temp
-            if i > 0:
-                temp.prev = cur
-            cur = cur.next
-        return dump.next
-
-    def dfs(self, node):
-        cur = node
-        while cur != None:
-            self.arr.append(cur.val)
-            if cur.child != None:
-                self.dfs(cur.child)
-            cur = cur.next
-
 
 """
-    2nd approach: recursion but dont create new nodes
+    1st approach: recursion but dont create new nodes
     - get all the nodes. if a node has child, go into the child linked list
     - construct the linked list with the nodes in order
 
@@ -64,33 +21,26 @@ class Solution(object):
 
 
 class Solution(object):
-
-    def __init__(self):
-        self.arr = []
-
     def flatten(self, head):
-        """
-        :type head: Node
-        :rtype: Node
-        """
         if head == None:
             return None
-        self.dfs(head)
-        dump = Node(0)
-        cur = dump
-        for i in range(len(self.arr)):
-            x = self.arr[i]
-            cur.next = x
-            if i > 0:
-                x.prev = cur
-            x.child = None
-            cur = cur.next
-        return dump.next
+        dumphead = Node()
+        self.prev = dumphead
+        self.preorder(head)
+        dumphead.next.prev = None
+        return dumphead.next
 
-    def dfs(self, node):
-        cur = node
-        while cur != None:
-            self.arr.append(cur)
-            if cur.child != None:
-                self.dfs(cur.child)
-            cur = cur.next
+    def preorder(self, node):
+        if node == None:
+            return
+
+        nodeNext = node.next
+
+        node.prev = self.prev
+        self.prev.child = None
+        # due to this change, we need nodeNext, or we keep traversing the node over**2 again
+        self.prev.next = node
+        self.prev = node
+
+        self.preorder(node.child)
+        self.preorder(nodeNext)
