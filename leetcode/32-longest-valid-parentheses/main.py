@@ -63,7 +63,7 @@ print("---------------")
 
     e.g. ")()(()))"
 
-    01234567
+    0123456789
     )()(()))()
      ^    ^
     the longest valid one = 6 - 0 = 6
@@ -121,3 +121,68 @@ print(Solution().longestValidParentheses(a))
 
 a = "()(()"
 print(Solution().longestValidParentheses(a))
+
+print("-----")
+
+"""
+    3rd: optimal
+
+    e.g. ")()(()))"
+
+    0 1 2 3 4 5 6 7 8 9
+    ) ( ) ( ( ) ) ) ( )
+o-> 0 1 1 2 3 3 3 0 1 1  
+c-> 0 0 1 1 1 2 3 0 1 1
+        ^       ^
+                o=c, cur len = 3*2 = 6
+
+    0 1 2 3 4 5 6 7 8 9
+    ) ( ) ( ( ) ) ) ( )
+    4 4 3 3 2 1 1 1 1 0 <- o
+    6 5 5 4 4 4 3 2 1 1 <- c
+                    ^
+
+    ref:
+    - https://www.algoexpert.io/questions/Longest%20Balanced%20Substring
+
+    Time    O(N)
+    Space   O(1)
+    36 ms, faster than 63.93%
+"""
+
+
+class Solution(object):
+    def longestValidParentheses(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        n = len(s)
+        res = 0
+        opens = 0
+        closes = 0
+        for i in range(n):
+            c = s[i]
+            if c == '(':
+                opens += 1
+            else:
+                closes += 1
+            if opens == closes:
+                res = max(res, opens * 2)
+            elif closes > opens:
+                opens = 0
+                closes = 0
+        opens = 0
+        closes = 0
+        for i in range(n-1, -1, -1):
+            c = s[i]
+            if c == '(':
+                opens += 1
+            else:
+                closes += 1
+            if opens == closes:
+                res = max(res, opens * 2)
+            elif opens > closes:
+                opens = 0
+                closes = 0
+        return res
