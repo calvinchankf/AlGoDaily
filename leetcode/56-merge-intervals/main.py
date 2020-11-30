@@ -16,16 +16,16 @@ class Solution(object):
         :type intervals: List[Interval]
         :rtype: List[Interval]
         """
-        if len(intervals) == 0:
-            return []
-        intervals.sort()
-        res = [intervals[0]]
-        for i in range(1, len(intervals)):
-            s, e = intervals[i]
-            if s <= res[-1][1]:
-                res[-1][1] = max(res[-1][1], e)
+        res = []
+        intvs.sort()
+        for s, e in intvs:
+            if len(res) == 0:
+                res.append([s, e])
             else:
-                res.append(intervals[i])
+                if s <= res[-1][1]:
+                    res[-1][1] = max(res[-1][1], e)
+                else:
+                    res.append([s, e])
         return res
 
 

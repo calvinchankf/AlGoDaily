@@ -8,7 +8,7 @@ import (
 /*
 	1st approach: sliding window
 
-	Time	O(n)
+	Time	O(N)
 	Space	O(1)
 	124 ms, faster than 100.00%
 */
