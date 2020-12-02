@@ -1,3 +1,7 @@
+from typing import List
+from collections import *
+
+
 class Solution(object):
     def calcEquation(self, equations, values, queries):
         """
@@ -6,7 +10,7 @@ class Solution(object):
         :type queries: List[List[str]]
         :rtype: List[float]
 
-        1st approach: union find
+        1st: union find
 
         consider
 
@@ -111,15 +115,83 @@ class UnionFind(object):
         self.count -= 1
 
 
+s = Solution()
+
 # normal
 a = [["a", "b"], ["b", "c"]]
 b = [2.0, 3.0]
 c = [["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x", "x"]]
-print(Solution().calcEquation(a, b, c))
+print(s.calcEquation(a, b, c))
 
 # very important test case: combine sets after we saved
 a = [["a", "b"], ["e", "f"], ["b", "e"]]
 b = [3.4, 1.4, 2.3]
 c = [["b", "a"], ["a", "f"], ["f", "f"], [
     "e", "e"], ["c", "c"], ["a", "c"], ["f", "e"]]
-print(Solution().calcEquation(a, b, c))
+print(s.calcEquation(a, b, c))
+
+print("-----")
+
+
+class Solution:
+    def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
+        """
+            2nd: BFS
+
+            e.g. a/b = 2, b/c = 3
+            means
+            a -> b = 2
+            b -> c = 3
+            so, a -> b -> c = 2 * 3 = 6
+            therefore, 
+            we can start BFS from 1.0,
+            after BFS, ratio = 1.0 * graph[a][b] * graph[b][c] = 1 * 2 * 3 = 6
+
+            Time    O(N^2)
+            Space   O(N^2)
+            32 ms, faster than 52.91% 
+        """
+        n = len(equations)
+        graph = defaultdict(dict)
+        for i in range(n):
+            a, b = equations[i]
+            ratio = values[i]
+            graph[a][b] = ratio         # from A to B = ratio
+            graph[b][a] = 1.0/ratio     # from B to A = 1/ratio
+
+        def bfs(s, e):
+            if s not in graph and e not in graph:
+                return -1
+            q = [(s, 1.0)]
+            seen = set()
+            while len(q) > 0:
+                node, ratio = q.pop(0)
+                if node == e:
+                    return ratio
+                if node in seen:
+                    continue
+                seen.add(node)
+                for neighbor in graph[node]:
+                    q.append((neighbor, ratio * graph[node][neighbor]))
+            return -1
+
+        res = []
+        for s, e in queries:
+            res.append(bfs(s, e))
+        return res
+
+
+s = Solution()
+
+# normal
+a = [["a", "b"], ["b", "c"]]
+b = [2.0, 3.0]
+c = [["a", "c"], ["b", "a"], ["a", "e"], ["a", "a"], ["x", "x"]]
+print(s.calcEquation(a, b, c))
+
+# very important test case: combine sets after we saved
+a = [["a", "b"], ["e", "f"], ["b", "e"]]
+b = [3.4, 1.4, 2.3]
+c = [["b", "a"], ["a", "f"], ["f", "f"], [
+    "e", "e"], ["c", "c"], ["a", "c"], ["f", "e"]]
+print(s.calcEquation(a, b, c))
