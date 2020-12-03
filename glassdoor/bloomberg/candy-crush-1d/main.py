@@ -38,7 +38,14 @@
     Explanation:
     1. Remove 3 'a': "aaabbbacd" => "bbbacd"
     2. Remove 3 'b': "bbbacd" => "acd"
+
+    ref:
+    - https://leetcode.com/discuss/interview-question/380650/Bloomberg-or-Phone-Screen-or-Candy-Crush-1D
 """
+
+
+from itertools import groupby
+from functools import lru_cache
 
 
 def candy_crush_1d(s):
@@ -98,12 +105,10 @@ print(candy_crush_1d(a))
 a = 'AABBCCCCBADD'  # D
 print(candy_crush_1d(a))
 
-print("-----")
-
-a = 'AAABBB'  # (empty)
+a = 'ABBBCC'  # ACC
 print(candy_crush_1d(a))
 
-a = 'aaabbba'  #
+a = 'ABCCCBB'  # A
 print(candy_crush_1d(a))
 
 print("--- greedy: recursion ---")
@@ -153,13 +158,14 @@ print(candy_crush_1d(a))
 a = 'AABBCCCCBADD'  # D
 print(candy_crush_1d(a))
 
-print("-----")
-
-a = 'AAABBB'  # (empty)
+a = 'ABBBCC'  # ACC
 print(candy_crush_1d(a))
 
-a = 'aaabbba'  #
+a = 'ABCCCBB'  # A
 print(candy_crush_1d(a))
+
+
+print("--- followup ---")
 
 """
     Follow-up:
@@ -173,3 +179,30 @@ print(candy_crush_1d(a))
     1. Remove 3 'b': "aaabbbacd" => "aaaacd"
     2. Remove 4 'a': "aaaacd" => "cd"
 """
+
+
+@lru_cache()
+def candyCrush1D_followup(S):
+    l, segs = 0, []
+    for c, seq in groupby(S):
+        k = len(list(seq))
+        if k >= 3:
+            segs.append((l, l + k))
+        l += k
+    return min([
+        candyCrush1D_followup(S[:l] + S[r:])
+        for l, r in segs
+    ], key=len, default=S)
+
+
+a = "aaabbbc"
+print(candyCrush1D_followup(a))
+
+a = "aabbbacd"
+print(candyCrush1D_followup(a))
+
+a = "aaabbbacd"
+print(candyCrush1D_followup(a))
+
+for c, seq in groupby('aaabbbacd'):
+    print(c, list(seq))
