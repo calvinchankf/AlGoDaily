@@ -47,6 +47,18 @@ print(Solution().topKFrequent(a, b))
 
 print("-----")
 
+"""
+    2nd approach
+	1. count num: freq into a hashtable
+	2. sort the hashtable keys
+	3. put the hashtable key&value into a bucket with freq as an index
+	4. the first k elements are the top k elements in the bucket
+
+	Time	O(NlogK)
+	Space	O(n)
+	44 ms, faster than 67.17%
+"""
+
 
 class WrapString:
     def __init__(self, string):

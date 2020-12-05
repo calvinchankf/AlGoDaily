@@ -90,31 +90,30 @@ var isCousins = function(root, x, y) {
 
     Time    O(n)
     Space   O(n)
-    88 ms, faster than 35.80%
+    76 ms, faster than 94.49%
 */
 var isCousins = function(root, x, y) {
-    if (!root || x == y) {
-        return false
+    let parentX = null
+    let depthX = -1
+    let parentY = null
+    let depthY = -1
+    
+    const dfs = (node, parent, depth) => {
+        if (node == null) {
+            return
+        }
+        if (node.val == x) {
+            parentX = parent
+            depthX = depth
+        }
+        if (node.val == y) {
+            parentY = parent
+            depthY = depth
+        }
+        dfs(node.left, node, depth + 1)
+        dfs(node.right, node, depth + 1)
     }
-    const [xDepth, xParent] = findDepth(root, null, x)
-    const [yDepth, yParent] = findDepth(root, null, y)
-    return xDepth == yDepth && xParent != yParent
+    dfs(root, null, 0)
+    
+    return depthX == depthY && parentX !== parentY
 };
-
-const findDepth = (node, parent, target) => {
-    if (node == null) {
-        return [-1, null]
-    }
-    if (node.val == target) {
-        return [0, parent]
-    }
-    const left = findDepth(node.left, node, target)
-    const right = findDepth(node.right, node, target)
-    if (left[0] != -1) {
-        return [left[0] + 1, left[1]]
-    }
-    if (right[0] != -1) {
-        return [right[0] + 1, right[1]]
-    }
-    return [-1, null]
-}
