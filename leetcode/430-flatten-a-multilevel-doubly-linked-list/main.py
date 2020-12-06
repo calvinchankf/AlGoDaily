@@ -11,6 +11,7 @@ class Node(object):
 
 """
     1st approach: recursion but dont create new nodes
+    - similar to lc114, 426, 430, 897
     - get all the nodes. if a node has child, go into the child linked list
     - construct the linked list with the nodes in order
 

@@ -7,36 +7,35 @@
 
 	Time	O(nlogn * klogk)
 	Space	O(n)
-	76 ms, faster than 47.07%
+	96 ms, faster than 59.15%
 */
-
-/**
- * @param {string[]} words
- * @param {number} k
- * @return {string[]}
- */
 var topKFrequent = function (words, k) {
-	const ht = {};
-	words.forEach((word) => {
-		if (ht[word] === undefined) {
-			ht[word] = 1;
-		} else {
-			ht[word] += 1;
-		}
-	});
-	const arr = [];
-	for (let key in ht) {
-		arr.push([ht[key], key]);
-	}
-	arr.sort((a, b) => {
-		if (a[0] === b[0]) {
-			return a[1] < b[1] ? -1 : 1;
-		}
-		return b[0] - a[0];
-	});
-	const res = [];
-	for (let i = 0; i < Math.min(k, arr.length); i++) {
-		res.push(arr[i][1]);
-	}
-	return res;
+	const counter = {}
+    for (let w of words) {
+        if ((w in counter) === false) {
+            counter[w] = 0
+        }
+        counter[w] += 1
+    }
+    const freqs = {}
+    let maxFreq = 0
+    for (let key in counter) {
+        const count = counter[key]
+        maxFreq = Math.max(maxFreq, count)
+        if ((count in freqs) === false) {
+            freqs[count] = []
+        }
+        freqs[count].push(key)
+    }
+    const res = []
+    for (let f = maxFreq; f >= 0; f--) {
+        if (f in freqs) {
+            const words = freqs[f].sort()
+            for (let w of words) {
+                res.push(w)
+                if (res.length == k) { return res }
+            }
+        }
+    }
+    return res
 };

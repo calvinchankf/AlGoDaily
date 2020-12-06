@@ -3,8 +3,8 @@
     - similar to parentheses problem
     - when the last item is equal to the current item, pop stack
 
-    Time    O(n)
-    Space   O(n)
+    Time    O(N)
+    Space   O(N)
     92 ms, faster than 41.55%
 """
 

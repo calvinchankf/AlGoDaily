@@ -36,15 +36,18 @@ class Solution:
 
 class Solution:
     def kthFactor(self, n: int, k: int) -> int:
-        root = int(sqrt(n))
+        root = int(n**0.5)
         fronts, backs = [], []
         for i in range(1, root + 1):
-            partner = n // i
-            if i * partner == n:
+            remain = n // i
+            if i * remain != n:
+                continue
+            if i == remain:
                 fronts.append(i)
-                if i != partner:
-                    backs.append(partner)
+            else:
+                fronts.append(i)
+                backs.append(remain)
         factors = fronts + backs[::-1]
-        if k < 1 or k > len(factors):
-            return - 1
+        if k-1 < 0 or k-1 == len(factors):
+            return -1
         return factors[k-1]

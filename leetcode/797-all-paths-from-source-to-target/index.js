@@ -51,3 +51,31 @@ var allPathsSourceTarget = function (graph) {
 
 	return res;
 };
+
+/*
+    followup: there might be cycles
+
+    Backtracking
+    108ms beats 95.61%
+*/
+var allPathsSourceTarget = function(graph) {
+    const n = graph.length
+    const res = []
+    const seen = new Set()
+    
+    const backtracking = (node, path) => {
+        if (node == n-1) {
+            res.push(path)
+        }
+        if (seen.has(node)) {
+            return
+        }
+        for (let nb of graph[node]) {
+            backtracking(nb, path.concat(nb))
+        }
+        seen.delete(node)
+    }
+    backtracking(0, [0])
+    
+    return res
+};
