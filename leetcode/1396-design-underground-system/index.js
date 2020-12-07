@@ -43,30 +43,30 @@ UndergroundSystem.prototype.getAverageTime = function(startStation, endStation) 
 */
 class UndergroundSystem {
     constructor() {
-        this.usersGetIn = {}
-        this.travelTimeBetween = {}
-        this.travelCountBetween = {}
+        this.checkIns = {} // person: [time, station]
+        this.travelTimeBetween = {} // 'from, to' : total time
+        this.travelCountBetween = {} // 'from, to' : total count
     }
     checkIn(id, stationName, t) {
-        this.usersGetIn[id] = [stationName, t]
+        this.checkIns[id] = [stationName, t]
     }
     checkOut(id, stationName, t) {
-        const [startStation, startTime] = this.usersGetIn[id]
-        const diff = t - startTime
-        const key = `${startStation},${stationName}`
-
-        if (this.travelTimeBetween[key] === undefined) {
-            this.travelTimeBetween[key] = 0
+        const [src, s] = this.checkIns[id]
+        const travelTime = t - s
+        const key = `${src}, ${stationName}`
+        
+        if ((key in this.travelTimeBetween) == false) {
+            this.travelTimeBetween[key]  = 0
         }
-        this.travelTimeBetween[key] += diff
-
-        if (this.travelCountBetween[key] === undefined) {
-            this.travelCountBetween[key] = 0
+        this.travelTimeBetween[key] += travelTime
+        
+        if ((key in this.travelCountBetween) == false) {
+            this.travelCountBetween[key]  = 0
         }
         this.travelCountBetween[key] += 1
     }
     getAverageTime(startStation, endStation) {
-        const key = `${startStation},${endStation}`
+        const key = `${startStation}, ${endStation}`
         const totalTime = this.travelTimeBetween[key]
         const totalCount = this.travelCountBetween[key]
         return totalTime / totalCount

@@ -2,6 +2,9 @@ import heapq
 
 """
     dijkstra on a undirected graph
+
+    Time    O((E + V) x logV)
+    Space   O(V)
 """
 
 

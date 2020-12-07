@@ -8,55 +8,47 @@
 	Space   O(n) hashtable
 	152 ms, faster than 15.95%
 */
-var maxAreaOfIsland = function (grid) {
-	const R = grid.length;
-	const C = grid[0].length;
-
-	if (R == 0 || C == 0) {
-		return 0;
-	}
-
-	let res = 0;
-	const ht = {};
-	for (let i = 0; i < R; i++) {
-		for (let j = 0; j < C; j++) {
-			const key = `${i},${j}`;
-			if (grid[i][j] == 1) {
-				const area = bfs(grid, i, j, ht);
-				res = Math.max(res, area);
-			}
-		}
-	}
-	return res;
+var maxAreaOfIsland = function(grid) {
+    let res = 0
+    const seen = new Set() // 'i,j'
+    const R = grid.length
+    const C = grid[0].length
+    for (let i = 0; i < R; i++) {
+        for (let j = 0; j < C; j++) {
+            const key = `${i},${j}`
+            if (grid[i][j] == 0 || seen.has(key)) {
+                continue
+            }
+            const area = bfs(grid, i, j, seen)
+            res = Math.max(res, area)
+        }
+    }
+    return res
 };
 
-const bfs = (grid, x, y, ht) => {
-	const R = grid.length;
-	const C = grid[0].length;
-
-	let area = 0;
-	const q = [[x, y]];
-	while (q.length > 0) {
-		const [i, j] = q.shift();
-		if (i < 0 || i == R || j < 0 || j == C) {
-			continue;
-		}
-		if (grid[i][j] == 0) {
-			continue;
-		}
-
-		const key = `${i},${j}`;
-		if (key in ht) {
-			continue;
-		}
-		ht[key] = true;
-
-		area += 1;
-
-		q.push([i - 1, j]);
-		q.push([i + 1, j]);
-		q.push([i, j - 1]);
-		q.push([i, j + 1]);
-	}
-	return area;
-};
+const bfs = (grid, x, y, seen) => {
+    const R = grid.length
+    const C = grid[0].length
+    let area = 0
+    const q = [[x, y]]
+    while (q.length > 0) {
+        const [i, j] = q.shift()
+        if (i < 0 || i == R || j < 0 || j == C) {
+            continue
+        }
+        if (grid[i][j] == 0) {
+            continue
+        }
+        const key = `${i},${j}`
+        if (seen.has(key)) {
+            continue
+        }
+        seen.add(key)
+        area += 1
+        q.push([i-1, j])
+        q.push([i+1, j])
+        q.push([i, j-1])
+        q.push([i, j+1])
+    }
+    return area
+}
