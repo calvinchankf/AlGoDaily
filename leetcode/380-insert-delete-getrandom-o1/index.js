@@ -1,4 +1,39 @@
 /*
+    1st: hashtable
+    - straight forward approach
+
+    Insert Time				O(1)
+	Remove Time				O(1)
+	GetRandom Time		    O(N)
+	Space					O(n) the unique keys
+    244 ms, faster than 21.56%
+*/
+class RandomizedSet {
+    constructor() {
+        this.ht = new Set()
+    }
+    insert(x) {
+        if (this.ht.has(x)) {
+            return false
+        }
+        this.ht.add(x)
+        return true
+    }
+    remove(x) {
+        if (this.ht.has(x) == false) {
+            return false
+        }
+        this.ht.delete(x)
+        return true
+    }
+    getRandom() {
+        const keys = Array.from(this.ht)
+        const n = keys.length
+        const i = Math.floor(Math.random() * n)
+        return keys[i]
+    }
+}
+/*
     hashtable + array, learned from others
 	- save value: index in hashtable
 	- when delete, swap the target item and the last item in the array, and remove the last item
@@ -46,7 +81,10 @@ RandomizedSet.prototype.remove = function (val) {
 		const lastItem = this.arr[lastIdx];
 
 		// swap
-		[this.arr[targetIdx], this.arr[lastIdx]] = [
+		[
+            this.arr[targetIdx], 
+            this.arr[lastIdx]
+        ] = [
 			this.arr[lastIdx],
 			this.arr[targetIdx],
 		];

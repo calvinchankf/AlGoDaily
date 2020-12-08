@@ -1,13 +1,9 @@
 """
-    1st: recursion
-    e.g. s = pbbcggttciiippooaais, k = 2
-    start from  = pbbcggttciiippooaais
-    recursion 1 = pcciis
-    recursion 2 = ps
+    stack
 
-    Time    O(nm) m depends on how many k duplicate characters from the input
-    Space   O(n)
-    104 ms, faster than 29.91% 
+    Time    O(N)
+    Space   O(N)
+    80 ms, faster than 46.97%
 """
 
 
@@ -18,30 +14,18 @@ class Solution(object):
         :type k: int
         :rtype: str
         """
-        arr = []
+        stack = []
         for c in s:
-            arr.append(c)
-        temp = self.dfs(arr, k)
-        return ''.join(temp)
-
-    def dfs(self, arr, k):
-        if len(arr) == 0:
-            return []
-        res = []
-        i = 0
-        trimmed = False
-        while i < len(arr):
-            c = arr[i]
-            j = i
-            while j+1 < len(arr) and arr[j+1] == c:
-                j += 1
-            count = (j - i + 1) % k
-            if j - i + 1 > count:
-                trimmed = True
-            res += count * c
-            i = j + 1
-        print()
-        return self.dfs(res, k) if trimmed else arr
+            if len(stack) > 0 and stack[-1][0] == c:
+                stack[-1][1] += 1
+            else:
+                stack.append([c, 1])
+            if len(stack) > 0 and stack[-1][1] == k:
+                stack.pop()
+        res = ''
+        for char, count in stack:
+            res += char * count
+        return res
 
 
 s = Solution()

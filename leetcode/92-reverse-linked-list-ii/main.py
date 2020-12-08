@@ -20,25 +20,26 @@ class Solution(object):
         29jan2019
         """
         # find the parent of node[m]
-        dump = ListNode(0)
-        dump.next = head
-        i = 1
-        parent = dump
-        while i < m and parent != None:
-            i += 1
-            parent = parent.next
+        dumphead = ListNode(0)
+        dumphead.next = head
 
+        parent = dumphead
+        cur = head
+        count = 1
+        while count < m and cur != None:
+            parent = cur
+            cur = cur.next
+            count += 1
         # reverse the linked list until n
-        targetHead = parent.next
-        cur = targetHead
-        while i < n and targetHead.next != None:
-            temp = targetHead.next
-            targetHead.next = targetHead.next.next
-            temp.next = cur
-            cur = temp
-            i += 1
-        parent.next = cur
-        return dump.next
+        newHead = cur
+        while cur != None and cur.next != None and count < n:
+            temp = cur.next
+            cur.next = cur.next.next
+            temp.next = newHead
+            newHead = temp
+            count += 1
+        parent.next = newHead
+        return dumphead.next
 
 
 # helpers for test

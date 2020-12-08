@@ -8,70 +8,63 @@ from collections import Counter
     Time of top()           O(k)
     Time of reset()         O(N) binary search + linear search
     Space                   O(2N)
-    60 ms, faster than 77.46%
+    44 ms, faster than 87.86%
 """
 
 
-class Leaderboard:
+class Leaderboard(object):
 
     def __init__(self):
-        self.ht = defaultdict(int)
-        self.nums = []
+        self.arr = []   # [id0, id1, id2...]
+        self.ht = {}    # {id0: score0, id1: score1....}
 
-    def _upperBsearch(self, nums, target):
-        # nums = [(player0, score0), (player1, score1)....]
+    def addScore(self, playerId, score):
+        newScore = 0
+        if playerId in self.ht:
+            newScore = self.ht[playerId] + score
+            self.ht[playerId] = newScore
+            # remove
+            i = self.arr.index(playerId)
+            self.arr.pop(i)
+        else:
+            self.ht[playerId] = score
+            newScore = score
+        # add
+        j = self._upperBsearch(self.arr, self.ht, newScore)
+        self.arr.insert(j, playerId)
+
+    def top(self, K):
+        res = 0
+        n = len(self.arr)
+        leftBound = max(n-K-1, -1)
+        for i in range(n-1, leftBound, -1):
+            pId = self.arr[i]
+            res += self.ht[pId]
+        return res
+
+    def reset(self, playerId):
+        i = self.arr.index(playerId)
+        self.arr.pop(i)
+        del self.ht[playerId]
+
+    def _upperBsearch(self, arr, ht, target):
         left = 0
-        right = len(nums)
+        right = len(arr)
         while left < right:
             mid = (left + right)//2
-            if target >= nums[mid][1]:
+            pId = arr[mid]
+            if target >= ht[pId]:
                 left = mid + 1
             else:
                 right = mid
         return right
 
-    def findPersonFromTheRight(self, nums, idx, playerId):
-        while nums[idx][0] != playerId:
-            idx -= 1
-        return idx
 
-    def addScore(self, playerId: int, score: int) -> None:
-        idxToInsert = self._upperBsearch(self.nums, score)
-        if playerId in self.ht:
-            idxToInsert -= 1
-            targetIdx = self.findPersonFromTheRight(
-                self.nums, idxToInsert, playerId)
-            # get the new score
-            newScore = self.nums[targetIdx][1] + score
-            # remove
-            self.nums = self.nums[:targetIdx] + self.nums[targetIdx+1:]
-            # add back
-            idxToInsert = self._upperBsearch(self.nums, newScore)
-            self.nums.insert(idxToInsert, (playerId, newScore))
-            self.ht[playerId] = newScore
-        else:
-            self.nums.insert(idxToInsert, (playerId, score))
-            self.ht[playerId] = score
-
-    def top(self, K: int) -> int:
-        total = 0
-        for i in range(len(self.nums)-1, len(self.nums)-K-1, -1):
-            total += self.nums[i][1]
-        return total
-
-    def reset(self, playerId: int) -> None:
-        if playerId not in self.ht:
-            return
-        # find out the score
-        score = self.ht[playerId]
-        # binary search the (player, score) with the same score O(logN)
-        rightMostIdx = self._upperBsearch(self.nums, score) - 1
-        # linear search the player
-        targetIdx = self.findPersonFromTheRight(
-            self.nums, rightMostIdx, playerId)
-        # remove it from the list
-        self.nums = self.nums[:targetIdx] + self.nums[targetIdx+1:]
-        del self.ht[playerId]
+# Your Leaderboard object will be instantiated and called as such:
+# obj = Leaderboard()
+# obj.addScore(playerId,score)
+# param_2 = obj.top(K)
+# obj.reset(playerId)
 
 
 """

@@ -1,6 +1,8 @@
 from collections import *
 
 """
+    https://leetcode.com/discuss/interview-question/413734/Bloomberg-or-Re-order-Array-Based-on-Dictionary
+
     Consider a vector of employees with a name and their title:
     [<John, Manager>, <Sally, CTO>, <Sam, CEO>, <Drax, Engineer>, <Bob, CFO>, <Daniel, Engineer>]
 

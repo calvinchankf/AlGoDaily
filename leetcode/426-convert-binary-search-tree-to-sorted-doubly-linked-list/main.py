@@ -9,7 +9,7 @@ class Node(object):
 
 """
     1st approach: straight forward intuition
-    - similar to lc114, 426, 430
+    - similar to lc114, 426, 430, 897
     - put the nodes in an array in ascending order
     - update the values of the nodes
 
@@ -59,7 +59,7 @@ class Solution(object):
 
 """
     2nd: recursion
-    - similar to lc114, 426, 430
+    - similar to lc114, 426, 430, 897
     - reassign the pointers during the inorder traversal process
 
     Time    O(N)

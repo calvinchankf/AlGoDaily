@@ -1,12 +1,12 @@
 """
-    2nd approach: doubly linked list + binary search
+    1st approach: doubly linked list + binary search
 
-    Time
-    - push      O(logn)
-    - pop       O(logn)
-    - top       O(1)
-    - peekMax   O(1)
-    - popMax    O(logn)
+    Time of
+    - push()      O(logN + K)
+    - pop()       O(logN + K)
+    - top()       O(1)
+    - peekMax()   O(1)
+    - popMax()    O(logN + K)
     256 ms, faster than 17.40%
 """
 
@@ -91,3 +91,59 @@ class MaxStack(object):
             else:
                 right = mid
         return left
+
+
+"""
+    Easier approach: sorted list + stack
+
+    Time of
+    - push()      O(logN + K)
+    - pop()       O(logN + K)
+    - top()       O(1)
+    - peekMax()   O(1)
+    - popMax()    O(K)
+    148 ms, faster than 80.07%
+"""
+
+
+class MaxStack:
+
+    def __init__(self):
+        self.sortedNums = []
+        self.stack = []
+
+    def push(self, x: int) -> None:
+        self.stack.append(x)
+        i = self._upperBsearch(self.sortedNums, x)
+        self.sortedNums.insert(i, x)
+
+    def pop(self) -> int:
+        res = self.stack.pop()
+        i = self._upperBsearch(self.sortedNums, res)
+        self.sortedNums.pop(i-1)
+        return res
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def peekMax(self) -> int:
+        return self.sortedNums[-1]
+
+    def popMax(self) -> int:
+        res = self.sortedNums.pop()
+        for i in range(len(self.stack)-1, -1, -1):
+            if self.stack[i] == res:
+                self.stack.pop(i)
+                break
+        return res
+
+    def _upperBsearch(self, nums, target):
+        left = 0
+        right = len(nums)
+        while left < right:
+            mid = (left + right)//2
+            if target >= nums[mid]:
+                left = mid + 1
+            else:
+                right = mid
+        return right

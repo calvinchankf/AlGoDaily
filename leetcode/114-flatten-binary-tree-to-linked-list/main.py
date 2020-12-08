@@ -8,7 +8,7 @@
 
 """
     1st approach: 
-    - similar to lc114, 426, 430
+    - similar to lc114, 426, 430, 897
     - store the nodes' values
     - add the values back to the linked list
 

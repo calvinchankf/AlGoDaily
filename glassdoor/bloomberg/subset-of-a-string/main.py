@@ -1,5 +1,7 @@
 """
-    Eg. String "abc" should output
+    https://leetcode.com/discuss/interview-question/439548/Bloomberg-Phone-Interview-Questions
+
+    e.g. String "abc" should output
     empty string
     a
     b
@@ -8,8 +10,6 @@
     bc
     ac
     abc
-
-    ref: https://leetcode.com/discuss/interview-question/439548/Bloomberg-Phone-Interview-Questions
 """
 
 
