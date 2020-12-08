@@ -1,5 +1,42 @@
+
 """
-    1st appraoch: bottom-up iterative
+    1st: top-down recursive
+    - use a hashtable to avoid redundant calculation
+	
+    Time O(n)		duplicates are avoided so only the unseen numbers go through the calculations
+	Space O(2n)	n for hashtable, n for recursive callstack
+	20 ms, faster than 66.37%
+"""
+
+
+class Solution(object):
+    def climbStairs(self, n):
+        return self.f(n, {})
+
+    def f(self, n, ht):
+        if n == 0:
+            return 1
+        if n < 0:
+            return 0
+        if n in ht:
+            return ht[n]
+        fn = self.f(n-1, ht) + self.f(n-2, ht)
+        ht[n] = fn
+        return fn
+
+
+print(Solution().climbStairs(0))
+print(Solution().climbStairs(1))
+print(Solution().climbStairs(2))
+print(Solution().climbStairs(3))
+print(Solution().climbStairs(4))
+print(Solution().climbStairs(13))
+print(Solution().climbStairs(40))
+
+print("-----")
+
+"""
+    2nd: bottom-up iterative
 
     dp[0] = 1
     dp[1] = 1
@@ -25,43 +62,6 @@ class Solution(object):
         for i in range(2, n+1):
             dp.append(dp[i-1] + dp[i-2])
         return dp[n]
-
-
-print(Solution().climbStairs(0))
-print(Solution().climbStairs(1))
-print(Solution().climbStairs(2))
-print(Solution().climbStairs(3))
-print(Solution().climbStairs(4))
-print(Solution().climbStairs(13))
-print(Solution().climbStairs(40))
-
-print("-----")
-
-
-"""
-    2nd approach: top-down recursive
-    - use a hashtable to avoid redundant calculation
-	
-    Time O(n)		duplicates are avoided so only the unseen numbers go through the calculations
-	Space O(2n)	n for hashtable, n for recursive callstack
-	20 ms, faster than 66.37%
-"""
-
-
-class Solution(object):
-    def climbStairs(self, n):
-        return self.f(n, {})
-        
-    def f(self, n, ht):
-        if n == 0:
-            return 1
-        if n < 0:
-            return 0
-        if n in ht:
-            return ht[n]
-        fn = self.f(n-1, ht) + self.f(n-2, ht)
-        ht[n] = fn
-        return fn
 
 
 print(Solution().climbStairs(0))

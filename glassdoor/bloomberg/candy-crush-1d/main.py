@@ -51,18 +51,15 @@ from functools import lru_cache
 def candy_crush_1d(s):
     stack = []  # (char, count)
     for c in s:
-        if len(stack) > 0:
-            if stack[-1][0] == c:
+        if len(stack) > 0 and stack[-1][0] == c:
+            stack[-1][1] += 1
+        else:
+            if len(stack) > 0 and stack[-1][1] >= 3:
+                stack.pop()
+            if len(stack) > 0 and stack[-1][0] == c:
                 stack[-1][1] += 1
             else:
-                if stack[-1][1] >= 3:
-                    stack.pop()
-                if len(stack) > 0 and stack[-1][0] == c:
-                    stack[-1][1] += 1
-                else:
-                    stack.append([c, 1])
-        else:
-            stack.append([c, 1])
+                stack.append([c, 1])
     if len(stack) > 0 and stack[-1][1] >= 3:
         stack.pop()
     res = ''
@@ -102,7 +99,7 @@ print(candy_crush_1d(a))
 a = 'AABBCCCCDD'  # AABBDD
 print(candy_crush_1d(a))
 
-a = 'AABBCCCCBADD'  # D
+a = 'AABBCCCCBADD'  # DD
 print(candy_crush_1d(a))
 
 a = 'ABBBCC'  # ACC

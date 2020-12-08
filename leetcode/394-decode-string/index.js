@@ -1,4 +1,65 @@
 /*
+    1st approach: 2 stacks
+
+    - 1st stack for counts
+    - 2nd stack for substrings
+
+    e.g. ab2[c3[de]]f
+
+    when it comes to 2[
+    cntStack = [2]
+    strStack = ['ab', '']
+
+    when it comes to 3[
+    cntStack = [2, 3]
+    strStack = ['ab', 'c', '']
+
+    when it comes to the character before 1st ], 
+    cntStack = [2, 3]
+    strStack = ['ab', 'c', 'de']
+    
+    when it comes to 1st ], multiply 3 with 'de' and append to 'c'
+    cntStack = [2]
+    strStack = ['ab', 'cdedede']
+
+    when it comes to 2nd ], , multiply 2 with 'cdedede' and append to 'abc'
+    cntStack = []
+    strStack = ['abcdededecdedede']
+
+    when it comes to f
+    cntStack = []
+    strStack = ['abcdededecdededef']
+
+    Time    O(n)
+    Space   O(n)
+    76 ms, faster than 68.48%
+*/
+var decodeString = function(s) {
+    const countStack = []
+    const stringStack = ['']
+    let num = 0
+    for (let c of s) {
+        if (parseInt(c) >= 0 && parseInt(c) < 10) {
+			num = num*10 + parseInt(c)
+		} else if (c == '[') {
+            countStack.push(num)
+            stringStack.push('')
+            num = 0
+        } else if (c == ']') {
+            const c = stringStack.pop()
+            const r = countStack.pop()
+            const n = stringStack.length
+            stringStack[n-1] += c.repeat(r)
+        } else {
+            const n = stringStack.length
+            stringStack[n-1] += c
+        }
+    }
+    const n = stringStack.length
+    return stringStack[n-1]
+};
+
+/*
     2nd approach: recursion
 
     Time    O(2n)
@@ -25,10 +86,8 @@ const recur = (q) => {
 			num = num * 10 + parseInt(x);
 		} else if (x === "[") {
 			const single = recur(q);
-			for (let j = 0; j < num; j++) {
-				s += single;
-			}
-			num = 0;
+            s += single.repeat(num);
+            num = 0;
 		} else if (x === "]") {
 			return s;
 		} else {

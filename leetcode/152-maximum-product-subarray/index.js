@@ -6,24 +6,24 @@
     - the result is the largest dp[i]
     - see ./idea.jpeg
 
-    Time	O(n)
-    Space	O(n)
-    120 ms, faster than 16.10%
+    Time	O(N)
+    Space	O(N)
+    76 ms, faster than 94.10%
 */
 var maxProduct = function (nums) {
-	let minP = Number.MAX_SAFE_INTEGER;
-	let maxP = Number.MIN_SAFE_INTEGER;
-	let res = Number.MIN_SAFE_INTEGER;
-	for (let x of nums) {
-		if (x > 0) {
-			minP = Math.min(x, x * minP);
-			maxP = Math.max(x, x * maxP);
-		} else {
-			const temp = minP;
-			minP = Math.min(x, x * maxP);
-			maxP = Math.max(x, x * temp);
-		}
-		res = Math.max(res, maxP);
-	}
-	return res;
+	let minP = 2**32
+    let maxP = -(2**32)
+    let res = -(2**32)
+    for (let x of nums) {
+        if (x >= 0) {
+            minP = Math.min(minP * x, x)
+            maxP = Math.max(maxP * x, x)
+        } else {
+            const temp = minP
+            minP = Math.min(maxP * x, x)
+            maxP = Math.max(temp * x, x)
+        }
+        res = Math.max(res, maxP)
+    }
+    return res
 };

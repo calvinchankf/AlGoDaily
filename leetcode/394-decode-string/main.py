@@ -1,8 +1,8 @@
 """
     1st approach: 2 stacks
 
-    - 1 stack for counts
-    - 2 stack for substrings
+    - 1st stack for counts
+    - 2nd stack for substrings
 
     e.g. ab2[c3[de]]f
 
