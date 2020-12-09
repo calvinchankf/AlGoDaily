@@ -20,7 +20,7 @@ def xx01(s):
             dfs(i+1, cur + '0')
             dfs(i+1, cur + '1')
         else:
-            dfs(i+1, cur+s[i])
+            dfs(i+1, cur + s[i])
     dfs(0, '')
 
     return res

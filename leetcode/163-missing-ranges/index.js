@@ -22,3 +22,31 @@ var findMissingRanges = function (nums, lower, upper) {
 	}
 	return res;
 };
+
+/*  
+    2nd: 2 pass
+    
+    Time    O(2N)
+    Space   O(N)
+    80ms beats 38.04%
+*/
+var findMissingRanges = function(nums, lower, upper) {
+    const intvs = []
+    nums = [lower-1, ...nums, upper+1]
+    for (let i = 1; i < nums.length; i++) {
+        const left = nums[i-1] + 1
+        const right = nums[i] - 1
+        if (left <= right) {
+            intvs.push([left, right])
+        }
+    }
+    const res = []
+    for (let [s, e] of intvs) {
+        if (s == e) {
+            res.push(`${s}`)
+        } else {
+            res.push(`${s}->${e}`)
+        }
+    }
+    return res
+};

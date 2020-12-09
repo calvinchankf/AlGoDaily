@@ -13,18 +13,17 @@
     84 ms, faster than 85.31%
 */
 var permute = function (nums) {
-	var res = [];
-	const f = (cands, chosen) => {
-		if (cands.length === 0) {
-			res.push(chosen);
-		}
-		for (let i = 0; i < cands.length; i++) {
-			let left = cands.slice(0, i);
-			let right = cands.slice(i + 1);
-			f([...left, ...right], [...chosen, cands[i]]);
-		}
-	};
-	f(nums, []);
-
-	return res;
+	const res = []
+    const dfs = (cands, chosen) => {
+        if (cands.length == 0) {
+            res.push(chosen)
+        }
+        for (let i = 0; i < cands.length; i++) {
+            const _cands = [...cands.slice(0, i), ...cands.slice(i+1)]
+            const _chosen = [...chosen, cands[i]]
+            dfs(_cands, _chosen)
+        }
+    }
+    dfs(nums, [])
+    return res
 };

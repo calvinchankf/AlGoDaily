@@ -4,9 +4,12 @@
     - subtract the source from target, to get the diff
 
     Time    O(S+T)
-    Space   O(S+T)
-    364 ms, faster than 11.57%
+    Space   O(52)
+    332 ms, faster than 16.01%
 """
+
+
+from collections import *
 
 
 class Solution:
@@ -19,7 +22,34 @@ class Solution:
         for c in s:
             idx = ord(c) - ord('a')
             ht_s[idx] += 1
-        res = 0
+        diff = 0
         for i in range(26):
-            res += max(ht_s[i] - ht_t[i], 0)
-        return res
+            diff += abs(ht_s[i] - ht_t[i])
+        return diff//2
+
+
+"""
+    followup: if not only lowercase letters
+"""
+
+
+class Solution(object):
+    def minSteps(self, s, t):
+        ht_s = Counter()
+        ht_t = Counter()
+        seen = set()
+        for c in s:
+            ht_s[c] += 1
+            seen.add(c)
+        for c in t:
+            ht_t[c] += 1
+            seen.add(c)
+        diff = 0
+        for c in seen:
+            if c in ht_s and c in ht_t:
+                diff += abs(ht_s[c] - ht_t[c])
+            elif c in ht_s:
+                diff += ht_s[c]
+            elif c in ht_t:
+                diff += ht_t[c]
+        return diff//2

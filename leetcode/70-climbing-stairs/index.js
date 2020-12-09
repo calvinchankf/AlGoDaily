@@ -1,5 +1,5 @@
 /*
-    2nd approach: top-down recursive
+    1st: top-down recursive
     - use a hashtable to avoid redundant calculation
 	
     Time O(n)		duplicates are avoided so only the unseen numbers go through the calculations
@@ -23,3 +23,29 @@ const dfs = (n, ht) => {
     ht[n] = count
     return count
 }
+
+
+/*
+    2nd: bottom-up iterative
+
+    dp[0] = 1
+    dp[1] = 1
+    dp[2] = 0 + 1 = 2
+    dp[3] = 1 + 2 = 3
+    dp[4] = 2 + 3 = 5
+    dp[5] = 3 + 5 = 8
+    dp[6] = 5 + 8 = 13
+
+	Time 	O(n) iterate from 1 to N
+	Space	O(n) for the array
+	12ms beats 98.53%
+*/
+var climbStairs = function(n) {
+    const dp = Array(n+1).fill(0)
+    dp[1] = 1
+    dp[2] = 2
+    for (let i = 3; i <= n; i++) {
+        dp[i] = dp[i-2] + dp[i-1]
+    }
+    return dp[n]
+};
