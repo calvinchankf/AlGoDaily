@@ -42,7 +42,7 @@ print(Solution().coinChange(
 print("--------------------")
 
 """
-    3rd: dp
+    2nd: dp
     learned from others: bottom-up
     e.g. coins = [1,2,5], amount = 7
     f(0) = 0  so if f(100-100), it output 0+1=1

@@ -3,17 +3,17 @@
  * @return {boolean}
  */
 var isValid = function (s) {
-    m = {
-        ')': '(',
-        ']': '[',
-        '}': '{'
+    const m = {
+        ')':'(',
+        ']':'[',
+        '}':'{'
     }
-    stack = []
+    const stack = []
     for (const c of s) {
         if (c == '(' || c == '[' || c == '{') {
             stack.push(c)
         } else {
-            if (stack.length > 0 && stack[stack.length - 1] == m[c]) {
+            if (stack.length > 0 && stack[stack.length-1] == m[c]) {
                 stack.pop()
             } else {
                 return false
