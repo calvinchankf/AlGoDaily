@@ -10,10 +10,10 @@
     - actually we did [cat,sand,ogab], we know that "ogab" is breakable after the recursion,
         therefore we can save "ogab" as "true" so that we can avoid redundant computation if we meet "ogab" again
 
-    Time    O(n^2)
+    Time    O(n^3)
     Space   O(n)
 
-    88 ms, faster than 39.98%
+    84 ms, faster than 78.08%
 */
 var wordBreak = function (s, wordDict) {
 	const m = {};

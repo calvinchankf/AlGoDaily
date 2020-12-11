@@ -4,7 +4,7 @@
     
     Time    O(2^n) worst
     Space   O(2^n) recursion
-    108 ms, faster than 22.25%
+    88 ms, faster than 54.52%
 */
 var subsetsWithDup = function (nums) {
 	nums.sort((a, b) => a - b);
@@ -12,9 +12,12 @@ var subsetsWithDup = function (nums) {
 	const dfs = (cands, chosen) => {
 		res.push(chosen);
 		for (let i = 0; i < cands.length; i++) {
-			if (i == 0 || cands[i] != cands[i - 1]) {
-				dfs(cands.slice(i + 1), [...chosen, cands[i]]);
-			}
+            if (i-1 >= 0 && cands[i-1] == cands[i]) {
+                continue
+            }
+            const _cands = cands.slice(i+1)
+            const _chosen = [...chosen, cands[i]]
+            dfs(_cands, _chosen)
 		}
 	};
 	dfs(nums, []);

@@ -8,13 +8,15 @@
     92 ms, faster than 21.88% 
 */
 var subsets = function (nums) {
-	const res = [];
-	const dfs = (cands, chosen) => {
-		res.push(chosen);
-		for (let i = 0; i < cands.length; i++) {
-			dfs(cands.slice(i + 1), [...chosen, cands[i]]);
-		}
-	};
-	dfs(nums, []);
-	return res;
+	const res = []
+    const dfs = (cands, chosen) => {
+        res.push(chosen)
+        for (let i = 0; i < cands.length; i++) {
+            const _cands = cands.slice(i+1)
+            const _chosen = [...chosen, cands[i]]
+            dfs(_cands, _chosen)
+        }
+    }
+    dfs(nums, [])
+    return res
 };

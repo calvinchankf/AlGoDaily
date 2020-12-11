@@ -63,7 +63,7 @@ var flatten = function(root) {
         if (node === null) {
             return
         }
-        const rightChild = node.right
+        const rightChild = node.right // consider [1,2,null], after we change it to [1,null,2], the node.left is still 2, then here is an infinite loop
         prev.left = null
         prev.right = node
         prev = node
@@ -71,5 +71,35 @@ var flatten = function(root) {
         preorder(rightChild)
     }
     preorder(root)
+    return dumphead.right
+};
+
+/*
+    3rd approach: stack
+    - similar to lc114, 426, 430
+    - store the nodes' values
+    - add the values back to the linked list
+
+    Time    O(N)
+    Space   O(N)
+    96 ms, faster than 52.56%
+*/
+var flatten = function(root) {
+    if (root == null) { return null }
+    const dumphead = new TreeNode()
+    let prev = dumphead
+    const stack = [root]
+    while (stack.length > 0) {
+        const node = stack.pop()
+        prev.left = null
+        prev.right = node
+        prev = node
+        if (node.right) {
+            stack.push(node.right)
+        }
+        if (node.left) {
+            stack.push(node.left)
+        }
+    }
     return dumphead.right
 };

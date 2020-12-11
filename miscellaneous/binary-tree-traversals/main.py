@@ -55,7 +55,7 @@ def preOrderIterative(root):
     while len(stack) > 0:
         node = stack.pop()
         res.append(node.val)
-        if node.right:
+        if node.right:  # stack is last-in-first-out
             stack.append(node.right)
         if node.left:
             stack.append(node.left)

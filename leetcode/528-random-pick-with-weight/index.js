@@ -45,3 +45,36 @@ const bsearch = (nums, target) => {
 	// to find number that >= target
 	return left;
 };
+
+/*
+    ES6 version + lower bound binary search
+*/
+class Solution {
+    constructor(w) {
+        this.nums = []
+        let pfs = 0
+        for (let x of w) {
+            pfs += x
+            this.nums.push(pfs)
+        }
+    }
+    pickIndex() {
+        const last = this.nums[this.nums.length-1]
+        const x = Math.floor(Math.random() * last) + 1 // from 1 to K instead of 0 to K-1
+        const i = this._lowerBsearch(this.nums, x)
+        return i
+    }
+    _lowerBsearch(nums, target) {
+        let left = 0
+        let right = nums.length
+        while (left < right) {
+            const mid = Math.floor((left + right) / 2)
+            if (target <= nums[mid]) {
+                right = mid
+            } else {
+                left = mid + 1
+            }
+        }
+        return left
+    }
+}

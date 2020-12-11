@@ -1,23 +1,27 @@
 /*
     Iterative Inorder Traversal of BST
-    156 ms, faster than 64.39%
+
+    Time of next()      O(H)
+    Time of hasNext()   O(1)
+    Space               O(H)  
+    140 ms, faster than 93.28%
 */
-var BSTIterator = function (root) {
-	this.stack = [];
-	this.pushLeft(root);
-};
-BSTIterator.prototype.next = function () {
-	const cur = this.stack.pop();
-	this.pushLeft(cur.right);
-	return cur.val;
-};
-BSTIterator.prototype.hasNext = function () {
-	return this.stack.length > 0;
-};
-BSTIterator.prototype.pushLeft = function (node) {
-	let cur = node;
-	while (cur != null) {
-		this.stack.push(cur);
-		cur = cur.left;
-	}
-};
+class BSTIterator {
+    constructor(root) {
+        this.stack = []
+        this.cur = root
+    }
+    next() {
+        while (this.cur != null) {
+            this.stack.push(this.cur)
+            this.cur = this.cur.left
+        }
+        const node = this.stack.pop()
+        const res = node.val
+        this.cur = node.right
+        return res
+    }
+    hasNext() {
+        return this.stack.length > 0 || this.cur != null
+    }
+}

@@ -31,26 +31,26 @@ var combinationSum4 = function (nums, target) {
 
     Time    O(NA)
     Space   O(N)
-    420 ms, faster than 5.67%
+    84 ms, faster than 64.90%
 */
 var combinationSum4 = function (nums, target) {
-	const ht = {};
-	const dfs = (path, remain) => {
-		if (remain == 0) {
-			return 1;
-		}
-		if (remain < 0) {
-			return 0;
-		}
-		if (remain in ht) {
-			return ht[remain];
-		}
-		let total = 0;
-		for (let c of nums) {
-			total += dfs([...path, c], remain - c);
-		}
-		ht[remain] = total;
-		return total;
-	};
-	return dfs([], target);
+	const ht = {}
+    const dfs = (remain) => {
+        if (remain == 0) {
+            return 1
+        }
+        if (remain < 0) {
+            return 0
+        }
+        if (remain in ht) {
+            return ht[remain]
+        }
+        let total = 0
+        for (let c of nums) {
+            total += dfs(remain - c)
+        }
+        ht[remain] = total
+        return total
+    }
+    return dfs(target)
 };
