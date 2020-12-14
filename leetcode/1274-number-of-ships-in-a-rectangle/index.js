@@ -32,7 +32,7 @@ var countShips = function(sea, topRight, bottomLeft) {
             continue
         }
         
-        hasShips = sea.hasShips(_topRight, _bottomLeft)
+        const hasShips = sea.hasShips(_topRight, _bottomLeft)
         if (hasShips == false) { continue }
         
         if (_topRight[0] == _bottomLeft[0] && _topRight[1] == _bottomLeft[1]) {

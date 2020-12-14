@@ -58,6 +58,6 @@ var flatten = function(head) {
         }
     }
     // the catch: the first node.prev = null instead of dumphead
-    dumphead.next.prev = null
-    return dumphead.next
+    head.prev = null
+    return head
 };

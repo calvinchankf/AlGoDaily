@@ -57,7 +57,7 @@ class Solution:
 
 
 """
-    3rd: lower bound binary search
+    2nd: lower bound binary search
     - similar to lc162, 852
     - when the next item is smaller, the peak is on the left hand side
     - actually same as 2nd, but the left & right are always within boundary

@@ -22,5 +22,5 @@ var minSteps = function(s, t) {
     for (let i = 0; i < 26; i++) {
         diff += Math.abs(counterA[i] - counterB[i])
     }
-    return diff/2
+    return diff / 2
 };

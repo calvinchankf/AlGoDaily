@@ -24,3 +24,23 @@ MovingAverage.prototype.next = function (val) {
 	}
 	return this.total / this.window.length;
 };
+
+/*
+    ES6 version of 1st approach
+*/
+class MovingAverage {
+    constructor(size) {
+        this.window = []
+        this.total = 0
+        this.size = size
+    }
+    next(val) {
+        this.window.push(val)
+        this.total += val
+        if (this.window.length > this.size) {
+            const left = this.window.shift()
+            this.total -= left
+        }
+        return this.total/this.window.length
+    }
+}

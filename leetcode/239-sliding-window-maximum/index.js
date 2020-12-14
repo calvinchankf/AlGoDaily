@@ -7,26 +7,26 @@
     Space O(k)
     2520 ms, faster than 15.90%
 */
-var maxSlidingWindow = function (nums, k) {
-	const window = [];
-	const sortedWindow = [];
-	const res = [];
-	for (let i = 0; i < nums.length; i++) {
-		window.push(nums[i]);
-		const idx = upperBsearch(sortedWindow, nums[i]);
-		sortedWindow.splice(idx, 0, nums[i]);
-
-		if (window.length > k) {
-			const last = window.shift();
-			const idx = lowerBsearch(sortedWindow, last);
-			sortedWindow.splice(idx, 1);
-		}
-
-		if (sortedWindow.length == k) {
-			res.push(sortedWindow[sortedWindow.length - 1]);
-		}
-	}
-	return res;
+var maxSlidingWindow = function(nums, k) {
+    const window = []
+    const res = []
+    for (let i = 0; i < nums.length; i++) {
+        const x = nums[i]
+        
+        if (i >= k) {
+            const left = nums[i-k]
+            const j = lowerBsearch(window, left)
+            window.splice(j, 1)
+        }
+        
+        const j = upperBsearch(window, x)
+        window.splice(j, 0, x)
+        
+        if (i+1 >= k) {
+            res.push(window[window.length-1])
+        }
+    }
+    return res
 };
 
 const lowerBsearch = (nums, target) => {

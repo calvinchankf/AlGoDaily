@@ -11,7 +11,7 @@ class Node:
 
 """
     1st: recursion
-    - similar to lc236, 1644, 1650
+    - similar to lc236, 1644, 1650, 1676
     - find the root
     - do LCA
 

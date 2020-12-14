@@ -1,6 +1,6 @@
 """
     1st approach: dynamic programming
-    - similar to lc198
+    - similar to lc198, 300, 1671
 
     ref: Longest Increasing Subsequence
     - https://www.youtube.com/watch?v=CE2b_-XfVDk

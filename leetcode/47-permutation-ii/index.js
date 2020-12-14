@@ -12,22 +12,23 @@
     40 ms, faster than 98.27%
 */
 var permuteUnique = function (nums) {
-	nums.sort((a, b) => a - b);
+    nums.sort((a, b) => a - b)
+    
+    const res = []
+    const dfs = (cands, chosen) => {
+        if (cands.length == 0) {
+            res.push(chosen)
+        }
+        for (let i = 0; i < cands.length; i++) {
+            if (i-1 >= 0 && cands[i-1] == cands[i]) {
+                continue
+            }
+            const _cands = [...cands.slice(0, i), ...cands.slice(i+1)]
+            const _chosen = [...chosen, cands[i]]
+            dfs(_cands, _chosen)
+        }
+    }
+    dfs(nums, [])
 
-	var res = [];
-	const f = (cands, chosen) => {
-		if (cands.length === 0) {
-			res.push(chosen);
-		}
-		for (let i = 0; i < cands.length; i++) {
-			if (i == 0 || cands[i] != cands[i - 1]) {
-				let left = cands.slice(0, i);
-				let right = cands.slice(i + 1);
-				f([...left, ...right], [...chosen, cands[i]]);
-			}
-		}
-	};
-	f(nums, []);
-
-	return res;
+    return res
 };

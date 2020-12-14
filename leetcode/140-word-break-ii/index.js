@@ -10,31 +10,29 @@
     Space   O(n^2*k)
     76 ms, faster than 96.35%
 */
-var wordBreak = function (s, wordDict) {
-	const m = {};
-	const wordSet = new Set(wordDict);
-	return explore(s, wordSet, m);
+var wordBreak = function(s, wordDict) {
+    return dfs(s, wordDict, {})
 };
 
-const explore = (s, wordSet, m) => {
-	if (s.length === 0) {
-		return [""];
-	}
-	if (s in m) {
-		return m[s];
-	}
-	const res = [];
-	for (let w of wordSet) {
-		const n = w.length;
-		const cand = s.slice(0, n);
-		if (w === cand) {
-			const suffixArr = explore(s.slice(n), wordSet, m);
-			for (let suffix of suffixArr) {
-				const newS = w + " " + suffix;
-				res.push(newS.trim());
-			}
-		}
-	}
-	m[s] = res;
-	return m[s];
-};
+const dfs = (s, wordDict, seen) => {
+    if (s.length == 0) {
+        return ['']
+    }
+    if (s in seen) {
+        return seen[s]
+    }
+    const sentences = []
+    for (let w of wordDict) {
+        const n = w.length
+        const sub = s.slice(0, n)
+        if (w == sub) {
+            const _sentences = dfs(s.slice(n), wordDict, seen)
+            for (let _s of _sentences) {
+                const temp = `${sub} ${_s}`.trim()
+                sentences.push(temp)
+            }
+        }
+    }
+    seen[s] = sentences
+    return seen[s]
+}
