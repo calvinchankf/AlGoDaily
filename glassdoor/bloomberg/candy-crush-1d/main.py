@@ -47,6 +47,22 @@
 from itertools import groupby
 from functools import lru_cache
 
+"""
+    1st: stack
+
+    e.g. "aabbbbacd"
+
+    # stackItem = (character, count)
+    stack = [(a,2)]
+    stack = [(a,2), (b,4)]
+    stack = [(a,3)]
+    stack = []
+    stack = [(c,1)]
+    stack = [(c,1), (d,1)]
+
+    so the result is "cd"
+"""
+
 
 def candy_crush_1d(s):
     stack = []  # (char, count)

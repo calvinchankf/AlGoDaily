@@ -102,6 +102,7 @@ class Solution(object):
 
     Time    O(2N)
     Space   O(N)
+    1788 ms, faster than 10.32%
 """
 
 
@@ -114,23 +115,23 @@ class Solution(object):
         if k == 1:
             return nums
 
-        # init deque and output
-        window = []
-        output = []
-        # build output
+        # init deque and res
+        window = []  # [(num, idx)
+        res = []
+        # build res
         for i in range(n):  # for i in range(k, n):
             # remove indexes of elements not in sliding window
             # since we push item one by one, the first one is guaranteed to be the one to remove if len(window) > k
-            if len(window) > 0 and window[0] == i - k:
+            if len(window) > 0 and window[0][1] == i - k:
                 window.pop(0)
             # remove from deq indexes of all elements
             # which are smaller than current element nums[i]
-            while len(window) > 0 and nums[i] > nums[window[-1]]:
+            while len(window) > 0 and nums[i] > window[-1][0]:
                 window.pop()
 
             # append the current index
-            window.append(i)
+            window.append((nums[i], i))
 
             if i+1 >= k:
-                output.append(nums[window[0]])
-        return output
+                res.append(window[0][0])
+        return res

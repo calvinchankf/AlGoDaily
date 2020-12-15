@@ -12,8 +12,8 @@ var dailyTemperatures = function (T) {
 	for (let i = 0; i < n; i++) {
 		const x = T[i];
 		while (stack.length > 0 && x > stack[stack.length - 1][0]) {
-			const [item, idx] = stack.pop();
-			res[idx] = i - idx;
+			const [_, j] = stack.pop();
+			res[idx] = i - j;
 		}
 		stack.push([x, i]);
 	}
