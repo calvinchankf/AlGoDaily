@@ -28,7 +28,8 @@ class Solution(object):
             #       ^
             # 4, 5, 1     <- next iteration
             mid = (left + right)//2
-            if nums[left] > nums[mid]:
+            # both < and <= work fine because there are duplicate numbers
+            if nums[mid] <= nums[right]:
                 right = mid
             else:
                 # e.g.1
@@ -43,33 +44,10 @@ class Solution(object):
 
 
 """
-    same thing
-"""
-
-
-class Solution(object):
-    def findMin(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        left = 0
-        right = len(nums) - 1
-        while left <= right:
-            # if no left most < right most, the minval is the left most number
-            if nums[left] <= nums[right]:
-                return nums[left]
-            mid = (left + right)/2
-            # this is so similar to lower bound,
-            # both < and <= work fine because there are duplicate numbers
-            if nums[mid] < nums[right]:
-                right = mid
-            else:
-                left = mid + 1
-
-
-"""
     variation: find max
+
+    Approach: same as above except return j-1
+    Since maxNum is always on the left of the minNum, we just need to return the nums[(left - 1) % n]
 """
 
 
@@ -79,19 +57,19 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+        n = len(nums)
         left = 0
-        right = len(nums)-1
+        right = n-1
         while left <= right:
             # if no left most < right most, the minval is the left most number
             if nums[left] <= nums[right]:
-                return nums[right]
-
+                return nums[(left - 1) % n]
             # binary search, always keep the mid
-            mid = (left + right + 1)//2
-            if nums[left] >= nums[mid]:
-                right = mid - 1
+            mid = (left + right)//2
+            if nums[mid] <= nums[right]:
+                right = mid
             else:
-                left = mid
+                left = mid + 1
 
 
 a = [3, 4, 5, 1, 2]

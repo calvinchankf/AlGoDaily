@@ -7,7 +7,7 @@
 
 """
     1st: recursion
-    - similar to lc235, 236
+    - similar to lc236, 1644, 1650, 1676
     1. use LCA
     2. check if both p and q are in the result LCA
 

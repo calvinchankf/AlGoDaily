@@ -1,5 +1,6 @@
 """
     3rd approach: learned from others
+    - similar to lc236, 1644, 1650, 1676
 	- calculate the products from the front & from the back
 		e.g.
 							2		3 		4 		5
@@ -28,8 +29,10 @@ class Solution(object):
             res[i] = forward[i] * backward[i]
         return res
 
+
 """
     4th approach: learned from others
+    - similar to lc236, 1644, 1650, 1676
 	- calculate the products from the front & from the back
 		e.g.
 							2		3 		4 		5
@@ -42,6 +45,8 @@ class Solution(object):
 	Space	O(1) exlcuding the result
 	208 ms, faster than 28.59%
 """
+
+
 class Solution(object):
     def productExceptSelf(self, nums):
         n = len(nums)

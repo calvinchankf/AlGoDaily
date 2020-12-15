@@ -45,67 +45,37 @@ class RandomizedSet {
 	Space					O(n) the unique keys
     120 ms beats 99.01%
 */
-
-/**
- * Initialize your data structure here.
- */
-var RandomizedSet = function () {
-	this.arr = [];
-	this.ht = {};
-};
-
-/**
- * Inserts a value to the set. Returns true if the set did not already contain the specified element.
- * @param {number} val
- * @return {boolean}
- */
-RandomizedSet.prototype.insert = function (val) {
-	if (val in this.ht) {
-		return false;
-	}
-	const n = this.arr.length;
-	this.ht[val] = n;
-	this.arr.push(val);
-	return true;
-};
-
-/**
- * Removes a value from the set. Returns true if the set contained the specified element.
- * @param {number} val
- * @return {boolean}
- */
-RandomizedSet.prototype.remove = function (val) {
-	if (val in this.ht) {
-		const targetIdx = this.ht[val];
-		const lastIdx = this.arr.length - 1;
-		const lastItem = this.arr[lastIdx];
-
-		// swap
-		[
-            this.arr[targetIdx], 
-            this.arr[lastIdx]
-        ] = [
-			this.arr[lastIdx],
-			this.arr[targetIdx],
-		];
-		// assign new idx to swapped key which was at the end of array
-		this.ht[lastItem] = targetIdx;
-
-		// clear the shits
-		delete this.ht[val];
-		this.arr.pop();
-
-		return true;
-	}
-	return false;
-};
-
-/**
- * Get a random element from the set.
- * @return {number}
- */
-RandomizedSet.prototype.getRandom = function () {
-	const n = this.arr.length;
-	const idx = Math.floor(Math.random() * n);
-	return this.arr[idx];
-};
+class RandomizedSet {
+    constructor() {
+        this.ht = {}
+        this.nums = []
+    }
+    insert(x) {
+        if (x in this.ht) {
+            return false
+        }
+        this.ht[x] = this.nums.length
+        this.nums.push(x)
+        return true
+    }
+    remove(x) {
+        if (x in this.ht == false) {
+            return false;
+        }
+        const i = this.ht[x];
+        const last = this.nums[this.nums.length-1];
+        const j = this.ht[last];
+        
+        [this.nums[i], this.nums[j]] = [this.nums[j], this.nums[i]];
+        this.ht[last] = i;
+        
+        this.nums.pop();
+        delete this.ht[x];
+        
+        return true;
+    }
+    getRandom() {
+        const i = Math.floor(Math.random() * this.nums.length)
+        return this.nums[i]
+    }
+}
