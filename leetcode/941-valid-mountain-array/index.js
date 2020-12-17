@@ -20,3 +20,30 @@ var validMountainArray = function (A) {
 	}
 	return i == j && i != 0 && j != n - 1;
 };
+
+/*
+    Go forward only
+    
+    Time    O(N)
+    Space   O(1)
+*/
+var validMountainArray = function(arr) {
+    let peak = -1
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i-1] > arr[i]) {
+            peak = i - 1
+            break
+        } else if (arr[i-1] == arr[i]) {
+            return false
+        }
+    }
+    if (peak <= 0 || peak == arr.length -1) {
+        return false
+    }
+    for (let i = peak+1; i < arr.length; i++) {
+        if (arr[i-1] < arr[i] || arr[i-1] == arr[i]) {
+            return false
+        }
+    }
+    return true
+};

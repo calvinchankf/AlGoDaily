@@ -11,23 +11,22 @@
 */
 var removeDuplicates = function (nums) {
 	if (nums.length == 0) {
-		return [];
+		return 0;
 	}
 	let j = 0;
-	let curMax = Number.MIN_SAFE_INTEGER;
+	let curNum = Number.MIN_SAFE_INTEGER;
 	let curCount = 0;
 	for (let i = 0; i < nums.length; i++) {
-		if (nums[i] > curMax) {
-			curMax = nums[i];
+		if (nums[i] != curNum) {
+			curNum = nums[i];
 			[nums[i], nums[j]] = [nums[j], nums[i]];
 			j += 1;
 			curCount = 1;
-		} else if (nums[i] == curMax && curCount < 2) {
+		} else if (nums[i] == curNum && curCount < 2) {
 			[nums[i], nums[j]] = [nums[j], nums[i]];
 			j += 1;
 			curCount += 1;
 		}
-		console.log(nums, j);
 	}
 	return j;
 };

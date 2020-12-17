@@ -43,7 +43,7 @@ print("-----")
 
 """
     1st: dynamic programming (recursion + hashtable)
-    - similar to lc139,140
+    - similar to lc131, 132, 139, 140
     - cache only stores the minLength group of palindrome from the end of the string
 
     e.g. 'noonabbad'
@@ -139,7 +139,7 @@ print("-----")
 
     Time    O(N^2) in each recursion we check every suffix O(N), and there are N recursions (because every recursion stops when we see a cache)
     Space   O(N) the suffixes cache
-    1444 ms, faster than 10.13%
+    884 ms, faster than 13.70%
 """
 
 
@@ -159,12 +159,9 @@ class Solution(object):
         if s in ht:
             return ht[s]
         minGroupLen = sys.maxsize
-        forward = ''
-        backward = ''
         for i in range(len(s)):
-            forward += s[i]
-            backward = s[i] + backward
-            if forward == backward:
+            sub = s[:i+1]
+            if sub == sub[::-1]:
                 groupLen = self.dfs(s[i+1:], ht) + 1
                 if groupLen < minGroupLen:
                     minGroupLen = groupLen

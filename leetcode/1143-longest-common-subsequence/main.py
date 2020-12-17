@@ -1,7 +1,6 @@
 """
-    class dynamic programming problem
-    - longest common substring
-    - similar to lc516, 712
+    classic dynamic programming problem
+    - similar to lc516, 1143, 1312
     - see miscellaneous/longest-common-subsequence/idea.png
 
     ref:
@@ -65,19 +64,21 @@ print("-----")
     - more similar to longest common substring
     - easier to explain
 """
+
+
 class Solution:
     def longestCommonSubsequence(self, text1: str, text2: str) -> int:
         R, C = len(text1), len(text2)
         dp = [C * [0] for _ in range(R)]
-        
+
         for i in range(R):
             if text1[i] == text2[0] or (i > 0 and dp[i-1][0] == 1):
                 dp[i][0] = 1
-        
+
         for j in range(1, C):
             if text1[0] == text2[j] or (j > 0 and dp[0][j-1] == 1):
                 dp[0][j] = 1
-        
+
         res = 0
         for i in range(R):
             for j in range(C):
@@ -87,8 +88,9 @@ class Solution:
                     else:
                         dp[i][j] = max(dp[i-1][j], dp[i][j-1])
                 res = max(res, dp[i][j])
-        
+
         return res
+
 
 s = Solution()
 

@@ -52,7 +52,7 @@ var isAnagram = function(s, t) {
 const countFreq = (s) => {
     const counter = {}
     for (let c of s) {
-        if ((c in counter) === false) {
+        if (c in counter === false) {
             counter[c] = 0
         }
         counter[c] += 1
