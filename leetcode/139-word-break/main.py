@@ -1,5 +1,6 @@
 """
     1st approach: recursion + memorization + slice max length
+    - similar to lc131, 132, 139, 140
     
     - e.g. "catsandogab", ["cats", "dog", "sand", "and", "cat", "og", "ab"]
     from the begining, we can split it into 2 strings
