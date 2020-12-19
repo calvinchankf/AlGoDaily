@@ -1,5 +1,6 @@
 """
     1st approach: recursion
+    - similar to lc131, 132, 139, 140
     - when we do recursion to slice candidates, we can check there are any palindromes from start to i, s[:i+1]
     - if yes, we can do the next recusion starting from i+1
 

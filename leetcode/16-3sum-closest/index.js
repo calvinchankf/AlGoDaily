@@ -72,7 +72,7 @@ const floor = Math.floor;
     reminder:
     - since closest means the result can be either smaller or bigger than the target,
         the 2 pointers loop ends only either: 
-        - left==right
+        - left == right
         - OR total == target
 
 	Time		O(n^2)
@@ -80,30 +80,27 @@ const floor = Math.floor;
 	72 ms, faster than 96.85%
 */
 var threeSumClosest = function (nums, target) {
-	const n = nums.length;
-	nums.sort((a, b) => a - b);
-
-	let res = Number.MAX_SAFE_INTEGER;
-
-	for (let i = 0; i < n; i++) {
-		let left = i + 1;
-		let right = n - 1;
-		while (left < right) {
-			const total = nums[i] + nums[left] + nums[right];
-			if (total < target) {
-				if (abs(total - target) < abs(res - target)) {
-					res = total;
-				}
-				left += 1;
-			} else if (total > target) {
-				if (abs(total - target) < abs(res - target)) {
-					res = total;
-				}
-				right -= 1;
-			} else {
-				return total;
-			}
-		}
-	}
-	return res;
+	const n = nums.length
+    nums.sort((a, b) => a - b)
+    
+    let res = Number.MAX_SAFE_INTEGER
+    
+    for (let i = 0; i < n; i++) {
+        let left = i + 1
+        let right = n - 1
+        while (left < right) {
+            const total = nums[i] + nums[left] + nums[right]
+            if (abs(total - target) < abs(res - target)) {
+                res = total
+            }
+            if (total < target) {
+                left += 1
+            } else if (total > target) {
+                right -= 1
+            } else {
+                return total
+            }
+        }
+    }
+    return res
 };
