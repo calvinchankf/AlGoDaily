@@ -1,5 +1,6 @@
 """
     questions to ask:
+    - similar to lc131, 132, 139, 140
     - will the words in wordDict contain each other? e.g. wordDict = [abc, ab] ? yes
     - will there be no duplicate words in wordDict? yes
     - lowercase letters only? yes
