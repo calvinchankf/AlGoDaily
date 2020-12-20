@@ -4,8 +4,8 @@
     - use hashtable to put the scores to corresponding sids(student id)
     - construct result by iterating the sid from ascendingly
 
-    Time    O(nlogn)
-    Space   O(n)
+    Time    O(NlogN)
+    Space   O(N)
     64 ms, faster than 30.29%
 """
 
