@@ -69,7 +69,6 @@ class UnionFind(object):
     Time		O(NN)
     Space		O(N)
     220 ms, faster than 23.64%
-    23apr2019
 """
 
 

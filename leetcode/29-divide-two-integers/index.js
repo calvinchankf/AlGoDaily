@@ -7,33 +7,28 @@
     96 ms, faster than 73.76%
 */
 var divide = function(dividend, divisor) {
-    let sign = 1
-    if ((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0)) {
-        sign = -1
-    }
+    const sign = dividend * divisor > 0 ? 1 : -1
     dividend = Math.abs(dividend)
     divisor = Math.abs(divisor)
-    let left = -(2**31)
-    let right = 2**31
-    let res = null
-    while (left <= right) {
-        const mid = Math.floor((left + right) / 2)
-        if (dividend < mid * divisor) {
-            right = mid - 1
-        } else if (dividend > mid * divisor) {
-            left = mid + 1
-        } else {    
-            res = mid * sign
-            break
-        }
-    }
-    if (res == null) {
-        res = right * sign
-    }
-    if (res < -(2**31)) {
-        return -(2**31)
-    } else if (res > (2**31)-1) {
-        return (2**31)-1
+    const res = bsearch(dividend, divisor) * sign
+    if (res < -(2**31) || res > 2**31-1) {
+        return 2**31 - 1
     }
     return res
 };
+
+const bsearch = (dividend, divisor) => {
+    let left = 1
+    let right = dividend
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2)
+        if (mid*divisor < dividend) {
+            left = mid + 1
+        } else if (mid*divisor > dividend) {
+            right = mid - 1
+        } else {
+            return mid
+        }
+    }
+    return right
+}

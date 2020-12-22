@@ -15,37 +15,6 @@
     80 ms, faster than 65.43%
 */
 var eraseOverlapIntervals = function (intervals) {
-	intervals.sort((a, b) => {
-		if (a[0] == b[0]) {
-			return a[1] - b[1];
-		}
-		return a[0] - b[0];
-	});
-	let res = 0;
-	const mergeds = [intervals[0]];
-	for (let i = 1; i < intervals.length; i++) {
-		const [s, e] = intervals[i];
-		const n = mergeds.length;
-		if (s < mergeds[n - 1][1]) {
-			if (e < mergeds[n - 1][1]) {
-				mergeds[n - 1] = [s, e];
-			}
-			res += 1;
-		} else {
-			mergeds.push([s, e]);
-		}
-	}
-	return res;
-};
-
-/*
-    2nd: space optimization
-
-    Time    O(NlogN)
-    Space   O(1)
-    80 ms, faster than 65.43%
-*/
-var eraseOverlapIntervals = function (intervals) {
 	if (intervals.length == 0) {
 		return [];
 	}
@@ -69,4 +38,28 @@ var eraseOverlapIntervals = function (intervals) {
 		}
 	}
 	return res;
+};
+
+/*
+    2nd: activity selection
+    - similar to 435, 646
+    - sort by end time
+    - update the count & curEnd greedily
+
+    Time    O(NlogN)
+    Space   O(1)
+    84 ms, faster than 62.50%
+*/
+var eraseOverlapIntervals = function(intervals) {
+    if (intervals.length == 0) { return 0 }
+    intervals.sort((a, b) => a[1] - b[1])
+    let curEnd = -(2**32)
+    let legitCount = 0
+    for (let [s, e] of intervals) {
+        if (s >= curEnd) {
+            curEnd = e
+            legitCount += 1
+        }
+    }
+    return intervals.length - legitCount
 };

@@ -12,38 +12,36 @@
     544 ms, faster than 9.49%
 */
 var getMaximumGold = function (grid) {
-	let res = 0;
-	const dfs = (i, j, ht, gold) => {
-		if (i < 0 || i == grid.length || j < 0 || j == grid[i].length) {
-			return;
-		}
-		if (grid[i][j] == 0) {
-			return;
-		}
-		const key = `${i},${j}`;
-		if (key in ht) {
-			return;
-		}
-		ht[key] = true;
-		gold += grid[i][j];
-		res = Math.max(res, gold);
-
-		dfs(i - 1, j, ht, gold);
-		dfs(i + 1, j, ht, gold);
-		dfs(i, j - 1, ht, gold);
-		dfs(i, j + 1, ht, gold);
-
-		delete ht[key];
-		return;
-	};
-
-	for (let i = 0; i < grid.length; i++) {
-		for (let j = 0; j < grid[i].length; j++) {
-			if (grid[i][j] != 0) {
-				const ht = {};
-				dfs(i, j, ht, 0);
-			}
-		}
-	}
-	return res;
+	const R = grid.length
+    const C = grid[0].length
+	let res = 0
+    
+    const backtrack = (i, j, total, seen) => {
+        if (i < 0 || i == R || j < 0 || j == C) {
+            return
+        }
+        if (grid[i][j] == 0) {
+            return
+        }
+        const key = `${i},${j}`
+        if (seen.has(key)) {
+            return
+        }
+        seen.add(key)
+        total += grid[i][j]
+        res = Math.max(res, total)
+        backtrack(i-1, j, total, seen)
+        backtrack(i+1, j, total, seen)
+        backtrack(i, j-1, total, seen)
+        backtrack(i, j+1, total, seen)
+        seen.delete(key)
+    }
+    
+    for (let i = 0; i < R; i++) {
+        for (let j = 0; j < C; j++) {
+            backtrack(i, j, 0, new Set())
+        }
+    }
+    
+    return res
 };

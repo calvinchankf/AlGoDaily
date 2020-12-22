@@ -1,19 +1,21 @@
 /*
     naive approach
 
-    Time    O(n!)
-    Space   O(n)
-    84 ms, faster than 29.88%
+    Time    O(N^2)
+    Space   O(N)
+    72 ms, faster than 93.96%
 */
-var getRow = function (rowIndex) {
-	let res = [1];
-	for (let i = 0; i < rowIndex; i++) {
-		const clone = [1];
-		for (let j = 0; j < res.length - 1; j++) {
-			clone.push(res[j] + res[j + 1]);
-		}
-		clone.push(1);
-		res = clone;
-	}
-	return res;
+var getRow = function(rowIndex) {
+    if (rowIndex == 0) {
+        return [1]
+    }
+    let row = [1,1]
+    for (let i = 2; i <= rowIndex; i++) {
+        const newRow = Array(i+1).fill(1)
+        for (let j = 1; j < row.length; j++) {
+            newRow[j] = row[j-1] + row[j]
+        }
+        row = newRow
+    }
+    return row
 };

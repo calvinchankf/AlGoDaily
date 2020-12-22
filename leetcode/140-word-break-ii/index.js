@@ -1,6 +1,6 @@
 /*
     classic approach: bottom-up recursion + memorization
-    - similar to lc132
+    - similar to lc131, 132, 139, 140
     - see ./idea.png
 
     ref:

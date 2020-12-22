@@ -17,23 +17,25 @@
         ^
     3^2 = 9 is larger than 8, therefore answer should be 3-1=2
 
-    Time    O(logn)
+    Time    O(logN)
     Space   O(1)
-    112 ms, faster than 32.19%
+    96 ms, faster than 73.18%
 */
 var mySqrt = function (x) {
-	if (x === x ** 2) {
-		return x;
-	}
-	let left = 1;
-	let right = x;
-	while (left < right) {
-		const mid = Math.floor((left + right) / 2);
-		if (x >= mid ** 2) {
-			left = mid + 1;
-		} else {
-			right = mid;
-		}
-	}
-	return right - 1;
+	if (x <= 0) {
+        return 0
+    }
+    let left = 1
+    let right = x
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2)
+        if (mid*mid < x) {
+            left = mid + 1
+        } else if (mid*mid > x) {
+            right = mid - 1
+        } else {
+            return mid
+        }
+    }
+    return right
 };

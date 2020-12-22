@@ -17,8 +17,7 @@ class Solution(object):
         """
         res = []
         for i in range(left, right+1):
-            b = self.checkSelfDividing(i)
-            if b:
+            if self.checkSelfDividing(i):
                 res.append(i)
         return res
 

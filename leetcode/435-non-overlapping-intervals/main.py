@@ -42,3 +42,27 @@ class Solution(object):
                     merged[-1][1] = e
                 res += 1
         return res
+
+
+"""
+    2nd: activity selection
+    - similar to 435, 646
+    - sort by end time
+    - update the count & curEnd greedily
+
+    Time    O(NlogN)
+    Space   O(1)
+    92 ms, faster than 8.49%
+"""
+
+
+class Solution:
+    def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
+        intervals.sort(key=lambda x: x[1])
+        legitCount = 0
+        curEnd = -sys.maxsize
+        for s, e in intervals:
+            if s >= curEnd:
+                curEnd = e
+                legitCount += 1
+        return len(intervals) - legitCount
