@@ -48,7 +48,7 @@ class Solution(object):
 """
     2nd: dynamic programming, bottom up
     - storing the minimum running sum from bottom of the matrix
-    Time    O(RCC)
+    Time    O(RC)
     Space   O(RC)
     100 ms, faster than 62.54%
 """

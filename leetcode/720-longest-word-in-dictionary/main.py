@@ -1,12 +1,13 @@
 """
-    1st approach: hashset
-    1. put the words into a set
-    2. for each word, i check if the word can be built up from the words
-    3. update the result if necessary
+    1st: sort + hashtable
+    - sort the array
+    - if the current word is a single character, put that in hashset
+    - if the prefix of current word is in the hashset, put that in hashset
+    - the longest key in hashset is the result
 
-    Time    O(nk) n: number of words, k: average number of characters in words
-    Space   O(n)
-    120 ms, faster than 38.44%
+    Time    O(NlogN) n: number of words, k: average number of characters in words
+    Space   O(N)
+    76 ms, faster than 75.63%
 """
 
 
@@ -16,22 +17,17 @@ class Solution(object):
         :type words: List[str]
         :rtype: str
         """
-        res = ""
-        wordSet = set(words)
-        for word in words:
-            canBuild = True
-            for i in range(1, len(word)+1):
-                subs = word[:i]
-                if subs not in wordSet:
-                    canBuild = False
-                    break
-            if canBuild == True:
-                if res == "":
-                    res = subs
-                elif len(subs) > len(res):
-                    res = subs
-                elif len(subs) == len(res) and subs < res:
-                    res = subs
+        words.sort(key=lambda w: len(w))
+        hs = set()
+        for w in words:
+            if len(w) == 1 or w[:-1] in hs:
+                hs.add(w)
+        res = ''
+        for w in hs:
+            if len(w) > len(res):
+                res = w
+            elif len(w) == len(res) and w < res:
+                res = w
         return res
 
 
