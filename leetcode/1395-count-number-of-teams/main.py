@@ -4,6 +4,18 @@
         - count the number of items less then itself from the left
         - count the number of items bigger then itself from the right
     - same idea vice versa
+    - e.g. 
+            [1, 2, 3, 4, 5, 6]
+                   ^
+            _____    ________
+              2          3
+    we can form 2*3 = 6 increasing sequences
+    [1,3,4]
+    [1,3,5]
+    [1,3,6]
+    [2,3,4]
+    [2,3,5]
+    [2,3,6]
 
     Time    O(n^2)
     Space   O(1)
