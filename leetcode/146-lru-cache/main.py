@@ -1,10 +1,10 @@
 from collections import *
 """
-  Doubly Linked List + Hashtable
-  - similar to lc379, lc1429
+    Doubly Linked List + Hashtable
+    - similar to lc379, lc1429
 
-  Time  put:O(1), get: O(1)
-  124ms beats 96.42%
+    Time  put:O(1), get: O(1)
+    124ms beats 96.42%
 """
 
 

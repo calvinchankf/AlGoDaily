@@ -88,70 +88,61 @@ print("---------------")
     left = max(4, 2) = 4, this is the result
 
 
-	Time		O(m+n)
-	Space 	O(m+n)
-	84 ms, faster than 41.34%
-    17apr2019
+	Time		O(log(min(M,N))
+	Space 	    O(1)
+	88 ms, faster than 78.54%
 """
 
 
 class Solution(object):
-    def findMedianSortedArrays(self, nums1, nums2):
-        """
-        :type nums1: List[int]
-        :type nums2: List[int]
-        :rtype: float
-        """
-
+    def findMedianSortedArrays(self, nums1: List[int], nums2: List[int]) -> float:
         # get the lengths
         m, n = len(nums1), len(nums2)
-
         # make sure that m <= n
         if m > n:
             nums1, nums2 = nums2, nums1
             m, n = n, m
-
         # if the larger array is empty, just return empty
         if n == 0:
             return 0.0
 
         # binary search
-        iMin = 0
-        iMax = m
+        left = 0
+        right = m
         # the number of sum of nums1[left1] and nums2[left] must be the half of the total count
-        halfLen = (m + n + 1) / 2
-        while iMin <= iMax:
-            i = (iMin + iMax) / 2
-            j = halfLen - i
-            if i < m and nums2[j-1] > nums1[i]:
-                # i is too small, increase it
-                iMin = i + 1
-            elif i > 0 and nums1[i-1] > nums2[j]:
-                # i is too big, decrease it
-                iMax = i - 1
+        halfLen = (m + n + 1) // 2
+        while left <= right:
+            mid1 = (left + right) // 2
+            mid2 = halfLen - mid1
+            if mid1 < m and nums1[mid1] < nums2[mid2-1]:
+                # mid1 is too small, increase it
+                left = mid1 + 1
+            elif mid1 > 0 and nums1[mid1-1] > nums2[mid2]:
+                # mid1 is too big, decrease it
+                right = mid1 - 1
             else:
-                # i is perfect
+                # mid1 is perfect
 
                 # find the left
                 maxLeft = 0
-                if i == 0:
-                    maxLeft = nums2[j-1]
-                elif j == 0:
-                    maxLeft = nums1[i-1]
+                if mid1 == 0:
+                    maxLeft = nums2[mid2-1]
+                elif mid2 == 0:
+                    maxLeft = nums1[mid1-1]
                 else:
-                    maxLeft = max(nums1[i-1], nums2[j-1])
+                    maxLeft = max(nums1[mid1-1], nums2[mid2-1])
 
                 if (m + n) % 2 == 1:
                     return maxLeft * 1.0
 
                 # find the right
                 minRight = 0
-                if i == m:
-                    minRight = nums2[j]
-                elif j == n:
-                    minRight = nums1[i]
+                if mid1 == m:
+                    minRight = nums2[mid2]
+                elif mid2 == n:
+                    minRight = nums1[mid1]
                 else:
-                    minRight = min(nums1[i], nums2[j])
+                    minRight = min(nums1[mid1], nums2[mid2])
 
                 return (maxLeft + minRight) / 2.0
 

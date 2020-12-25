@@ -1,8 +1,8 @@
 """
     1st approach: stack
 
-    Time    O(n)
-    Space   O(1)
+    Time    O(N)
+    Space   O(N)
     44 ms, faster than 86.88%
 """
 
