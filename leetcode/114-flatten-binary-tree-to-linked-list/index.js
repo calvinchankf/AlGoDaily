@@ -82,7 +82,7 @@ var flatten = function(root) {
 
     Time    O(N)
     Space   O(N)
-    96 ms, faster than 52.56%
+    84 ms, faster than 95.56%
 */
 var flatten = function(root) {
     if (root == null) { return null }

@@ -10,10 +10,11 @@ const isASubsetOfB = (A, B) => {
         counter[x] += 1
     }
     for (let x of A) {
-        if (x in counter === false || counter[x] === 0) {
+        if (x in counter === false) {
             return false
         }
         counter[x] -= 1
+        if (counter[x] == 0) delete counter[x]
     }
     return true
 }

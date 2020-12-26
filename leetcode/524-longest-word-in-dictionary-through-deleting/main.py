@@ -19,21 +19,23 @@ class Solution(object):
         :rtype: str
         """
         res = ''
-        for word in d:
-            if self.check(s, word):
+        for w in d:
+            if self.check(s, w):
                 # conditions
                 # 1. length of this word is longer than the intermediate result
                 # 2. this word is lexicologically lower than intermediate result if both lengths are the same
-                if len(word) > len(res) or len(word) == len(res) and word < res:
-                    res = word
+                if len(w) > len(res) or len(w) == len(res) and w < res:
+                    res = w
         return res
 
-    # check if each of the words can be formed by deleting characters from s
+    # check if the word can be formed from deleting characters in s
     def check(self, s, w):
         i = 0
-        for c in s:
-            if c == w[i]:
+        j = 0
+        while i < len(s) and j < len(w):
+            if s[i] == w[j]:
                 i += 1
-                if i == len(w):
-                    return True
-        return False
+                j += 1
+            else:
+                i += 1
+        return j == len(w)

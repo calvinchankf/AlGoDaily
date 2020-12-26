@@ -3,7 +3,7 @@
 
     Time    O(n)
     Space   O(n)
-    92 ms, faster than 39.28%
+    80 ms, faster than 95.07%
 */
 var compress = function(chars) {
     if (chars.length == 0) { return '' }

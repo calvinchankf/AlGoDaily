@@ -8,24 +8,27 @@
  * @param {string[]} strs
  * @return {string[][]}
  */
-var groupAnagrams = function (strs) {
-	const ht = {};
-	for (let s of strs) {
-		const alphabetsCount = Array(26).fill(0);
-		for (let c of s) {
-			const idx = c.charCodeAt(0) - "a".charCodeAt(0);
-			alphabetsCount[idx] += 1;
-		}
-		const key = alphabetsCount.join(",");
-		if (key in ht) {
-			ht[key].push(s);
-		} else {
-			ht[key] = [s];
-		}
-	}
-	const res = [];
-	for (let key in ht) {
-		res.push(ht[key]);
-	}
-	return res;
+var groupAnagrams = function(strs) {
+    const ht = {}
+    for (let s of strs) {
+        const key = getSignature(s)
+        if (key in ht === false) {
+            ht[key] = []
+        }
+        ht[key].push(s)
+    }
+    const res = []
+    for (let key in ht) {
+        res.push(ht[key])
+    }
+    return res
 };
+
+const getSignature = (s) => {
+    const counter = Array(26).fill(0)
+    for (let c of s) {
+        const i = c.charCodeAt() - 'a'.charCodeAt()
+        counter[i] += 1
+    }
+    return counter.join(',')
+}

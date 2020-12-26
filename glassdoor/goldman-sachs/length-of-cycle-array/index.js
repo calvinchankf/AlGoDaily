@@ -16,7 +16,7 @@ let lengthOfCycle
 
 /*
     1st: hashtable
-    - store the { val: index } pair in cache
+    - store the { val: steps } pair in cache
     - steps - cache[val] is the length of the cycle
 */
 lengthOfCycle = (arr, startIndex) => {
@@ -32,6 +32,35 @@ lengthOfCycle = (arr, startIndex) => {
         return -1
     }
     return steps - ht[arr[idx]]
+}
+
+/*
+    2nd: Floyds' Cycle
+    Distance traveled by fast pointer = a+2b+c
+    Distance traveled by slow pointer = a+b
+    2(a+b) = a+2b+c
+    a == c
+
+    length of circle = b + c
+    which is actually = b + a
+    a + b <= count
+*/
+lengthOfCycle = (arr, startIndex) => {
+    let slow = arr[startIndex]
+    let fast = arr[arr[startIndex]]
+    if (slow == fast) {
+        return -1
+    }
+    let count = 1
+    while (fast != slow) {
+        if (fast < 0 || fast >= arr.length) {
+            return -1;
+        }
+        count += 1
+        slow = arr[slow]
+        fast = arr[arr[fast]]
+    }
+    return count
 }
 
 let a, b
