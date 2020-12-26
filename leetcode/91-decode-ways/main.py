@@ -52,51 +52,7 @@ class Solution(object):
 
         Time    O(n) the length of the string, we use map to avoid duplicate substring
         Space   O(h) the height of recursion
-        36 ms, faster than 26.40%
-        """
-        if s in self.seen:
-            return self.seen[s]
-        if len(s) == 0:
-            return 1
-        left = 0
-        right = 0
-        a = int(s[0])
-        if a > 0:
-            left = self.numDecodings(s[1:])
-        b = int(s[:2])
-        if a > 0 and b > 9 and b < 27:
-            right = self.numDecodings(s[2:])
-        self.seen[s] = left + right
-        return left + right
-
-
-print(Solution().numDecodings("0"))
-print(Solution().numDecodings("10"))
-print(Solution().numDecodings("12"))
-print(Solution().numDecodings("102"))
-print(Solution().numDecodings("226"))
-print(Solution().numDecodings("1212"))
-print(Solution().numDecodings(
-    "9371597631128776948387197132267188677349946742344217846154932859125134924241649584251978418763151253"))
-print("-----")
-
-
-class Solution(object):
-
-    def __init__(self):
-        self.seen = {}
-
-    def numDecodings(self, s):
-        """
-        2nd approach: brute force with memorization
-        1. go through all the paths
-        2. for each path, when it comes to an end return 1
-        3. memorize the substrings and their "ways" to avoid duplicate calculations
-        3. the result is the sum of recursion
-
-        Time    O(n) the length of the string, we use map to avoid duplicate substring
-        Space   O(h) the height of recursion
-        36 ms, faster than 26.40%
+        16 ms, faster than 89.55%
         """
         if s in self.seen:
             return self.seen[s]
@@ -107,7 +63,7 @@ class Solution(object):
         if a > 0:
             total += self.numDecodings(s[1:])
         b = int(s[:2])
-        if a > 0 and b > 9 and b < 27:
+        if b > 9 and b < 27:
             total += self.numDecodings(s[2:])
         self.seen[s] = total
         return total

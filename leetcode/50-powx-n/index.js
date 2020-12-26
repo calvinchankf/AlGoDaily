@@ -10,54 +10,24 @@
     Space   O(logn) recursion tree
     56 ms, faster than 98.58%
 */
-const myPow = (x, n) => {
-	const N = Math.abs(n);
-	if (n >= 0) {
-		return f(x, N);
-	}
-	return 1 / f(x, N);
+var myPow = function(x, n) {
+    if (n < 0) {
+        return 1 / f(x, -n)
+    }
+    return f(x, n)
 };
 
 const f = (x, n) => {
-	if (n === 0) {
-		return 1;
-	}
-	const half = f(x, Math.floor(n / 2));
-	if (n % 2 == 0) {
-		return half * half;
-	}
-	return half * half * x;
-};
-
-/*
-    classic approach 2: math recursively
-    - split the n (divide and conquer)
-
-            2^10
-        (2*2=4) ^5
-    (4 * 4) ^ 2 * 4 
-
-    Time    O(logn)
-    Space   O(logn) recursion tree
-    104 ms, faster than 17.12% 
-*/
-var myPow = function (x, n) {
-	if (n === 0) {
-		return 1;
-	}
-
-	if (n === 1) {
-		return x;
-	} else if (n === -1) {
-		return 1 / x;
-	}
-
-	if (n % 2 === 0) {
-		return myPow(x * x, Math.floor(n / 2));
-	} else {
-		return myPow(x * x, Math.floor(n / 2)) * x;
-	}
-};
+    if (n == 0) {
+        return 1
+    }
+    const mid = Math.floor(n/2)
+    const p = f(x, mid)
+    if (n % 2 == 0) {
+        return p * p
+    }
+    return p * p * x
+}
 
 /*
     classic approach: math recursively

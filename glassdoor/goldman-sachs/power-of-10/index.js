@@ -26,9 +26,13 @@ console.log("-----")
 
 // 2nd: division
 powerOfTen = (n) => {
-    if (n < 1) { return false }
+    if (n < 1) {
+        return false
+    }
     while (n > 1) {
-        if (n%10 != 0) { return false}
+        if (n % 10 != 0) {
+            return false
+        }
         n /= 10
     }
     return true

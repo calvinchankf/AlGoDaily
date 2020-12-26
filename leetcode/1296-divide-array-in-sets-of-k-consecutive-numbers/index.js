@@ -27,7 +27,7 @@ var isPossibleDivide = function(nums, k) {
         let cur = x
         counter[cur] -= 1
         if (counter[cur] == 0) delete counter[cur]
-        while (seq[seq.length-1] + 1 in counter && seq.length < k) {
+        while (cur + 1 in counter && seq.length < k) {
             cur += 1
             seq.push(cur)
             counter[cur] -= 1
