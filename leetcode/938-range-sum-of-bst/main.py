@@ -9,8 +9,8 @@ class TreeNode(object):
 """
     1st approach: dfs all the nodes, and sum sup the values within the ranges
 
-    Time    O(n)
-    Space   O(h)
+    Time    O(N)
+    Space   O(H)
     296 ms, faster than 59.63%
 """
 
@@ -70,3 +70,30 @@ c.right = g
 d.left = h
 d.right = i
 print(Solution().rangeSumBST(a, 6, 10))
+
+print('-----')
+
+"""
+    2nd approach: BFS the nodes near to the range(L, R), and sum sup the values within the ranges
+
+    Time    O(H)
+    Space   O(N)
+    196 ms, faster than 94.31%
+"""
+
+
+class Solution:
+    def rangeSumBST(self, root: TreeNode, low: int, high: int) -> int:
+        if root == None:
+            return 0
+        total = 0
+        q = [root]
+        while len(q) > 0:
+            node = q.pop(0)
+            if low <= node.val <= high:
+                total += node.val
+            if node.left and node.val >= low:
+                q.append(node.left)
+            if node.right and node.val <= high:
+                q.append(node.right)
+        return total
