@@ -22,12 +22,13 @@ class ListNode:
     32 ms, faster than 88.70%
 """
 
+
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
         newHead = head
-        while cur != None and cur.next != None:
-            temp = cur.next
-            cur.next = cur.next.next
+        while head != None and head.next != None:
+            temp = head.next
+            head.next = head.next.next
             temp.next = newHead
             newHead = temp
         return newHead
