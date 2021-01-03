@@ -7,9 +7,55 @@ class TreeNode(object):
 
 
 """
+    1st: do BST traversal twice
+    - one for x <= target
+    - one for x >= target
+
+    Time    O(H)
+    Space   O(1)
+    44 ms, faster than 33.33% 
+"""
+
+
+class Solution:
+    def closestValue(self, root: TreeNode, target: float) -> int:
+        a = self.smallerEqual(root, target)
+        b = self.largerEqual(root, target)
+        if abs(a - target) < abs(b - target):
+            return a
+        return b
+
+    def smallerEqual(self, node, target):
+        cur = node
+        maxSmaller = -(2**32)
+        while cur != None:
+            if target < cur.val:
+                maxSmaller = cur.val
+                cur = cur.left
+            elif target > cur.val:
+                cur = cur.right
+            else:
+                return cur.val
+        return maxSmaller
+
+    def largerEqual(self, node, target):
+        cur = node
+        minLarger = 2**32
+        while cur != None:
+            if target < cur.val:
+                cur = cur.left
+            elif target > cur.val:
+                minLarger = cur.val
+                cur = cur.right
+            else:
+                return cur.val
+        return minLarger
+
+
+"""
     2nd: recursive BST search
-	Time		O(logn)
-	Space	O(height of the tree) the call stack
+	Time		O(H)
+	Space	    O(H) recursion call stack
 	beats 100%
 	20jan2019
 """
@@ -47,7 +93,7 @@ class Solution(object):
     - set the root as intermediate result
     - bst traverse down to the nearest node and keep updating the result
 
-    Time    O(h)
+    Time    O(H)
     Space   O(1)
     32 ms, faster than 81.41%
     24apr2019

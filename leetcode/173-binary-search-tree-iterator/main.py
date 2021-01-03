@@ -40,31 +40,32 @@ class BSTIterator1(object):
             self.arr = self.arr[1:]
         return result.val
 
-# suggested solution: idea from Iterative Inorder Traversal of BST
+
+"""
+    suggested solution: Iterative Inorder Traversal of BST
+
+    Time    O(N)
+    Space   O(N)
+    64 ms, faster than 97.38%
+"""
 
 
 class BSTIterator:
-    def __init__(self, root):
+    def __init__(self, root: TreeNode):
         self.stack = []
-        self.pushLeft(root)
+        self.cur = root
 
-    def hasNext(self):
-        return len(self.stack) > 0
+    def next(self) -> int:
+        while self.cur != None:
+            self.stack.append(self.cur)
+            self.cur = self.cur.left
+        node = self.stack.pop()
+        res = node.val
+        self.cur = node.right
+        return res
 
-    # trick1:
-    #   after pop, push the right node into the stack(if it is null, pushLeft() will ignore it)
-    def next(self):
-        temp = self.stack.pop()
-        self.pushLeft(temp.right)
-        return temp.val
-
-    # trick2:
-    #   push the left node(from the parent's right child) into the stack
-    #   , therefore the time complexity will be just O(height)
-    def pushLeft(self, node):
-        while node is not None:
-            self.stack.append(node)
-            node = node.left
+    def hasNext(self) -> bool:
+        return len(self.stack) > 0 or self.cur != None
 
 #       5
 #    3      6
