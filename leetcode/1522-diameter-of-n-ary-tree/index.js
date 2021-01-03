@@ -8,8 +8,10 @@
 
 /*
     1st: recursion
-    - lc543, lc414
+    - lc543, lc414, lc1522
 
+    Time    O(N)
+    Space   O(H)
     84 ms, faster than 100.00%
 */
 const diameter = (root) => {

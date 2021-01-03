@@ -12,35 +12,21 @@
 
     Time    O(n)
     Space   O(1)
-    452 ms, faster than 29.08%
+    472 ms, faster than 56.28%
 """
 
 
 class Solution(object):
     def isMonotonic(self, A):
-        """
-        :type A: List[int]
-        :rtype: bool
-        """
-        if len(A) < 2:
-            return True
-
-        isIncrease = True
-        i = 1
-        while i < len(A) and A[i] == A[i-1]:
-            i += 1
-
-        if i < len(A) and A[i] < A[i-1]:
-            isIncrease = False
-
-        for j in range(i+1, len(A)):
-            if isIncrease == True:
-                if A[j] < A[j-1]:
-                    return False
-            else:
-                if A[j] > A[j-1]:
-                    return False
-        return True
+        isIncreasing = True
+        isDecreasing = True
+        for i in range(1, len(A)):
+            diff = A[i] - A[i-1]
+            if isIncreasing and diff < 0:
+                isIncreasing = False
+            if isDecreasing and diff > 0:
+                isDecreasing = False
+        return isIncreasing or isDecreasing
 
 
 """

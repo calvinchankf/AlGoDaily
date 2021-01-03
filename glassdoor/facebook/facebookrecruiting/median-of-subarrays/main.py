@@ -34,29 +34,36 @@ import heapq
     e.g.3
     1, 5 | 10, 11, 22 <- 100
 """
-def medianOfSubarrays(nums):
-    maxHeap = []
-    minHeap = []
+
+
+def findMedian(arr):
+    maxheap = []  # left
+    minheap = []  # right
     res = []
-    for i in range(len(nums)):
-        x = nums[i]
-        if len(maxHeap) == len(minHeap):
-            heapq.heappush(maxHeap, -x)
-            maxFromLeft = -(heapq.heappop(maxHeap))
-            heapq.heappush(minHeap, maxFromLeft)
+    for x in arr:
+        if len(maxheap) == len(minheap):
+            heappush(maxheap, -x)
+            pop = -heappop(maxheap)
+            heappush(minheap, pop)
         else:
-            heapq.heappush(minHeap, x)
-            minFromRight = heapq.heappop(minHeap)
-            heapq.heappush(maxHeap, -minFromRight)
-        
-        if i%2 == 0:
-            res.append(minHeap[0])
+            heappush(minheap, x)
+            pop = heappop(minheap)
+            heappush(maxheap, -pop)
+
+        if len(maxheap) == len(minheap):
+            left = -maxheap[0]
+            right = minheap[0]
+            res.append((left + right) // 2)
         else:
-            a = maxHeap[0]
-            b = minHeap[0]
-            c = int((-a + b) / 2.0)
-            res.append(c)
+            res.append(minheap[0])
     return res
 
+
 a = [5, 15, 1, 3]
+print(medianOfSubarrays(a))
+
+a = [1, 2]
+print(medianOfSubarrays(a))
+
+a = [2, 4, 7, 1, 5, 3]
 print(medianOfSubarrays(a))
