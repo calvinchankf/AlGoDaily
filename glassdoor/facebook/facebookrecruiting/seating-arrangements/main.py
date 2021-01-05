@@ -54,15 +54,18 @@
     Time    O(NlogN)
     Space   O(N)
 """
+
+
 def minOverallAwkwardness(arr):
     arr.sort()
     numsAtEvenIdx = arr[::2]
     numsAtOddIdx = arr[1::2]
     arr = numsAtEvenIdx + numsAtOddIdx[::-1]
-    res = abs(arr[-1] - arr[0])
+    res = 0
     for i in range(1, len(arr)):
         res = max(res, abs(arr[i] - arr[i-1]))
     return res
+
 
 a = [5, 10, 6, 8]
 print(minOverallAwkwardness(a))

@@ -52,8 +52,8 @@ print(Solution().findAnagrams("abab", "ab"))
     2nd approach: sliding window
     - check if each substring is an anagram but dont use slice in every iteration
 
-    Time    O(n*m)
-    Space   O(m)
+    Time    O(26S)
+    Space   O(52)
     204 ms, faster than 32.10%
 """
 
@@ -77,7 +77,7 @@ class Solution(object):
             if self.sameStructure(target, window):
                 res.append(j)
         return res
-            
+
     def sameStructure(self, target, window):
         for i in range(26):
             if target[i] != window[i]:

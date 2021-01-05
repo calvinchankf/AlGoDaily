@@ -49,7 +49,54 @@ class WordDictionary:
         return dfs(word, self.root)
 
 
-# Your WordDictionary object will be instantiated and called as such:
-# obj = WordDictionary()
-# obj.addWord(word)
-# param_2 = obj.search(word)
+print("-----")
+
+
+"""
+    2nd: trie + bfs
+
+    Time of search      O(26^C)
+    Space               O(N)
+    468 ms, faster than 32.13%
+"""
+
+
+class Node(object):
+    def __init__(self, isWord=False):
+        self.children = 26 * [None]
+        self.isWord = isWord
+
+
+class WordDictionary:
+
+    def __init__(self):
+        self.trie = Node()
+
+    def addWord(self, word: str) -> None:
+        cur = self.trie
+        for c in word:
+            i = ord(c) - ord('a')
+            if cur.children[i] == None:
+                cur.children[i] = Node()
+            cur = cur.children[i]
+        cur.isWord = True
+
+    def search(self, word: str) -> bool:
+        q = [(word, self.trie)]
+        while len(q) > 0:
+            s, cur = q.pop(0)
+            if cur == None:
+                continue
+            if len(s) == 0:
+                if cur.isWord:
+                    return True
+                continue
+            c = s[0]
+            remain = s[1:]
+            if c == '.':
+                for i in range(26):
+                    q.append((remain, cur.children[i]))
+            else:
+                i = ord(c) - ord('a')
+                q.append((remain, cur.children[i]))
+        return False
