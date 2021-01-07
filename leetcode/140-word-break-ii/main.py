@@ -73,3 +73,36 @@ s = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 d = ["a", "aa", "aaa", "aaaa", "aaaaa", "aaaaaa",
      "aaaaaaa", "aaaaaaaa", "aaaaaaaaa", "aaaaaaaaaa"]
 print(Solution().wordBreak(s, d))
+
+print("-----")
+
+"""
+    2nd: use index instead of slicing
+    - so the length of every key is smaller in the hashtable
+    - but if the string is long and wordDict is small, it will be slow
+"""
+
+
+class Solution(object):
+    def wordBreak(self, s, wordDict):
+        wordSet = set(wordDict)
+        return self.dfs(s, 0, wordSet, {})
+
+    def dfs(self, s, start, wordSet, ht):
+        if start == len(s):
+            return ['']
+
+        if start in ht:                 # O(N): N times
+            return ht[start]
+
+        sentences = []
+        for i in range(start, len(s)):  # O(N^2): do slicing at every index
+            sub = s[start: i+1]
+            if sub in wordSet:
+                suffixes = self.dfs(s, i+1, wordSet, ht)
+                for sf in suffixes:
+                    temp = sub + ' ' + sf
+                    sentences.append(temp.strip())
+
+        ht[start] = sentences
+        return sentences
