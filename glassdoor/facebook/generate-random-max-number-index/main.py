@@ -53,7 +53,7 @@ def getRandomIndexOfMaxNumber(nums):
         if x > maxNum:
             maxNum = x
             maxNumIdx = i
-            count = 1
+            targetIndexCount = 1
         elif x == maxNum:
             # pick the current number with probability 1 / count (reservoir sampling)
             targetIndexCount += 1
