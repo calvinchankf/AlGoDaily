@@ -1,8 +1,8 @@
 """
     1st approach: recursive dfs
 
-    Time  O(n)
-    Space O(h)
+    Time  O(N)
+    Space O(H)
     12 ms, faster than 99.88%
 """
 
@@ -27,10 +27,10 @@ class Solution(object):
 
 
 """
-    1st approach: iterative dfs
+    2nd approach: iterative DFS
 
-    Time  O(n)
-    Space O(h)
+    Time  O(N)
+    Space O(H)
     20 ms, faster than 83.54%
 """
 
@@ -53,3 +53,28 @@ class Solution(object):
                 else:
                     stack.append((x.getList(), depth + 1))
         return result
+
+
+"""
+    3rd: BFS
+    
+    Time  O(n)
+    Space O(h)
+    28 ms, faster than 84.90%
+"""
+
+
+class Solution:
+    def depthSum(self, nestedList: List[NestedInteger]) -> int:
+        total = 0
+        q = []
+        for x in nestedList:
+            q.append((x, 1))
+        while len(q) > 0:
+            x, d = q.pop(0)
+            if x.isInteger():
+                total += x.getInteger() * d
+            else:
+                for child in x.getList():
+                    q.append((child, d + 1))
+        return total

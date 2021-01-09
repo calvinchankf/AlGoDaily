@@ -73,6 +73,8 @@ print('-----')
     C:2
     D:1
 
+    n = 2
+
     => A x x A x x A x x A x x A
     => A B x A B x A B x A x x A
     => A B C A B C A B x A x x A
@@ -108,3 +110,39 @@ print(Solution().leastInterval(["A", "A", "A", "B", "B", "B"], 2))
 print(Solution().leastInterval(["A", "A", "A", "B", "B", "B", "C", "C"], 2))
 print(Solution().leastInterval(
     ["A", "A", "A", "A", "A", "B", "B", "B", "C", "C", "C", "D", "D"], 2))
+
+"""
+    3rd: greedy + math
+    - similar to 2nd
+
+    e.g.
+    A:5
+    B:5
+    C:2
+    D:1
+
+    n = 2
+
+    => A x x A x x A x x A x x | A 
+    => A B x A B x A B x A B x | A B
+    => A B C A B C A B x A B x | A B
+    => A B C A B C A B D A B x | A B
+    -------------------------------
+           (n+1) * (maxFreq-1) + maxFreqCount
+"""
+
+
+class Solution:
+    def leastInterval(self, tasks: List[str], n: int) -> int:
+        freqs = 26 * [0]
+        for t in tasks:
+            freqs[ord(t) - ord('A')] += 1
+        if n == 0:
+            return sum([f for f in freqs])
+        freqs.sort()
+        maxFreq = freqs[-1]
+        maxFreqCount = freqs.count(maxFreq)
+        return max(
+            len(tasks),
+            (n+1) * (maxFreq-1) + maxFreqCount
+        )
