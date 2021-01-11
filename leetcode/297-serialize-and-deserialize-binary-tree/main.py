@@ -32,30 +32,28 @@ class Codec:
         left = self.serialize(node.left)
         right = self.serialize(node.right)
         return str(node.val) + '(' + left + ')(' + right + ')'
-        
 
     def deserialize(self, s):
         """Decodes your encoded data to tree.
-        
+
         :type data: str
         :rtype: TreeNode
         """
         if len(s) == 0:
             return None
         arr = []
-        # execpt the open and end parentheses
         for c in s:
             arr.append(c)
         return self.deserializeHelper(arr)
-    
+
     def deserializeHelper(self, arr):
         if len(arr) == 0:
             return None
-                
+
         s = ""
         while len(arr) > 0 and arr[0] != "(" and arr[0] != ")":
             s += arr.pop(0)
-        
+
         node = None
         if len(s) > 0:
             num = int(s)

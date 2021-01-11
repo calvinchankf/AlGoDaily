@@ -70,16 +70,12 @@ print("----")
 
 class Solution:
     def removeDuplicates(self, nums):
-        if len(nums) == 0:
-            return
         j = 0
-        curMax = -sys.maxsize
         for i in range(len(nums)):
-            if nums[i] > curMax:
-                curMax = nums[i]
-                nums[i], nums[j] = nums[j], nums[i]
+            if nums[i] > nums[j]:
                 j += 1
-        return j
+                nums[i], nums[j] = nums[j], nums[i]
+        return j + 1
 
 
 a = []

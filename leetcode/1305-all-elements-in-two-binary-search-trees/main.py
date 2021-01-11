@@ -16,30 +16,64 @@
 
 class Solution(object):
     def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
-        self.arr1, self.arr2 = [], []
-        self.inorder(root1, self.arr1)
-        self.inorder(root2, self.arr2)
-        return self.merge2lists(self.arr1, self.arr2)
-
-    def inorder(self, root: TreeNode, arr: List[int]):
-        if root == None:
-            return
-        self.inorder(root.left, arr)
-        arr.append(root.val)
-        self.inorder(root.right, arr)
-
-    def merge2lists(self, arr1: List[int], arr2: List[int]) -> List[int]:
-        res = []
+        A = self.getSortedList(root1)
+        B = self.getSortedList(root2)
         i, j = 0, 0
-        while i < len(arr1) and j < len(arr2):
-            if arr1[i] < arr2[j]:
-                res.append(arr1[i])
+        res = []
+        while i < len(A) and j < len(B):
+            if A[i] < B[j]:
+                res.append(A[i])
                 i += 1
             else:
-                res.append(arr2[j])
+                res.append(B[j])
                 j += 1
-        if i < len(arr1):
-            res += arr1[i:]
-        if j < len(arr2):
-            res += arr2[j:]
+        if i < len(A):
+            res += A[i:]
+        if j < len(B):
+            res += B[j:]
+        return res
+
+    def getSortedList(self, root):
+        res = []
+
+        def inorder(node):
+            if node == None:
+                return
+            inorder(node.left)
+            res.append(node.val)
+            inorder(node.right)
+        inorder(root)
+        return res
+
+
+"""
+    2nd: ONE PASS iterative inorder traversal + merge 2 lists
+
+    Time    O(M+N)
+    Space   O(M+N)
+    456 ms, faster than 23.77%
+"""
+
+
+class Solution:
+    def getAllElements(self, root1: TreeNode, root2: TreeNode) -> List[int]:
+        stack1, stack2 = [], []
+        cur1, cur2 = root1, root2
+        res = []
+        while cur1 or cur2 or len(stack1) > 0 or len(stack2) > 0:
+            while cur1 != None:
+                stack1.append(cur1)
+                cur1 = cur1.left
+            while cur2 != None:
+                stack2.append(cur2)
+                cur2 = cur2.left
+
+            if len(stack2) == 0 or (len(stack1) > 0 and stack1[-1].val < stack2[-1].val):
+                node = stack1.pop()
+                res.append(node.val)
+                cur1 = node.right
+            else:
+                node = stack2.pop()
+                res.append(node.val)
+                cur2 = node.right
         return res
