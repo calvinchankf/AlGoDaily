@@ -7,80 +7,6 @@ class TreeNode(object):
 
 
 """
-    1st approach
-    1. find the width of the binary tree by dfs
-    2. bfs the tree with a corresponding 'diff'
-    3. put the node.val into a right subarray of result corresponding to the 'diff'
-
-    Time    O(n)
-    Space   O(h+n) the height of tree(recursion) + the result
-    24ms beats 100%
-"""
-
-
-class Solution(object):
-
-    def __init__(self):
-        self.max = 0
-        self.min = 0
-
-    def verticalOrder(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-        """
-        if root == None:
-            return []
-        self.findWidth(root, 0)
-        n = self.max-self.min+1
-
-        res = []
-        for i in range(n):
-            res.append([])
-
-        q = [(root, 0)]
-        while len(q) > 0:
-            node, col = q.pop(0)
-            res[col-self.min].append(node.val)
-            if node.left != None:
-                q.append((node.left, col-1))
-            if node.right != None:
-                q.append((node.right, col+1))
-
-        return res
-
-    def findWidth(self, node, at):
-        if node == None:
-            return
-        self.min = min(self.min, at)
-        self.max = max(self.max, at)
-        self.findWidth(node.left, at-1)
-        self.findWidth(node.right, at+1)
-
-
-#      1
-#    2   3
-#  5  6    7
-#      8
-a = TreeNode(1)
-b = TreeNode(2)
-c = TreeNode(3)
-d = TreeNode(4)
-e = TreeNode(5)
-f = TreeNode(6)
-g = TreeNode(7)
-h = TreeNode(8)
-a.left = b
-a.right = c
-b.left = e
-b.right = f
-c.right = g
-f.right = h
-print(Solution().verticalOrder(a))
-
-print(Solution().verticalOrder(None))
-
-"""
     2nd approach: dfs + hashtable
     - dfs through the tree with incrementing row and incrementing/decrementing col
     - put the node to the corresponding col in a hashtable
@@ -126,11 +52,11 @@ class Solution(object):
 
 
 """
-    2nd approach: bfs + hashtable + sort
+    2nd approach: bfs + hashtable + bucket sort
     - similar to lc987
 
     Time    O(NlogN)
-    Space   O(h+n) the height of tree(recursion) + the result
+    Space   O(H+N) the height of tree(recursion) + the result
     20ms beats 78.65%
 """
 
@@ -143,22 +69,20 @@ class Solution(object):
         """
         if root == None:
             return []
-        ht = defaultdict(list)
-
+        minCol, maxCol = 0, 0
+        ht = defaultdict(list)  # {col: []}
         q = [(root, 0)]  # (node, col)
         while len(q) > 0:
             node, col = q.pop(0)
+            minCol = min(minCol, col)
+            maxCol = max(maxCol, col)
             ht[col].append(node.val)
             if node.left:
-                q.append((node.left, col - 1))
+                q.append((node.left, col-1))
             if node.right:
-                q.append((node.right, col + 1))
-
-        rawRes = []
-        for c in ht:
-            rawRes.append((c, ht[c]))
-
+                q.append((node.right, col+1))
         res = []
-        for c, arr in sorted(rawRes):
-            res.append(arr)
+        for i in range(minCol, maxCol+1):
+            if i in ht:
+                res.append(ht[i])
         return res
