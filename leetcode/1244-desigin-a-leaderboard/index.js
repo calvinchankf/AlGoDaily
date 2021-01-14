@@ -72,53 +72,49 @@ const upperBsearch = (arr, ht, target) => {
 */
 class Leaderboard {
     constructor() {
-        this.arr = []   // ids sort by scores
-        this.ht = {}    // {id1: score1, id2: score2}
+        this.ht = {}
+        this.ids = [] // sorted
     }
     addScore(playerId, score) {
-        let newScore = 0
-        if (playerId in this.ht) {
-            newScore = this.ht[playerId] + score
-            this.ht[playerId] = newScore
-            // remove
-            const i = this.arr.indexOf(playerId)
-            this.arr.splice(i, 1)
-        } else {
-            this.ht[playerId] = score
-            newScore = score
+        if (playerId in this.ht == false) {
+            this.ht[playerId] = 0
         }
-        // add
-        const j = this._upperBsearch(this.arr, this.ht, newScore)
-        this.arr.splice(j, 0, playerId)
-    }
-    top(K) {
-        let res = 0
-        let count = 0
-        for (let i = this.arr.length-1; i >= 0; i--) {
-            const pId = this.arr[i]
-            res += this.ht[pId]
-            count += 1
-            if (count === K) { break }
+        this.ht[playerId] += score
+        const i = this.ids.indexOf(playerId)
+        if (i > -1) {
+            this.ids.splice(i, 1)
         }
-        return res
+        const j = this._upperBsearch(this.ht[playerId])
+        this.ids.splice(j, 0, playerId)
     }
-    reset(playerId) {
-        const i = this.arr.indexOf(playerId)
-        this.arr.splice(i, 1)
-        delete this.ht[playerId]
-    }
-    _upperBsearch(arr, ht, target) {
-        let left = 0;
-        let right = arr.length;
+    _upperBsearch(target) {
+        let left = 0
+        let right = this.ids.length
         while (left < right) {
-            const mid = Math.floor((left + right) / 2);
-            const pId = arr[mid]
-            if (target >= ht[pId]) {
-                left = mid + 1;
+            const mid = Math.floor((left + right) / 2)
+            if (target >= this.ht[this.ids[mid]]) {
+                left = mid + 1
             } else {
-                right = mid;
+                right = mid
             }
         }
-        return left;
-    };
+        return left
+    }
+    top(K) {
+        let total = 0
+        let i = this.ids.length-1
+        while (K > 0) {
+            total += this.ht[this.ids[i]]
+            i -= 1
+            K -= 1
+        }
+        return total
+    }
+    reset(playerId) {
+        delete this.ht[playerId]
+        const i = this.ids.indexOf(playerId)
+        if (i > -1) {
+            this.ids.splice(i, 1)
+        }
+    }
 }
