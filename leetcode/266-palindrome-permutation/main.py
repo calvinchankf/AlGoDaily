@@ -22,7 +22,7 @@ class Solution(object):
         for key in counter:
             if counter[key] % 2 == 1:
                 oddCount += 1
-        return oddCount == 0 or oddCount == 1
+        return oddCount <= 1
 
 
 """
