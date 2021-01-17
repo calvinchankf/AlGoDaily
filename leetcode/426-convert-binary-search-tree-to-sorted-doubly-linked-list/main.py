@@ -58,7 +58,7 @@ class Solution(object):
 
 
 """
-    2nd: recursion
+    2nd: recursive inorder
     - similar to lc114, 426, 430, 897
     - reassign the pointers during the inorder traversal process
 
@@ -95,3 +95,41 @@ class Solution:
         self.prev = node
 
         self.inorder(node.right)
+
+
+"""
+    3rd: iterative inorder
+    - similar to lc114, 426, 430, 897
+    - reassign the pointers during the inorder traversal process
+
+    Time    O(N)
+    Space   O(N)
+    32 ms, faster than 94.92%
+"""
+
+
+class Solution(object):
+    def treeToDoublyList(self, root):
+        if root == None:
+            return None
+        dumphead = Node(-1)
+        dumphead.right = root
+        prev = dumphead
+        cur = dumphead.right
+        stack = []
+        while cur != None or len(stack) > 0:
+            while cur != None:
+                stack.append(cur)
+                cur = cur.left
+            node = stack.pop()
+
+            prev.right = node
+            node.left = prev
+            prev = node
+
+            cur = node.right
+
+        prev.right = dumphead.right
+        dumphead.right.left = prev
+
+        return dumphead.right

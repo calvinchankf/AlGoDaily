@@ -20,3 +20,32 @@ var uniquePaths = function (m, n) {
 	}
 	return dp[m - 1][n - 1];
 };
+
+
+/*
+    2nd: DP(recursion + hashtable)
+
+    Time    O(MN)
+    Space   O(MN)
+    140 ms, faster than 5.00%
+*/
+var uniquePaths = function(m, n) {
+    return dfs(m-1, n-1, {})
+};
+
+const dfs = (m, n, ht) => {
+    if (m == 0 && n == 0) {
+        return 1
+    } else if (m < 0 || n < 0) {
+        return 0
+    }
+    const key = `${m},${n}`
+    if (key in ht) {
+        return ht[key]
+    }
+    let total = 0
+    total += dfs(m-1, n, ht)
+    total += dfs(m, n-1, ht)
+    ht[key] = total
+    return ht[key]
+}
