@@ -1,5 +1,5 @@
 /*
-    1st approach: stack + carry
+    1st approach: 2 pointers
 	- each digit = byteA + byteB + carry
 	- add the digits until no more carry, a, b
 
