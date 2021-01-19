@@ -3,7 +3,7 @@
 
     Time    O(NlogN)
     Space   O(N)
-    332 ms, faster than 72.27%
+    280 ms, faster than 87.69%
 """
 
 
@@ -17,21 +17,13 @@ class Solution(object):
         :rtype: List[int]
         """
         if veganFriendly == 1:
-            arr = []
-            for x in restaurants:
-                if x[2] == 1:
-                    arr.append(x)
-            restaurants = arr
+            restaurants = [r for r in restaurants if r[2] == 1]
 
         arr = []
         for x in restaurants:
             if x[3] <= maxPrice and x[4] <= maxDistance:
                 arr.append(x)
 
-        def cmpter(a, b):
-            if a[1] == b[1]:
-                return b[0]-a[0]
-            return b[1]-a[1]
-        sortedArr = sorted(arr, cmp=cmpter)
+        sortedArr = sorted(arr, key=lambda x: (-x[1], -x[0]))
 
         return [x[0] for x in sortedArr]

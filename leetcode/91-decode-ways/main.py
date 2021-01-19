@@ -37,35 +37,37 @@ print(Solution().numDecodings("1212"))
 print("-----")
 
 
+"""
+    2nd approach: brute force with memorization
+    1. go through all the paths
+    2. for each path, when it comes to an end return 1
+    3. memorize the substrings and their "ways" to avoid duplicate calculations
+    3. the result is the sum of recursion
+
+    Time    O(n) the length of the string, we use map to avoid duplicate substring
+    Space   O(h) the height of recursion
+    16 ms, faster than 89.55%
+"""
+
+
 class Solution(object):
 
-    def __init__(self):
-        self.seen = {}
+    def numDecodings(self, s: str) -> int:
+        return self.dfs(s, {})
 
-    def numDecodings(self, s):
-        """
-        2nd approach: brute force with memorization
-        1. go through all the paths
-        2. for each path, when it comes to an end return 1
-        3. memorize the substrings and their "ways" to avoid duplicate calculations
-        3. the result is the sum of recursion
-
-        Time    O(n) the length of the string, we use map to avoid duplicate substring
-        Space   O(h) the height of recursion
-        16 ms, faster than 89.55%
-        """
-        if s in self.seen:
-            return self.seen[s]
+    def dfs(self, s, cache):
         if len(s) == 0:
             return 1
+        if s in cache:
+            return cache[s]
         total = 0
-        a = int(s[0])
-        if a > 0:
-            total += self.numDecodings(s[1:])
-        b = int(s[:2])
-        if b > 9 and b < 27:
-            total += self.numDecodings(s[2:])
-        self.seen[s] = total
+        a = s[:1]
+        b = s[:2]
+        if 1 <= int(a) <= 9:
+            total += self.dfs(s[1:], cache)
+        if 10 <= int(b) <= 26:
+            total += self.dfs(s[2:], cache)
+        cache[s] = total
         return total
 
 

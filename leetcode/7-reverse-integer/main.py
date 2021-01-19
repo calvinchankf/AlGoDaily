@@ -36,10 +36,6 @@ class Solution(object):
 
 class Solution(object):
     def reverse(self, x):
-        """
-        :type x: int
-        :rtype: int
-        """
         # +/-
         sign = 1
         if x < 0:
@@ -48,9 +44,8 @@ class Solution(object):
         # reverse numbers
         rev = 0
         while x > 0:
-            num = x % 10
+            rev = rev*10 + x % 10
             x //= 10
-            rev = rev*10 + num
         # boundaries
         temp = int(rev) * sign
         if temp < -2**31 or temp > 2**31-1:
