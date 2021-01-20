@@ -55,15 +55,13 @@ class Solution(object):
         - the result will be the max sum of profit on day i, which is forward[i]+backward[i]
         - see ./idea.jpeg
 
-        Time    O(2n)
-        Space   O(1)
-        1988 ms, faster than 5.24%
-
-        Aug31 2020 LTE
+        Time    O(4N)
+        Space   O(2N)
+        1776 ms, faster than 12.55%
         """
         if len(prices) < 2:
             return 0
-
+        n = len(prices)
         dip = sys.maxsize
         forwardDiff = 0
         forwardDiffs = []
@@ -75,16 +73,16 @@ class Solution(object):
         peak = -sys.maxsize
         backwardDiff = 0
         backwardDiffs = []
-        for i in range(len(prices)-1, -1, -1):
+        for i in range(n-1, -1, -1):
             price = prices[i]
             peak = max(peak, price)
             backwardDiff = max(backwardDiff, peak - price)
-            backwardDiffs = [backwardDiff] + backwardDiffs
+            backwardDiffs.append(backwardDiff)
+        backwardDiffs = backwardDiffs[::-1]
 
         result = 0
-        for i in range(len(forwardDiffs)):
-            result = max(result, forwardDiffs[i]+backwardDiffs[i])
-
+        for i in range(n):
+            result = max(result, forwardDiffs[i] + backwardDiffs[i])
         return result
 
 

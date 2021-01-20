@@ -19,7 +19,7 @@ class Solution(object):
         left = 1
         right = n
         while left < right:
-            mid = int((left + right)/2)
+            mid = (left + right)//2
             if isBadVersion(mid):
                 right = mid
             else:

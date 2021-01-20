@@ -11,8 +11,8 @@ class RandomListNode(object):
     1. use a hashtable to map the address of each node and a new node
     2. iterate the linked list and construct a new linked list using the values in hashtable
 
-    Time    O(2n)
-    Space   O(n)
+    Time    O(N)
+    Space   O(N)
     68ms beats 97.59%
 """
 
@@ -62,3 +62,30 @@ d.random = a
 
 s = Solution().copyRandomList(a)
 printList(s)
+
+print("-----")
+
+"""
+    2nd: do 1st recursively
+
+    Time    O(N)
+    Space   O(N)
+    44 ms, faster than 54.79%
+"""
+
+
+class Solution(object):
+
+    def __init__(self):
+        self.cache = {}
+
+    def copyRandomList(self, head):
+        if head == None:
+            return None
+        if head in self.cache:
+            return self.cache[head]
+        clone = Node(head.val)
+        self.cache[head] = clone
+        clone.next = self.copyRandomList(head.next)
+        clone.random = self.copyRandomList(head.random)
+        return clone
