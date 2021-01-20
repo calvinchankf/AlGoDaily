@@ -7,7 +7,7 @@
     - https://www.youtube.com/watch?v=VlZiMD7Iby4
 
     Time    O(V+E)
-    Space   O(V+E)
+    Space   O(V)
     156 ms, faster than 62.09%
 """
 
@@ -48,7 +48,7 @@ class Solution(object):
     - https://www.youtube.com/watch?v=VlZiMD7Iby4
 
     Time    O(V+E)
-    Space   O(V+E)
+    Space   O(V)
     164 ms, faster than 40.67%
 """
 

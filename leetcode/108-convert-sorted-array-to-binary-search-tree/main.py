@@ -50,16 +50,12 @@ class Solution(object):
 
     Time	O(N)
 	Space	O(N)
+    68 ms, faster than 85.35%
 """
 
 
 class Solution(object):
     def sortedArrayToBST(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: TreeNode
-        """
-        nums = sorted(nums)
         return self.buildBST(nums, 0, len(nums)-1)
 
     def buildBST(self, nums, left, right):

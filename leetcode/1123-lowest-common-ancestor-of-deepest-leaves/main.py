@@ -18,32 +18,30 @@
 
 class Solution:
     def lcaDeepestLeaves(self, root: TreeNode) -> TreeNode:
+        if root == None:
+            return None
         maxDepth = 0
-        maxDepthNodes = []
+        maxDepthLeaves = []
         q = [(root, 0)]
         while len(q) > 0:
             node, d = q.pop(0)
-
             if d > maxDepth:
                 maxDepth = d
-                maxDepthNodes = [node]
+                maxDepthLeaves = [node]
             elif d == maxDepth:
-                maxDepthNodes.append(node)
-
+                maxDepthLeaves.append(node)
             if node.left:
-                q.append((node.left, d+1))
+                q.append((node.left, d + 1))
             if node.right:
-                q.append((node.right, d+1))
+                q.append((node.right, d + 1))
+        first, last = maxDepthLeaves[0], maxDepthLeaves[-1]
+        return self.lca(root, first, last)
 
-        if len(maxDepthNodes) == 1:
-            return maxDepthNodes[0]
-        return self.lca(root, maxDepthNodes[0], maxDepthNodes[-1])
-
-    def lca(self, node, a, b):
-        if node == None or node == a or node == b:
+    def lca(self, node, p, q):
+        if node == None or node == p or node == q:
             return node
-        left = self.lca(node.left, a, b)
-        right = self.lca(node.right, a, b)
+        left = self.lca(node.left, p, q)
+        right = self.lca(node.right, p, q)
         if left != None and right != None:
             return node
         if left != None:
