@@ -1,4 +1,4 @@
-from collections import defaultdict
+from collections import *
 
 """
     1st: hashtable
@@ -13,42 +13,42 @@ from collections import defaultdict
 
 class Solution(object):
     def findSpecialInteger(self, arr):
-        ht = defaultdict(int)
-        for x in arr:
-            ht[x] += 1
-        target = len(arr) / 4
-        for key in ht:
-            if ht[key] > target:
+        counter = Counter(arr)
+        for key in counter:
+            if counter[key] > len(arr) / 4:
                 return key
 
 
 """
     2nd: binary search
-    - for each number, binary search its upper bound
+    - for number at indices (0, n/4, n/2, 3n/4), find their first and last occurence index
     - and check if the range is more than 25% of the length of the input array
 
-    Time    O(NlogN)
+    Time    O(4logN)
     Space   O(1)
-    128 ms, faster than 7.76%
+    76 ms, faster than 45.79%
 """
 
 
-class Solution:
-    def findSpecialInteger(self, arr: List[int]) -> int:
-        for i in range(len(arr)):
-            if i == 0 or arr[i] != arr[i-1]:
-                right = self.upperBsearch(arr, arr[i], i)
-                diff = right - i
-                if diff > len(arr) // 4:
-                    return arr[i]
+class Solution(object):
+    def findSpecialInteger(self, arr):
+        n = len(arr)
+        if n == 1:
+            return arr[0]
+        indices = [0, n//4, n//2, 3*n//4]
+        for i in indices:
+            left = self.lowerBsearch(arr, arr[i])
+            right = left + n//4
+            if arr[left] == arr[right]:
+                return arr[i]
 
-    def upperBsearch(self, nums: List[int], target: int, start: int) -> int:
-        left = start
+    def lowerBsearch(self, nums, target):
+        left = 0
         right = len(nums)
         while left < right:
-            mid = (left + right) // 2
-            if target >= nums[mid]:
-                left = mid + 1
-            else:
+            mid = (left + right)//2
+            if target <= nums[mid]:
                 right = mid
+            else:
+                left = mid + 1
         return left

@@ -5,22 +5,25 @@
     Space   O(AS)
     944 ms, faster than 29.46%
 """
-class Solution(object):
-    def numWays(self, steps, arrLen):
-        return self.dfs(steps, arrLen, 0, {})
-        
-    def dfs(self, steps, arrLen, n, ht):
-        if n < 0 or n == arrLen:
+
+
+class Solution:
+    def numWays(self, steps: int, N: int) -> int:
+        return self.dfs(steps, N, 0, {})
+
+    def dfs(self, remain, N, i, cache):
+        if i < 0 or i == N:
             return 0
-        if steps == 0:
-            if n == 0:
+        if remain == 0:
+            if i == 0:
                 return 1
             return 0
-        key = (steps, n)
-        if key in ht:
-            return ht[key]
-        left = self.dfs(steps-1, arrLen, n-1, ht)
-        stay = self.dfs(steps-1, arrLen, n, ht)
-        right = self.dfs(steps-1, arrLen, n+1, ht)
-        ht[key] = (left + stay + right) % (10**9+7)
-        return ht[key]
+        key = (remain, i)
+        if key in cache:
+            return cache[key]
+        left = self.dfs(remain-1, N, i-1, cache)
+        right = self.dfs(remain-1, N, i+1, cache)
+        stay = self.dfs(remain-1, N, i, cache)
+        total = left + right + stay
+        cache[key] = total % (10**9 + 7)
+        return cache[key]
