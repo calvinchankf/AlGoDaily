@@ -72,3 +72,43 @@ class UndergroundSystem {
         return totalTime / totalCount
     }
 }
+
+/*
+    2nd: similar to 1st
+    - group the times and counts in one hashtable
+
+    Time of checkIn()           O(1)
+    Time of checkOut()          O(1)
+    Time of getAverageTime()    O(1)
+    Space                       O(U + S^2) U: number of users, S: number of stations
+*/
+class UndergroundSystem {
+    constructor() {
+        this.userCheckIns = {}
+        this.timesAndCounts = {} // {(s,e): [duration, count] 
+    }
+    checkIn(uId, stationName, t) {
+        this.userCheckIns[uId] = [stationName, t]
+    }
+    checkOut(uId, stationName, t) {
+        if (uId in this.userCheckIns == false) {
+            return
+        }
+        const [from, startTime] =  this.userCheckIns[uId]
+        const key = `${from},${stationName}`
+        if (key in this.timesAndCounts == false) {
+            this.timesAndCounts[key] = [0, 0]
+        }
+        this.timesAndCounts[key][0] += t - startTime
+        this.timesAndCounts[key][1] += 1
+    }
+    getAverageTime(s, e) {
+        const key = `${s},${e}`
+        if (key in this.timesAndCounts == false) {
+            return
+        }
+        const totalTime = this.timesAndCounts[key][0]
+        const totalCount = this.timesAndCounts[key][1]
+        return totalTime / totalCount
+    }
+}

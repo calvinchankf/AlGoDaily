@@ -20,20 +20,22 @@ class Solution(object):
             Time
             24ms beats 100%
         """
-        dumphead = ListNode(0)
+        dumphead = ListNode()
         cur = dumphead
-        while l1 != None and l2 != None:
-            if l1.val < l2.val:
-                cur.next = l1
-                l1 = l1.next
+        cur1 = l1
+        cur2 = l2
+        while cur1 and cur2:
+            if cur1.val < cur2.val:
+                cur.next = ListNode(cur1.val)
+                cur1 = cur1.next
             else:
-                cur.next = l2
-                l2 = l2.next
+                cur.next = ListNode(cur2.val)
+                cur2 = cur2.next
             cur = cur.next
-        if l1 != None:
-            cur.next = l1
-        if l2 != None:
-            cur.next = l2
+        if cur1:
+            cur.next = cur1
+        elif cur2:
+            cur.next = cur2
         return dumphead.next
 
 

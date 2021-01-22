@@ -1,5 +1,5 @@
 """
-    3rd approach
+    2nd approach
     - check every cell adjacent cells
     - for each cell, use binary digits to store the next status
     e.g.
