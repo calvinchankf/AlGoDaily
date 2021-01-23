@@ -17,22 +17,20 @@ class Node(object):
 
 
 class Solution:
-    def cloneGraph(self, root: 'Node') -> 'Node':
-        ht = {}
+    def __init__(self):
+        self.cache = {}
 
-        def dfs(node):
-            if node == None:
-                return None
-            if node in ht:
-                return ht[node]
-            clone = Node(node.val)
-            ht[node] = clone
-
-            for child in node.neighbors:
-                clone.neighbors.append(dfs(child))
-            return clone
-
-        return dfs(root)
+    def cloneGraph(self, node):
+        if node == None:
+            return None
+        if node in self.cache:
+            return self.cache[node]
+        clone = Node(node.val)
+        self.cache[node] = clone
+        for nb in node.neighbors:
+            x = self.cloneGraph(nb)
+            clone.neighbors.append(x)
+        return clone
 
 
 """

@@ -126,19 +126,17 @@ print("------------------")
 
 class Solution(object):
     def isOneEditDistance(self, s, t):
-        m, n = len(s), len(t)
-        for i in range(min(m, n)):
+        L = min(len(s), len(t))
+        for i in range(L):
             if s[i] == t[i]:
                 continue
-            if s[i+1:] == t[i:]:
-                return True
-            elif s[i:] == t[i+1:]:
-                return True
-            elif s[i+1:] == t[i+1:]:
-                return True
+            if len(s) > len(t):
+                return s[i+1:] == t[i:]
+            elif len(s) < len(t):
+                return s[i:] == t[i+1:]
             else:
-                return False
-        return abs(m - n) == 1
+                return s[i+1:] == t[i+1:]
+        return abs(len(s) - len(t)) == 1
 
 
 a = "ab"

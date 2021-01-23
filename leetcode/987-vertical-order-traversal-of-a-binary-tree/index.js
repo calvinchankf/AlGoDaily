@@ -8,8 +8,8 @@
     Space   O(N)
     84 ms, faster than 64.93%
 */
-var verticalTraversal = function (root) {
-	if (root == null) {
+var verticalTraversal = function(root) {
+    if (root == null) {
         return []
     }
     const ht = {}
@@ -17,19 +17,18 @@ var verticalTraversal = function (root) {
     let minCol = 0
     let maxCol = 0
     while (q.length > 0) {
-        const n = q.length
         const columns = {}
+        const n = q.length
         for (let i = 0; i < n; i++) {
             const [node, col] = q.shift()
-        
-            if ((col in columns) === false) {
+            minCol = Math.min(minCol, col)
+            maxCol = Math.max(maxCol, col)
+            
+            if (col in columns === false) {
                 columns[col] = []
             }
             columns[col].push(node.val)
-
-            minCol = Math.min(minCol, col)
-            maxCol = Math.max(maxCol, col)
-
+            
             if (node.left) {
                 q.push([node.left, col-1])
             }
@@ -37,14 +36,14 @@ var verticalTraversal = function (root) {
                 q.push([node.right, col+1])
             }
         }
-        for (let col in columns) {
-            if ((col in ht)  === false) {
-                ht[col] = []
+        for (let key in columns) {
+            const arr = columns[key]
+            arr.sort((a, b) => a - b)
+            if (key in ht === false) {
+                ht[key] = []
             }
-            const x = columns[col].sort((a, b) => a - b)
-            ht[col] = ht[col].concat(x)
+            ht[key] = ht[key].concat(arr)
         }
-        
     }
     
     const res = []

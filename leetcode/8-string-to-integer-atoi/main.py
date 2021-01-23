@@ -20,9 +20,9 @@ class Solution(object):
         if len(s) == 0:
             return 0
         num = 0
-        polarity = 0
+        polarity = 1
         if s[0] == '+':
-            polarity = 1
+            pass
         elif s[0] == '-':
             polarity = -1
         elif s[0].isdigit():
@@ -36,9 +36,7 @@ class Solution(object):
                 num = num*10 + int(c)
             else:
                 break
-        if polarity == -1:
-            return self.bound(-num)
-        return self.bound(num)
+        return self.bound(num * polarity)
 
     def bound(self, num):
         if num < -2**31:
