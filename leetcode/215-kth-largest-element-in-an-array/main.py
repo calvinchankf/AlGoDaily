@@ -40,7 +40,7 @@ class Solution(object):
 
 """
     2nd approach: min heap
-    - similar to lc215, 703
+    - similar to lc215, 703, 973
     - maintain a min heap of size k, the top item in the minheap at the end is the kth largest item
 
 	Time		O(NlogK)
