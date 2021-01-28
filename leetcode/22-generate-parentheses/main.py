@@ -49,31 +49,25 @@ print(Solution().generateParenthesis(3))
 
     Time    < O(2^2n) the total number of nodes in the recursion tree
     Space   < O(2^2n)
+    24 ms, faster than 100.00%
 """
 
 
 class Solution(object):
-
-    def __init__(self):
-        self.res = []
-
     def generateParenthesis(self, n):
-        """
-        24 ms, faster than 100.00%
-        """
         if n <= 0:
             return []
-        self.permuate("", 0, 0, n)
+        self.res = []
+        self.dfs(n, '', 0, 0)
         return self.res
 
-    def permuate(self, s, open_cnt, close_cnt, n):
-        if len(s) == 2*n:
+    def dfs(self, n, s, openCount, closeCount):
+        if openCount == n and closeCount == n:
             self.res.append(s)
-            return
-        if open_cnt < n:
-            self.permuate(s + "(", open_cnt+1, close_cnt, n)
-        if close_cnt < open_cnt:
-            self.permuate(s + ")", open_cnt, close_cnt+1, n)
+        if openCount < n:
+            self.dfs(n, s + '(', openCount+1, closeCount)
+        if closeCount < openCount:
+            self.dfs(n, s + ')', openCount, closeCount+1)
 
 
 print(Solution().generateParenthesis(-1))

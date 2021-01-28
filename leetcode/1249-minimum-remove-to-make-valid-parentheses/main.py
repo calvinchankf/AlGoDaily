@@ -36,10 +36,7 @@ class Solution(object):
 
 
 """
-    2nd: similar logic
-
-    takeaway: add list to a set()
-    https://docs.python.org/3/library/stdtypes.html#frozenset.update
+    2nd: similar logic as 1st but using one stack only
 
     Time    O(2N)
     Space   O(N)
@@ -49,23 +46,24 @@ class Solution(object):
 
 class Solution(object):
     def minRemoveToMakeValid(self, s):
-        """
-        :type s: str
-        :rtype: str
-        """
-        redundant = set()
-        opens = []
-        for i in range(len(s)):
+        n = len(s)
+        stack = []
+        for i in range(n):
             c = s[i]
             if c == '(':
-                opens.append(i)
+                stack.append(i)
             elif c == ')':
-                if len(opens) == 0:
-                    redundant.add(i)
+                if len(stack) > 0 and s[stack[-1]] == '(':
+                    stack.pop()
                 else:
-                    opens.pop()
-        redundant |= set(opens)
-        return ''.join(s[i] for i in range(len(s)) if i not in redundant)
+                    stack.append(i)
+        hs = set(stack)
+        res = ''
+        for i in range(n):
+            if i in hs:
+                continue
+            res += s[i]
+        return res
 
 
 """

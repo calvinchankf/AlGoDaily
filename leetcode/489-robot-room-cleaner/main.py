@@ -25,7 +25,7 @@ class Solution:
 
         # go back to the previous position
         # and face to the same direction
-        # as if time travel back to the time when the robot saw this grid[i][j]
+        # as if the way when the robot saw this grid[i][j]
         def goback():
             robot.turnRight()
             robot.turnRight()

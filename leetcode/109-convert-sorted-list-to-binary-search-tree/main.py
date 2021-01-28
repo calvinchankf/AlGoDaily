@@ -24,8 +24,8 @@
 		2			6
 	1	  3		5		7
 
-    Time    O(2n)
-    Space   O(n)
+    Time    O(2N)
+    Space   O(logN)
     108 ms, faster than 99.82%
 """
 
@@ -53,14 +53,15 @@ class Solution(object):
         return node
 
 
-
 """
     2nd: optimize the speed by using indices instead of array slicing
 
-    Time    O(2n)
-    Space   O(n)
+    Time    O(2N)
+    Space   O(N)
     124 ms, faster than 81.05%
 """
+
+
 class Solution(object):
     def sortedListToBST(self, head):
         """
@@ -73,7 +74,7 @@ class Solution(object):
             nums.append(cur.val)
             cur = cur.next
         return self.buildBST(nums, 0, len(nums)-1)
-    
+
     def buildBST(self, nums, left, right):
         if left > right:
             return None

@@ -28,7 +28,8 @@
     n = 2
     arr = [2, 1]
     output = [2, 2]
-    The first student will sign their own yearbook and pass it to the second, who will also sign it and pass it back to the first student, resulting in 2 signatures. Meanwhile, the second student's yearbook will similarly be signed both by themselves and then by the first student.
+    The first student will sign their own yearbook and pass it to the second, who will also sign it and pass it back to the first student, resulting in 2 signatures. 
+    Meanwhile, the second student's yearbook will similarly be signed both by themselves and then by the first student.
 
     Example 2
     n = 2
@@ -51,6 +52,8 @@
 """
     1st: brute force
 """
+
+
 def findSignatureCounts(arr):
     n = len(arr)
     res = []
@@ -63,16 +66,17 @@ def findSignatureCounts(arr):
         res.append(count)
     return res
 
-a = [1,2]
+
+a = [1, 2]
 print(findSignatureCounts(a))
 
-a = [2,1]
+a = [2, 1]
 print(findSignatureCounts(a))
 
-a = [4,3,2,5,1]
+a = [4, 3, 2, 5, 1]
 print(findSignatureCounts(a))
 
-a = [5,1,2,3,6,4]
+a = [5, 1, 2, 3, 6, 4]
 print(findSignatureCounts(a))
 
 print("-----")
@@ -80,6 +84,8 @@ print("-----")
 """
     2nd: union find
 """
+
+
 class UnionFind(object):
     def __init__(self, n):
         self.count = n
@@ -112,6 +118,7 @@ class UnionFind(object):
             self.caps[pId] += self.caps[qId]
         self.count -= 1
 
+
 def findSignatureCounts(arr):
     nums = [x - 1 for x in arr]
     n = len(nums)
@@ -124,14 +131,15 @@ def findSignatureCounts(arr):
         res.append(uf.caps[rootI])
     return res
 
-a = [1,2]
+
+a = [1, 2]
 print(findSignatureCounts(a))
 
-a = [2,1]
+a = [2, 1]
 print(findSignatureCounts(a))
 
-a = [4,3,2,5,1]
+a = [4, 3, 2, 5, 1]
 print(findSignatureCounts(a))
 
-a = [5,1,2,3,6,4]
+a = [5, 1, 2, 3, 6, 4]
 print(findSignatureCounts(a))
