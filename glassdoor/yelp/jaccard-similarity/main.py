@@ -4,8 +4,20 @@ from collections import *
 """
     https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=664894&ctid=230591
 
-    Calculate the jaccard distance between 2 strings(compare to the first string)
+    Calculate the jaccard distance between 2 strings
 
+    variation1: compare to the first string
+    e.g.1
+    abcd
+    xbcdx
+    res = 3/6 (bcd / abcdxx)
+
+    e.g.2
+    abcdd
+    xbcddx
+    res = 4/7 (bcdd / abcddxx)
+
+    variation2: compare to the first string
     e.g.1
     abcd
     xbcdx
@@ -25,26 +37,26 @@ def jaccard(s, t):
     A = Counter(s)
     B = Counter(t)
 
-    # A or B
-    # mutual = 0
-    # total = 0
-    # keys = set(list(A.keys()) + list(B.keys()))
-    # for key in keys:
-    #     if key in A and key in B:
-    #         mutual += max(A[key], B[key])
-    #         total += max(A[key], B[key])
-    #     elif key in A:
-    #         total += A[key]
-    #     elif key in B:
-    #         total += B[key]
-    # return mutual / total
+    # # compare to S
+    # count = 0
+    # for key in A:
+    #     if key in B:
+    #         count += min(A[key], B[key])
+    # return count / len(s)
 
-    # compare to S
-    count = 0
-    for key in A:
-        if key in B:
-            count += min(A[key], B[key])
-    return count / len(s)
+    # A or B
+    mutual = 0
+    total = 0
+    keys = set(list(A.keys()) + list(B.keys()))
+    for key in keys:
+        if key in A and key in B:
+            mutual += min(A[key], B[key])
+            total += max(A[key], B[key])
+        elif key in A:
+            total += A[key]
+        elif key in B:
+            total += B[key]
+    return mutual / total
 
 
 a = 'abcd'
