@@ -57,7 +57,7 @@ print("----")
         ('Stanley', 'management'),
     ]
 
-    Time    O(N + KM) = O(N + N) K=num of teams, M=average num of people in every group
+    Time    O(N + NK) every items would be visited once, K=num of groups
     Space   O(N)
 """
 
