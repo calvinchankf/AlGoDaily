@@ -86,6 +86,9 @@ def getTeamMatches(users):
     # we should match the ab first, then the remain would be 'aabbcc', now they have the same opportunity
     # case2 YES, consider 'aaabbbwxyz'
     # we should match the aabb first, then the remain would be 'abwxyz', but a will always match with the b, so this is a downside
+    #
+    # One possible solution is, when there are more than 1 item have the same count as the maxheap[0], suffle the them,
+    # but the downside is it takes longer O(N), and we also need to put the names in an object because heapq sort the 2nd param
     maxheap = []
     for key in ht:
         heappush(maxheap, (-len(ht[key]), key))
@@ -118,3 +121,18 @@ a = [
     ('Stanley', 'management')
 ]
 print(getTeamMatches(a))
+
+print("-----")
+
+heap = []
+heappush(heap, (0, 'one', 1))
+heappush(heap, (1, 'c', 11))
+heappush(heap, (1, 'b', 2))
+heappush(heap, (1, 'a', 3))
+heappush(heap, (1, 'b', 3))
+heappush(heap, (1, 'b', 4))
+heappush(heap, (1, 'a', 5))
+heappush(heap, (1, 'c', 1))
+
+while len(heap) > 0:
+    print(heappop(heap))

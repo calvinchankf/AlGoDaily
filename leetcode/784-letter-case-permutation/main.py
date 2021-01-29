@@ -9,24 +9,19 @@
 """
 
 
-class Solution(object):
-    def letterCasePermutation(self, S):
-        """
-        :type S: str
-        :rtype: List[str]
-        """
+class Solution:
+    def letterCasePermutation(self, S: str) -> List[str]:
         self.res = []
-        self.dfs(S, "")
+        self.dfs(S, 0, '')
         return self.res
 
-    def dfs(self, remain, s):
-        if len(remain) == 0:
-            self.res.append(s)
+    def dfs(self, s, i, cur):
+        if i == len(s):
+            self.res.append(cur)
+            return
+        c = s[i]
+        if c.isdigit():
+            self.dfs(s, i+1, cur+c)
         else:
-            first = remain[0]
-            if (ord(first) >= 65 and ord(first) <= 90) or\
-                    (ord(first) >= 97 and ord(first) <= 122):
-                self.dfs(remain[1:], s+first.lower())
-                self.dfs(remain[1:], s+first.upper())
-            else:
-                self.dfs(remain[1:], s+first)
+            self.dfs(s, i+1, cur+c.lower())
+            self.dfs(s, i+1, cur+c.upper())

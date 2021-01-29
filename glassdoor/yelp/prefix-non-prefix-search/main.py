@@ -28,7 +28,7 @@ from collections import *
 """ 
     1st: brute force
     Time    O(NC * min(C, S)) N=num of businesses, C=num of characters of every word
-    Space   O(NC)
+    Space   O(N) the result hashset
 """
 
 
@@ -67,7 +67,7 @@ print("-----")
 """ 
     2nd: Trie
     Time    O(NCC + S) N=num of businesses, W=num of words, C=num of characters of every word
-    Space   O(NC)
+    Space   O(NC + N)
 """
 
 

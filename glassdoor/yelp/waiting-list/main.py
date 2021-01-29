@@ -96,5 +96,5 @@ print(getFirstCustomer(a, 4).name)
 
 """
     followup: maximize table usgae
-    - can we put several groups together on a table? if yes, minheap(order by size of the group)
+    - can we put several groups together on a table? if yes, minheap(order by size of the group + index as 2nd param)
 """
