@@ -66,9 +66,10 @@ class Trie(object):
                 return []
             cur = cur.children[idx]
 
-        res = []
         alphabet = "abcdefghijklmnopqrstuvwxyz"
+        res = []
 
+        # DFS
         def dfs(node, path):
             if node == None:
                 return
@@ -77,8 +78,20 @@ class Trie(object):
             for i in range(len(node.children)):
                 child = node.children[i]
                 dfs(child, path + alphabet[i])
-
         dfs(cur, "")
+
+        # BFS
+        # q = [(cur, prefix)]
+        # while len(q) > 0:
+        #     node, path = q.pop(0)
+        #     if node.is_word:
+        #         res.append(path)
+        #     for i in range(len(node.children)):
+        #         child = node.children[i]
+        #         if child != None:
+        #             c = alphabet[i]
+        #             q.append((child, path + c))
+
         return res
 
 
@@ -93,3 +106,5 @@ print(obj.search('abc'))
 print(obj.startsWith('c'))
 print(obj.startsWith('ca'))
 print(obj.startsWith('cal'))
+
+print("-----")

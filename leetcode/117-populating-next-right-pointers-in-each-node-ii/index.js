@@ -24,7 +24,7 @@ var connect = function(root) {
         let prev = null
         const n = q.length
         for (let i = 0; i < n; i++) {
-            const node= q.shift()
+            const node = q.shift()
             node.next = prev
             prev = node
             if (node.right) {

@@ -19,20 +19,27 @@ class Solution(object):
         """
         if len(matrix) == 0 or len(matrix[0]) == 0:
             return 0
-        r, c = len(matrix), len(matrix[0])
-        dp = [c * [0] for _ in range(r)]
-        result = 0
-        # for each cell, check if itself can complete a larger square
-        for i in range(r):
-            for j in range(c):
-                if i == 0 or j == 0:
-                    dp[i][j] = int(matrix[i][j])
-                elif matrix[i][j] == '1':
-                    # the current grid = 1min among upperleft, left, up + 1
-                    dp[i][j] = min(dp[i-1][j-1], dp[i-1][j], dp[i][j-1]) + 1
-                result = max(result, dp[i][j])
-        # area of a square
-        return result*result
+        R, C = len(matrix), len(matrix[0])
+        dp = []
+        for i in range(R):
+            dp.append(C * [0])
+
+        res = 0
+        for i in range(R):
+            for j in range(C):
+                if matrix[i][j] == '1':
+                    if i == 0 and j == 0:
+                        dp[i][j] = 1
+                    elif i == 0 or j == 0:
+                        dp[i][j] = 1
+                    else:
+                        dp[i][j] = min(
+                            dp[i-1][j-1],
+                            dp[i-1][j],
+                            dp[i][j-1]
+                        ) + 1
+                    res = max(res, dp[i][j])
+        return res**res
 
 
 a = [
