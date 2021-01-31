@@ -20,6 +20,7 @@ var flatten = function(head) {
         prev.child = null
         node.prev = prev
         prev = node
+        
         preorder(node.child)
         preorder(next)
     }

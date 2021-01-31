@@ -2,7 +2,7 @@
     1st: sliding window
 
     Time    O(n)
-    Space   O(n)
+    Space   O(1)
     68 ms, faster than 95.02% 
 """
 
@@ -54,3 +54,25 @@ class Solution(object):
             if len(cur) > len(res):
                 res = cur
         return res
+
+
+"""
+    3rd: dynamic programming
+    - Longest increasing subsequence
+
+    Time    O(N)
+    Space   O(N)
+    72ms beats 80.69%
+"""
+
+
+class Solution:
+    def findLengthOfLCIS(self, nums: List[int]) -> int:
+        n = len(nums)
+        if n == 0:
+            return 0
+        dp = n * [1]
+        for i in range(1, n):
+            if nums[i] > nums[i-1]:
+                dp[i] += dp[i-1]
+        return max(dp)

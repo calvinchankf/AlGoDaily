@@ -52,17 +52,18 @@ class Solution(object):
 
     Time    O(NlogN)
     Space   O(1)
-    92 ms, faster than 8.49%
+    80 ms, faster than 18.45%
 """
 
 
 class Solution:
     def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
         intervals.sort(key=lambda x: x[1])
-        legitCount = 0
-        curEnd = -sys.maxsize
+        count = 0
+        maxEnd = -(2**32)
         for s, e in intervals:
-            if s >= curEnd:
-                curEnd = e
-                legitCount += 1
-        return len(intervals) - legitCount
+            if s >= maxEnd:
+                maxEnd = e
+            else:
+                count += 1
+        return count

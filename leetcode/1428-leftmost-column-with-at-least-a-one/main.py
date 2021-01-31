@@ -32,17 +32,19 @@ class Solution(object):
         :rtype: int
         """
         R, C = binaryMatrix.dimensions()
-        res = C
+        minVal = C
         for i in range(R):
-            left = 0
-            right = C
-            while left < right:
-                mid = (left + right) // 2
-                if binaryMatrix.get(i, mid) == 1:
-                    right = mid
-                else:
-                    left = mid + 1
-            res = min(res, left)
-        if res == C:
-            return -1
-        return res
+            idx = self.lowerBsearch(binaryMatrix, i, C)
+            minVal = min(minVal, idx)
+        return minVal if 0 <= minVal < C else -1
+
+    def lowerBsearch(self, binaryMatrix, R, C):
+        left = 0
+        right = C
+        while left < right:
+            mid = (left + right)//2
+            if binaryMatrix.get(R, mid) == 1:
+                right = mid
+            else:
+                left = mid + 1
+        return left

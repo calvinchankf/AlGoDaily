@@ -65,7 +65,7 @@ class Solution:
     - https://www.youtube.com/watch?v=APZbA_q1zAc
 
 	Time 	O(A + klogA)
-	Space	O(MN)
+	Space	O(max(A,B))
 	36 ms, faster than 86.84%
 """
 

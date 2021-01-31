@@ -35,28 +35,25 @@
     76 ms, faster than 68.48%
 */
 var decodeString = function(s) {
-    const countStack = []
-    const stringStack = ['']
+    const count_stack = []
+    const chars_stack = ['']
     let num = 0
     for (let c of s) {
-        if (parseInt(c) >= 0 && parseInt(c) < 10) {
-			num = num*10 + parseInt(c)
-		} else if (c == '[') {
-            countStack.push(num)
-            stringStack.push('')
+        if (parseInt(c) >= 0 && parseInt(c) <= 9) {
+            num = num * 10 + parseInt(c)
+        } else if (c == '[') {
+            chars_stack.push('')
+            count_stack.push(num)
             num = 0
         } else if (c == ']') {
-            const c = stringStack.pop()
-            const r = countStack.pop()
-            const n = stringStack.length
-            stringStack[n-1] += c.repeat(r)
+            const count = count_stack.pop()
+            const sub = chars_stack.pop()
+            chars_stack[chars_stack.length-1] += sub.repeat(count)
         } else {
-            const n = stringStack.length
-            stringStack[n-1] += c
+            chars_stack[chars_stack.length-1] += c
         }
     }
-    const n = stringStack.length
-    return stringStack[n-1]
+    return chars_stack[0]
 };
 
 /*

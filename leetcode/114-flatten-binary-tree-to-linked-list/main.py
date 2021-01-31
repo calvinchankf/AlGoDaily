@@ -61,13 +61,14 @@ class Solution:
     def preorder(self, node):
         if not node:
             return
-        left = node.left
-        right = node.right
+
+        temp = node.right
         self.prev.left = None
         self.prev.right = node
         self.prev = node
-        self.preorder(left)
-        self.preorder(right)
+
+        self.preorder(node.left)
+        self.preorder(temp)
 
 
 """
@@ -91,11 +92,41 @@ class Solution(object):
         stack = [root]
         while len(stack) > 0:
             node = stack.pop()
+
             prev.left = None
             prev.right = node
             prev = node
+
             if node.right:
                 stack.append(node.right)
             if node.left:
                 stack.append(node.left)
+
+        return dumphead.right
+
+
+"""
+    followup: to a Doubly Linked List
+"""
+
+
+class Solution(object):
+    def flatten(self, root):
+        if not root:
+            return None
+        dumphead = TreeNode()
+        prev = dumphead
+        stack = [root]
+        while len(stack) > 0:
+            node = stack.pop()
+
+            prev.right = node
+            node.left = prev
+            prev = node
+
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+
         return dumphead.right
