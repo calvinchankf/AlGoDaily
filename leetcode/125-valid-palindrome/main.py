@@ -63,3 +63,31 @@ class Solution:
                 i += 1
                 j -= 1
         return True
+
+
+"""
+    3rd: recursion
+
+    Time    O(N)
+    Space   O(1)
+    64 ms, faster than 27.95%
+"""
+
+
+class Solution(object):
+    def isPalindrome(self, s):
+        s = s.lower()
+        return self.isValid(s, 0, len(s)-1)
+
+    def isValid(self, s, i, j):
+        if i >= j:
+            return True
+        if s[i].isalnum() and s[j].isalnum():
+            if s[i] == s[j]:
+                return self.isValid(s, i+1, j-1)
+            return False
+        elif s[i].isalnum():
+            return self.isValid(s, i, j-1)
+        elif s[j].isalnum():
+            return self.isValid(s, i+1, j)
+        return self.isValid(s, i+1, j-1)

@@ -21,64 +21,51 @@
 
 class Solution(object):
     def alienOrder(self, words):
-        """
-        :type words: List[str]
-        :rtype: str
-        """
+        nodes = set()
+        for w in words:
+            for c in w:
+                nodes.add(c)
+        if len(nodes) == 1:
+            return words[0]
         edges = []
-        nodesSet = set()
-        # put the characters in order into the edges
-        for i in range(len(words)):
-            word = words[i]
-            edgeFormed = False
-            for j in range(len(word)):
-                if edgeFormed == False and i > 0 and j < len(words[i-1]) and words[i][j] != words[i-1][j]:
-                    # construct graph, [to, from]
-                    edges.append([words[i-1][j], words[i][j]])
-                    edgeFormed = True
-                nodesSet.add(word[j])
-        nodes = list(nodesSet)
-        result = self.topoSortInBFS(edges, nodes)
-        return ''.join(result)
+        for i in range(1, len(words)):
+            prev = words[i-1]
+            cur = words[i]
+            n = min(len(prev), len(cur))
+            for j in range(n):
+                p = prev[j]
+                c = cur[j]
+                if p != c:
+                    edges.append([p, c])
+                    break
+            if prev[:n] == cur[:n] and len(prev) > len(cur):
+                return ''
+        orders = self.toposort(nodes, edges)
+        return ''.join(orders)
 
-    def topoSortInBFS(self, prerequisites, nodes):
-        """
-        :type prerequisites: List[List[string]] e.g. [[to1, from1], [to2, from2],...]
-        :rtype: List[string]
-        """
+    def toposort(self, nodes, edges):
+        graph = {}
         indegrees = {}
         for node in nodes:
+            graph[node] = []
             indegrees[node] = 0
-        # get all the connections/adjacents list
-        connections = {}
-        for src, dest in prerequisites:
-            # construct adjacent list
-            if src not in connections:
-                connections[src] = [dest]
-            else:
-                connections[src].append(dest)
-            # add indegree for each node
-            indegrees[dest] += 1
-        # get the nodes with 0 indegree
-        queue = []
-        for key in indegrees:
-            if indegrees[key] == 0:
-                queue.append(key)
-        # dequeue node from the queue and put it into the result
+        for a, b in edges:
+            graph[a].append(b)
+            indegrees[b] += 1
+        q = []
+        for node in indegrees:
+            if indegrees[node] == 0:
+                q.append(node)
         res = []
-        while len(queue) > 0:
-            dq = queue.pop(0)
-            res.append(dq)
-            if dq in connections:
-                children = connections[dq]
-                for child in children:
-                    indegrees[child] -= 1
-                    if indegrees[child] == 0:
-                        queue.append(child)
-        # return [] if there is a cycle
-        for key in indegrees:
-            if indegrees[key] > 0:
-                return []
+        while len(q) > 0:
+            node = q.pop(0)
+            res.append(node)
+            for nb in graph[node]:
+                indegrees[nb] -= 1
+                if indegrees[nb] == 0:
+                    q.append(nb)
+        if len(res) != len(nodes):
+            return []
         return res
 
 

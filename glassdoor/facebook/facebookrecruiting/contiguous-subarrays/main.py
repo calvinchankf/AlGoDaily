@@ -3,8 +3,8 @@
 
     Contiguous Subarrays
     You are given an array arr of N integers. For each index i, you are required to determine the number of contiguous subarrays that fulfills the following conditions:
-    The value at index i must be the maximum element in the contiguous subarrays, and
-    These contiguous subarrays must either start from or end on index i.
+    - The value at index i must be the maximum element in the contiguous subarrays, and
+    - These contiguous subarrays must either start from or end on index i.
     
     Signature
     int[] countSubarrays(int[] arr)
@@ -33,9 +33,11 @@
 """
     similar to lc739
 """
+
+
 def countSubarrays(nums):
     n = len(nums)
-    
+
     forward = n * [1]
     stack = []
     for i in range(n):
@@ -46,10 +48,10 @@ def countSubarrays(nums):
     while len(stack) > 0:
         _, j = stack.pop()
         forward[j] = n - j
-    
+
     backward = n * [1]
     stack = []
-    for i in range(n-1,-1,-1):
+    for i in range(n-1, -1, -1):
         while len(stack) > 0 and stack[-1][0] < nums[i]:
             _, j = stack.pop()
             backward[j] = j - i
@@ -63,6 +65,7 @@ def countSubarrays(nums):
         res.append(forward[i] + backward[i] - 1)
 
     return res
+
 
 a = [3, 4, 1, 6, 2]
 print(countSubarrays(a))

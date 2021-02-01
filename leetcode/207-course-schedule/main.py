@@ -67,32 +67,28 @@ class Solution(object):
         :type prerequisites: List[List[int]]
         :rtype: List[int]
         """
-        connections = {}
+        n = numCourses
+        graph = {}
         indegrees = {}
-        for num in range(numCourses):
-            connections[num] = []
-            indegrees[num] = 0
-
-        for cur, prev in prerequisites:
-            indegrees[cur] += 1
-            connections[prev].append(cur)
-
+        for i in range(n):
+            graph[i] = []
+            indegrees[i] = 0
+        for dest, src in prerequisites:
+            graph[src].append(dest)
+            indegrees[dest] += 1
         q = []
-        for x in indegrees:
-            if indegrees[x] == 0:
-                q.append(x)
-
-        res = []
+        for key in indegrees:
+            if indegrees[key] == 0:
+                q.append(key)
+        count = 0
         while len(q) > 0:
-            pop0 = q.pop(0)
-            res.append(pop0)
-            children = connections[pop0]
-            for child in children:
-                indegrees[child] -= 1
-                if indegrees[child] == 0:
-                    q.append(child)
-
-        return len(res) == numCourses
+            node = q.pop(0)
+            count += 1
+            for nb in graph[node]:
+                indegrees[nb] -= 1
+                if indegrees[nb] == 0:
+                    q.append(nb)
+        return count == n
 
 
 print(Solution().canFinish(2, [[1, 0]]))
