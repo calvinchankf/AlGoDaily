@@ -21,11 +21,11 @@ class Solution:
     def findLongestChain(self, pairs: List[List[int]]) -> int:
         pairs.sort(key=lambda x: x[1])
         count = 0
-        curEnd = -sys.maxsize
+        maxEnd = -(2**32)
         for s, e in pairs:
-            if s > curEnd:
-                curEnd = e
+            if s > maxEnd:
                 count += 1
+                maxEnd = e
         return count
 
 

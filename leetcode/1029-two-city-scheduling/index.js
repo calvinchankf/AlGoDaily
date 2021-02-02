@@ -5,31 +5,30 @@
 
     Time    O(N^2)
     Space   O(N^2)
-    116 ms, faster than 7.24%
+    88 ms, faster than 27.27%
 */
 var twoCitySchedCost = function(costs) {
-    const n2 = costs.length
-    const n = n2/2
-    const ht = {}
-    const dfs = (i, countA, countB) => {
-        if (countA == 0 && countB == 0) {
-            return 0
-        }
-        if (i == n2) {
-            return 2**32
-        }
-        const key = `${countA},${countB}`
-        if (key in ht) {
-            return ht[key]
-        }
-        const left = dfs(i+1, countA-1, countB) + costs[i][0]
-        const right = dfs(i+1, countA, countB-1) + costs[i][1]
-        ht[key] = Math.min(left, right)
+    const n = costs.length
+    const half =  Math.floor(n/2)
+    return dfs(costs, 0, half, half, {})
+};
+
+const dfs = (costs, i, countA, countB, ht) => {
+    if (countA == 0 && countB == 0) {
+        return 0
+    }
+    if (countA < 0 || countB < 0 || i == costs.length) {
+        return 2**32
+    }
+    const key = `${countA},${countB}`
+    if (key in ht) {
         return ht[key]
     }
-    const res = dfs(0, n, n)
-    return res
-};
+    const a = dfs(costs, i+1, countA-1, countB, ht) + costs[i][0]
+    const b = dfs(costs, i+1, countA, countB-1, ht) + costs[i][1]
+    ht[key] = Math.min(a, b)
+    return ht[key]
+}
 
 let a
 
@@ -44,11 +43,46 @@ console.log(twoCitySchedCost(a));
 
 console.log('-----')
 
+/*
+    1st: sort
+    - learned from others
+    - first fill CityA, then the remaning people go to CityB
+
+    e.g.1
+    [[10,20],[30,200],[400,50],[30,20]]
+    
+    consider idx0, cityA is the way cheaper to go
+    consider idx1, cityA is the way cheaper to go
+
+    so we can sort the costs by diff btw going to cityA and cityB
+
+    person1     person0   person3   person2
+    ------------------------------------------
+    [[30, 200], [10, 20], [30, 20], [400, 50]]
+        -170        -10     10          350     <= diff
+
+
+    e.g.2 
+    [[259, 770], [448, 54], [926, 667], [184, 139], [840, 118], [577, 469]]
+
+    person0      person3     person5     person2     person1    person4
+    -----------------------------------------------------------------------
+    [[259, 770], [184, 139], [577, 469], [926, 667], [448, 54], [840, 118]]
+        -551        45          108         259         394         722     <= diff
+    
+    ref:
+    - https://leetcode.com/problems/two-city-scheduling/solution/
+    - https://www.youtube.com/watch?v=3A98vh5zsqw
+
+    Time    O(NlogN)
+    Space   O(1)
+    36 ms, faster than 82.68%
+*/
 var twoCitySchedCost = function(costs) {
     costs.sort((a, b) => {
         const diffA = a[0] - a[1]
         const diffB = b[0] - b[1]
-        return diffA < diffB ? -1 : 1
+        return diffA - diffB
     })
     let res = 0
     for (let i = 0; i < costs.length; i++) {

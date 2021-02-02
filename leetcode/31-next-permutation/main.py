@@ -1,7 +1,7 @@
 """
-    classic approach: Next lexicographical permutation algorithm(use a stack)
+    classic approach: Next lexicographical permutation algorithm
 
-    similar to lc556
+    - similar to lc3, 556, 1053
 
 	e.g. 43143221
 	- find the non-increasing suffix, e.g. 431<43221>

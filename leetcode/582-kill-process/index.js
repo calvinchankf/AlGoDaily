@@ -11,7 +11,7 @@ var killProcess = function(pid, ppid, kill) {
     for (let i = 0; i < n; i++) {
         const node = pid[i]
         const parent = ppid[i]
-        if ((parent in graph) === false) {
+        if (parent in graph === false) {
             graph[parent] = []
         }
         graph[parent].push(node)
@@ -21,13 +21,11 @@ var killProcess = function(pid, ppid, kill) {
     const q = [kill]
     while (q.length > 0) {
         const node = q.shift()
-        
+        res.push(node)
         if (seen.has(node)) {
             continue
         }
         seen.add(node)
-        
-        res.push(node)
         if (node in graph) {
             for (let child of graph[node]) {
                 q.push(child)

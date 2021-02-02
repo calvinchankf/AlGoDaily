@@ -44,20 +44,15 @@
 
 class Solution(object):
     def intervalIntersection(self, A, B):
-        if len(A) == 0 or len(B) == 0:
-            return []
-        p1 = 0
-        p2 = 0
+        i, j = 0, 0
         res = []
-        while p1 < len(A) and p2 < len(B):
-            s1, e1 = A[p1]
-            s2, e2 = B[p2]
-            a = max(s1, s2)
-            b = min(e1, e2)
-            if a <= b:
-                res.append([a, b])
-            if e1 < e2:
-                p1 += 1
+        while i < len(A) and j < len(B):
+            s = max(A[i][0], B[j][0])
+            e = min(A[i][1], B[j][1])
+            if s <= e:
+                res.append([s, e])
+            if A[i][1] < B[j][1]:
+                i += 1
             else:
-                p2 += 1
+                j += 1
         return res
