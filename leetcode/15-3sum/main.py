@@ -5,8 +5,8 @@
 	3. for each nums[i] + nums[j], find out the num from the hashtable that they sum up to zero
 	4. use a set to deduplicate
 
-	Time	O(nlogn+n^2+n) => O(n^2)
-	Space	O(n)
+	Time	O(NlogN + N^2 + N) => O(N^2)
+	Space	O(N)
 	780 ms, faster than 49.08%
 """
 
@@ -63,8 +63,8 @@ print("-----")
 	3. for each nums[i] + nums[j], find out the num from the hashtable that they sum up to zero
 	4. use a set to deduplicate
 
-	Time	O(nlogn+n^2+n) => O(n^2)
-	Space	O(n)
+	Time	O(NlogN + N^2 + N) => O(N^2)
+	Space	O(N)
 	780 ms, faster than 49.08%
 """
 
@@ -112,8 +112,8 @@ print("-----")
 	2. for each num[i], use 2 pointers, from the front and from the end, to find the pairs which nums[i]+nums[j]+nums[k] sum up to 0
 	3. use a set to deduplicate
 
-	Time	O(n^2)
-	Space	O(n)
+	Time	O(N^2)
+	Space	O(N)
 	1880 ms, faster than 16.17%
 """
 
@@ -167,8 +167,8 @@ print("-----")
     ref:
     - - https://leetcode.com/problems/3sum/discuss/7380/Concise-O(N2)-Java-solution
 
-	Time	O(n^2)
-	Space	O(n)
+	Time	O(N^2)
+	Space	O(N)
 	652 ms, faster than 76.36%
 """
 
