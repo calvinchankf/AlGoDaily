@@ -26,18 +26,20 @@ class Solution(object):
 
     Time    O(4logN)
     Space   O(1)
-    80 ms, faster than 31.84%
+    76 ms, faster than 45.79%
 """
 
 
 class Solution(object):
     def findSpecialInteger(self, arr):
         n = len(arr)
+        if n == 1:
+            return arr[0]
         indices = [0, n//4, n//2, 3*n//4]
         for i in indices:
             left = self.lowerBsearch(arr, arr[i])
-            right = self.upperBsearch(arr, arr[i]) - 1
-            if right - left + 1 > n/4.0:
+            right = left + n//4
+            if arr[left] == arr[right]:
                 return arr[i]
 
     def lowerBsearch(self, nums, target):
@@ -50,14 +52,3 @@ class Solution(object):
             else:
                 left = mid + 1
         return left
-
-    def upperBsearch(self, nums, target):
-        left = 0
-        right = len(nums)
-        while left < right:
-            mid = (left + right)//2
-            if target >= nums[mid]:
-                left = mid + 1
-            else:
-                right = mid
-        return right
