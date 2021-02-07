@@ -55,6 +55,10 @@ print("-------------------------")
     - 1 pointer again from the meet point
     they will meet at the duplicate number
 
+    P.S. This work only because it is from 1 to N inclusive, such that any number would never point to an go-out-of-boundary index
+          0  1  2  3  4
+    e.g. [1, 3, 4, 2, 2]
+
     Time    O(2n)
     Space   O(1)
     68 ms, faster than 31.83%
@@ -63,31 +67,21 @@ print("-------------------------")
 
 class Solution(object):
     def findDuplicate(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        # see if there is a cycle
-        tortoise = nums[0]
-        hare = nums[0]
+        # find the end of the cycle
+        slow = nums[0]
+        fast = nums[0]
         while True:
-            tortoise = nums[tortoise]
-            hare = nums[nums[hare]]
-            if tortoise == hare:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+            if slow == fast:
                 break
-        """
-        since 2 * slow pointer steps = fast pointer steps
-        if we run
-        - 1 pointer again from the start point
-        - 1 pointer again from the meet point
-        they will meet at the duplicate number
-        """
-        ptr1 = nums[0]
-        ptr2 = tortoise
-        while ptr1 != ptr2:
-            ptr1 = nums[ptr1]
-            ptr2 = nums[ptr2]
-        return ptr1
+        # 2 (a + b) = a + b + c + b => a = c
+        p1 = nums[0]
+        p2 = slow  # or fast
+        while p1 != p2:
+            p1 = nums[p1]
+            p2 = nums[p2]
+        return p1  # or p2
 
 
 print(Solution().findDuplicate([1, 3, 4, 2, 2]))

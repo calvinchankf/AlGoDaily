@@ -1,3 +1,4 @@
+from heapq import *
 from bisect import insort_right, bisect_left
 
 """
@@ -83,4 +84,38 @@ class Solution:
                 sorted_arr.pop(target_idx)
             # print(sorted_arr)
             res = max(res, len(sorted_arr))
+        return res
+
+
+"""
+    3rd: 2 heaps
+    - minheap for the left
+    - maxheap for the right
+    - when the max - min > limit
+        - move forward the slow pointer
+        - pop the minheap, maxheap while the their indices are < slow pointer
+
+    Time    O(NlogN)
+    Space   O(N)
+    1552 ms, faster than 11.25%
+"""
+
+
+class Solution(object):
+    def longestSubarray(self, nums, limit):
+        minheap = []
+        maxheap = []
+        j = 0  # slow pointer
+        res = 0
+        for i in range(len(nums)):
+            x = nums[i]
+            heappush(minheap, (x, i))
+            heappush(maxheap, (-x, i))
+            while -maxheap[0][0] - minheap[0][0] > limit:
+                j = min(minheap[0][1], maxheap[0][1]) + 1
+                while minheap[0][1] < j:
+                    heappop(minheap)
+                while maxheap[0][1] < j:
+                    heappop(maxheap)
+            res = max(res, i - j + 1)
         return res
