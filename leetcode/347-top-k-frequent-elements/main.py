@@ -51,14 +51,12 @@ print("-----")
 class Solution(object):
     def topKFrequent(self, nums, k):
         counter = Counter(nums)
-        minHeap = []
+        minheap = []
         for key in counter:
-            f = counter[key]
-            heappush(minHeap, (f, key))
-            if len(minHeap) > k:
-                heappop(minHeap)
-        res = [x for f, x in minHeap]  # we dont care about the order
-        return res
+            heappush(minheap, (counter[key], key))
+            if len(minheap) > k:
+                heappop(minheap)
+        return [key for _, key in minheap]  # we dont care about the order
 
 
 print(Solution().topKFrequent([], 0))
