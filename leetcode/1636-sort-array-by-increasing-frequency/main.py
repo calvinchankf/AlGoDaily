@@ -8,6 +8,8 @@ from collections import Counter
     Space   O(N)
     36 ms, faster than 100.00%
 """
+
+
 class Solution(object):
     def frequencySort(self, nums):
         """
@@ -16,14 +18,15 @@ class Solution(object):
         """
         counter = Counter(nums)
         freqs = [(counter[key], key) for key in counter]
-        
-        def cmpter(a, b):
-            if a[0] == b[0]:
-                return b[1] - a[1]
-            return a[0] - b[0]
-        
-        freqs.sort(cmp=cmpter)
+
+        freqs.sort(key=lambda x: (x[0], -x[1]))
         res = []
         for f, x in freqs:
             res += f * [x]
         return res
+
+
+class Solution:
+    def frequencySort(self, nums: List[int]) -> List[int]:
+        counter = Counter(nums)
+        return sorted(nums, key=lambda x: (counter[x], -x))
