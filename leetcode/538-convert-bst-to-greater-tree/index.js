@@ -1,41 +1,26 @@
 /*
-    1st approach: recursive dfs
-    - sorted list is the inorder traversal of the BST
-    - use suffixSum to calculate the target values
-    - update the nodes' value with the suffixSums
+    2nd: iterative (reversed) inorder traversal, one-pass
 
-    Time    O(3n)
+    Time    O(N)
     Space   O(n)
-    72 ms, faster than 32.67%
+    116 ms, faster than 58.12%
 */
 var convertBST = function (root) {
-	const nums = [];
-	const inorder = (node) => {
-		if (node == null) {
-			return;
-		}
-		inorder(node.left);
-		nums.push(node.val);
-		inorder(node.right);
-	};
-	inorder(root);
-
-	let sfs = 0;
-	const sfsMap = {};
-	for (let i = nums.length - 1; i >= 0; i--) {
-		sfs += nums[i];
-		sfsMap[nums[i]] = sfs;
-	}
-
-	const addSfs = (node) => {
-		if (node == null) {
-			return;
-		}
-		node.val = sfsMap[node.val];
-		addSfs(node.left);
-		addSfs(node.right);
-	};
-	addSfs(root);
-
-	return root;
+	if (!root) {
+        return null
+    }
+    let total = 0
+    let cur = root
+    const stack = []
+    while (cur != null || stack.length > 0) {
+        while (cur != null) {
+            stack.push(cur)
+            cur = cur.right
+        }
+        const node = stack.pop()
+        total += node.val
+        node.val = total
+        cur = node.left
+    }
+    return root
 };

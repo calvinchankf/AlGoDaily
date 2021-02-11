@@ -1,6 +1,11 @@
 from heapq import *
 
 """
+    This is a followup on lc209
+"""
+
+
+"""
     1st: minheap
     - calculate prefix sum at every index
     - at every index, subtract the min prefix sum from the left, so that we can have a short subarray in between

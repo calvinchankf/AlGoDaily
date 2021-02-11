@@ -13,7 +13,7 @@ import random
 
     Clearly, we can do it with a binary search to find number that >= target
 
-    Time of init()          O()
+    Time of init()          O(N)
     Time of pickIndex()     O(logN)
     Space                   O(N)
     316ms beats 40.72%
@@ -21,28 +21,26 @@ import random
 
 
 class Solution:
-
     def __init__(self, w: List[int]):
-        self.nums = []
+        self.pfss = []
         pfs = 0
         for x in w:
             pfs += x
-            self.nums.append(pfs)
+            self.pfss.append(pfs)
 
     def pickIndex(self) -> int:
-        r = random.randrange(1, self.nums[-1] + 1)
-        return self.bsearch(self.nums, r)
+        last = self.pfss[-1]
+        r = randint(1, last)
+        i = self.lowerBsearch(self.pfss, r)
+        return i
 
-    def bsearch(self, nums, target):
+    def lowerBsearch(self, nums, target):
         left = 0
-        right = len(nums)-1
-        while left <= right:
-            mid = (left + right)//2
-            if target < nums[mid]:
-                right = mid - 1
-            elif target > nums[mid]:
-                left = mid + 1
+        right = len(nums)
+        while left < right:
+            mid = (left + right) // 2
+            if target <= nums[mid]:
+                right = mid
             else:
-                return mid
-        # to find number that >= target
+                left = mid + 1
         return left
