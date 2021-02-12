@@ -12,7 +12,7 @@
 
     Time    O(n)
     Space   O(h)
-    84 ms, faster than 48.17%
+    80 ms, faster than 99.24%
 */
 var widthOfBinaryTree = function (root) {
 	let res = 0;
@@ -36,8 +36,7 @@ var widthOfBinaryTree = function (root) {
 				q.push([node.right, (idx - left) * 2 + 1]);
 			}
 		}
-		const diff = right - left + 1;
-		res = Math.max(res, diff);
+		res = Math.max(res, right - left + 1);
 	}
 	return res;
 };

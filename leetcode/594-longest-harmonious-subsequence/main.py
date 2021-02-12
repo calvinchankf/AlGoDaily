@@ -1,3 +1,4 @@
+from bisect import *
 """
     1st approach: hashtable
     - count the occurence of each number
@@ -73,3 +74,24 @@ class Solution(object):
             if num+1 in m:
                 ans = max(ans, m[num] + m[num+1])
         return ans
+
+
+"""
+    3rd: sort + binary search
+    
+    Time    O(NlogN)
+    Space   O(N)
+"""
+
+
+class Solution(object):
+    def findLHS(self, nums):
+        nums.sort()
+        ht = {}
+        res = 0
+        for i in range(len(nums)):
+            x = nums[i]
+            j = bisect_left(nums, x-1)
+            if nums[j] == x-1:
+                res = max(res, i - j + 1)
+        return res

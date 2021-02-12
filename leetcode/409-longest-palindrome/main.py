@@ -6,9 +6,9 @@ from collections import Counter
     3. if no of odd ocurrence characters > 0, 
         wit means that we have to place any one of them in the center to form the biggest palindrome
 
-    Time    O(n)
-    Space   O(n)
-    36 ms, faster than 15.64%
+    Time    O(N)
+    Space   O(N)
+    20 ms, faster than 85.04%
 """
 
 
@@ -18,26 +18,17 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-
-        # count the occurence of each character
-        ht = {}
-        for c in s:
-            if c in ht:
-                ht[c] += 1
+        counter = Counter(s)
+        res = 0
+        oddCount = 0
+        for c in counter:
+            if counter[c] % 2 == 0:
+                res += counter[c]
             else:
-                ht[c] = 1
-
-        # make sure the all characters occurr "evenly"
-        noOfOdd = 0
-        res = len(s)
-        for key in ht:
-            if ht[key] % 2 != 0:
-                res -= 1
-                noOfOdd += 1
-
-        # if no of odd ocurrence characters > 0, it means that we have to place any one of them in the center to form the biggest palindrome
-        if noOfOdd > 0:
-            res += 1
+                res += counter[c] - 1
+                oddCount += 1
+        if oddCount > 0:
+            return res + 1
         return res
 
 
@@ -50,33 +41,3 @@ a = "aaaabbbccccddd"
 print(s.longestPalindrome(a))
 
 print("-----")
-
-
-class Solution:
-    def longestPalindrome(self, s: str) -> int:
-        counter = Counter(s)
-        largestOddCount = 0
-        largestOdd = None
-        for key in counter:
-            if counter[key] % 2 == 1 and counter[key] > largestOddCount:
-                largestOddCount = counter[key]
-                largestOdd = key
-        res = 0
-        for key in counter:
-            if counter[key] % 2 == 0:
-                res += counter[key]
-            else:
-                if key == largestOdd:
-                    res += counter[key]
-                else:
-                    res += counter[key] - 1
-        return res
-
-
-s = Solution()
-
-a = "abccccdd"
-print(s.longestPalindrome(a))
-
-a = "aaaabbbccccddd"
-print(s.longestPalindrome(a))
