@@ -74,36 +74,33 @@ class UnionFind(object):
 
 class Solution(object):
     def findCircleNum(self, M):
-        """
-        :type M: List[List[int]]
-        :rtype: int
-        """
-
-        # get friend list for each person
-        connections = []
-        for i in range(len(M)):
-            connections.append([])
-        for i in range(len(M)):
-            for j in range(len(M[0])):
+        n = len(M)
+        graph = defaultdict(set)
+        for i in range(n):
+            for j in range(n):
                 if M[i][j] == 1:
-                    connections[i].append(j)
-        # for each person, bfs to find all of his friends and put them into history
-        # after finished one bfs, it means that we are done with one 'cluster'
-        count = 0
-        seen = len(M)*[False]
-        for i in range(len(M)):
-            if seen[i] == True:
+                    graph[i].add(j)
+                    graph[j].add(i)
+        res = 0
+        seen = set()
+        for i in range(n):
+            if i in seen:
                 continue
-            q = [i]
-            while len(q) > 0:
-                head = q.pop(0)
-                if seen[head] == True:
-                    continue
-                seen[head] = True
-                for child in connections[head]:
-                    q.append(child)
-            count += 1
-        return count
+            self.bfs(graph, i, seen)
+            res += 1
+        return res
+
+    def bfs(self, graph, start, seen):
+        q = [start]
+        while len(q) > 0:
+            node = q.pop(0)
+            if node in seen:
+                continue
+            seen.add(node)
+            if node not in graph:
+                continue
+            for nb in graph[node]:
+                q.append(nb)
 
 
 a = [[1, 1, 0],
