@@ -47,3 +47,25 @@ class Solution(object):
 print(Solution().isValid("(())"))
 print(Solution().isValid("(()"))
 print(Solution().isValid("(())()"))
+
+print("-----")
+
+"""
+    2nd: brute force
+    - remove all parentheses () [] {} from the string until the point we cannot remove anymore
+
+    Time    O(N^2)
+    Space   O(1)
+"""
+
+
+class Solution:
+    def isValid(self, s: str) -> bool:
+        while '[]' in s or '()' in s or '{}' in s:
+            s = s.replace('[]', '').replace('()', '').replace('{}', '')
+        return len(s) == 0
+
+
+print(Solution().isValid("(())"))
+print(Solution().isValid("(()"))
+print(Solution().isValid("(())()"))

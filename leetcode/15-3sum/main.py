@@ -192,10 +192,10 @@ class Solution(object):
                     res.append([nums[i], nums[left], nums[right]])
                     # !!! we skip indices only if total == 0 !!!
                     # skip if the next number which equals to this num when we right--
-                    while left < right and nums[left] == nums[left+1]:
+                    while left+1 < right and nums[left] == nums[left+1]:
                         left += 1
                     # skip if the next number which equals to this num when we left++
-                    while left < right and nums[right-1] == nums[right]:
+                    while left < right-1 and nums[right-1] == nums[right]:
                         right -= 1
                     left += 1
                     right -= 1
@@ -215,3 +215,10 @@ print(Solution().threeSum(a))
 a = [-13, 5, 13, 12, -2, -11, -1, 12, -3, 0, -3, -7, -7, -5, -3, -15, -2, 14, 14, 13, 6, -11, -11, 5, -15, -14, 5, -5, -2, 0, 3, -8, -10, -7, 11, -5, -10, -5, -7, -6, 2, 5, 3, 2, 7, 7, 3, -10, -2, 2, -12, -11, -1,
      14, 10, -9, -15, -8, -7, -9, 7, 3, -2, 5, 11, -13, -15, 8, -3, -7, -12, 7, 5, -2, -6, -3, -10, 4, 2, -5, 14, -3, -1, -10, -3, -14, -4, -3, -7, -4, 3, 8, 14, 9, -2, 10, 11, -10, -4, -15, -9, -1, -1, 3, 4, 1, 8, 1]
 print(Solution().threeSum(a))
+
+print("-----")
+
+assert [3, 5, 7] == [3, 5, 7]
+assert [[-1, -1, 2], [-1, 0, 1]] == [[-1, -1, 2], [-1, 0, 1]]
+assert {'a': 1, 'b': 2, 'c': 3} == {'a': 1, 'b': 2, 'c': 3}
+assert {'a', 'b', 'c'} == {'a', 'b', 'c'}
