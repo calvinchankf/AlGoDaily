@@ -63,6 +63,7 @@ console.log(Math.ceil((now - start) / (1000 * 3600 * 24)));
 -   [Day 701 - 800](./markdowns/day701-800.md)
 -   [Day 801 - 900](./markdowns/day801-900.md)
 
-| Day | Question                                             | Type | From                                                             | remarks         |
-| --- | ---------------------------------------------------- | ---- | ---------------------------------------------------------------- | --------------- |
-| 901 | [Escape The Ghosts](/leetcode/789-escape-the-ghosts) | math | [leetcode 789](https://leetcode.com/problems/escape-the-ghosts/) | ⭐️ i hate math |
+| Day | Question                                                                                                      | Type  | From                                                                                          | remarks         |
+| --- | ------------------------------------------------------------------------------------------------------------- | ----- | --------------------------------------------------------------------------------------------- | --------------- |
+| 901 | [Escape The Ghosts](/leetcode/789-escape-the-ghosts)                                                          | math  | [leetcode 789](https://leetcode.com/problems/escape-the-ghosts/)                              | ⭐️ i hate math |
+| 928 | [Minimum Degree of a Connected Trio in a Graph](/leetcode/1761-minimum-degree-of-a-connected-trio-in-a-graph) | graph | [leetcode 1761](https://leetcode.com/problems/minimum-degree-of-a-connected-trio-in-a-graph/) | ⭐️📌           |
