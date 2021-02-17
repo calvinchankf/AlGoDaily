@@ -7,41 +7,28 @@
  * }
  */
 /*
-    2nd approach: inorder + suffix sum
+    2nd approach: iterative (reversed) inorder traversal
 
     Time    O(n)
     Space   O(h)
-    68 ms, faster than 93.57%
+    76 ms, faster than 82.93%
 */
 var bstToGst = function (root) {
-	const ht = {};
-	const arr = [];
-	const inorder = (node) => {
-		if (node == null) {
-			return;
-		}
-		inorder(node.left);
-		arr.push(node.val);
-		inorder(node.right);
-	};
-	inorder(root);
-
-	let sfs = 0;
-	for (let i = arr.length - 1; i >= 0; i--) {
-		sfs += arr[i];
-		ht[arr[i]] = sfs;
-	}
-
-	const q = [root];
-	while (q.length > 0) {
-		const node = q.shift();
-		node.val = ht[node.val];
-		if (node.left) {
-			q.push(node.left);
-		}
-		if (node.right) {
-			q.push(node.right);
-		}
-	}
-	return root;
+	if (!root) {
+        return null
+    }
+    let total = 0
+    let cur = root
+    const stack = []
+    while (cur != null || stack.length > 0) {
+        while (cur != null) {
+            stack.push(cur)
+            cur = cur.right
+        }
+        const node = stack.pop()
+        total += node.val
+        node.val = total
+        cur = node.left
+    }
+    return root
 };
