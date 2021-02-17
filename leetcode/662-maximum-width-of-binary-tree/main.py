@@ -33,22 +33,20 @@ class Solution(object):
         # node, position
         q = [(root, 0)]
         while len(q) > 0:
-            diff = 0
-            left = 0
-            right = 0
+            left, right = 0, 0
             n = len(q)
             for i in range(n):
-                head, position = q.pop(0)
+                node, position = q.pop(0)
 
                 if i == 0:
                     left = position
                 if i+1 == n:
                     right = position
 
-                if head.left != None:
-                    q.append((head.left, position*2))
-                if head.right != None:
-                    q.append((head.right, position*2+1))
+                if node.left != None:
+                    q.append((node.left, position*2))
+                if node.right != None:
+                    q.append((node.right, position*2+1))
             diff = right - left + 1
             res = max(res, diff)
         return res
