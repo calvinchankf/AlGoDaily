@@ -1,4 +1,5 @@
 from collections import *
+from heapq import *
 
 """
     https://www.1point3acres.com/bbs/thread-500537-1-1.html
@@ -41,11 +42,24 @@ def topKReceivers(comments, K):
         receiver = c.receiver
         ht[receiver].add(sender)
 
+    # minheap: O(NlogK, KlogK)
+    # minheap = []
+    # for receiver in ht:
+    #     uniqueSenders = ht[receiver]
+    #     heappush(minheap, (len(uniqueSenders), receiver))
+    #     if len(minheap) > K:
+    #         heappop(minheap)
+    # res = []
+    # while len(minheap) > 0:
+    #     count, receiver = heappop(minheap)
+    #     res.append(receiver)
+    # return res[::-1]
+
+    # or sort: O(NlogN + K)
     freqs = []
     for receiver in ht:
         uniqueSenders = ht[receiver]
         freqs.append([receiver, len(uniqueSenders)])
-
     freqs.sort(key=lambda x: -x[1])
     res = []
     for receiver, count in freqs:
