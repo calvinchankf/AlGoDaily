@@ -63,7 +63,8 @@ console.log(Math.ceil((now - start) / (1000 * 3600 * 24)));
 -   [Day 701 - 800](./markdowns/day701-800.md)
 -   [Day 801 - 900](./markdowns/day801-900.md)
 
-| Day | Question                                             | Type | From                                                             | remarks         |
-| --- | ---------------------------------------------------- | ---- | ---------------------------------------------------------------- | --------------- |
-| 901 | [Escape The Ghosts](/leetcode/789-escape-the-ghosts) | math | [leetcode 789](https://leetcode.com/problems/escape-the-ghosts/) | ⭐️ i hate math |
-| 902 | [Find the Highest Altitude](/leetcode/1732-find-the-highest-altitude)                                                                       | array               | [leetcode 1732](https://leetcode.com/problems/find-the-highest-altitude/)                                    |                                      |
+| Day | Question                                                                    | Type                | From                                                                         | remarks         |
+| --- | --------------------------------------------------------------------------- | ------------------- | ---------------------------------------------------------------------------- | --------------- |
+| 901 | [Escape The Ghosts](/leetcode/789-escape-the-ghosts)                        | math                | [leetcode 789](https://leetcode.com/problems/escape-the-ghosts/)             | ⭐️ i hate math |
+| 902 | [Find the Highest Altitude](/leetcode/1732-find-the-highest-altitude)       | array               | [leetcode 1732](https://leetcode.com/problems/find-the-highest-altitude/)    |                 |
+| 929 | [Buildings With an Ocean View](/leetcode/1762-buildings-with-an-ocean-view) | dynamic programming | [leetcode 1762](https://leetcode.com/problems/buildings-with-an-ocean-view/) |                 |
