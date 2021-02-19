@@ -63,8 +63,9 @@ console.log(Math.ceil((now - start) / (1000 * 3600 * 24)));
 -   [Day 701 - 800](./markdowns/day701-800.md)
 -   [Day 801 - 900](./markdowns/day801-900.md)
 
-| Day | Question                                             | Type | From                                                             | remarks         |
-| --- | ---------------------------------------------------- | ---- | ---------------------------------------------------------------- | --------------- |
-| 901 | [Escape The Ghosts](/leetcode/789-escape-the-ghosts) | math | [leetcode 789](https://leetcode.com/problems/escape-the-ghosts/) | ⭐️ i hate math |
-| 902 | [Find the Highest Altitude](/leetcode/1732-find-the-highest-altitude)                                                                       | array               | [leetcode 1732](https://leetcode.com/problems/find-the-highest-altitude/)                                    |                                      |
-| 903 | [Minimum Number of People to Teach](/leetcode/1733-minimum-number-of-people-to-teach)                                                       | hashtable           | [leetcode 1733](https://leetcode.com/problems/minimum-number-of-people-to-teach/)                            | ⭐️                                  |
+| Day | Question                                                                                                | Type      | From                                                                                       | remarks         |
+| --- | ------------------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------ | --------------- |
+| 901 | [Escape The Ghosts](/leetcode/789-escape-the-ghosts)                                                    | math      | [leetcode 789](https://leetcode.com/problems/escape-the-ghosts/)                           | ⭐️ i hate math |
+| 902 | [Find the Highest Altitude](/leetcode/1732-find-the-highest-altitude)                                   | array     | [leetcode 1732](https://leetcode.com/problems/find-the-highest-altitude/)                  |                 |
+| 903 | [Minimum Number of People to Teach](/leetcode/1733-minimum-number-of-people-to-teach)                   | hashtable | [leetcode 1733](https://leetcode.com/problems/minimum-number-of-people-to-teach/)          | ⭐️             |
+| 931 | [Check If Word Is Valid After Substitutions](/leetcode/1003-check-if-word-is-valid-after-substitutions) | stack     | [leetcode 1003](https://leetcode.com/problems/check-if-word-is-valid-after-substitutions/) | 👍🏻              |
