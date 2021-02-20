@@ -42,24 +42,23 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
-        cntStack = []
-        strStack = [""]
+        countStack = []
+        charsStack = ['']
         num = 0
         for c in s:
             if c.isdigit():
                 num = num*10 + int(c)
             elif c == '[':
-                cntStack.append(num)
+                countStack.append(num)
+                charsStack.append('')
                 num = 0
-                strStack.append("")
             elif c == ']':
-                cnt = cntStack.pop()
-                cur = strStack.pop()
-                temp = cnt * cur
-                strStack[-1] += temp
+                count = countStack.pop()
+                chars = charsStack.pop()
+                charsStack[-1] += count * chars
             else:
-                strStack[-1] += c
-        return strStack.pop()
+                charsStack[-1] += c
+        return charsStack[-1]
 
 
 print(Solution().decodeString("3[a]2[bc]"))
@@ -84,20 +83,21 @@ class Solution(object):
         return self.helper(q)
 
     def helper(self, q):
+        cur = ''
         num = 0
-        res = ''
         while len(q) > 0:
             c = q.pop(0)
             if c.isdigit():
-                num = num * 10 + int(c)
+                num = num*10 + int(c)
             elif c == '[':
-                res += self.helper(q) * num
+                sub = self.dfs(q)
+                cur += num * sub
                 num = 0
             elif c == ']':
-                return res
+                return cur
             else:
-                res += c
-        return res
+                cur += c
+        return cur
 
 
 print(Solution().decodeString("3[a]2[bc]"))

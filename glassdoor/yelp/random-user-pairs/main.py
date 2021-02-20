@@ -1,3 +1,5 @@
+from collections import *
+from heapq import *
 import random
 """
     https://www.1point3acres.com/bbs/thread-523161-1-1.html
@@ -43,5 +45,53 @@ print("----")
     followup:
     Each person belongs to a dept, dont pair up the people from the same dept
 
-    ???
+    e.g.
+    [
+        ('Alan', 'tech'),
+        ('Da', 'tech'),
+        ('Jen', 'sales'),
+        ('Kevin', 'sales',
+        ('Neha', 'management'),
+        ('Rachel', 'management'),
+        ('Calvin', 'tech'),
+        ('Stanley', 'management'),
+    ]
+
+    Time    O(N^2) there are N items. Getting a list of keys of hashtable take O(N)
+    Space   O(N)
 """
+
+
+def getTeamMatches(users):
+    users = shuffle(users)
+    ht = defaultdict(list)
+    for name, dept in users:
+        ht[dept].append(name)
+
+    # consider 'aaabbbcc', sometimes 'aa' or 'bb' will remain and unable to match
+    res = []
+    while len(ht) >= 2:
+        keys = list(ht.keys())
+        a = keys[0]
+        b = keys[1]
+        res.append((ht[a].pop(), ht[b].pop()))
+        if len(ht[a]) == 0:
+            del ht[a]
+        if len(ht[b]) == 0:
+            del ht[b]
+    return res
+
+
+a = [
+    ('Alan', 'tech'),
+    ('Da', 'tech'),
+    ('Calvin', 'tech'),
+
+    ('Jen', 'sales'),
+    ('Kevin', 'sales'),
+
+    ('Neha', 'management'),
+    ('Rachel', 'management'),
+    ('Stanley', 'management')
+]
+print(getTeamMatches(a))

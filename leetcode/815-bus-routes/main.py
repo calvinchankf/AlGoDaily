@@ -199,6 +199,7 @@ print("----")
 
 """
     3rd: similar to the 1st
+    - similar to lc815, 1345
     - learned from others
     - but we clear each of the routes whenever after we put its stops in the BFS queue
 

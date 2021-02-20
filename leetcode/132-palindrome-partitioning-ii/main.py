@@ -145,29 +145,23 @@ print("-----")
 
 class Solution(object):
 
-    def minCut(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        res = self.dfs(s, {})
-        return res - 1
+    def minCut(self, s: str) -> int:
+        return self.dfs(s, {}) - 1
 
     def dfs(self, s, ht):
         if len(s) == 0:
             return 0
         if s in ht:
             return ht[s]
-        minGroupLen = sys.maxsize
+        minGroupCount = 2**32
         for i in range(len(s)):
             sub = s[:i+1]
-            if sub == sub[::-1]:
-                groupLen = self.dfs(s[i+1:], ht) + 1
-                if groupLen < minGroupLen:
-                    minGroupLen = groupLen
-        # print(s, minGroup)
-        ht[s] = minGroupLen
-        return ht[s]
+            rev = sub[::-1]
+            if sub == rev:
+                groupCount = self.dfs(s[i+1:], ht) + 1
+                minGroupCount = min(minGroupCount, groupCount)
+        ht[s] = minGroupCount
+        return minGroupCount
 
 
 s = Solution()

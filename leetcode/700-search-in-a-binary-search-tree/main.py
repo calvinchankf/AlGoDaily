@@ -19,8 +19,6 @@ class Solution(object):
         Space   O(height)
         72 ms, faster than 56.73%
         """
-        if root == None:
-            return None
         cur = root
         while cur != None:
             if cur.val < val:
