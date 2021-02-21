@@ -90,34 +90,32 @@ print(Solution().exist(a, "ABCESEEEFS"))
 
 class Solution:
     def exist(self, board: List[List[str]], word: str) -> bool:
-        for i in range(len(board)):
-            for j in range(len(board[0])):
-                if word[0] == board[i][j]:
-                    if self.backtrack(board, i, j, word, set()):
-                        return True
+        R, C = len(board), len(board[0])
+        used = set()
+        for i in range(R):
+            for j in range(C):
+                if self.backtrack(board, i, j, word, used):
+                    return True
         return False
 
-    def backtrack(self, board, i, j, word, hs):
-        # last character
+    def backtrack(self, board, i, j, word, used):
+        R, C = len(board), len(board[0])
         if len(word) == 0:
             return True
-        # boundary
-        if i < 0 or i == len(board) or j < 0 or j == len(board[0]):
+        if i < 0 or i == R or j < 0 or j == C:
             return False
-        c = word[0]
-        remain = word[1:]
-        if board[i][j] != c:
+        if board[i][j] != word[0]:
             return False
-        # only store the possible path in ht
+        # to use (i,j)
         key = (i, j)
-        if key in hs:
+        if key in used:
             return False
-        hs.add(key)
-        # for 4 directions
+        used.add(key)
+        # next recursion
         dirs = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         for di, dj in dirs:
-            if self.backtrack(board, i+di, j+dj, remain, hs):
+            if self.backtrack(board, i+di, j+dj, word[1:], used):
                 return True
-        # backtracking
-        hs.remove(key)
+        # backtrack
+        used.remove(key)
         return False

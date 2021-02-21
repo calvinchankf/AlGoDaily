@@ -1,3 +1,4 @@
+from collections import *
 """
     1st attempt: hashtable + sort
     1 pass for iterating the words and put the words into corresponding hashtable
@@ -57,8 +58,7 @@ class Solution(object):
         for key in ht:
             res.append(ht[key])
         return res
-            
-        
+
     def getSignature(self, s):
         freqs = 26 * [0]
         for c in s:
@@ -86,17 +86,13 @@ class Solution(object):
         :type strs: List[str]
         :rtype: List[List[str]]
         """
-        ht = {}
+        ht = defaultdict(list)
         for s in strs:
-            structure = 26*[0]
+            counts = 26 * [0]
             for c in s:
-                i = ord(c)-ord('a')
-                structure[i] += 1
-            key = tuple(structure)
-            if key not in ht:
-                ht[key] = [s]
-            else:
-                ht[key].append(s)
+                counts[ord(c) - ord('a')] += 1
+            key = tuple(counts)
+            ht[key].append(s)
         res = []
         for key in ht:
             res.append(ht[key])

@@ -9,61 +9,51 @@ import collections
 
     Time    O(E^F) E: edge, F: flight
     Space   O(h)
-    200 ms, faster than 5.29%
+    80 ms, faster than 64.66%
 """
 from functools import cmp_to_key
 
 
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
-        ht = {}
-        for src, dest in tickets:
-            if src not in ht:
-                ht[src] = [dest]
-            else:
-                ht[src].append(dest)
-
-        def cmptr(a, b):
-            return -1 if a < b else 1
-
-        for key in ht:
-            ht[key] = sorted(ht[key], key=cmp_to_key(cmptr))
-
-        # print(ht)
-        self.res = []
-        self.dfs(['JFK'], ht)
+        # construct a graph
+        graph = defaultdict(list)
+        for u, v in tickets:
+            graph[u].append(v)
+        # ensure the lexical order
+        for key in graph:
+            graph[key].sort()
+        self.res = None
+        self.backtracking(graph, ['JFK'])
         return self.res
 
-    def dfs(self, itinerary, ht):
-        if self.isHtEmpty(ht) == 0:
-            self.res = itinerary
+    def backtracking(self, graph, path):
+        if len(graph) == 0:
+            self.res = path
             return True
 
-        node = itinerary[-1]
-        if node not in ht:
+        node = path[-1]
+        if node not in graph:
             return False
 
-        options = ht[node]
-        for i in range(len(options)):
-            cloneHt = self.cloneHt(ht)
-            key = cloneHt[node].pop(i)
-            if self.dfs(itinerary + [key], cloneHt):
+        for i in range(len(graph[node])):
+            child = graph[node][i]
+
+            # consume a node
+            graph[node].pop(i)
+            if len(graph[node]) == 0:
+                del graph[node]
+
+            # next recursion
+            if self.backtracking(graph, path + [child]):
                 return True
-            cloneHt[node].insert(i, key)
+
+            # backtrack(add back) the consumed node
+            if len(graph[node]) == 0:
+                graph[node] = []
+            graph[node].insert(i, child)
+
         return False
-
-    def cloneHt(self, ht):
-        res = {}
-        for key in ht:
-            options = ht[key]
-            res[key] = options[:]
-        return res
-
-    def isHtEmpty(self, ht):
-        count = 0
-        for key in ht:
-            count += len(ht[key])
-        return count
 
 
 """

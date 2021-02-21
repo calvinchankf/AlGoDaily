@@ -24,31 +24,26 @@ import heapq
 class MedianFinder(object):
 
     def __init__(self):
-        # for left half
-        self.maxheap = []
-        # for right half
         self.minheap = []
+        self.maxheap = []
 
     def addNum(self, num):
-        """
-        O(3*logn)
-        """
         if len(self.maxheap) == len(self.minheap):
-            heapq.heappush(self.maxheap, -num)
-            largest = heapq.heappop(self.maxheap)
-            heapq.heappush(self.minheap, -largest)
+            heappush(self.maxheap, -num)
+            x = -heappop(self.maxheap)
+            heappush(self.minheap, x)
         else:
-            heapq.heappush(self.minheap, num)
-            least = heapq.heappop(self.minheap)
-            heapq.heappush(self.maxheap, -least)
+            heappush(self.minheap, num)
+            x = heappop(self.minheap)
+            heappush(self.maxheap, -x)
 
     def findMedian(self):
-        """
-        O(1)
-        """
-        if len(self.maxheap) != len(self.minheap):
+        if len(self.maxheap) == len(self.minheap):
+            left = -self.maxheap[0]
+            right = self.minheap[0]
+            return (left + right) / 2.0
+        else:
             return self.minheap[0]
-        return (-self.maxheap[0] + self.minheap[0])/2.0
 
 
 obj = MedianFinder()

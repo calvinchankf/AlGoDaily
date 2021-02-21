@@ -62,15 +62,14 @@ class Solution(object):
         if not root:
             return []
         res = []
-        q = [(root, 0)]
+        q = []
+        q.append((root, 1))
         while len(q) > 0:
-            n = len(q)
-            for _ in range(n):
-                node, depth = q.pop(0)
-                if depth == len(res):
-                    res.append(node.val)
-                if node.right:
-                    q.append((node.right, depth + 1))
-                if node.left:
-                    q.append((node.left, depth + 1))
+            node, depth = q.pop(0)
+            if depth > len(res):
+                res.append(node.val)
+            if node.right:
+                q.append((node.right, depth + 1))
+            if node.left:
+                q.append((node.left, depth + 1))
         return res
