@@ -57,7 +57,7 @@ print("----")
         ('Stanley', 'management'),
     ]
 
-    Time    O(N + NK) every items would be visited once, K=num of groups
+    Time    O(N^2) there are N items. Getting a list of keys of hashtable take O(N)
     Space   O(N)
 """
 

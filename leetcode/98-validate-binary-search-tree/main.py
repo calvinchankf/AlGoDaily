@@ -14,30 +14,24 @@ class TreeNode(object):
     1st approach
     - compare the node.val with min & max in each recursion
     
-    Time 	O(n)
-    Space	O(h)
-    52ms beats 19.48%
+    Time 	O(N)
+    Space	O(N)
+    32 ms, faster than 99.46%
 """
 
 
 class Solution(object):
     def isValidBST(self, root):
-        """
-        :type root: TreeNode
-        :rtype: bool
-        """
-        return self.helper(root, -sys.maxsize, sys.maxsize)
+        return self.isValid(root, -sys.maxsize, sys.maxsize)
 
-    def helper(self, node, left, right):
+    def isValid(self, node, lower, upper):
         if node == None:
             return True
-        if node.val <= left or node.val >= right:
+        if node.val <= lower or node.val >= upper:
             return False
-        if not self.helper(node.left, left, node.val):
+        if self.isValid(node.left, lower, node.val) == False:
             return False
-        if not self.helper(node.right, node.val, right):
-            return False
-        return True
+        return self.isValid(node.right, node.val, upper)
 
 
 """

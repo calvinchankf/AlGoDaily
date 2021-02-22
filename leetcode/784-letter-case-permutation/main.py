@@ -9,19 +9,20 @@
 """
 
 
-class Solution:
-    def letterCasePermutation(self, S: str) -> List[str]:
+class Solution(object):
+    def letterCasePermutation(self, S):
         self.res = []
-        self.dfs(S, 0, '')
+        self.dfs(S, '')
         return self.res
 
-    def dfs(self, s, i, cur):
-        if i == len(s):
+    def dfs(self, S, cur):
+        if len(S) == 0:
             self.res.append(cur)
             return
-        c = s[i]
-        if c.isdigit():
-            self.dfs(s, i+1, cur+c)
+        c = S[0]
+        remain = S[1:]
+        if c in '0123456789':
+            self.dfs(remain, cur + c)
         else:
-            self.dfs(s, i+1, cur+c.lower())
-            self.dfs(s, i+1, cur+c.upper())
+            self.dfs(remain, cur + c.upper())
+            self.dfs(remain, cur + c.lower())
