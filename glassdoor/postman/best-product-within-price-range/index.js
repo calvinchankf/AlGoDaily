@@ -1,11 +1,9 @@
 /*
     https://leetcode.com/discuss/interview-question/370770/Postman-or-HackerEarth-or-Software-Engineering-Intern-or-Bengaluru-India
-
     You want to buy a laptop. Each laptop has two parameters: Rating & Price. 
     Your task is to buy a laptop with the highest rating within a given price range. 
     Given Q tasks, each query consisting of price range required, 
     you have to print the highest rated laptop that can be bought within that price range.
-
     e.g.
     Input
     pricesAndRatings = [
@@ -20,10 +18,8 @@
         [1700, 1900],
         [0, 2000],
     ]
-
     Output:
     [400, 500, 600]
-
     Note: If you cannot get any laptop within the range, print -1.
 */
 const f = (pricesAndRatings, queries) => {

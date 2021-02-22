@@ -1,21 +1,16 @@
 /*
     - https://leetcode.com/discuss/interview-question/390895/Postman-or-Software-Engineering-Internship-or-Coding-Challenge
     - https://leetcode.com/discuss/interview-question/453354/POSTMAN-or-SWE-Internship-or-Coding-Challenge
-
     A program generates an output of an array of integers. The programmer forgot to separate the numbers with white-spaces. You have a string S of length N consisting of non-negative integers. All the integers were not greater than C without leading zeroes. Write a program to find how many arrays could have S as an output? The answer can be very large, print it as modulo10^k.
-
     Input Format
     The first line contains 3 space-separeted integers: N, C, and K.
     The second line contains a string S of length N.
-
     Output Format
     Output the answer modulo 10^k.
-
     Input Constraints
     1 <= N <= 100000
     1 <= C <= 10^9
     1 <= k <= 18
-
     Sample Input
     7 1234567 9
     1234567

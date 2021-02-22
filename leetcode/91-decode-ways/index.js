@@ -4,7 +4,6 @@
     2. for each path, when it comes to an end return 1
     3. memorize the substrings and their "ways" to avoid duplicate calculations
     3. the result is the sum of recursion
-
     Time    O(n) the length of the string, we use map to avoid duplicate substring
     Space   O(h) the height of recursion
     16 ms, faster than 89.55%

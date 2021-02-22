@@ -3,8 +3,8 @@
     - on each cell, BFS to traverse in 9 directions
     - use a hashset to avoid redundant visit
 
-    Time    O(n^2)
-    Space   O(n)
+    Time    O(RC)
+    Space   O(RC)
     1000 ms, faster than 14.14%
 """
 
