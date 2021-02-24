@@ -24,44 +24,32 @@
 #         """
 
 
+"""
+    1st: buffer?
+
+    Time    O(1)
+    Space   O(1)
+    28 ms, faster than 16.67%
+"""
+
+
 class PeekingIterator(object):
     def __init__(self, iterator):
-        """
-        Initialize your data structure here.
-        :type iterator: Iterator
-        """
-        self.it = iterator
+        self.iterator = iterator
         self.buffer = None
+        if self.iterator.hasNext():
+            self.buffer = self.iterator.next()
 
     def peek(self):
-        """
-        Returns the next element in the iteration without advancing the iterator.
-        :rtype: int
-        """
-        if self.it.hasNext():
-            if self.buffer == None:
-                x = self.it.next()
-                self.buffer = x
-                return x
-            return self.buffer
         return self.buffer
 
     def next(self):
-        """
-        :rtype: int
-        """
-        if self.buffer != None:
-            temp = self.buffer
+        res = self.buffer
+        if self.iterator.hasNext():
+            self.buffer = self.iterator.next()
+        else:
             self.buffer = None
-            return temp
-        if self.it.hasNext():
-            return self.it.next()
-        return self.buffer
+        return res
 
     def hasNext(self):
-        """
-        :rtype: bool
-        """
-        if self.buffer != None:
-            return True
-        return self.it.hasNext()
+        return self.buffer != None

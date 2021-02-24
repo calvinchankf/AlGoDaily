@@ -11,15 +11,14 @@ class MyHashMap {
     constructor() {
         this.buckets = []
         for (let i = 0; i < 1000; i++) {
-            const slots = Array(1000).fill(null)
-            this.buckets.push(slots)
+            this.buckets.push(Array(1000).fill(null))
         }
     }
     _getBucketIdx(key) {
         return Math.floor(key / 1000)
     }
     _getSlotIdx(key) {
-        return Math.floor(key % 1000)
+        return key % 1000
     }
     put(key, value) {
         const b = this._getBucketIdx(key)

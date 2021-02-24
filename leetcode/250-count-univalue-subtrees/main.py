@@ -6,29 +6,29 @@ class TreeNode(object):
         self.right = None
 
 
-class Solution(object):
+"""
+    1st approach: bottom up recusrion
+	- return the value of the node if it is a univalue subtree
 
-    def __init__(self):
+    Time    O(N)
+    Space   O(N)
+    40 ms, faster than 24.46%
+"""
+
+
+class Solution:
+    def countUnivalSubtrees(self, root: TreeNode) -> int:
         self.res = 0
-
-    def countUnivalSubtrees(self, root):
-        """
-            1st approach: bottom up recusrion
-            Time    O(n)
-            Space   O(h)
-            32 ms, faster than 16.86% 
-        """
-        if root == None:
-            return 0
-        self.dfs(root, None)
+        self.countUni(root)
         return self.res
 
-    def dfs(self, node, parentVal):
+    def countUni(self, node):
         if node == None:
-            return parentVal
-        left = self.dfs(node.left, node.val)
-        right = self.dfs(node.right, node.val)
-        if node.val == left and node.val == right and left != None and right != None:
+            return set()
+        seen = set()
+        seen.add(node.val)
+        seen |= self.countUni(node.left)
+        seen |= self.countUni(node.right)
+        if len(seen) == 1:
             self.res += 1
-            return node.val
-        return None
+        return seen
