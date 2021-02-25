@@ -12,16 +12,9 @@
 class MinStack(object):
 
     def __init__(self):
-        """
-        initialize your data structure here.
-        """
         self.stack = []
 
     def push(self, x):
-        """
-        :type x: int
-        :rtype: None
-        """
         if len(self.stack) == 0:
             self.stack.append(StackItem(x, x))
             return
@@ -32,25 +25,16 @@ class MinStack(object):
             self.stack.append(StackItem(x,  top.minVal))
 
     def pop(self):
-        """
-        :rtype: None
-        """
         if len(self.stack) == 0:
             return None
         return self.stack.pop().val
 
     def top(self):
-        """
-        :rtype: int
-        """
         if len(self.stack) == 0:
             return None
         return self.stack[-1].val
 
     def getMin(self):
-        """
-        :rtype: int
-        """
         if len(self.stack) == 0:
             return None
         return self.stack[-1].minVal
@@ -77,45 +61,22 @@ class StackItem(object):
 class MinStack(object):
 
     def __init__(self):
-        """
-        initialize your data structure here.
-        """
         self.stack = []
 
-    def push(self, x):
-        """
-        :type x: int
-        :rtype: None
-        """
-        if len(self.stack) == 0:
-            self.stack.append((x, x))
-            return
-        lastMin = self.stack[-1][1]
-        self.stack.append((x, min(x, lastMin)))
+    def push(self, x: int) -> None:
+        if len(self.stack) > 0 and x >= self.stack[-1][1]:
+            self.stack.append([x, self.stack[-1][1]])
+        else:
+            self.stack.append([x, x])
 
-    def pop(self):
-        """
-        :rtype: None
-        """
-        if len(self.stack) == 0:
-            return None
-        pop, lastMin = self.stack.pop()
-        return pop
+    def pop(self) -> None:
+        x, _ = self.stack.pop()
+        return x
 
-    def top(self):
-        """
-        :rtype: int
-        """
-        if len(self.stack) == 0:
-            return None
+    def top(self) -> int:
         return self.stack[-1][0]
 
-    def getMin(self):
-        """
-        :rtype: int
-        """
-        if len(self.stack) == 0:
-            return None
+    def getMin(self) -> int:
         return self.stack[-1][1]
 
 
