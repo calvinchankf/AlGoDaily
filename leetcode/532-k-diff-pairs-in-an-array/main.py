@@ -11,8 +11,8 @@
     }
     remove the (2,1) from result
 
-    Time    O(n)
-    Space   O(n)
+    Time    O(N)
+    Space   O(N)
     124 ms, faster than 45.14% 
 """
 
@@ -36,15 +36,11 @@ class Solution(object):
             up = num + k
             down = num - k
             if up in seen:
-                res.add((up, num))
+                res.add((num, up))
             if down in seen:
                 res.add((down, num))
             seen.add(num)
-        final = set()
-        for left, right in res:
-            if k == 0 or (right, left) not in final:
-                final.add((left, right))
-        return len(final)
+        return len(res)
 
 
 a = [3, 1, 4, 1, 5]
@@ -80,22 +76,21 @@ print("-----")
 """
     2nd approach: sort + hashtable
 
-    Time    O(NlogN + N)
+    Time    O(NlogN)
     Space   O(N)
-    72 ms, faster than 80.10%
+    60 ms, faster than 85.40%
 """
 
 
 class Solution:
     def findPairs(self, nums: List[int], k: int) -> int:
         nums.sort()
-        counter = Counter(nums)
+        seen = set()
         res = set()
         for x in nums:
-            remain = x - k
-            if remain in counter:
-                if remain != x or counter[x] > 1:
-                    res.add((remain, x))
+            if x - k in seen:
+                res.add((x-k, x))
+            seen.add(x)
         return len(res)
 
 
