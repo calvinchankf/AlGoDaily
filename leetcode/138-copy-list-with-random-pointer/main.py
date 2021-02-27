@@ -1,9 +1,9 @@
 # Definition for singly-linked list with a random pointer.
-class RandomListNode(object):
-    def __init__(self, x):
-        self.label = x
-        self.next = None
-        self.random = None
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
 
 
 """
@@ -23,10 +23,10 @@ class Solution(object):
         ht = {}
         cur = head
         while cur != None:
-            ht[cur] = RandomListNode(cur.label)
+            ht[cur] = Node(cur.val)
             cur = cur.next
         # iterate the list again and construct a new list
-        newhead = RandomListNode(-1)
+        newhead = Node(-1)
         cur = head
         cloneCur = newhead
         while cur != None:
@@ -43,9 +43,9 @@ def printList(head):
     cur = head
     while cur != None:
         if cur.random != None:
-            print(cur.label, cur.random.label)
+            print(cur.val, cur.random.val)
         else:
-            print(cur.label, None)
+            print(cur.val, None)
         cur = cur.next
 
 

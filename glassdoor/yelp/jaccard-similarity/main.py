@@ -3,18 +3,31 @@ from collections import *
 
 """
     https://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=664894&ctid=230591
+    https://www.1point3acres.com/bbs/thread-685587-1-1.html
 
-    Calculate the jaccard distance between 2 strings(compare to the first string)
+    Calculate the jaccard distance between 2 strings
 
+    variation1: compare to the first string
     e.g.1
     abcd
     xbcdx
-    res = 3/4
+    res = 3/6 (bcd / abcdxx)
 
     e.g.2
     abcdd
     xbcddx
-    res = 4/5
+    res = 4/7 (bcdd / abcddxx)
+
+    variation2: compare to the first string
+    e.g.1
+    abcd
+    xbcdx
+    res = 3/5
+
+    e.g.2
+    abcdd
+    xbcddy
+    res = 3/6
 
     Time    O(S+T)
     Space   O(S+T)
@@ -22,29 +35,27 @@ from collections import *
 
 
 def jaccard(s, t):
+
+    # # approach 1: only the distinct characters
+    # # e.g.1 => 3/5
+    # # e.g.2 =>
+    # A = set([c for c in s])
+    # B = set([c for c in t])
+    # mutual = A.intersection(B)
+    # total = A.union(B)
+    # return len(mutual) / len(total)
+
+    # approach 2: len(overlapping) / (S + T - len(overlapping))
+    # e.g.1 => 3/6 = 0.5
+    # e.g.2 => 4/7 = 0.571...
     A = Counter(s)
     B = Counter(t)
-
-    # A or B
-    # mutual = 0
-    # total = 0
-    # keys = set(list(A.keys()) + list(B.keys()))
-    # for key in keys:
-    #     if key in A and key in B:
-    #         mutual += max(A[key], B[key])
-    #         total += max(A[key], B[key])
-    #     elif key in A:
-    #         total += A[key]
-    #     elif key in B:
-    #         total += B[key]
-    # return mutual / total
-
-    # compare to S
-    count = 0
-    for key in A:
-        if key in B:
-            count += min(A[key], B[key])
-    return count / len(s)
+    mutual = 0
+    total = len(s) + len(t)
+    keys = set(list(A.keys()) + list(B.keys()))
+    for key in keys:
+        mutual += min(A[key], B[key])
+    return mutual / (total - mutual)
 
 
 a = 'abcd'
@@ -52,8 +63,11 @@ b = 'xbcdx'
 print(jaccard(a, b))
 
 a = 'abcdd'
-b = 'xbcddx'
+b = 'xbcddy'
 print(jaccard(a, b))
+
+print("-----")
+
 
 """
     followup: given a list of objects, return the one with the highest jaccard score
@@ -83,8 +97,8 @@ def highestJaccard(original, objs):
 
 a = 'abcd'
 b = [
-    Restaurant('xbcdx', 100, 'blablabla'),
-    Restaurant('xbcddx', 100, 'blablabla'),
-    Restaurant('xbcddxa', 100, 'blablabla'),
+    Restaurant('xbcdx', 100, 'arbitary address'),
+    Restaurant('xbcddx', 100, 'arbitary address'),
+    Restaurant('xbcddxa', 100, 'arbitary address'),
 ]
 print(highestJaccard(a, b).name)
