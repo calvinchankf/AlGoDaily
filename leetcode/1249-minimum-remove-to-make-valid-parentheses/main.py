@@ -15,9 +15,10 @@ class Solution(object):
         :type s: str
         :rtype: str
         """
+        n = len(s)
         opens = []
         closes = []
-        for i in range(len(s)):
+        for i in range(n):
             c = s[i]
             if c == '(':
                 opens.append(i)
@@ -26,12 +27,12 @@ class Solution(object):
                     opens.pop()
                 else:
                     closes.append(i)
-        hs = set(opens + closes)
+        toRemove = set(opens + closes)
         res = ''
-        for i in range(len(s)):
-            c = s[i]
-            if i not in hs:
-                res += c
+        for i in range(n):
+            if i in toRemove:
+                continue
+            res += s[i]
         return res
 
 

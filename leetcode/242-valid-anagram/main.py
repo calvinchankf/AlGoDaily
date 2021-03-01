@@ -26,3 +26,17 @@ class Solution(object):
             if hs1[i] != hs2[i]:
                 return False
         return True
+
+
+"""
+    Or one line
+
+    Time    O(s+t)
+    Space   O(s+t)
+    32 ms, faster than 97.61%
+"""
+
+
+class Solution(object):
+    def isAnagram(self, s, t):
+        return Counter(s) == Counter(t)
