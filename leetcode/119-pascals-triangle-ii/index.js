@@ -6,13 +6,13 @@
     72 ms, faster than 93.96%
 */
 var getRow = function(rowIndex) {
-    let row = [1]
-    for (let i = 1; i <= rowIndex; i++) {
-        const _row = Array(i+1).fill(1)
-        for (let j = 1; j < row.length; j++) {
-            _row[j] = row[j] + row[j-1]
+    let res = []
+    for (let i = 1; i <= rowIndex + 1; i++) {
+        const row = Array(i).fill(1)
+        for (let j = 1; j < i-1; j++) {
+            row[j] = res[j-1] + res[j]
         }
-        row = _row
+        res = row
     }
-    return row
+    return res
 };

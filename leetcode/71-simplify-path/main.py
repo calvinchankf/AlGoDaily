@@ -15,15 +15,15 @@ class Solution:
     def simplifyPath(self, path: str) -> str:
         path = path[1:]
         stack = []
-        folders = path.split('/')
-        for f in folders:
-            if f == '.':
-                continue
-            elif f == '..':
+        arr = path.split('/')
+        for w in arr:
+            if w == '..':
                 if len(stack) > 0:
                     stack.pop()
-            elif len(f) > 0:
-                stack.append(f)
+            elif w == '' or w == '.':
+                continue
+            else:
+                stack.append(w)
         return '/' + '/'.join(stack)
 
 

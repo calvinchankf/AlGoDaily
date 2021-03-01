@@ -77,23 +77,17 @@ class Solution(object):
         :type W: int
         :rtype: bool
         """
-        nums.sort()
-        counter = Counter(nums)
-        for i in range(len(nums)):
-            x = nums[i]
-            if x not in counter:
+        counter = Counter(hand)
+        hand.sort()
+        for x in hand:
+            if counter[x] == 0:
                 continue
             seq = [x]
-            cur = x
-            counter[cur] -= 1
-            if counter[cur] == 0:
-                del counter[cur]
-            while cur+1 in counter and len(seq) < k:
-                cur += 1
-                seq.append(cur)
-                counter[cur] -= 1
-                if counter[cur] == 0:
-                    del counter[cur]
-            if len(seq) != k:
+            counter[x] -= 1
+            while seq[-1]+1 in counter and counter[seq[-1]+1] > 0 and len(seq) < W:
+                nextNum = seq[-1]+1
+                seq.append(nextNum)
+                counter[nextNum] -= 1
+            if len(seq) < W:
                 return False
         return True

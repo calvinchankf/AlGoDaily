@@ -23,20 +23,20 @@ let a, b
 
 a = [4,5]
 b = [2,4,5,6]
-console.log(isASubsetOfB(a, b))
+console.assert(isASubsetOfB(a, b) == true)
 
 a = [4,5,5]
 b = [2,4,5,6]
-console.log(isASubsetOfB(a, b))
+console.assert(isASubsetOfB(a, b) == false)
 
 a = [4,5,5]
 b = [2,4,5,5,6]
-console.log(isASubsetOfB(a, b))
+console.assert(isASubsetOfB(a, b) == true)
 
 a = [4,5,5,5]
 b = [2,4,5,5,6]
-console.log(isASubsetOfB(a, b))
+console.assert(isASubsetOfB(a, b) == false)
 
 a = [4,7]
 b = [2,4,5,6]
-console.log(isASubsetOfB(a, b))
+console.assert(isASubsetOfB(a, b) == false)

@@ -10,11 +10,11 @@
  * 52 ms, faster than 95.20%
  */
 var maxProfit = function (prices) {
-    let dip = Number.MAX_VALUE
     let res = 0
-    for (let i = 0; i < prices.length; i++) {
-        dip = Math.min(dip, prices[i])
-        res = Math.max(res, prices[i] - dip)
+    let dip = 2**32
+    for (let p of prices) {
+        dip = Math.min(dip, p)
+        res = Math.max(res, p - dip)
     }
     return res
 };
