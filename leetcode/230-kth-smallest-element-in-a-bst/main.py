@@ -39,3 +39,29 @@ class Solution(object):
         if self.count == k:
             self.res = node.val
         self.dfs(node.right, k)
+
+
+"""
+    2nd: iterative inorder traversal
+
+    Time    O(K)
+    Space   O(K)
+    36 ms, faster than 99.45%
+"""
+
+
+class Solution:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+        arr = []
+        cur = root
+        stack = []
+        while cur != None or len(stack) > 0:
+            while cur != None:
+                stack.append(cur)
+                cur = cur.left
+            node = stack.pop()
+            arr.append(node.val)
+            if len(arr) == k:
+                break
+            cur = node.right
+        return arr[-1]
