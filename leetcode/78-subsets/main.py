@@ -126,7 +126,7 @@ class Solution(object):
     [],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]
     Time    O(2^n)
     Space   O(2^n)
-    beats   35.29%
+    16 ms, faster than 94.11%
     """
 
     def subsets(self, nums):
@@ -134,8 +134,7 @@ class Solution(object):
         for num in nums:
             n = len(res)
             for i in range(n):
-                res += [res[i]+[num]]
-            # the above 3 lines can be reduced as res += [item+[num] for item in res] # but only beats 15.25%
+                res.append(res[i] + [num])
         return res
 
 

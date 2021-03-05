@@ -46,18 +46,16 @@ class Solution(object):
 
 class Solution(object):
     def isIsomorphic(self, a, b):
-        signA = self.getSignature(a)
-        signB = self.getSignature(b)
-        return signA == signB
+        return self.getKey(s) == self.getKey(t)
 
-    def getSignature(sefl, word):
-        signature = ""
+    def getKey(self, s):
         seen = {}
-        for c in word:
+        pattern = []
+        for c in s:
             if c not in seen:
                 seen[c] = len(seen)
-            signature += str(seen[c]) + '#'
-        return signature
+            pattern.append(seen[c])
+        return tuple(pattern)
 
 
 """
