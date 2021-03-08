@@ -34,20 +34,17 @@ class Solution:
 
     Time    O(logN)
     Space   O(1)
-    24 ms, faster than 86.68%
+    16 ms, faster than 73.33%
 """
 
 
 class Solution:
     def brokenCalc(self, X: int, Y: int) -> int:
         steps = 0
-        cur = Y
-        end = X
-        while cur > end:
-            steps += 1
-            if cur % 2 == 0:
-                cur //= 2
+        while Y > X:
+            if Y % 2 == 0:
+                Y //= 2
             else:
-                cur += 1
-
-        return steps + end - cur
+                Y += 1
+            steps += 1
+        return steps + X - Y
