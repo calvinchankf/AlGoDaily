@@ -4,9 +4,8 @@
  * @return {boolean}
  */
 var searchMatrix = function (matrix, target) {
-	for (let i = 0; i < matrix.length; i++) {
-		const nums = matrix[i];
-		const b = bsearch(nums, target);
+	for (let row of matrix) {
+		const b = bsearch(row, target);
 		if (b > -1) {
 			return true;
 		}
