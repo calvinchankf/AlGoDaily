@@ -31,35 +31,35 @@ import heapq
 """
 
 
-class Twitter(object):
+class Twitter:
 
     def __init__(self):
-        self.userPosts = {}     # { calvin: [(ada,1, (dad, 2), ...]
-        self.followship = {}    # { calvin: [calvin, alice, bob]...}
+        self.followship = {}  # { calvin: {calvin, john, stanley, alex}, alex: {alex, calvin} }
+        self.userPosts = {}  # { calvin: [id1, id3..], alex: [id2, id4..]}
         self.timestamp = 0
 
     def _initUser(self, userId):
-        if userId in self.userPosts and userId in self.followship:
+        if userId in self.followship and userId in self.userPosts:
             return
-        self.userPosts[userId] = []
         self.followship[userId] = set([userId])
+        self.userPosts[userId] = []
 
     def postTweet(self, userId: int, tweetId: int) -> None:
         self._initUser(userId)
-        self.userPosts[userId].append((self.timestamp, tweetId))
+        self.userPosts[userId].append([tweetId, self.timestamp])
         self.timestamp += 1
 
     def getNewsFeed(self, userId: int) -> List[int]:
         self._initUser(userId)
-        followings = self.followship[userId]
+        followees = self.followship[userId]
         minheap = []
-        for f in followings:
-            for time, tweetId in self.userPosts[f]:
-                heappush(minheap, (time, tweetId))
+        for f in followees:
+            for tweetId, timestamp in self.userPosts[f]:
+                heappush(minheap, (timestamp, tweetId))
                 if len(minheap) > 10:
                     heappop(minheap)
         minheap.sort(key=lambda x: -x[0])
-        return [x[1] for x in minheap]
+        return [tweetId for timestamp, tweetId in minheap]
 
     def follow(self, followerId: int, followeeId: int) -> None:
         self._initUser(followerId)
