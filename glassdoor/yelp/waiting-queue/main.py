@@ -47,8 +47,10 @@ wq = WaitingQueue()
 wq.lineUp(Customer('dog', 4, 150))
 wq.lineUp(Customer('cat', 2, 200))
 wq.lineUp(Customer('bird', 3, 300))
-print(wq.letCustomerIn(3).name)
-print(wq.letCustomerIn(4).name)
+# print(wq.letCustomerIn(3).name)
+assert wq.letCustomerIn(3).name == 'cat'
+# print(wq.letCustomerIn(4).name)
+assert wq.letCustomerIn(4).name == 'dog'
 
 print("-----")
 
@@ -69,7 +71,7 @@ print("-----")
 """
 
 
-def getFirstCustomer(customers, k):
+def getLastCustomer(customers, k):
     res = None
     customers.sort(key=lambda x: x.waitTime)
     for i in range(len(customers)):
@@ -85,7 +87,7 @@ a = [
     Customer('rat', 7, 400),
 ]
 b = 3
-print(getFirstCustomer(a, 3).name)
+print(getLastCustomer(a, 3).name)
 
 a = [
     Customer('dog', 4, 150),
@@ -94,7 +96,7 @@ a = [
     Customer('rat', 4, 700),
 ]
 b = 4
-print(getFirstCustomer(a, 4).name)
+print(getLastCustomer(a, 4).name)
 
 print("-----")
 
@@ -137,7 +139,9 @@ wq.lineUp(Customer('dog', 4, 150))
 wq.lineUp(Customer('cat', 2, 200))
 wq.lineUp(Customer('bird', 3, 300))
 print(wq.letCustomerIn(5))
+assert wq.letCustomerIn(5) == None
 print(wq.letCustomerIn(3).name)
 print(wq.letCustomerIn(3))
+assert wq.letCustomerIn(3) == None
 print(wq.letCustomerIn(4).name)
 print(wq.letCustomerIn(2).name)

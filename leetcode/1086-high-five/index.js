@@ -9,29 +9,21 @@
     84 ms, faster than 84.04%
 */
 var highFive = function(items) {
-    items.sort((a, b) => b[1] - a[1])
-    const counter = {}
+    const ht = {}
     for (let [sid, score] of items) {
-        if (sid in counter === false) {
-            counter[sid] = []
+        if (sid in ht == false) {
+            ht[sid] = []
         }
-        if (counter[sid].length < 5) {
-            counter[sid].push(score)
-        }
+        ht[sid].push(score)
     }
     const res = []
-    for (let sid in counter) {
-        const n = Math.min(counter[sid].length, 5)
-        const scores = counter[sid]
-        const average = Math.floor(sum(scores) / n)
-        res.push([sid, average])
+    for (let key in ht) {
+        ht[key].sort((a, b) => b - a)
+        const topFive = ht[key].slice(0, 5)
+        const count = topFive.length
+        const total = topFive.reduce((_total, num) => _total + num, 0)
+        res.push([key, Math.floor(total / count)])
     }
     res.sort((a, b) => a[0] - b[0])
     return res
 };
-
-const sum = (nums) => {
-    let total = 0
-    nums.forEach(x => total += x)
-    return total
-}
