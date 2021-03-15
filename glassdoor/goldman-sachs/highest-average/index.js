@@ -23,7 +23,8 @@ const highestAverage = (scores) => {
     let maxAverage = 0
     let res = null
     for (let student in totalScoreNCount) {
-        const average = Math.floor(totalScoreNCount[student][0] / totalScoreNCount[student][1])
+        const [total, count] = totalScoreNCount[student]
+        const average = Math.floor(total / count)
         if (average > maxAverage) {
             maxAverage = average
             res = student

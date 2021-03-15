@@ -1,6 +1,5 @@
 from heapq import *
 from collections import *
-from functools import cmp_to_key
 
 """
     1st approach
@@ -75,16 +74,16 @@ class WrapString:
 class Solution:
     def topKFrequent(self, words: List[str], k: int) -> List[str]:
         ht = Counter(words)
-        minHeap = []
-        for w in ht:
-            f = ht[w]
-            heappush(minHeap, (f, WrapString(w), w))
-            if len(minHeap) > k:
-                heappop(minHeap)
+        minheap = []
+        for key in counter:
+            f = counter[key]
+            heappush(minheap, (f, WrapString(key)))
+            if len(minheap) > k:
+                heappop(minheap)
         res = []
-        while len(minHeap) > 0:
-            f, o, w = heappop(minHeap)
-            res.append(w)
+        while len(minheap) > 0:
+            f, ws = heappop(minheap)
+            res.append(ws.val)
         return res[::-1]
 
 
