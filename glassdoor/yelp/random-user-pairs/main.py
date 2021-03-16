@@ -81,6 +81,32 @@ def getTeamMatches(users):
             del ht[b]
     return res
 
+    # # it gurantee a match, but a big group would always match with another big group?
+    # # case1 NO, consider 'aaabbbcc'
+    # # we should match the ab first, then the remain would be 'aabbcc', now they have the same opportunity
+    # # case2 YES, consider 'aaabbbwxyz'
+    # # we should match the aabb first, then the remain would be 'abwxyz', but a will always match with the b, so this is a downside
+    # #
+    # # One possible solution is, when there are more than 1 item have the same count as the maxheap[0], suffle the them,
+    # # but the downside is it takes longer O(N), and we also need to put the names in an object because heapq sort the 2nd param
+    # maxheap = []
+    # for key in ht:
+    #     heappush(maxheap, (-len(ht[key]), key))
+    # res = []
+    # while len(maxheap) >= 2:
+    #     a, keyA = heappop(maxheap)
+    #     b, keyB = heappop(maxheap)
+    #     res.append((ht[keyA].pop(), ht[keyB].pop()))
+    #     if len(ht[keyA]) == 0:
+    #         del ht[keyA]
+    #     else:
+    #         heappush(maxheap, (a+1, keyA))
+    #     if len(ht[keyB]) == 0:
+    #         del ht[keyB]
+    #     else:
+    #         heappush(maxheap, (b+1, keyB))
+    # return res
+
 
 a = [
     ('Alan', 'tech'),
@@ -95,3 +121,18 @@ a = [
     ('Stanley', 'management')
 ]
 print(getTeamMatches(a))
+
+print("-----")
+
+heap = []
+heappush(heap, (0, 'one', 1))
+heappush(heap, (1, 'c', 11))
+heappush(heap, (1, 'b', 2))
+heappush(heap, (1, 'a', 3))
+heappush(heap, (1, 'b', 3))
+heappush(heap, (1, 'b', 4))
+heappush(heap, (1, 'a', 5))
+heappush(heap, (1, 'c', 1))
+
+while len(heap) > 0:
+    print(heappop(heap))
