@@ -19,18 +19,16 @@ class Solution(object):
         :type s: str
         :rtype: int
         """
-        j = 0
-        ht = Counter()
         res = 0
+        counter = Counter()
+        j = 0
         for i in range(len(s)):
-            cur = s[i]
-            ht[cur] += 1
-            while ht[cur] > 1:
+            c = s[i]
+            counter[c] += 1
+            while counter[c] > 1:
                 left = s[j]
                 j += 1
-                ht[left] -= 1
-                if ht[left] == 0:
-                    del ht[left]
+                counter[left] -= 1
             res = max(res, i - j + 1)
         return res
 
