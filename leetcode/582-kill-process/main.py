@@ -1,3 +1,4 @@
+from collections import *
 """
     1st approach: bfs
 
@@ -15,21 +16,21 @@ class Solution(object):
         :type kill: int
         :rtype: List[int]
         """
-        connections = {}
-        for i in range(len(ppid)):
-            if ppid[i] not in connections:
-                connections[ppid[i]] = [pid[i]]
-            else:
-                connections[ppid[i]].append(pid[i])
-        q = [kill]
+        n = len(pid)
+        graph = defaultdict(list)
+        for i in range(n):
+            node = pid[i]
+            parent = ppid[i]
+            graph[parent].append(node)
         res = []
+        q = [kill]
         while len(q) > 0:
-            head = q.pop(0)
-            res.append(head)
-            if head in connections:
-                children = connections[head]
-                for child in children:
-                    q.append(child)
+            node = q.pop(0)
+            res.append(node)
+            if node not in graph:
+                continue
+            for child in graph[node]:
+                q.append(child)
         return res
 
 
