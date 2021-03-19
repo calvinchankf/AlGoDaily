@@ -7,6 +7,18 @@ from collections import *
 
     Calculate the jaccard distance between 2 strings
 
+    variation1: compare to the first string
+    e.g.1
+    abcd
+    xbcdx
+    res = 3/6 (bcd / abcdxx)
+
+    e.g.2
+    abcdd
+    xbcddx
+    res = 4/7 (bcdd / abcddxx)
+
+    variation2: compare to the first string
     e.g.1
     abcd
     xbcdx
