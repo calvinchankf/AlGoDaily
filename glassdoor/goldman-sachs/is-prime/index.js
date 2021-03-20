@@ -2,13 +2,13 @@ const isPrime = n => {
     if (n < 2) {
         return false
     }
-    let i = 2
-    while (i * i <= n) {
-        const dividend = Math.floor(n / i)
-        if (dividend * i == n) {
+    let x = 2
+    while (x * x <= n) {
+        const y = Math.floor(n / x)
+        if (x * y == n) {
             return false
         }
-        i += 1
+        x += 1
     }
     return true
 }

@@ -14,22 +14,22 @@
     104 ms, faster than 74.83%
 */
 var maxSubArrayLen = function (nums, k) {
-	let res = 0;
-	const ht = {};
-	let pfs = 0;
-	for (let i = 0; i < nums.length; i++) {
-		const x = nums[i];
-		pfs += x;
-		if (pfs === k) {
-			res = i + 1;
-		}
-		const remain = pfs - k;
-		if (remain in ht) {
-			res = Math.max(res, i - ht[remain]);
-		}
-		if (pfs in ht === false) {
-			ht[pfs] = i;
-		}
-	}
-	return res;
+	const cache = {}
+    let pfs = 0
+    let res = 0
+    for (let i = 0; i < nums.length; i++) {
+        pfs += nums[i]
+        if (pfs == k) {
+            res = i + 1
+        }
+        const remain = pfs - k
+        if (remain in cache) {
+            const j = cache[remain]
+            res = Math.max(res, i - j)
+        }
+        if (pfs in cache === false) {
+            cache[pfs] = i
+        }
+    }
+    return res
 };
