@@ -37,8 +37,10 @@ const mergeIntervalsWithLowerPrice = (intervals) => {
     const res = []
     for (let [s, e, p] of intervals) {
         const n = res.length
+        // overlap with the prev intv 
         if (n > 0 && s <= res[n-1][1]) {
             if (p < res[n-1][2]) {
+                // shorter height shorter than prev intv
                 if (e < res[n-1][1]) {
                     // within
                     const lastE = res[n-1][1]
@@ -57,6 +59,7 @@ const mergeIntervalsWithLowerPrice = (intervals) => {
                 res.push([lastE, e, p])
             }
         } else {
+            // not even touch the prev intv
             res.push([s, e, p])
         }
     }

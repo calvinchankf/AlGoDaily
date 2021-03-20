@@ -22,10 +22,10 @@ const bsearch = (dividend, divisor) => {
     let right = dividend
     while (left <= right) {
         const mid = Math.floor((left + right) / 2)
-        if (mid*divisor < dividend) {
-            left = mid + 1
-        } else if (mid*divisor > dividend) {
+        if (dividend < mid * divisor) {
             right = mid - 1
+        } else if (dividend > mid * divisor) {
+            left = mid + 1
         } else {
             return mid
         }
