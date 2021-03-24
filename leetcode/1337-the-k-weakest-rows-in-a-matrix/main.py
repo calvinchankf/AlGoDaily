@@ -26,7 +26,7 @@ class Solution(object):
 
 
 """
-    2nd: binary search
+    2nd: upper binary search
     
     Time    O(RlogC)
     Space   O(1)
@@ -66,3 +66,39 @@ class Solution(object):
             else:
                 right = mid
         return right
+
+
+"""
+    3rd: lower binary search
+    
+    Time    O(RlogC)
+    Space   O(1)
+    100 ms, faster than 58.63%
+"""
+
+
+class Solution:
+    def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
+        counts = []
+        for i in range(len(mat)):
+            row = mat[i]
+            count = self.bsearch(row)
+            counts.append((count, i))
+        counts.sort()
+        res = []
+        for count, i in counts:
+            res.append(i)
+            if len(res) == k:
+                break
+        return res
+
+    def bsearch(self, nums):
+        left = 0
+        right = len(nums)
+        while left < right:
+            mid = (left + right) // 2
+            if nums[mid] == 0:
+                right = mid
+            else:
+                left = mid + 1
+        return left
