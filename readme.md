@@ -105,3 +105,4 @@ console.log(Math.ceil((now - start) / (1000 * 3600 * 24)));
 | 935 | [Merge Strings Alternately](/leetcode/1768-merge-strings-alternately)                               | 2 pointers | [leetcode 1768](https://leetcode.com/problems/merge-strings-alternately/)               |                 |
 | 936 | [Sort Features by Popularity](/leetcode/1772-sort-features-by-popularity)                           | hashtable, sort | [leetcode 1772](https://leetcode.com/problems/sort-features-by-popularity/)             |                 |
 | 937 | [Minimum Number of Operations to Move All Balls to Each Box](/leetcode/1769-minimum-number-of-operations-to-move-all-balls-to-each-box) | math      | [leetcode 1769](https://leetcode.com/problems/minimum-number-of-operations-to-move-all-balls-to-each-box/) | interesting     |
+| 959 | [Push Dominoes](/leetcode/838-push-dominoes) | 2 arrays      | [leetcode 838](https://leetcode.com/problems/push-dominoes/) | 👍🏻     |
