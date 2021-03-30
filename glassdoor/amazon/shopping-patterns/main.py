@@ -1,4 +1,6 @@
 """
+    lc1761
+
     https://leetcode.com/discuss/interview-question/934203/Amazon-or-OA-2020-or-New-question-Shopping-Patterns-or-Experienced
     https://aonecode.com/amazon-online-assessment-shopping-patterns
 
@@ -43,39 +45,29 @@ def f(product_nodes, product_edges, product_from, product_to):
     edges = []
     for i in range(len(product_from)):
         edges.append((product_from[i], product_to[i]))
-    graph = {}
+
+    isConnected = []
+    indegrees = []
     for i in range(n):
-        graph[i+1] = set()
-    for u, v in edges:
-        graph[u].add(v)
-        graph[v].add(u)
-    # print(graph)
-    res = 2**31
-    for i in range(1, n+1):
-        if len(graph[i]) < 2:
-            continue
-        trio = findTrio(i, graph)
-        # print(trio)
-        if trio != None:
-            score = 0
-            for node in trio:
-                score += len(graph[node])
-            res = min(res, score - 6)
-    if res == 2**31:
-        return -1
-    return res
-
-
-def findTrio(root, graph):
-    cands = list(graph[root])
-    n = len(cands)
+        indegrees.append(0)
+        isConnected.append(n * [False])
+    for _u, _v in edges:
+        u = _u - 1
+        v = _v - 1
+        isConnected[u][v] = True
+        isConnected[v][u] = True
+        indegrees[u] += 1
+        indegrees[v] += 1
+    res = 2**32
     for i in range(n):
         for j in range(i+1, n):
-            left = cands[i]
-            right = cands[j]
-            if left in graph[right] or right in graph[left]:
-                return [root, cands[i], cands[j]]
-    return None
+            for k in range(j+1, n):
+                if isConnected[i][j] and isConnected[j][k] and isConnected[k][i]:
+                    res = min(res, indegrees[i] +
+                              indegrees[j] + indegrees[k] - 6)
+    if res == 2**32:
+        return -1
+    return res
 
 
 a = 6
