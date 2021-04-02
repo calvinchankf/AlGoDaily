@@ -27,8 +27,8 @@ I believe that practising algorithms every day is a long-term investment in my l
 -   Linked list
 -   Bit Operation
 -   Backtracking
--   Dynamic programming(Kadan's, Binary Lifting)
--   Math (Reservoir Sampling...etc)
+-   Dynamic programming(Kadan, Knapsack, Binary Lifting...etc)
+-   Math (Reservoir Sampling, Rejection Sampling...etc)
 -   and more...
 
 #### Questions from
@@ -110,6 +110,7 @@ console.log(Math.ceil((now - start) / (1000 * 3600 * 24)));
 | 940 | [Count Items Matching a Rule](leetcode/1773-count-items-matching-a-rule)                                                                | hashtable                   | [leetcode 1773](https://leetcode.com/problems/count-items-matching-a-rule/)                                |                                  |
 | 941 | [Closest Dessert Cost](leetcode/1774-closest-dessert-cost)                                                                              | recursion                   | [leetcode 1774](https://leetcode.com/problems/closest-dessert-cost/)                                       |                                  |
 | 942 | [Binary Trees With Factors](leetcode/823-binary-trees-with-factors)                                                                     | dynamic programming         | [leetcode 823](https://leetcode.com/problems/binary-trees-with-factors/)                                   | 📌                               |
-| 943 | [Find Nearest Point That Has the Same X or Y Coordinate](/leetcode/1779-find-nearest-point-that-has-the-same-x-or-y-coordinate)                                                                              | 2 pointers                | [leetcode 1779](https://leetcode.com/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/)                                        |                                              |
-| 944 | [Check if Number is a Sum of Powers of Three](/leetcode/1780-check-if-number-is-a-sum-of-powers-of-three)                                                                              | math, backtracking                | [leetcode 1780](https://leetcode.com/problems/check-if-number-is-a-sum-of-powers-of-three/)                                        | 📌                                              |
-| 945 | [Sum of Beauty of All Substrings](/leetcode/1781-sum-of-beauty-of-all-substrings)                                                                              | hashtable                | [leetcode 1781](https://leetcode.com/problems/sum-of-beauty-of-all-substrings/)                                        | 👍🏻                                              |
+| 943 | [Find Nearest Point That Has the Same X or Y Coordinate](/leetcode/1779-find-nearest-point-that-has-the-same-x-or-y-coordinate)         | 2 pointers                  | [leetcode 1779](https://leetcode.com/problems/find-nearest-point-that-has-the-same-x-or-y-coordinate/)     |                                  |
+| 944 | [Check if Number is a Sum of Powers of Three](/leetcode/1780-check-if-number-is-a-sum-of-powers-of-three)                               | math, backtracking          | [leetcode 1780](https://leetcode.com/problems/check-if-number-is-a-sum-of-powers-of-three/)                | 📌                               |
+| 945 | [Sum of Beauty of All Substrings](/leetcode/1781-sum-of-beauty-of-all-substrings)                                                       | hashtable                   | [leetcode 1781](https://leetcode.com/problems/sum-of-beauty-of-all-substrings/)                            | 👍🏻                               |
+| 965 | [Ones and Zeroes](/leetcode/474-ones-and-zeroes)                                                                                        | dynamic programming         | [leetcode 474](https://leetcode.com/problems/ones-and-zeroes/)                                             | 👍🏻 classic knapsack              |
