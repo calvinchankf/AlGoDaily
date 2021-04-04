@@ -4,7 +4,7 @@
 
     Time    O(logN) -> O(N)
     Space   O(logN) -> O(N)
-    9588 ms, faster than 20.00%
+    6112 ms, faster than 20.00%
 */
 var findIntegers = function(L) {
     if (L < 1) {
