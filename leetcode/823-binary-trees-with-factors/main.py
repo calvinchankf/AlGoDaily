@@ -1,3 +1,4 @@
+
 from collections import *
 
 """
@@ -8,13 +9,13 @@ from collections import *
         then X can be the root of its left subtree, and X/Y can be the root of its right subtree;
         the number of such tree is cache[X] * cache[X/Y]
     3. sum the cache values
-
     ref:
     https://leetcode.com/problems/binary-trees-with-factors/discuss/126277/Concise-Java-solution-using-HashMap-with-detailed-explanation.-Easily-understand!!!
-
     Time    O(N^2)
     Space   O(N)
 """
+
+
 class Solution:
     def numFactoredBinaryTrees(self, arr: List[int]) -> int:
         arr.sort()
