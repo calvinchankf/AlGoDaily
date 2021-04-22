@@ -6,6 +6,10 @@
 
     ref:
     - https://leetcode.com/problems/number-of-submatrices-that-sum-to-target/discuss/303750/JavaC%2B%2BPython-Find-the-Subarray-with-Target-Sum
+
+    Time    O(RCC)
+    Space   O(RC)
+    836 ms, faster than 77.18%
 """
 
 
