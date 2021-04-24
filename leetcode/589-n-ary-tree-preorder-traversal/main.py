@@ -3,40 +3,51 @@ class Node(object):
         self.val = val
         self.children = children
 
-# iterative
-class Solution(object):
-    def preorder(self, root):
-        """
-        :type root: Node
-        :rtype: List[int]
-        """
-        if root is None:
-            return []
-        result = []
-        stack = []
-        stack.append(root)
-        while len(stack) > 0:
-            pop = stack.pop()
-            result.append(pop.val)
-            # be careful:
-            # when we pop the stack, the order of children is reserved,
-            # so we need to put the children in the stack in a reserved order
-            for i in range(len(pop.children)):
-                idx = len(pop.children)-1-i
-                stack.append(pop.children[idx])
-        return result
 
-# recursive
+# iterative: stack
+"""
+    1st: stack
+
+    Time    O(N)
+    Space   O(N)
+    52 ms, faster than 57.84%
+"""
+
+
 class Solution(object):
     def preorder(self, root):
-          """
-          :type root: Node
-          :rtype: List[int]
-          """
-          if not root:
-              return []
-          ans = []
-          ans.append(root.val)
-          for n in root.children:
-              ans.extend(self.preorder(n))
-          return ans
+        if root == None:
+            return []
+        res = []
+        stack = [root]
+        while len(stack) > 0:
+            node = stack.pop()
+            if node.val != None:
+                res.append(node.val)
+            for child in node.children[::-1]:
+                stack.append(child)
+        return res
+
+
+"""
+    2nd: recursion
+
+    Time    O(N)
+    Space   O(H)
+    44 ms, faster than 93.90%
+"""
+
+
+class Solution(object):
+    def preorder(self, root):
+        res = []
+
+        def f(node):
+            if node == None:
+                return
+            res.append(node.val)
+            for child in node.children:
+                f(child)
+
+        f(root)
+        return res
