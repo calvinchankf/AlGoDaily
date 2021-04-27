@@ -21,23 +21,18 @@
 
 class Solution(object):
     def countBinarySubstrings(self, s):
-        """
-        :type s: str
-        :rtype: int
-        """
-        zeroCount = 0
-        oneCount = 0
         res = 0
+        zeros, ones = 0, 0
         for i in range(len(s)):
-            if i > 0 and s[i-1] != s[i]:
-                res += min(zeroCount, oneCount)
+            if i > 0 and s[i] != s[i-1]:
+                res += min(zeros, ones)
                 if s[i] == '0':
-                    zeroCount = 0
+                    zeros = 0
                 else:
-                    oneCount = 0
+                    ones = 0
             if s[i] == '0':
-                zeroCount += 1
-            if s[i] == '1':
-                oneCount += 1
-        res += min(zeroCount, oneCount)
+                zeros += 1
+            else:
+                ones += 1
+        res += min(zeros, ones)
         return res
