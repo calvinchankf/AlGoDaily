@@ -18,4 +18,4 @@ class Solution:
             diff = arr[i] - arr[i-1]
             if abs(diff) != abs(minDiff):
                 return arr[i-1] + minDiff
-        return 0
+        return arr[-1] + minDiff
