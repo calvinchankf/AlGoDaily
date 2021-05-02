@@ -27,7 +27,7 @@ I believe that practising algorithms every day is a long-term investment in my l
 -   Linked list
 -   Bit Operation
 -   Backtracking
--   Dynamic programming(Kadan's, Binary Lifting)
+-   Dynamic programming(Kadan, Knapsack, Binary Lifting...etc)
 -   Math (Reservoir Sampling, Rejection Sampling...etc)
 -   and more...
 
@@ -38,7 +38,6 @@ I believe that practising algorithms every day is a long-term investment in my l
 -   [AlgoExpert](https://www.algoexpert.io)
 -   [Google Code Jam](https://codingcompetitions.withgoogle.com/codejam)
 -   [Google Kick Start](https://codingcompetitions.withgoogle.com/kickstart/)
--   [Project Euler](https://projecteuler.net)
 -   Glassdoor
 -   Interviews
 -   ...
@@ -48,7 +47,7 @@ I believe that practising algorithms every day is a long-term investment in my l
 -   [GoogleCodeJam](https://github.com/calvinchankf/GoogleCodeJam)
 -   [GoogleKickStart](https://github.com/calvinchankf/GoogleKickStart)
 
-#### I started doing this since September 1st 2018
+#### I have been doing this every day since September 1st 2018
 
 ```js
 const start = new Date("09/01/2018");
@@ -123,4 +122,24 @@ console.log(Math.ceil((now - start) / (1000 * 3600 * 24)));
 | 953 | [Shortest Path in a Hidden Grid](/leetcode/1778-shortest-path-in-a-hidden-grid)                                                         | graph                       | [leetcode 1778](https://leetcode.com/problems/shortest-path-in-a-hidden-grid/)                             | ⭐️ DFS + BFS                    |
 | 954 | [Second Largest Digit in a String](/leetcode/1796-second-largest-digit-in-a-string)                                                     | array                       | [leetcode 1796](https://leetcode.com/problems/second-largest-digit-in-a-string/)                           |                                  |
 | 955 | [Design Authentication Manager](/leetcode/1797-design-authentication-manager)                                                           | hashtable + linked list     | [leetcode 1797](https://leetcode.com/problems/design-authentication-manager/)                              | ⭐️                              |
+| 956 | [Maximum Number of Consecutive Values You Can Make](/leetcode/1798-maximum-number-of-consecutive-values-you-can-make)                   | greedy                      | [leetcode 1798](https://leetcode.com/problems/maximum-number-of-consecutive-values-you-can-make/)          |                                  |
+| 957 | [Maximum Ascending Subarray Sum](/leetcode/1800-maximum-ascending-subarray-sum)                                                         | array                       | [leetcode 1800](https://leetcode.com/problems/maximum-ascending-subarray-sum/)                             |                                  |
+| 958 | [Number of Orders in the Backlog](/leetcode/1801-number-of-orders-in-the-backlog)                                                       | heap                        | [leetcode 1801](https://leetcode.com/problems/number-of-orders-in-the-backlog/)                            |                                  |
+| 959 | [Push Dominoes](/leetcode/838-push-dominoes) | 2 arrays      | [leetcode 838](https://leetcode.com/problems/push-dominoes/) | 👍🏻     |
+| 960 | [Implement Trie II (Prefix Tree)](/leetcode/1804-implement-trie-ii-prefix-tree)                                                         | trie                        | [leetcode 1804](https://leetcode.com/problems/implement-trie-ii-prefix-tree/)                              | 👍🏻                               |
+| 961 | [Number of Different Integers in a String](/leetcode/1805-number-of-different-integers-in-a-string)                                     | string                      | [leetcode 1805](https://leetcode.com/problems/number-of-different-integers-in-a-string/)                   |                                  |
+| 962 | [Evaluate the Bracket Pairs of a String](leetcode/1807-evaluate-the-bracket-pairs-of-a-string)                                          | hashtable                   | [leetcode 1807](https://leetcode.com/problems/evaluate-the-bracket-pairs-of-a-string/)                     |                                  |
+| 963 | [Minimum Number of Operations to Reinitialize a Permutation](leetcode/1806-minimum-number-of-operations-to-reinitialize-a-permutation)  | array                       | [leetcode 1806](https://leetcode.com/problems/minimum-number-of-operations-to-reinitialize-a-permutation/) |                                  |
+| 964 | [Minimum Path Cost in a Hidden Grid](/leetcode/1810-minimum-path-cost-in-a-hidden-grid)                                                 | graph                       | [leetcode 1810](https://leetcode.com/problems/minimum-path-cost-in-a-hidden-grid/)                         | 👍🏻 dijkstra                      |
+| 965 | [Ones and Zeroes](/leetcode/474-ones-and-zeroes)                                                                                        | dynamic programming         | [leetcode 474](https://leetcode.com/problems/ones-and-zeroes/)                                             | 👍🏻 classic knapsack              |
+| 966 | [Non-negative Integers without Consecutive Ones](/leetcode/600-non-negative-integers-without-consecutive-ones)                          | bit operation               | [leetcode 600](https://leetcode.com/problems/non-negative-integers-without-consecutive-ones/)              | 👍🏻 suboptimal approach works in JS but fails in python |
+| 967 | [Relative Ranks](/leetcode/506-relative-ranks)                                                                                          | sort, hashtable             | [leetcode 506](https://leetcode.com/problems/relative-ranks/)                                              |                                  |
+| 968 | [Global and Local Inversions](/leetcode/775-global-and-local-inversions)                                                                | binary search               | [leetcode 775](https://leetcode.com/problems/global-and-local-inversions/)                                 |                                  |
+| 969 | [Determine Color of a Chessboard Square](/leetcode/1812-determine-color-of-a-chessboard-square)                                         | math                        | [leetcode 1812](https://leetcode.com/problems/determine-color-of-a-chessboard-square/)                     |                                  |
+| 970 | [Sentence Similarity III](/leetcode/1813-sentence-similarity-iii)                                                           | 2 pointers                       | [leetcode 1813](https://leetcode.com/problems/sentence-similarity-iii/)                              | 👍🏻                                 |
+| 971 | [Count Nice Pairs in an Array](/leetcode/1814-count-nice-pairs-in-an-array)                                                             | hashtable, math             | [leetcode 1814](https://leetcode.com/problems/count-nice-pairs-in-an-array/)                               | 👍🏻                               |
+| 972 | [Truncate Sentence](/leetcode/1816-truncate-sentence)                                                                                   | array                       | [leetcode 1816](https://leetcode.com/problems/truncate-sentence/)                                          |                                  |
+| 973 | [Finding the Users Active Minutes](/leetcode/1817-finding-the-users-active-minutes)                                                     | hashtable                   | [leetcode 1817](https://leetcode.com/problems/finding-the-users-active-minutes/)                           |                                  |
+| 974 | [Beautiful Arrangement II](/leetcode/667-beautiful-arrangement-ii)                                                                      | greedy, math                | [leetcode 667](https://leetcode.com/problems/beautiful-arrangement-ii/)                                    | ⭐️ array construction           |
 | 975 | [Sign of the Product of an Array](/leetcode/1822-sign-of-the-product-of-an-array)                                                       | math                        | [leetcode 1822](https://leetcode.com/problems/sign-of-the-product-of-an-array/)                            |                                  |
+
