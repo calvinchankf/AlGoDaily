@@ -1,6 +1,6 @@
 def bsearch(nums, target):
-    left = 0
-    right = len(nums)-1
+    n = len(nums)
+    left, right = 0, n - 1
     while left <= right:
         mid = (left + right)//2
         if target < nums[mid]:
@@ -14,7 +14,6 @@ def bsearch(nums, target):
 
     # to find number that >= target
     # return left
-
     return -1
 
 
@@ -27,11 +26,11 @@ def recursiveBsearch(nums, target):
     def f(nums, target, left, right):
         if left > right:
             return -1
-        mid = (left+right)//2
+        mid = (left + right)//2
         if target < nums[mid]:
-            return f(nums, left, mid-1, target)
+            return f(nums, left, mid - 1, target)
         elif target > nums[mid]:
-            return f(nums, mid+1, right, target)
+            return f(nums, mid + 1, right, target)
         return mid
     return f(nums, target, 0, len(nums)-1)
 
@@ -42,8 +41,9 @@ print(recursiveBsearch([1, 3, 5, 7, 9], 5))   # 2
 
 
 def bSearchNearest(nums, target):
+    n = len(nums)
     left = 0
-    right = len(nums)-1
+    right = n-1
     while left <= right:
         mid = (left + right)//2
         if target < nums[mid]:
@@ -55,17 +55,18 @@ def bSearchNearest(nums, target):
     # bounds checking
     if right < 0:
         return 0
-    if left > len(nums)-1:
-        return len(nums)-1
+    if left > n-1:
+        return n-1
     # compare
-    if abs(target-nums[right]) < abs(target-nums[left]):
+    if abs(target - nums[right]) <= abs(target - nums[left]):
         return right
     return left
 
 
 print("--bSearchNearest--")
 print(bSearchNearest([1, 3, 7, 13, 20], 4))   # 1
-print(bSearchNearest([1, 3, 7, 13, 20], 5))   # 2
+print(bSearchNearest([1, 3, 7, 13, 20], 5))   # 1
+print(bSearchNearest([1, 3, 7, 13, 20], 6))   # 2
 
 
 def lowerBsearch(nums, target):
@@ -83,14 +84,15 @@ def lowerBsearch(nums, target):
 print("--lowerBsearch--")
 print(lowerBsearch([1, 3, 5, 5, 5, 7, 9], 0))   # 0
 print(lowerBsearch([1, 3, 5, 5, 5, 7, 9], 1))   # 0
-print(lowerBsearch([1, 3, 5, 5, 5, 7, 9], 4))   # 2 <- 4(taerget) is just <= 5(idx=2)
+print(lowerBsearch([1, 3, 5, 5, 5, 7, 9], 4))   # 2 <- 4 is just <= 5
 print(lowerBsearch([1, 3, 5, 5, 5, 7, 9], 5))   # 2
-print(lowerBsearch([1, 3, 5, 5, 5, 7, 9], 6))   # 5 <- 6(target) is just <= 7(idx=5)
+print(lowerBsearch([1, 3, 5, 5, 5, 7, 9], 6))   # 5 <- 6 is just <= 7
 print(lowerBsearch([1, 3, 5, 5, 5, 7, 9], 10))   # 7
 # consider [1, 10, 23]
 #      0    |    1    |    2
 # -inf -> 1 | 2 -> 10 | 11 -> 23
 # Or how many numbers < k
+
 
 def upperBsearch(nums, target):
     left = 0
@@ -108,13 +110,14 @@ print("--upperBsearch--")
 print(upperBsearch([1, 3, 5, 5, 5, 7, 9], 0))   # 0
 print(upperBsearch([1, 3, 5, 5, 5, 7, 9], 1))   # 1
 print(upperBsearch([1, 3, 5, 5, 5, 7, 9], 4))   # 2 <-
-print(upperBsearch([1, 3, 5, 5, 5, 7, 9], 5))   # 5 
+print(upperBsearch([1, 3, 5, 5, 5, 7, 9], 5))   # 5
 print(upperBsearch([1, 3, 5, 5, 5, 7, 9], 6))   # 5 <-
 print(upperBsearch([1, 3, 5, 5, 5, 7, 9], 10))   # 7
 # consider [1, 10, 23]
 #      0    |   1    |    2
 # -inf -> 0 | 1 -> 9 | 10 -> 23
 # Or how many numbers <= k
+
 
 def descending_bsearch(nums, target):
     left = 0
