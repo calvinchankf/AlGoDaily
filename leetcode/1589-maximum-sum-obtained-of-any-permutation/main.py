@@ -53,8 +53,8 @@ print("-----")
 
 
 """
-    1st: range frequency counting technique + hashtable
-    - similar to lc1094, 1109
+    1st: range frequency counting technique (line sweep) + hashtable
+    - similar to lcl094, 1109, 1589, 1854
 
     e.g. nums = [1,2,3,4,5,10], requests = [[0,2],[1,3],[1,1]]
 
@@ -63,7 +63,8 @@ print("-----")
            1       -1       <- request1
            1 -1             <- request2
     ---------------------
-        1, 3, 2, 1, 0, 0
+        1, 3, 2, 1, 0, 0    <- prefix sum the counts
+           ^ here is the result
 
     Time    O(NlogN)
     Space   O(N)
@@ -76,7 +77,7 @@ class Solution(object):
         n = len(nums)
         counts = n * [0]
 
-        # range frequency counting
+        # line sweep
         for s, e in requests:
             counts[s] += 1
             if e + 1 < n:
