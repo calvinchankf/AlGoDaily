@@ -59,9 +59,12 @@ class ListNode {
 }
 
 const musicalChairs = (N, K) => {
-    // if (N <= 1 || K < 2) {
-    //     return -1
-    // }
+    if (N <= 1 || K < 1) {
+        return -1
+    } else if (K == 1) {
+        return N
+    }
+    
     const head = new ListNode(1)
     let cur = head
     for (let i = 2; i <= N; i++) {
