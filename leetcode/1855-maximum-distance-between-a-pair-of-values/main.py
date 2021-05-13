@@ -29,3 +29,28 @@ class Solution:
             else:
                 left = mid + 1
         return left
+
+
+"""
+    2nd: 2 pointers
+    - for every number in A, we advance B
+    - since A & B are sorted, we dont need to go back in B. So we can just use 2 pointers
+
+    Time    O(A+B)
+    Space   O(1)
+    1008 ms, faster than 67.91%
+"""
+
+
+class Solution(object):
+    def maxDistance(self, nums1: List[int], nums2: List[int]) -> int:
+        i = 0
+        j = 0
+        res = 0
+        while i < len(nums1) and j < len(nums2):
+            if nums1[i] > nums2[j]:
+                i += 1
+            else:
+                res = max(res, j - i)
+                j += 1
+        return res
