@@ -3,7 +3,7 @@
     - use the approach in leetcode31 k times
     - and then swap the adjacent numbers until the num becomes kth smaller element <- brute force
 
-    Time    O(N^2) worst
+    Time    O(KN + N^2) worst
     Space   O(N)
     1916 ms, faster than 43.42%
 """
