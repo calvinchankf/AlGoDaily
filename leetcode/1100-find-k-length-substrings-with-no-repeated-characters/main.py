@@ -8,6 +8,9 @@
 """
 
 
+from collections import *
+
+
 class Solution(object):
     def numKLenSubstrNoRepeats(self, S, K):
         """
@@ -36,3 +39,30 @@ class Solution(object):
                 return False
             cnt += counts[i]
         return cnt == K
+
+
+"""
+    2nd approach: sliding window + hashtable
+    - similar to lc195,395
+
+    Time    O(26S)
+    Space   O(26)
+    64 ms, faster than 28.61%
+"""
+
+
+class Solution:
+    def numKLenSubstrNoRepeats(self, S: str, K: int) -> int:
+        ht = Counter()
+        res = 0
+        for i in range(len(S)):
+            c = S[i]
+            ht[c] += 1
+            if i >= K:
+                left = S[i-K]
+                ht[left] -= 1
+                if ht[left] == 0:
+                    del ht[left]
+            if len(ht) == K:
+                res += 1
+        return res
