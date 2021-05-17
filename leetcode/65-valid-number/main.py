@@ -10,7 +10,7 @@
 
 class Solution:
     def isNumber(self, s: str) -> bool:
-        s = s.strip()
+        s = s.strip().lower()
         seenE = False
         seenDot = False
         numberBeforeE = ''
