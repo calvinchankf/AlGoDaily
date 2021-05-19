@@ -81,25 +81,21 @@ print("-----")
 
 
 class Solution(object):
-    def partitionDisjoint(self, T):
-        """
-        :type A: List[int]
-        :rtype: int
-        """
-        greater = len(T) * [0]
-        greater[0] = T[0]
-        for i in range(1, len(T)):
-            greater[i] = max(T[i], greater[i-1])
-        # find the min from the end
-        smaller = len(T) * [0]
-        smaller[-1] = T[-1]
-        for i in range(len(T)-2, -1, -1):
-            smaller[i] = min(T[i], smaller[i+1])
-        # when max[i-1] <= max[i] <= min[i+1], it is the target index of the last item in the winter period
-        for i in range(1, len(T)):
-            if greater[i-1] <= smaller[i]:
+    def partitionDisjoint(self, nums):
+        n = len(nums)
+        left = n * [0]
+        left[0] = nums[0]
+        for i in range(1, n):
+            left[i] = max(nums[i], left[i-1])
+
+        right = n * [0]
+        right[-1] = nums[-1]
+        for i in range(n-2, -1, -1):
+            right[i] = min(nums[i], right[i+1])
+
+        for i in range(1, n):
+            if left[i-1] <= right[i]:
                 return i
-        # wont go here because the question mentions that there must be one result
         return -1
 
 
