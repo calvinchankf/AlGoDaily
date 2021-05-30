@@ -69,8 +69,9 @@ console.log(Math.ceil((now - start) / (1000 * 3600 * 24)));
 -   [Day 801 - 900](./markdowns/day801-900.md)
 -   [Day 901 - 1000](./markdowns/day901-1000.md)
 
-| Day  | Question                                                                   | Type      | From                                                                         | remarks    |
-| ---- | -------------------------------------------------------------------------- | --------- | ---------------------------------------------------------------------------- | ---------- |
-| 1001 | [Sum of All Subset XOR Totals](leetcode/1863-sum-of-all-subset-xor-totals) | recursion | [leetcode 1863](https://leetcode.com/problems/sum-of-all-subset-xor-totals/) | ⭐️ subset |
-| 1002 | [Rotating the Box](leetcode/1861-rotating-the-box)                                                                                      | array                       | [leetcode 1861](https://leetcode.com/problems/rotating-the-box/)                                           |                                                        |
-| 1003 | [Finding Pairs With a Certain Sum](/leetcode/1865-finding-pairs-with-a-certain-sum)                                                     | hashtable                   | [leetcode 1865](https://leetcode.com/problems/finding-pairs-with-a-certain-sum/)                           |                                                        |
+| Day  | Question                                                                                                  | Type      | From                                                                                        | remarks    |
+| ---- | --------------------------------------------------------------------------------------------------------- | --------- | ------------------------------------------------------------------------------------------- | ---------- |
+| 1001 | [Sum of All Subset XOR Totals](leetcode/1863-sum-of-all-subset-xor-totals)                                | recursion | [leetcode 1863](https://leetcode.com/problems/sum-of-all-subset-xor-totals/)                | ⭐️ subset |
+| 1002 | [Rotating the Box](leetcode/1861-rotating-the-box)                                                        | array     | [leetcode 1861](https://leetcode.com/problems/rotating-the-box/)                            |            |
+| 1003 | [Finding Pairs With a Certain Sum](/leetcode/1865-finding-pairs-with-a-certain-sum)                       | hashtable | [leetcode 1865](https://leetcode.com/problems/finding-pairs-with-a-certain-sum/)            |            |
+| 1012 | [Check if Word Equals Summation of Two Words](/leetcode/1880-check-if-word-equals-summation-of-two-words) | string    | [leetcode 1880](https://leetcode.com/problems/check-if-word-equals-summation-of-two-words/) |            |
