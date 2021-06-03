@@ -20,19 +20,19 @@ class Solution(object):
         if root == None:
             return TreeNode(val)
         cur = root
-        while True:
-            if cur.val < val:
-                if cur.right != None:
-                    cur = cur.right
-                else:
-                    cur.right = TreeNode(val)
-                    break
-            else:
-                if cur.left != None:
-                    cur = cur.left
-                else:
+        while cur:
+            if val < cur.val:
+                if cur.left == None:
                     cur.left = TreeNode(val)
                     break
+                cur = cur.left
+            elif val > cur.val:
+                if cur.right == None:
+                    cur.right = TreeNode(val)
+                    break
+                cur = cur.right
+            else:
+                break
         return root
 
 
