@@ -1,9 +1,19 @@
+"""
+    Binary Indexed Tree(BIT)
+    - is the optimal way for mutable range query
+
+    ref:
+    - query:    https://www.youtube.com/watch?v=RgITNht_f4Q
+    - update:   https://www.youtube.com/watch?v=B-BkW9ZpKKM
+
+    Time    O(logN)
+    Space   O(N)
+"""
+
+
 class BinaryIndexedTree(object):
 
     def __init__(self, n):
-        """
-        :type nums: List[int]
-        """
         self.fenwickTree = (n+1) * [0]
 
     def update(self, i, val):
@@ -37,11 +47,6 @@ class BinaryIndexedTree(object):
         return s
 
     def getRangeSum(self, i, j):
-        """
-        :type i: int
-        :type j: int
-        :rtype: int
-        """
         return self.getSum(j) - self.getSum(i-1)
 
 
