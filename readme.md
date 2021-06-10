@@ -49,8 +49,9 @@ I believe that practising algorithms every day is a long-term investment in my l
 
 # Journey
 
--   I have been doing this every day since September 1st 2018
--   On May 27th 2021, day 1000
+-   I have been doing this every day **since September 1st, 2018**
+-   On May 27th, 2021, **day 1000**
+-   On June 1st, 2021, I started my jorney at **Facebook** as a Solutions Engineer
 
 ```js
 const start = new Date("09/01/2018");
@@ -69,10 +70,19 @@ console.log(Math.ceil((now - start) / (1000 * 3600 * 24)));
 -   [Day 801 - 900](./markdowns/day801-900.md)
 -   [Day 901 - 1000](./markdowns/day901-1000.md)
 
-| Day  | Question                                                                                                      | Type      | From                                                                                          | remarks    |
-| ---- | ------------------------------------------------------------------------------------------------------------- | --------- | --------------------------------------------------------------------------------------------- | ---------- |
-| 1001 | [Sum of All Subset XOR Totals](leetcode/1863-sum-of-all-subset-xor-totals)                                    | recursion | [leetcode 1863](https://leetcode.com/problems/sum-of-all-subset-xor-totals/)                  | ⭐️ subset |
-| 1002 | [Rotating the Box](leetcode/1861-rotating-the-box)                                                            | array     | [leetcode 1861](https://leetcode.com/problems/rotating-the-box/)                              |            |
-| 1003 | [Finding Pairs With a Certain Sum](/leetcode/1865-finding-pairs-with-a-certain-sum)                           | hashtable | [leetcode 1865](https://leetcode.com/problems/finding-pairs-with-a-certain-sum/)              |            |
-| 1004 | [Longer Contiguous Segments of Ones than Zeros](/leetcode/1869-longer-contiguous-segments-of-ones-than-zeros) | array     | [leetcode 1869](https://leetcode.com/problems/longer-contiguous-segments-of-ones-than-zeros/) |            |
+| Day  | Question                                                                                                      | Type          | From                                                                                          | remarks    |
+| ---- | ------------------------------------------------------------------------------------------------------------- | ------------- | --------------------------------------------------------------------------------------------- | ---------- |
+| 1001 | [Sum of All Subset XOR Totals](leetcode/1863-sum-of-all-subset-xor-totals)                                    | recursion     | [leetcode 1863](https://leetcode.com/problems/sum-of-all-subset-xor-totals/)                  | ⭐️ subset |
+| 1002 | [Rotating the Box](leetcode/1861-rotating-the-box)                                                            | array         | [leetcode 1861](https://leetcode.com/problems/rotating-the-box/)                              |            |
+| 1003 | [Finding Pairs With a Certain Sum](/leetcode/1865-finding-pairs-with-a-certain-sum)                           | hashtable     | [leetcode 1865](https://leetcode.com/problems/finding-pairs-with-a-certain-sum/)              |            |
+| 1004 | [Longer Contiguous Segments of Ones than Zeros](/leetcode/1869-longer-contiguous-segments-of-ones-than-zeros) | array         | [leetcode 1869](https://leetcode.com/problems/longer-contiguous-segments-of-ones-than-zeros/) |            |
+| 1005 | [Minimum Speed to Arrive on Time](/leetcode/1870-minimum-speed-to-arrive-on-time)                             | binary search | [leetcode 1870](https://leetcode.com/problems/minimum-speed-to-arrive-on-time/)               |            |
+| 1006 | [Product of Two Run-Length Encoded Arrays](/leetcode/1868-product-of-two-run-length-encoded-arrays)                                     | 2 pointers                  | [leetcode 1868](https://leetcode.com/problems/product-of-two-run-length-encoded-arrays/)                   | classic                                                |
+| 1007 | [Minimize Product Sum of Two Arrays](/leetcode/1874-minimize-product-sum-of-two-arrays)                                                 | sort                        | [leetcode 1874](https://leetcode.com/problems/minimize-product-sum-of-two-arrays/)                         |                                                        |
+| 1008 | [Minimum Adjacent Swaps for K Consecutive Ones](/leetcode/1703-minimum-adjacent-swaps-for-k-consecutive-ones) | sliding window, prefix sum | [leetcode 1703](https://leetcode.com/problems/minimum-adjacent-swaps-for-k-consecutive-ones/) | 📌         |
+| 1009 | [Minimum Number of Swaps to Make the Binary String Alternating](/leetcode/1864-minimum-number-of-swaps-to-make-the-binary-string-alternating) | array     | [leetcode 1864](https://leetcode.com/problems/minimum-number-of-swaps-to-make-the-binary-string-alternating/) | ⭐️        |
+| 1010 | [Substrings of Size Three with Distinct Characters](/leetcode/1876-substrings-of-size-three-with-distinct-characters) | sliding window, hashtable | [leetcode 1876](https://leetcode.com/problems/substrings-of-size-three-with-distinct-characters/) |            |
+| 1011 | [Minimize Maximum Pair Sum in Array](/leetcode/1877-minimize-maximum-pair-sum-in-array)                               | sort                      | [leetcode 1877](https://leetcode.com/problems/minimize-maximum-pair-sum-in-array/)                |            |
+| 1012 | [Check if Word Equals Summation of Two Words](/leetcode/1880-check-if-word-equals-summation-of-two-words) | string    | [leetcode 1880](https://leetcode.com/problems/check-if-word-equals-summation-of-two-words/) |            |
+| 1013 | [Maximum Value after Insertion](/leetcode/1881-maximum-value-after-insertion)                                 | greedy    | [leetcode 1881](https://leetcode.com/problems/maximum-value-after-insertion/)                 | ⭐️ interesting |
 | 1014 | [Process Tasks Using Servers](/leetcode/1882-process-tasks-using-servers)                                     | heap      | [leetcode 1882](https://leetcode.com/problems/process-tasks-using-servers/)                   | 📌         |
