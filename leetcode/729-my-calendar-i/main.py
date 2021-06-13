@@ -45,7 +45,7 @@ class MyCalendar(object):
         left = 0
         right = len(nums)
         while left < right:
-            mid = (left + right)/2
+            mid = (left + right)//2
             if target <= nums[mid][0]:
                 right = mid
             else:

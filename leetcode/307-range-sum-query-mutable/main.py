@@ -130,57 +130,41 @@ class NumArray(object):
 """
 
 
-class NumArray(object):
+class BinaryIndexedTree(object):
 
-    def __init__(self, nums):
-        """
-        :type nums: List[int]
-        """
-        self.nums = nums
-        self.fenwickTree = (len(nums)+1) * [0]
-
-        for i in range(len(nums)):
-            self._buildTree(i, nums[i])
-
-    def _buildTree(self, i, val):
-        k = i + 1
-        # new i = i + least significant bit(i)
-        # e.g. start from 5
-        # 5     00101
-        # 6     00110 (becos 00101 + 00001)
-        # 8     01000 (becos 00110 + 00010)
-        # 16    10000 (becos 01000 + 01000)
-        while k < len(self.fenwickTree):
-            self.fenwickTree[k] += val
-            k = k + (k & -k)
-
-    def _getSum(self, i):
-        s = 0
-        k = i + 1
-        # flip the least significant bit 1 by 1 to the left until 0
-        # e.g. start from 14
-        # 14    1110
-        # 12    1100 (1110 - 0010)
-        # 8     1000 (1100 - 0100)
-        # 0     0000 (1000 - 1000)
-        while k > 0:
-            s += self.fenwickTree[k]
-            k = k - (k & -k)
-        return s
+    def __init__(self, n):
+        self.fenwickTree = (n+1) * [0]
 
     def update(self, i, val):
-        """
-        :type i: int
-        :type val: int
-        :rtype: None
-        """
-        self._buildTree(i, val - self.nums[i])
-        self.nums[i] = val
+        k = i + 1
+        while k < len(self.fenwickTree):
+            self.fenwickTree[k] += val
+            k += k & -k
 
-    def sumRange(self, i, j):
-        """
-        :type i: int
-        :type j: int
-        :rtype: int
-        """
-        return self._getSum(j) - self._getSum(i-1)
+    def getSum(self, i):
+        s = 0
+        k = i + 1
+        while k > 0:
+            s += self.fenwickTree[k]
+            k -= k & -k
+        return s
+
+    def getRangeSum(self, i, j):
+        return self.getSum(j) - self.getSum(i-1)
+
+
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        n = len(nums)
+        self.cache = nums
+        self.tree = BinaryIndexedTree(n)
+        for i in range(n):
+            self.tree.update(i, nums[i])
+
+    def update(self, index: int, val: int) -> None:
+        self.tree.update(index, val - self.cache[index])  # b = a + b - a
+        self.cache[index] = val
+
+    def sumRange(self, left: int, right: int) -> int:
+        return self.tree.getRangeSum(left, right)
