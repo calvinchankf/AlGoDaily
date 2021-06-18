@@ -1,6 +1,6 @@
 """
     1st: math
-    - similar to lcl094, 1109, 1589, 1854
+    - similar to lc732, l094, 1109, 1589, 1854
     - typical range frequency counting technique (line sweep) to deal with values on a range
     - basically we can just use the prefix-sum concept to mark the start and the end of each interval
     - ./idea.jpeg
