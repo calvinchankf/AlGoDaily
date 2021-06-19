@@ -1,3 +1,4 @@
+from bisect import *
 from sortedcontainers import SortedDict
 
 """
@@ -29,7 +30,7 @@ class Solution:
 
 
 """
-    1st: treemap / sortedDict
+    1st: treemap / sortedDict + binary search
     - learned from others
 
     ref:
@@ -47,9 +48,33 @@ class Solution(object):
         depths[0] = 0
         depths[10**5+1] = 0
         for x in order:
-            i = depths.bisect_left(x)
+            i = depths.bisect_right(x)
             vals = depths.values()
             left = vals[i-1]
             right = vals[i]
             depths[x] = max(left, right) + 1
         return max(depths.values())
+
+
+"""
+    2nd: use a simple hashtable and an array instead
+
+    Time    O(NlogN) -> O(N^2)
+    Space   O(N)
+    9484 ms, faster than 50.00%
+"""
+
+
+class Solution:
+    def maxDepthBST(self, nums: List[int]) -> int:
+        left, right = 0, 10**5+1
+        ht = {}
+        ht[left], ht[right] = 0, 0
+        arr = [left, right]
+        for x in nums:
+            i = bisect_right(arr, x)
+            left = ht[arr[i-1]]
+            right = ht[arr[i]]
+            ht[x] = max(left, right) + 1
+            insort_right(arr, x)
+        return max(ht.values())
