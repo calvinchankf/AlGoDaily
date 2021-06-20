@@ -29,7 +29,7 @@ class Solution:
 
 """
     2nd: line sweep
-    - similar to lcl094, 1109, 1589, 1854
+    - similar to lc732, l094, 1109, 1589, 1854
 
     concept:
 

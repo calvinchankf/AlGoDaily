@@ -54,7 +54,7 @@ print("-----")
 
 """
     1st: range frequency counting technique (line sweep) + hashtable
-    - similar to lcl094, 1109, 1589, 1854
+    - similar to lc732, l094, 1109, 1589, 1854
 
     e.g. nums = [1,2,3,4,5,10], requests = [[0,2],[1,3],[1,1]]
 
