@@ -10,41 +10,31 @@
 
 class Solution(object):
     def numMagicSquaresInside(self, grid):
-        """
-        :type grid: List[List[int]]
-        :rtype: int
-        """
-        count = 0
-        for i in range(len(grid)-2):
-            for j in range(len(grid[0])-2):
-                if self.isMagic(grid, i, j):
-                    count += 1
-        return count
+        R, C = len(grid), len(grid[0])
+        if R < 3 or C < 3:
+            return 0
+        res = 0
+        for i in range(1, R-1):
+            for j in range(1, C-1):
+                res += self.isMagicGrid(grid, i, j)
+        return res
 
-    def isMagic(self, grid, x, y):
-        # check unique
-        hs = set()
-        for i in range(x, x+3):
-            for j in range(y, y+3):
-                if grid[i][j] < 1 or grid[i][j] > 9:
-                    return False
-                hs.add(grid[i][j])
-        if len(hs) != 9:
-            return False
-        sums = []
-        # rows
-        sums.append(grid[x][y] + grid[x][y+1] + grid[x][y+2])
-        sums.append(grid[x+1][y] + grid[x+1][y+1] + grid[x+1][y+2])
-        sums.append(grid[x+2][y] + grid[x+2][y+1] + grid[x+2][y+2])
-        # cols
-        sums.append(grid[x][y] + grid[x+1][y] + grid[x+2][y])
-        sums.append(grid[x][y+1] + grid[x+1][y+1] + grid[x+2][y+1])
-        sums.append(grid[x][y+2] + grid[x+1][y+2] + grid[x+2][y+2])
-        # diag
-        sums.append(grid[x][y] + grid[x+1][y+1] + grid[x+2][y+2])
-        sums.append(grid[x][y+2] + grid[x+1][y+1] + grid[x+2][y])
-        # check sums
-        for i in range(1, len(sums)):
-            if sums[i-1] != sums[i]:
-                return False
-        return True
+    def isMagicGrid(self, grid, i, j):
+        # check if from 1 to 9
+        digits = set()
+        for _i in range(i-1, i+2):
+            for _j in range(j-1, j+2):
+                if 0 < grid[_i][_j] < 10:
+                    digits.add(grid[_i][_j])
+        if len(digits) != 9:
+            return 0
+        diag1 = grid[i-1][j-1] + grid[i][j] + grid[i+1][j+1]
+        diag2 = grid[i-1][j+1] + grid[i][j] + grid[i+1][j-1]
+        row1 = grid[i-1][j-1] + grid[i][j-1] + grid[i+1][j-1]
+        row2 = grid[i-1][j] + grid[i][j] + grid[i+1][j]
+        row3 = grid[i-1][j+1] + grid[i][j+1] + grid[i+1][j+1]
+        col1 = grid[i-1][j-1] + grid[i-1][j] + grid[i-1][j+1]
+        col2 = grid[i][j-1] + grid[i][j] + grid[i][j+1]
+        col3 = grid[i+1][j-1] + grid[i+1][j] + grid[i+1][j+1]
+        s = set([diag1, diag2, row1, row2, row3, col1, col2, col3])
+        return 1 if len(s) == 1 else 0
