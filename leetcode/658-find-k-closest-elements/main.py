@@ -1,54 +1,56 @@
 """
-    1st: binary search
+    1st: nearest binary search
 
-    Time        O(logN + K + KlogK)
+    Time        O(logN + K)
     Space       O(K)
     308 ms, faster than 61.39%
 """
+import heapq
+
+
 class Solution:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
-        idx = self.bsearch(arr, x)
-        res = [arr[idx]]
-        i = idx - 1
-        j = idx + 1
-        while i >= 0 and j < len(arr) and len(res) < k:
-            if abs(arr[i] - x) <= abs(arr[j] - x):
-                res.append(arr[i])
-                i -= 1
-            else:
-                res.append(arr[j])
-                j += 1
-        while i == -1 and len(res) < k:
-            res.append(arr[j])
-            j += 1
-        while j == len(arr) and len(res) < k:
-            res.append(arr[i])
-            i -= 1
-        return sorted(res)
-    
-    def bsearch(self, arr, target):
         n = len(arr)
+        centerIdx = self.bSearchNearest(arr, x)
+        left, right = centerIdx, centerIdx
+        k -= 1
+        while k > 0:
+            if left-1 >= 0 and right+1 < n:
+                if abs(arr[left-1] - x) < abs(arr[right+1] - x):
+                    left -= 1
+                elif abs(arr[left-1] - x) > abs(arr[right+1] - x):
+                    right += 1
+                else:
+                    left -= 1
+            elif left-1 < 0:
+                right += 1
+            elif right+1 == n:
+                left -= 1
+            k -= 1
+        return arr[left:right+1]
+
+    def bSearchNearest(self, nums, target):
+        n = len(nums)
         left = 0
-        right = n - 1
+        right = n-1
         while left <= right:
-            mid = (left + right) // 2
-            if target == arr[mid]:
-                return mid
-            elif target < arr[mid]:
+            mid = (left + right)//2
+            if target < nums[mid]:
                 right = mid - 1
-            else:
+            elif target > nums[mid]:
                 left = mid + 1
+            else:
+                return mid
+        # bounds checking
         if right < 0:
             return 0
-        if left > n - 1:
+        if left > n-1:
             return n-1
         # compare
-        if abs(target-arr[left]) < abs(target-arr[right]):
-            return left
-        return right
+        if abs(target - nums[right]) <= abs(target - nums[left]):
+            return right
+        return left
 
-
-import heapq
 
 """
     2nd: heap
@@ -57,6 +59,8 @@ import heapq
     Space   O(N)
     400 ms, faster than 20.44%
 """
+
+
 class Solution:
     def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
         pq = []
