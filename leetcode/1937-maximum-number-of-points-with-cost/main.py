@@ -29,8 +29,9 @@ class Solution:
     2nd: DP
     - use the concept of left&right arrays
     - for every col
-        - pre-compute the index to add
-        - pre-compute the index to delete
+        - pre-compute the running max from the left, rowMax[j] = max(rowMax[j-1]-1, dp[i-1][j])
+        - pre-compute the running max from the right, rowMax[j] = max(rowMax[j+1]-1, dp[i-1][j])
+        - the result must be either one of them
 
     ref:
     - https://leetcode.com/problems/maximum-number-of-points-with-cost/discuss/1344888/C%2B%2B-dp-from-O(m-*-n-*-n)-to-O(m-*-n)
@@ -50,18 +51,18 @@ class Solution(object):
         for j in range(C):
             dp[0][j] = points[0][j]
         for i in range(1, R):
-            left_dp = C * [-1]
-            right_dp = C * [-1]
+            left_dp = C * [0]
+            right_dp = C * [0]
 
             left_dp[0] = dp[i-1][0]
             for k in range(1, C):
-                left_dp[k] = max(left_dp[k-1], dp[i-1][k] + k)
+                left_dp[k] = max(left_dp[k-1]-1, dp[i-1][k])
 
-            right_dp[-1] = dp[i-1][-1] - C + 1
+            right_dp[-1] = dp[i-1][-1]
             for k in range(C-2, -1, -1):
-                right_dp[k] = max(right_dp[k+1], dp[i-1][k] - k)
+                right_dp[k] = max(right_dp[k+1]-1, dp[i-1][k])
 
             for j in range(C):
-                dp[i][j] = max(left_dp[j] - j, right_dp[j] + j) + points[i][j]
+                dp[i][j] = max(left_dp[j], right_dp[j]) + points[i][j]
 
         return max(dp[-1])
